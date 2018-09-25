@@ -1,0 +1,41 @@
+﻿{
+	"title": "Aplicación transaccional de SuperAndes",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "./src/main/resources/config/logo.png",
+	"menu":
+	[
+		{ "menuTitle": "Proveedores",
+		  "options":
+			[
+				{
+					"label": "AgregarProveedor",
+					"event": "agregarProveedor"
+				}
+			]
+		},
+		{ "menuTitle": "Productos",
+		  "options":
+			[
+				{
+					"label": "Agregar",
+					"event": "agregarProducto"
+				},
+				{
+					"label": "Listar",
+					"event": "listarProductos"
+				},
+				{
+					"label": "Borrar por código de barras",
+					"event": "eliminarProductoPorCodigoBarras"
+				},
+				{
+					"label": "Buscar por Nombre",
+					"event": "buscarProductoNombre"
+				}
+			]
+		}	
+		
+	]
+}
+	
