@@ -86,12 +86,15 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		configurarFrame ( );
 		
 		if (guiConfig != null) 
-			crearMenu( guiConfig.getAsJsonArray("menuBar") );
+			crearMenu( guiConfig.getAsJsonArray("menu") );
+		System.out.println("si");
 		
 		tableConfig = openConfig ("Tablas BD", CONFIGURACION_TABLAS);
 		superAndes = new SuperAndes(tableConfig);
+		System.out.println("si2");
 		
 		String path = guiConfig.get("bannerPath").getAsString();
+		System.out.println("si3");
 		panelDatos = new PanelDatos ( );
 
 		setLayout (new BorderLayout());
