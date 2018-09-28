@@ -38,7 +38,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	/**
 	 * Ruta al archivo de configuración de la interfaz
 	 */
-	private static final String CONFIGURACION_INTERFAZ = "./src/main/resources/config/interfaceConfigApp.json"; 
+	private static final String CONFIGURACION_INTERFAZ = "./src/main/resources/config/interfaceConfigApp2.json"; 
 	/**
 	 * Ruta al archivo de configuración de los nombres de tablas de la base de datos
 	 */
@@ -87,14 +87,15 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		
 		if (guiConfig != null) 
 			crearMenu( guiConfig.getAsJsonArray("menu") );
-		System.out.println("si");
+		
+		String path = guiConfig.get("bannerPath").getAsString();
+
+		System.out.println("si3");
 		
 		tableConfig = openConfig ("Tablas BD", CONFIGURACION_TABLAS);
 		superAndes = new SuperAndes(tableConfig);
-		System.out.println("si2");
 		
-		String path = guiConfig.get("bannerPath").getAsString();
-		System.out.println("si3");
+	
 		panelDatos = new PanelDatos ( );
 
 		setLayout (new BorderLayout());
@@ -124,7 +125,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		} 
 		catch (Exception e)
 		{
-			log.info ("NO se encontró un archivo de configuración válido");			
+			//			e.printStackTrace ();
+			log.info ("NO se encontró un archivo de configuración válido "+ e);			
 			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de interfaz válido: " + tipo, "Parranderos App", JOptionPane.ERROR_MESSAGE);
 		}	
 		return config;

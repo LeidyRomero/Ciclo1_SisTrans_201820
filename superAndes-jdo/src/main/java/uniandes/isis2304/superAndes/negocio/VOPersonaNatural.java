@@ -1,5 +1,10 @@
 package uniandes.isis2304.superAndes.negocio;
-
-public interface VOPersonaNatural {
-
+/**
+ * 
+ * @author lj.romero
+ *
+ */
+public interface VOPersonaNatural extends VOCliente{
+	public String darDocumento();
+	public String toString();
 }

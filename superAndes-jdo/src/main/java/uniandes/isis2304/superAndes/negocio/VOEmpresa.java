@@ -1,5 +1,13 @@
 package uniandes.isis2304.superAndes.negocio;
-
-public interface VOEmpresa {
-
+/**
+ * 
+ * @author lj.romero
+ *
+ */
+public interface VOEmpresa extends VOCliente{
+	
+	public int darNitEmpresa();
+	public String darDireccion();
+	public String toString();
+	
 }
