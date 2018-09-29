@@ -21,7 +21,7 @@ class SQLComprados
 	
 	public long agregar (PersistenceManager manager, int pCodigoBarras,int pCantidad, double pPrecioTotal, String pIdFactura)
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.darTablaComprados()+" (codigo_barras, cantidad, precio_total, id_factura) values (?,?,?,?)");
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlComprados()+" (codigo_barras, cantidad, precio_total, id_factura) values (?,?,?,?)");
 		q.setParameters(pCodigoBarras, pCantidad, pPrecioTotal,pIdFactura);
 		return (long) q.executeUnique();
 	}

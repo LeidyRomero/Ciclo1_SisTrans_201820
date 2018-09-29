@@ -21,7 +21,7 @@ class SQLPedidoProducto
 	
 	public long agregar (PersistenceManager manager)
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.darTablaPedidoProducto()+"");
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlPedidoProducto()+"");
 		q.setParameters();
 		return (long) q.executeUnique();
 	}

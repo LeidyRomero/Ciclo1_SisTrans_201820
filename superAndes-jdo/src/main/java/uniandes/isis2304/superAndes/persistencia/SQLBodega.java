@@ -24,7 +24,7 @@ class SQLBodega
 	
 	public long agregarBodega(PersistenceManager manager, String pTipo, double pVolumen, double pPeso, String pDireccionBodega, String pDireccionSucursal, String pCiudad)
 	{
-		Query add = manager.newQuery(SQL, "INSERT INTO "+persistencia.darTablaBodega()+" (tipo_bodega, volumen_bodega, peso_bodega, direccion_bodega, direccion_sucursal, ciudad) values (?,?,?,?,?,?)");
+		Query add = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlBodega()+" (tipo_bodega, volumen_bodega, peso_bodega, direccion_bodega, direccion_sucursal, ciudad) values (?,?,?,?,?,?)");
 		add.setParameters(pTipo, pVolumen, pPeso, pDireccionBodega, pDireccionSucursal, pCiudad);
 		return (long) add.executeUnique();
 	}

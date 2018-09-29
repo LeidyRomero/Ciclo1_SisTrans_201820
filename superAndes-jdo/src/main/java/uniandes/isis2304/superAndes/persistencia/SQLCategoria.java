@@ -21,7 +21,7 @@ class SQLCategoria
 	
 	public long agregar (PersistenceManager manager, String pNombre)
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.darTablaCategoria()+" (nombre_categoria) values (?)");
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlCategoria()+" (nombre_categoria) values (?)");
 		q.setParameters(pNombre);
 		return (long) q.executeUnique();
 	}

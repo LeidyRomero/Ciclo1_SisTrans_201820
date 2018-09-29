@@ -21,7 +21,7 @@ class SQLPersonaNatural
 	
 	public long agregar (PersistenceManager manager)
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.darTablaPersonaNatural()+"");
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlPersonaNatural()+"");
 		q.setParameters();
 		return (long) q.executeUnique();
 	}

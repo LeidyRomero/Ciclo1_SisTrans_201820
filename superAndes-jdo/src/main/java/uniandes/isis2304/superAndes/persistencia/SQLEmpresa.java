@@ -21,7 +21,7 @@ class SQLEmpresa
 	
 	public long agregar (PersistenceManager manager)
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.darTablaEmpresa()+"");
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlEmpresa()+"");
 		q.setParameters();
 		return (long) q.executeUnique();
 	}
