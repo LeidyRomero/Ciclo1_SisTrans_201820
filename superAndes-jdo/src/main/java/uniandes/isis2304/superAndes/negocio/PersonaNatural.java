@@ -4,7 +4,7 @@ package uniandes.isis2304.superAndes.negocio;
  * @author lj.romero
  *
  */
-public class PersonaNatural implements VOPersonaNatural{
+public class PersonaNatural extends Cliente implements VOPersonaNatural{
 	private String documento;
 	private String correo;
 
@@ -18,7 +18,7 @@ public class PersonaNatural implements VOPersonaNatural{
 		documento = pDocumento;
 		correo = pCorreo;
 	}
-	public String darCorreo() {
+	public String getCorreo() {
 		return correo;
 	}
 	public void cambiarCorreo(String pCorreo)

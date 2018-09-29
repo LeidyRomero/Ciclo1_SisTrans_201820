@@ -4,7 +4,7 @@ package uniandes.isis2304.superAndes.negocio;
  * @author lj.romero
  *
  */
-public class Empresa implements VOEmpresa{
+public class Empresa extends Cliente implements VOEmpresa{
 	private int nit;
 	private String direccion;
 	private String correo;
@@ -28,7 +28,7 @@ public class Empresa implements VOEmpresa{
 	public String darDireccion() {
 		return direccion;
 	}
-	public String darCorreo() {
+	public String getCorreo() {
 		return correo;
 	}
 	//TODO completar
@@ -36,4 +36,5 @@ public class Empresa implements VOEmpresa{
 	{
 		return "";
 	}
+	
 }

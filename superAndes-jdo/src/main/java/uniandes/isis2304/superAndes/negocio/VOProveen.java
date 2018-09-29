@@ -1,12 +1,10 @@
 package uniandes.isis2304.superAndes.negocio;
 
-public interface VOProveedor {
+public interface VOProveen {
 
 	public int getNitProveedor();
 
-	public String getNombreProveedor();
+	public int getCodigoBarras();
 
-	public String getCalificacion();
-	
 	public String toString();
 }
