@@ -20,6 +20,34 @@ public class Producto implements VOProducto{
 	private int codigoBarras;
 	private Date fechaVencimiento;
 
+	public Producto()
+	{
+		nombre = "";
+		marca = "";
+		precioUnidadMedida = 0;
+		presentacion = "";
+		unidadMedida = "";
+		especificacionEmpacado= "";
+		calidad ="";
+		precioUnitario=0;
+		cantidadPresentacion = 0;
+		codigoBarras = 0;
+		fechaVencimiento = null;
+	}
+	public Producto(String pNombre, String pMarca, String pUnidadMedida, String pPresentacion, String pEspecificacionEmpacado, String pCalidad, double pPrecioUnitario,double pPrecioUnidadMedida,int pCantidadPresentacion, int pCodigoBarras, Date pFechaVencimiento)
+	{
+		nombre = pNombre;
+		marca = pMarca;
+		precioUnidadMedida = pPrecioUnidadMedida;
+		presentacion = pPresentacion;
+		unidadMedida = pUnidadMedida;
+		especificacionEmpacado= pEspecificacionEmpacado;
+		calidad =pCalidad;
+		precioUnitario=pPrecioUnitario;
+		cantidadPresentacion = pCantidadPresentacion;
+		codigoBarras = pCodigoBarras;
+		fechaVencimiento = pFechaVencimiento;
+	}
 	//TODO SET
 	public String darNombre() {
 		return nombre;

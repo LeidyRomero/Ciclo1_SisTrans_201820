@@ -8,6 +8,16 @@ public class PersonaNatural implements VOPersonaNatural{
 	private String documento;
 	private String correo;
 
+	public PersonaNatural()
+	{
+		documento="";
+		correo = "";
+	}
+	public PersonaNatural(String pDocumento, String pCorreo)
+	{
+		documento = pDocumento;
+		correo = pCorreo;
+	}
 	public String darCorreo() {
 		return correo;
 	}

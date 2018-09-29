@@ -9,7 +9,21 @@ public class PedidoProducto implements VOPedidoProducto{
 	private long id;
 	private double cantidadProducto;
 	private double precioProducto;
-	//TOTO SET
+	public PedidoProducto()
+	{
+		codigoBarras = 0;
+		id = 0;
+		cantidadProducto=0;
+		precioProducto=0;
+	}
+	public PedidoProducto(int pCodigoBarras, long pId, double pCantidadProducto, double pPrecioProducto )
+	{
+		codigoBarras = pCodigoBarras;
+		id = pId;
+		cantidadProducto=pCantidadProducto;
+		precioProducto=pPrecioProducto;
+	}
+	//TODO SET
 	public int darCodigoBarras() {
 		return codigoBarras;
 	}
