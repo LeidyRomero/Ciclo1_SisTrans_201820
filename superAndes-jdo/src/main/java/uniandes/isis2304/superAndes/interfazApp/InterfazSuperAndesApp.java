@@ -5,11 +5,18 @@ package uniandes.isis2304.superAndes.interfazApp;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.logging.Logger;
+
+import javax.jdo.JDODataStoreException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,7 +45,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	/**
 	 * Ruta al archivo de configuración de la interfaz
 	 */
-	private static final String CONFIGURACION_INTERFAZ = "./src/main/resources/config/interfaceConfigApp2.json"; 
+	private static final String CONFIGURACION_INTERFAZ = "./src/main/resources/config/interfaceConfigApp.json"; 
 	/**
 	 * Ruta al archivo de configuración de los nombres de tablas de la base de datos
 	 */
@@ -69,7 +76,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	/**
 	 * Menú de la aplicación
 	 */
-	private JMenuBar menu;
+	private JMenuBar menuSA;
 	// -----------------------------------------------------------------
     // Constructores
     // -----------------------------------------------------------------
@@ -86,11 +93,11 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		configurarFrame ( );
 		
 		if (guiConfig != null) 
+		{
 			crearMenu( guiConfig.getAsJsonArray("menu") );
+		}
 		
 		String path = guiConfig.get("bannerPath").getAsString();
-
-		System.out.println("si3");
 		
 		tableConfig = openConfig ("Tablas BD", CONFIGURACION_TABLAS);
 		superAndes = new SuperAndes(tableConfig);
@@ -118,6 +125,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		try 
 		{
 			Gson gson = new Gson( );
+			File aja =new File(archConfig);
 			FileReader file = new FileReader (archConfig);
 			JsonReader reader = new JsonReader ( file );
 			config = gson.fromJson(reader, JsonObject.class);
@@ -172,7 +180,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	private void crearMenu(JsonArray jsonMenu )
 	{    	
 		// Creación de la barra de menús
-		menu = new JMenuBar();       
+		menuSA = new JMenuBar();       
 		for (JsonElement men : jsonMenu)
 		{
 			// Creación de cada uno de los menús
@@ -196,9 +204,9 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 				menu.add(mItem);
 			}       
-			menu.add( menu );
+			menuSA.add( menu );
 		}        
-		setJMenuBar ( menu );	
+		setJMenuBar ( menuSA );	
 	}
 	// -----------------------------------------------------------------
     // Métodos de interacción
@@ -222,6 +230,243 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			e.printStackTrace();
 		} 
 	}
+	
+	//TODO CRUD Proveedores
+	//TODO CRUD Productos
+	//TODO CRUD Clientes
+	//TODO CRUD Sucursal
+	//TODO CRUD Bodega
+	//TODO CRUD Estante
+	//TODO CRUD Promoción
+	//TODO CRUD Pedidos
+	//TODO CRUD Ventas	
+	
+	/* ****************************************************************
+	 * 			Métodos administrativos
+	 *****************************************************************/
+	/**
+	 * Muestra el log de Parranderos
+	 */
+	public void mostrarLogParranderos ()
+	{
+		mostrarArchivo ("parranderos.log");
+	}
+	
+	/**
+	 * Muestra el log de datanucleus
+	 */
+	public void mostrarLogDatanuecleus ()
+	{
+		mostrarArchivo ("datanucleus.log");
+	}
+	
+	/**
+	 * Limpia el contenido del log de parranderos
+	 * Muestra en el panel de datos la traza de la ejecución
+	 */
+	public void limpiarLogParranderos ()
+	{
+		// Ejecución de la operación y recolección de los resultados
+		boolean resp = limpiarArchivo ("parranderos.log");
+
+		// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+		String resultado = "\n\n************ Limpiando el log de parranderos ************ \n";
+		resultado += "Archivo " + (resp ? "limpiado exitosamente" : "NO PUDO ser limpiado !!");
+		resultado += "\nLimpieza terminada";
+
+		panelDatos.actualizarInterfaz(resultado);
+	}
+	
+	/**
+	 * Limpia el contenido del log de datanucleus
+	 * Muestra en el panel de datos la traza de la ejecución
+	 */
+	public void limpiarLogDatanucleus ()
+	{
+		// Ejecución de la operación y recolección de los resultados
+		boolean resp = limpiarArchivo ("datanucleus.log");
+
+		// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+		String resultado = "\n\n************ Limpiando el log de datanucleus ************ \n";
+		resultado += "Archivo " + (resp ? "limpiado exitosamente" : "NO PUDO ser limpiado !!");
+		resultado += "\nLimpieza terminada";
+
+		panelDatos.actualizarInterfaz(resultado);
+	}
+	
+	/**
+	 * Limpia todas las tuplas de todas las tablas de la base de datos de parranderos
+	 * Muestra en el panel de datos el número de tuplas eliminadas de cada tabla
+	 */
+	public void limpiarBD ()
+	{
+		try 
+		{
+    		// Ejecución de la demo y recolección de los resultados
+			//TODO Terminar SuperAndes
+//			long eliminados [] = superAndes.limpiarParranderos();
+//			
+//			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+//			String resultado = "\n\n************ Limpiando la base de datos ************ \n";
+//			resultado += eliminados [0] + " Gustan eliminados\n";
+//			resultado += eliminados [1] + " Sirven eliminados\n";
+//			resultado += eliminados [2] + " Visitan eliminados\n";
+//			resultado += eliminados [3] + " Bebidas eliminadas\n";
+//			resultado += eliminados [4] + " Tipos de bebida eliminados\n";
+//			resultado += eliminados [5] + " Bebedores eliminados\n";
+//			resultado += eliminados [6] + " Bares eliminados\n";
+//			resultado += "\nLimpieza terminada";
+//   
+//			panelDatos.actualizarInterfaz(resultado);
+		} 
+		catch (Exception e) 
+		{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	/**
+	 * Muestra el modelo conceptual de Parranderos
+	 */
+	public void mostrarModeloConceptual ()
+	{
+		//TODO Poner el modelo conceptual 
+		mostrarArchivo ("data/Modelo Conceptual Parranderos.pdf");
+	}
+	
+	/**
+	 * Muestra el esquema de la base de datos de Parranderos
+	 */
+	public void mostrarEsquemaBD ()
+	{
+		//TODO Esquema BD Parranderos
+		mostrarArchivo ("data/Esquema BD Parranderos.pdf");
+	}
+	
+	/**
+	 * Muestra el script de creación de la base de datos
+	 */
+	public void mostrarScriptBD ()
+	{
+		//TODO Script de BD
+		mostrarArchivo ("data/EsquemaParranderos.sql");
+	}
+	
+	/**
+	 * Muestra la arquitectura de referencia para Parranderos
+	 */
+	public void mostrarArqRef ()
+	{
+		//TODO Arquitectura Referencia
+		mostrarArchivo ("data/ArquitecturaReferencia.pdf");
+	}
+	
+	/**
+	 * Muestra la documentación Javadoc del proyectp
+	 */
+	public void mostrarJavadoc ()
+	{
+		//TODO Javadoc ¿?
+		mostrarArchivo ("doc/index.html");
+	}
+	
+	/**
+     * Muestra la información acerca del desarrollo de esta apicación
+     */
+    public void acercaDe ()
+    {
+		String resultado = "\n\n ************************************\n\n";
+		resultado += " * Universidad	de	los	Andes	(Bogotá	- Colombia)\n";
+		resultado += " * Departamento	de	Ingeniería	de	Sistemas	y	Computación\n";
+		resultado += " * Licenciado	bajo	el	esquema	Academic Free License versión 2.1\n";
+		resultado += " * \n";		
+		resultado += " * Curso: isis2304 - Sistemas Transaccionales\n";
+		resultado += " * Proyecto: SuperAndes Uniandes\n";
+		resultado += " * @version 1.0\n";
+		resultado += " * @author Leidy Romero\n";
+		resultado += " * @author María Ocampo\n";
+		resultado += " * Octubre de 2018\n";
+		resultado += " * \n";
+		resultado += " * Revisado por: Leidy Romero, María Ocampo\n";
+		resultado += "\n ************************************\n\n";
+
+		panelDatos.actualizarInterfaz(resultado);		
+    }
+    
+    /* ****************************************************************
+	 * 			Métodos privados para la presentación de resultados y otras operaciones
+	 *****************************************************************/
+	
+    /**
+     * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO
+     * @param e - La excepción recibida
+     * @return La descripción de la excepción, cuando es javax.jdo.JDODataStoreException, "" de lo contrario
+     */
+	private String darDetalleException(Exception e) 
+	{
+		String resp = "";
+		if (e.getClass().getName().equals("javax.jdo.JDODataStoreException"))
+		{
+			JDODataStoreException je = (javax.jdo.JDODataStoreException) e;
+			return je.getNestedExceptions() [0].getMessage();
+		}
+		return resp;
+	}
+
+	/**
+	 * Genera una cadena para indicar al usuario que hubo un error en la aplicación
+	 * @param e - La excepción generada
+	 * @return La cadena con la información de la excepción y detalles adicionales
+	 */
+	private String generarMensajeError(Exception e) 
+	{
+		String resultado = "************ Error en la ejecución\n";
+		resultado += e.getLocalizedMessage() + ", " + darDetalleException(e);
+		resultado += "\n\nRevise datanucleus.log y parranderos.log para más detalles";
+		return resultado;
+	}
+
+	/**
+	 * Limpia el contenido de un archivo dado su nombre
+	 * @param nombreArchivo - El nombre del archivo que se quiere borrar
+	 * @return true si se pudo limpiar
+	 */
+	private boolean limpiarArchivo(String nombreArchivo) 
+	{
+		BufferedWriter bw;
+		try 
+		{
+			bw = new BufferedWriter(new FileWriter(new File (nombreArchivo)));
+			bw.write ("");
+			bw.close ();
+			return true;
+		} 
+		catch (IOException e) 
+		{
+//			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * Abre el archivo dado como parámetro con la aplicación por defecto del sistema
+	 * @param nombreArchivo - El nombre del archivo que se quiere mostrar
+	 */
+	private void mostrarArchivo (String nombreArchivo)
+	{
+		try
+		{
+			Desktop.getDesktop().open(new File(nombreArchivo));
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	// -----------------------------------------------------------------
     // Programa principal
     // -----------------------------------------------------------------
@@ -233,7 +478,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	{
 		try
 		{
-
 			// Unifica la interfaz para Mac y para Windows.
 			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
 			InterfazSuperAndesApp interfaz = new InterfazSuperAndesApp( );
