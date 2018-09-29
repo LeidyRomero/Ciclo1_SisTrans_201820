@@ -18,5 +18,6 @@ public interface VOProducto {
 	public int darCodigoBarras();
 	public String darCalidad();
 	public Date darFechaVencimiento();
+	
 	public String toString();
 }
