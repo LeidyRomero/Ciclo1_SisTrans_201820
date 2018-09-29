@@ -241,9 +241,9 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	//TODO CRUD Pedidos
 	//TODO CRUD Ventas	
 	
-	/* ****************************************************************
-	 * 			Métodos administrativos
-	 *****************************************************************/
+	//--------------------------------------------------------------------------------------
+	 //* 			Métodos administrativos
+	//--------------------------------------------------------------------------------------/
 	/**
 	 * Muestra el log de Parranderos
 	 */
@@ -395,9 +395,9 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		panelDatos.actualizarInterfaz(resultado);		
     }
     
-    /* ****************************************************************
-	 * 			Métodos privados para la presentación de resultados y otras operaciones
-	 *****************************************************************/
+    //--------------------------------------------------------------------------------------
+	//* 			Métodos privados para la presentación de resultados y otras operaciones
+	//--------------------------------------------------------------------------------------
 	
     /**
      * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO

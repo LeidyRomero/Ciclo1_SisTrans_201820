@@ -93,7 +93,7 @@ public class PersistenciaSuperAndes {
 		tablas = leerNombresTablas(tableConfig);
 		String unidadPersistencia = tableConfig.get("unidadPersistencia").getAsString();
 		Log.trace("Accediendo a la unidad de persistencia: "+ unidadPersistencia);
-		managerFactory= JDOHelper.getPersistenceManagerFactory(unidadPersistencia);
+		managerFactory = JDOHelper.getPersistenceManagerFactory(unidadPersistencia);
 	}
 	
 	
@@ -258,7 +258,6 @@ public class PersistenciaSuperAndes {
 	public String getSqlTipoProducto() {
 		return tablas.get(21);
 	}
-	
 	
 	//TODO Metodos por cada tabla:
 }
