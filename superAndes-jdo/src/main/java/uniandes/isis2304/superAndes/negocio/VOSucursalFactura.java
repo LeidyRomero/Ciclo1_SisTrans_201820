@@ -1,13 +1,13 @@
 package uniandes.isis2304.superAndes.negocio;
 
-public interface VOSucursalCliente {
+public interface VOSucursalFactura {
 
 
 	public String getDireccionSucursal();
 
 	public String getCiudadSucursal();
 
-	public String getCorreoCliente();
+	public long getIdFactura();
 
 	public String toString();
 	

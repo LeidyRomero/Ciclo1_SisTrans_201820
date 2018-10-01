@@ -3,12 +3,19 @@ package uniandes.isis2304.superAndes.persistencia;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.jdo.JDODataStoreException;
 import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Transaction;
+
 import org.apache.log4j.Logger;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import uniandes.isis2304.superAndes.negocio.Cliente;
+import uniandes.isis2304.superAndes.negocio.Proveedor;
 
 public class PersistenciaSuperAndes {
 	
@@ -22,8 +29,14 @@ public class PersistenciaSuperAndes {
 	 */
 	public final static String SQL = "javax.jdo.query.SQL";
 	
+	/**
+	 * 
+	 */
 	private PersistenceManagerFactory managerFactory;
 	
+	/**
+	 * 
+	 */
 	private List <String> tablas;
 	
 	/**
@@ -50,7 +63,7 @@ public class PersistenciaSuperAndes {
 	private SQLProveedor sqlProveedor;
 	private SQLProveen sqlProveen;
 	private SQLSucursal sqlSucursal;
-	private SQLSucursalCliente sqlSucursalCliente;
+	private SQLSucursalFactura sqlSucursalFactura;
 	private SQLTipoProducto sqlTipoProducto;
 	
 	
@@ -83,7 +96,7 @@ public class PersistenciaSuperAndes {
 		tablas.add("PROVEEDOR");
 		tablas.add("PROVEEN");
 		tablas.add("SUCURSAL");
-		tablas.add("SUCURSAL_CLIENTE");
+		tablas.add("FACTURAS");
 		tablas.add("TIPO_PRODUCTO");
 	}
 	
@@ -166,7 +179,7 @@ public class PersistenciaSuperAndes {
 		sqlProveedor = new SQLProveedor(this);
 		sqlProveen = new SQLProveen(this);
 		sqlSucursal = new SQLSucursal(this);
-		sqlSucursalCliente = new SQLSucursalCliente(this);
+		sqlSucursalFactura = new SQLSucursalFactura(this);
 		sqlTipoProducto = new SQLTipoProducto(this);
 		sqlUtil = new SQLUtil(this);
 	}
@@ -251,7 +264,7 @@ public class PersistenciaSuperAndes {
 		return tablas.get(19);
 	}
 
-	public String getSqlSucursalCliente() {
+	public String getSqlSucursalFactura() {
 		return tablas.get(20);
 	}
 
@@ -259,5 +272,87 @@ public class PersistenciaSuperAndes {
 		return tablas.get(21);
 	}
 	
+	/**
+	 * Extrae el mensaje de la exception JDODataStoreException embebido en la Exception e, que da el detalle específico del problema encontrado
+	 * @param e - La excepción que ocurrio
+	 * @return El mensaje de la excepción JDO
+	 */
+	private String darDetalleException(Exception e) 
+	{
+		String resp = "";
+		if (e.getClass().getName().equals("javax.jdo.JDODataStoreException"))
+		{
+			JDODataStoreException je = (javax.jdo.JDODataStoreException) e;
+			return je.getNestedExceptions() [0].getMessage();
+		}
+		return resp;
+	}
+	
 	//TODO Metodos por cada tabla:
+	
+	//---------------------------------------------------------------------
+	// Métodos para manejar los PROVEEDORES
+	//---------------------------------------------------------------------
+	
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Proveedor
+	 * Adiciona entradas al log de la aplicación
+	 * @param nitProveedor - El nit del proveedor
+	 * @param nombreProveedor - El nombre del proveedor
+	 * @return El objeto Proveedor adicionado. null si ocurre alguna Excepción
+	 */
+	public Proveedor adicionarProveedor(int nitProveedor, String nombreProveedor)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlProveedor.adicionarProveedor(pm, nitProveedor, nombreProveedor);
+			tx.commit();
+			
+			Log.trace("Insercción proveedor: " + nitProveedor + ": "+tuplasInsertadas);
+			return new Proveedor(nitProveedor, nombreProveedor, "");
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+		}
+	}
+	
+	//---------------------------------------------------------------------
+	// Métodos para manejar los CLIENTES
+	//---------------------------------------------------------------------
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Cliente
+	 * Adiciona entradas al log de la aplicación
+	 * @param correo - El correo del cliente
+	 * @param nombre - El nombre del cliente
+	 * @return El objeto Cliente adicionado. null si ocurre alguna Excepción 
+	 */
+	public Cliente adicionarCliente(String correo, String nombre)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlCliente.adicionarCliente(pm, correo, nombre);
+			tx.commit();
+			
+			Log.trace("Insercción cliente: " + correo + ": "+tuplasInsertadas);
+			return new Cliente(nombre, correo, 0);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+		}
+	}
+	
+	//---------------------------------------------------------------------
+	// Métodos para manejar las SUCURSALES
+	//---------------------------------------------------------------------
+	
 }

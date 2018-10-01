@@ -1,5 +1,5 @@
 package uniandes.isis2304.superAndes.persistencia;
-class SQLSucursalCliente
+class SQLSucursalFactura
 {
 	/**
 	 * Cadena que representa el tipo de consulta que se va a realizar en las sentencias de acceso a la base de datos
@@ -9,7 +9,7 @@ class SQLSucursalCliente
 	
 	private PersistenciaSuperAndes persistencia;
 
-	public SQLSucursalCliente(PersistenciaSuperAndes persistencia) 
+	public SQLSucursalFactura(PersistenciaSuperAndes persistencia) 
 	{
 		this.persistencia = persistencia;
 	}	
