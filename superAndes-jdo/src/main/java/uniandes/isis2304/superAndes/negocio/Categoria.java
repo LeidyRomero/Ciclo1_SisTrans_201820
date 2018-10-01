@@ -23,4 +23,9 @@ public class Categoria implements VOCategoria{
 	{
 		this.nombre = pNombre;
 	}
+
+	public String toString() {
+		return "Categoria [nombre=" + nombre + "]";
+	}
+	
 }

@@ -18,11 +18,11 @@ class SQLEmpresa
 	{
 		this.persistencia = pPersistencia;
 	}
-	
-	public long agregar (PersistenceManager manager)
+	// TODO RF3 - Registrar clientes
+	public long agregarEmpresa(PersistenceManager manager, String pDireccionEmpres,int pNitEmpresa, String pCorreo )
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlEmpresa()+"");
-		q.setParameters();
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlEmpresa()+"(nit_empresa, direccion, correo) values (?,?,?)");
+		q.setParameters(pNitEmpresa, pDireccionEmpres, pCorreo);
 		return (long) q.executeUnique();
 	}
 }

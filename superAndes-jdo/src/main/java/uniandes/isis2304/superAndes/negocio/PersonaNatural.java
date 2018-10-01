@@ -6,25 +6,16 @@ package uniandes.isis2304.superAndes.negocio;
  */
 public class PersonaNatural extends Cliente implements VOPersonaNatural{
 	private String documento;
-	private String correo;
 
 	public PersonaNatural()
 	{
 		documento="";
-		correo = "";
 	}
-	public PersonaNatural(String pDocumento, String pCorreo)
+	public PersonaNatural(String pDocumento)
 	{
 		documento = pDocumento;
-		correo = pCorreo;
 	}
-	public String getCorreo() {
-		return correo;
-	}
-	public void cambiarCorreo(String pCorreo)
-	{
-		this.correo = pCorreo;
-	}
+
 	public String darDocumento() {
 		return documento;
 	}
@@ -32,9 +23,10 @@ public class PersonaNatural extends Cliente implements VOPersonaNatural{
 	{
 		this.documento = pDocumento;
 	}
-	//TODO 
-	public String toString()
-	{
-		return "";
+	@Override
+	public String toString() {
+		return "PersonaNatural [documento=" + documento + "]";
 	}
+
+
 }

@@ -18,11 +18,11 @@ class SQLPedidoProducto
 	{
 		this.persistencia = pPersistencia;
 	}
-	
-	public long agregar (PersistenceManager manager)
+	//TODO RF9 - Registrar un producto a un pedido
+	public long agregarPedidoProducto(PersistenceManager manager, int pCodigoBarras, long pIdPedido, double pCantidadProducto, double pPrecioProducto)
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlPedidoProducto()+"");
-		q.setParameters();
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlPedidoProducto()+"(codigo_barras, id_pedido,cantidad_producto, precio_producto) values (?,?,?,?)");
+		q.setParameters(pCodigoBarras,pIdPedido,pCantidadProducto, pPrecioProducto);
 		return (long) q.executeUnique();
 	}
 }

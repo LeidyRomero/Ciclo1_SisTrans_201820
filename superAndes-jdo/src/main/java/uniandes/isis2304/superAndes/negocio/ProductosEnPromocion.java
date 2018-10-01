@@ -34,5 +34,10 @@ public class ProductosEnPromocion implements VOProductosEnPromocion{
 	public int darCodigoBarras() {
 		return codigoBarras;
 	}
+	@Override
+	public String toString() {
+		return "ProductosEnPromocion [id=" + id + ", unidadesDisponibles=" + unidadesDisponibles + ", codigoBarras="
+				+ codigoBarras + "]";
+	}
 
 }

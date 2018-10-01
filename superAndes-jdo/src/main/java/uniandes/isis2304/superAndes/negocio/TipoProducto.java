@@ -6,7 +6,14 @@ package uniandes.isis2304.superAndes.negocio;
  */
 public class TipoProducto implements VOTipoProducto{
 	private String nombre;
-
+	public TipoProducto()
+	{
+		nombre = "";	
+	}
+	public TipoProducto(String pNombre)
+	{
+		nombre  = pNombre;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -18,5 +25,5 @@ public class TipoProducto implements VOTipoProducto{
 	public String toString() {
 		return "TipoProducto [nombre=" + nombre + "]";
 	}
-	
+
 }

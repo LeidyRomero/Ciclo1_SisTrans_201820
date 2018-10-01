@@ -83,9 +83,13 @@ public class Producto implements VOProducto{
 	public Date darFechaVencimiento() {
 		return fechaVencimiento;
 	}
-	//TODO 
-	public String toString()
-	{
-		return "";
+	@Override
+	public String toString() {
+		return "Producto [nombre=" + nombre + ", marca=" + marca + ", presentacion=" + presentacion + ", unidadMedida="
+				+ unidadMedida + ", especificacionEmpacado=" + especificacionEmpacado + ", calidad=" + calidad
+				+ ", precioUnitario=" + precioUnitario + ", precioUnidadMedida=" + precioUnidadMedida
+				+ ", cantidadPresentacion=" + cantidadPresentacion + ", codigoBarras=" + codigoBarras
+				+ ", fechaVencimiento=" + fechaVencimiento + "]";
 	}
+	
 }

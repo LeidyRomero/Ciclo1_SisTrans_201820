@@ -7,19 +7,16 @@ package uniandes.isis2304.superAndes.negocio;
 public class Empresa extends Cliente implements VOEmpresa{
 	private int nit;
 	private String direccion;
-	private String correo;
 
 	public Empresa()
 	{
 		nit = 0;
 		direccion = "";
-		correo ="";
 	}
-	public Empresa(int pNit,String pDireccion, String pCorreo )
+	public Empresa(int pNit,String pDireccion)
 	{
 		nit = pNit;
 		direccion = pDireccion;
-		correo = pCorreo;
 	}
 	//TODO SET
 	public int darNitEmpresa() {
@@ -28,13 +25,8 @@ public class Empresa extends Cliente implements VOEmpresa{
 	public String darDireccion() {
 		return direccion;
 	}
-	public String getCorreo() {
-		return correo;
-	}
-	//TODO completar
-	public String toString()
-	{
-		return "";
-	}
-	
+
+	public String toString() {
+		return "Empresa [nit=" + nit + ", direccion=" + direccion+ "]";
+	}	
 }

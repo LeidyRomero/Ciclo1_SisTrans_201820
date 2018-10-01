@@ -18,11 +18,11 @@ class SQLPersonaNatural
 	{
 		this.persistencia = pPersistencia;
 	}
-	
-	public long agregar (PersistenceManager manager)
+	//TODO RF3 - Registrar cliente
+	public long agregarPersonaNatural(PersistenceManager manager, String pDocumento, String pCorreo)
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlPersonaNatural()+"");
-		q.setParameters();
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlPersonaNatural()+"(documento, correo) values (?,?)");
+		q.setParameters(pDocumento, pCorreo);
 		return (long) q.executeUnique();
 	}
 }

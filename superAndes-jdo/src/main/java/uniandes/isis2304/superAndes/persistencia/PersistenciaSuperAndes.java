@@ -1,17 +1,24 @@
 package uniandes.isis2304.superAndes.persistencia;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.jdo.JDODataStoreException;
 import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Transaction;
+
 import org.apache.log4j.Logger;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import uniandes.isis2304.superAndes.negocio.*;
+
 public class PersistenciaSuperAndes {
-	
+
 	private static Logger Log = Logger.getLogger(PersistenciaSuperAndes.class.getName());
 	/**
 	 * Atributo privado que es el único objeto de la clase - Patrón SINGLETON
@@ -21,16 +28,16 @@ public class PersistenciaSuperAndes {
 	 * Cadena para indicar el tipo de sentencias que se va a utilizar en una consulta
 	 */
 	public final static String SQL = "javax.jdo.query.SQL";
-	
+
 	private PersistenceManagerFactory managerFactory;
-	
+
 	private List <String> tablas;
-	
+
 	/**
 	 * Atributo para el acceso a las sentencias SQL propias a PersistenciaSuperAndes 
 	 */
 	private SQLUtil sqlUtil;
-	
+
 	private SQLBodega sqlBodega;
 	private SQLCantidadEnBodega sqlCantidadEnBodega ;
 	private SQLCantidadEnEstantes sqlCantidadEnEstantes;
@@ -45,6 +52,7 @@ public class PersistenciaSuperAndes {
 	private SQLPedidoProducto sqlPedidoProducto;
 	private SQLPersonaNatural sqlPersonaNatural ;
 	private SQLProducto sqlProducto ;
+	private SQLProductoCategoria sqlProductoCategoria ;
 	private SQLProductosEnPromocion sqlProductosEnPromocion ;
 	private SQLPromocion sqlPromocion;
 	private SQLProveedor sqlProveedor;
@@ -52,9 +60,9 @@ public class PersistenciaSuperAndes {
 	private SQLSucursal sqlSucursal;
 	private SQLSucursalCliente sqlSucursalCliente;
 	private SQLTipoProducto sqlTipoProducto;
-	
-	
-	
+
+
+
 	/**
 	 * Constructor privado con valores por defecto - Patron SINGLETON
 	 */
@@ -85,8 +93,9 @@ public class PersistenciaSuperAndes {
 		tablas.add("SUCURSAL");
 		tablas.add("SUCURSAL_CLIENTE");
 		tablas.add("TIPO_PRODUCTO");
+		tablas.add("PRODUCTO_CATEGORIA");
 	}
-	
+
 	private PersistenciaSuperAndes(JsonObject tableConfig)
 	{
 		crearClasesSQL();
@@ -95,8 +104,8 @@ public class PersistenciaSuperAndes {
 		Log.trace("Accediendo a la unidad de persistencia: "+ unidadPersistencia);
 		managerFactory = JDOHelper.getPersistenceManagerFactory(unidadPersistencia);
 	}
-	
-	
+
+
 	public static PersistenciaSuperAndes getInstance ()
 	{
 		if (instance == null)
@@ -118,7 +127,7 @@ public class PersistenciaSuperAndes {
 		}
 		return instance;
 	}
-	
+
 	public void cerrarUnidadPersistencia()
 	{
 		managerFactory.close();
@@ -138,10 +147,10 @@ public class PersistenciaSuperAndes {
 		{
 			resp.add (nom.getAsString ());
 		}
-		
+
 		return resp;
 	}
-	
+
 	/**
 	 * Crea los atributos de clases de apoyo SQL
 	 */
@@ -168,6 +177,7 @@ public class PersistenciaSuperAndes {
 		sqlSucursal = new SQLSucursal(this);
 		sqlSucursalCliente = new SQLSucursalCliente(this);
 		sqlTipoProducto = new SQLTipoProducto(this);
+		sqlProductoCategoria = new SQLProductoCategoria(this);
 		sqlUtil = new SQLUtil(this);
 	}
 	public String darSecuenciaSuperAndes()
@@ -258,6 +268,341 @@ public class PersistenciaSuperAndes {
 	public String getSqlTipoProducto() {
 		return tablas.get(21);
 	}
-	
+	public String getSqlProductoCategoria() {
+		return tablas.get(22);
+	}
+	private String darDetalleException(Exception e) 
+	{
+		String resp = "";
+		if (e.getClass().getName().equals("javax.jdo.JDODataStoreException"))
+		{
+			JDODataStoreException je = (javax.jdo.JDODataStoreException) e;
+			return je.getNestedExceptions() [0].getMessage();
+		}
+		return resp;
+	}
 	//TODO Metodos por cada tabla:
+
+	//------------------------------------------------------------------
+	//  Metodos para manejar PRODUCTOS
+	//------------------------------------------------------------------
+	public Producto adicionarProducto(String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pEspecificacionEmpacado, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, int pCodigoBarras, Date pFechaVencimiento)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlProducto.agregarProducto(manager, pNombre, pMarca, pPresentacion, pUnidadMedida, pEspecificacionEmpacado, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento);
+			t.commit();
+			Log.trace("Inserccion producto: "+ pNombre+": "+tuplasInsertadas+ " tuplas insertadas");
+			return new Producto(pNombre, pMarca, pPresentacion, pUnidadMedida, pEspecificacionEmpacado, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	//------------------------------------------------------------------
+	//  Metodos para manejar PRODUCTO_CATEGORIA
+	//------------------------------------------------------------------
+	public ProductoCategoria adicionarProductoCategoria(String pNombreCategoria, int pCodigoBarras)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlProductoCategoria.agregarProductoCategoria(manager, pNombreCategoria, pCodigoBarras);
+			t.commit();
+			Log.trace("Inserccion producto categoria: "+ pCodigoBarras+": "+tuplasInsertadas+ " tuplas insertadas");
+			return new ProductoCategoria(pNombreCategoria,pCodigoBarras);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	//------------------------------------------------------------------
+	//  Metodos para manejar CATEGORIA
+	//------------------------------------------------------------------
+	public Categoria adicionarCategoria( String pNombre)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlCategoria.agregarCategoria(manager, pNombre );
+			t.commit();
+			Log.trace("Inserccion categoria: "+pNombre +": "+tuplasInsertadas+ " tuplas insertadas");
+			return new Categoria();
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	//------------------------------------------------------------------
+	//  Metodos para manejar TIPO_PRODUCTO
+	//------------------------------------------------------------------
+
+	public TipoProducto adicionarTipoProducto(String pNombreTipo, String pNombreCategoria)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlTipoProducto.agregarTipoDeProducto(manager, pNombreTipo, pNombreCategoria );
+			t.commit();
+			Log.trace("Inserccion tipo producto: "+ pNombreTipo +": "+tuplasInsertadas+ " tuplas insertadas");
+			return new TipoProducto(pNombreTipo);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	//------------------------------------------------------------------
+	//  Metodos para manejar EMPRESA
+	//------------------------------------------------------------------
+	public Empresa adicionarEmpresa(String pDireccion, int pNit, String pCorreo)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlEmpresa.agregarEmpresa(manager,pDireccion, pNit, pCorreo );
+			t.commit();
+			Log.trace("Inserccion empresa: "+ pNit +": "+tuplasInsertadas+ " tuplas insertadas");
+			return new Empresa(pNit,pDireccion);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	//------------------------------------------------------------------
+	//  Metodos para manejar PERSONA_NATURAL
+	//------------------------------------------------------------------
+	public PersonaNatural adicionarPersonaNatural(String pDocumento, String pCorreo)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlPersonaNatural.agregarPersonaNatural(manager,pDocumento, pCorreo );
+			t.commit();
+			Log.trace("Inserccion X: "+ pDocumento +": "+tuplasInsertadas+ " tuplas insertadas");
+			return new PersonaNatural(pDocumento);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	//------------------------------------------------------------------
+	//  Metodos para manejar BODEGA
+	//------------------------------------------------------------------
+	public Bodega adicionarBodega(String pTipo, double pVolumen, double pPeso, String pDireccionBodega, String pDireccionSucursal, String pCiudad)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlBodega.agregarBodega(manager, pTipo,pVolumen,pPeso,pDireccionBodega,pDireccionSucursal,pCiudad);
+			t.commit();
+			Log.trace("Inserccion X: "+ pDireccionBodega+", "+pDireccionSucursal+","+pCiudad+": "+tuplasInsertadas+ " tuplas insertadas");
+			return new Bodega(pDireccionBodega,pTipo,pPeso,pVolumen);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	//------------------------------------------------------------------
+	//  Metodos para manejar ESTANTE
+	//------------------------------------------------------------------
+
+	public Estante adicionarEstante(String pTipoEstante,double pVolumen, long pId, double pPeso, double pNivelAbastecimiento, String pDireccionSucursal, String pCiudad)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlEstante.agregarEstante(manager, pTipoEstante, pVolumen, pId, pPeso, pNivelAbastecimiento, pDireccionSucursal, pCiudad);
+			t.commit();
+			Log.trace("Inserccion estante: "+ pId +": "+tuplasInsertadas+ " tuplas insertadas");
+			return new Estante();
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+
+	//------------------------------------------------------------------
+	//  Metodos para manejar PEDIDO PRODUCTO
+	//------------------------------------------------------------------
+	public PedidoProducto adicionarPedidoProducto(int pCodigoBarras, long pIdPedido, double pCantidadProducto, double pPrecioProducto)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlPedidoProducto.agregarPedidoProducto(manager, pCodigoBarras, pIdPedido, pCantidadProducto, pPrecioProducto);
+			t.commit();
+			Log.trace("Inserccion pedido producto: "+ pCodigoBarras+", "+pIdPedido+": "+tuplasInsertadas+ " tuplas insertadas");
+			return new PedidoProducto(pCodigoBarras, pIdPedido, pCantidadProducto, pPrecioProducto);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	//------------------------------------------------------------------
+	//  Metodos para manejar COMPRADOS
+	//------------------------------------------------------------------
+	public Comprados adicionarComprados(int pCodigoBarras,int pCantidad, double pPrecioTotal, String pIdFactura)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlComprados.agregarComprados(manager, pCodigoBarras, pCantidad, pPrecioTotal, pIdFactura);
+			t.commit();
+			Log.trace("Inserccion comprados: "+pCodigoBarras+", "+pIdFactura +": "+tuplasInsertadas+ " tuplas insertadas");
+			return new Comprados(pCodigoBarras, pCantidad, pPrecioTotal, pIdFactura);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+
+
+	//BORRADOR
+	//	public X adicionarX()
+	//	{
+	//		PersistenceManager manager = managerFactory.getPersistenceManager();
+	//		Transaction t = manager.currentTransaction();
+	//		try 
+	//		{
+	//			t.begin();
+	//			long tuplasInsertadas = sqlX.agregarX(manager, );
+	//			t.commit();
+	//			Log.trace("Inserccion X: "+ +": "+tuplasInsertadas+ " tuplas insertadas");
+	//			return new X();
+	//		}
+	//		catch(Exception e)
+	//		{
+	//			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+	//			return null;
+	//		}
+	//		finally
+	//		{
+	//			if (t.isActive())
+	//			{
+	//				t.rollback();
+	//			}
+	//			manager.close();
+	//		}
+	//	}
 }
