@@ -1,0 +1,156 @@
+{
+	"title": "Demostracion de SuperAndes",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "./src/main/resources/config/logo.png",
+	"menu":
+	[
+		{ "menuTitle": "Sucursales",
+		  "options":
+			[
+				{
+					"label": "CRD de Sucursales",
+					"event": "demoSucursales"
+				}
+			]
+		},		
+		{ "menuTitle": "Bodegas",
+		  "options":
+			[
+				{
+					"label": "CRD Bodega",
+					"event": "demoBodega"
+				},
+				{
+					"label": "Eliminar Bodega por direccion",
+					"event": "demoElimarBodega"
+			]
+		},
+		{ "menuTitle": "Estantes",
+		  "options":
+			[
+				{
+					"label": "CRD Estante",
+					"event": "demoEstante"
+				},
+				{
+					"label": "Cambiar estante de sucursal",
+					"event": "demoCambiarEstanteSucursal"
+				},
+				{
+					"label": "Disminuir nivel abastecimiento",
+					"event": "demoDisminuirNivelAbastecimiento"
+				},
+				{
+					"label": "Aumentar nivel abastecimiento",
+					"event": "demoAumentarNivelAbastecimiento"
+				},
+			]
+		},
+		{ "menuTitle": "Productos",
+		  "options":
+			[
+				{
+					"label": "CRD Producto",
+					"event": "demoProducto"
+				},
+				{
+					"label": "Cambiar precioUnitario",
+					"event": "demoCambiarPrecioUnitario"
+				},
+				{
+					"label": "Eliminar Producto por codigoBarras",
+					"event": "demoEliminarProductoCodigo"
+				}
+			]
+		},
+		{ "menuTitle": "Proveedores",
+		  "options":
+			[
+				{
+					"label": "CRD",
+					"event": "demo"
+				}
+			]
+		},
+		{ "menuTitle": "Pedidos",
+		  "options":
+			[
+				{
+					"label": "CRD",
+					"event": "demo"
+				}
+			]
+		},
+		{ "menuTitle": "Clientes",
+		  "options":
+			[
+				{
+					"label": "CRD Empresa",
+					"event": "demoEmpresa"
+				},
+				{
+					"label": "CRD Persona",
+					"event": "demoPersona"
+				}		
+			]
+		},
+		{ "menuTitle": "Facturas",
+		  "options":
+			[
+				{
+					"label": "",
+					"event": "demo"
+				}
+			]
+		},	
+		{ "menuTitle": "Promociones",
+		  "options":
+			[
+				{
+					"label": "CRD",
+					"event": "demo"
+				}			
+			]
+		},	
+		{ "menuTitle": "Documentacion",
+		  "options":
+			[
+				{
+					"label": "Presentacion general",
+					"event": "mostrarPresentacionGeneral"
+				},
+				{
+					"label": "Modelo conceptual",
+					"event": "mostrarModeloConceptual"
+				},
+				{
+					"label": "Esquema de la BD",
+					"event": "mostrarEsquemaBD"
+				},
+				{
+					"label": "Script creacion de la BD",
+					"event": "mostrarScriptBD"
+				},
+				{
+					"label": "Arquitectura de referencia",
+					"event": "mostrarArqRef"
+				},
+				{
+					"label": "Javadoc SuperAndes",
+					"event": "mostrarJavadoc"
+				}
+			]
+		},		
+		{ "menuTitle": "Acerca de ...",
+		  "options":
+			[
+				{
+					"label": "Acerca de ...",
+					"event": "acercaDe"
+				}
+			]
+		}		
+	]
+}
+	

@@ -81,4 +81,12 @@ public class Estante implements VOEstante{
 	{
 		this.tipo=pTipo;
 	}
+
+	public String toString() {
+		return "Estante [ciudad=" + ciudad + ", direccionSucursal=" + direccionSucursal + ", tipo=" + tipo
+				+ ", nivelAbastecimiento=" + nivelAbastecimiento + ", peso=" + peso + ", volumen=" + volumen + ", id="
+				+ id + "]";
+	}
+	
+	
 }

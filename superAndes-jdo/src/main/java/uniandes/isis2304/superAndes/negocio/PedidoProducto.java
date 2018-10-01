@@ -38,10 +38,10 @@ public class PedidoProducto implements VOPedidoProducto{
 	public double darPrecioProducto() {
 		return precioProducto;
 	}
-	//TODO
-	public String toString()
-	{
-		return "";
+
+	public String toString() {
+		return "PedidoProducto [codigoBarras=" + codigoBarras + ", id=" + id + ", cantidadProducto=" + cantidadProducto
+				+ ", precioProducto=" + precioProducto + "]";
 	}
 	
 }

@@ -89,4 +89,10 @@ public class CantidadEnBodega implements VOCantidadEnBodega{
 		this.cantidadMinima = pCantidad;
 	}
 
+	public String toString() {
+		return "CantidadEnBodega [direccionBodega=" + direccionBodega + ", direccionSucursal=" + direccionSucursal
+				+ ", ciudad=" + ciudad + ", cantidadActual=" + cantidadActual + ", cantidadMinima=" + cantidadMinima
+				+ ", codigoBarras=" + codigoBarras + "]";
+	}
+
 }
