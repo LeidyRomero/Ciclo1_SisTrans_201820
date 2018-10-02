@@ -754,6 +754,33 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	public Categoria buscarCategoriaNombre(String pNombre)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		Categoria categoria = null;
+		try 
+		{
+			t.begin();
+			categoria = sqlCategoria.buscarNombre(manager, pNombre);
+			t.commit();
+			Log.trace("Buscar tipo de producto por nombre: "+ categoria);
+			return categoria;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar TIPO_PRODUCTO
 	//------------------------------------------------------------------
@@ -769,6 +796,33 @@ public class PersistenciaSuperAndes {
 			t.commit();
 			Log.trace("Inserccion tipo producto: "+ pNombreTipo +": "+tuplasInsertadas+ " tuplas insertadas");
 			return new TipoProducto(pNombreTipo);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public TipoProducto buscarTipoNombre(String pNombre)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		TipoProducto tipo = null;
+		try 
+		{
+			t.begin();
+			tipo = sqlTipoProducto.buscarNombre(manager, pNombre);
+			t.commit();
+			Log.trace("Buscar tipo de producto por nombre: "+ tipo);
+			return tipo;
 		}
 		catch(Exception e)
 		{
@@ -882,19 +936,19 @@ public class PersistenciaSuperAndes {
 			t.commit();
 			return q;
 		}
-			catch(Exception e)
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
 			{
-				Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-				return null;
+				t.rollback();
 			}
-			finally
-			{
-				if (t.isActive())
-				{
-					t.rollback();
-				}
-				manager.close();
-			}
+			manager.close();
+		}
 	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar ESTANTE
@@ -937,19 +991,19 @@ public class PersistenciaSuperAndes {
 			t.commit();
 			return q;
 		}
-			catch(Exception e)
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
 			{
-				Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-				return null;
+				t.rollback();
 			}
-			finally
-			{
-				if (t.isActive())
-				{
-					t.rollback();
-				}
-				manager.close();
-			}
+			manager.close();
+		}
 	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar PEDIDO PRODUCTO

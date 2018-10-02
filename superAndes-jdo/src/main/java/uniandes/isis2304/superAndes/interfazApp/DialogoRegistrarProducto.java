@@ -10,7 +10,9 @@ public class DialogoRegistrarProducto extends JDialog implements ActionListener{
 	 * Comando para agregar un producto
 	 */
 	private final static String REGISTRAR = "REGISTRAR";
-
+	private final static String REGISTRAR_CATEGORIA = "REGISTRAR_CATEGORIA";
+	private final static String REGISTRAR_PRODUCTO_CATEGORIA = "REGISTRAR_PRODUCTO_CATEGORIA";
+	private final static String REGISTRAR_TIPO = "REGISTRAR_TIPO";
 	/**
 	 * Comando para cancelar la operación
 	 */
@@ -39,7 +41,7 @@ public class DialogoRegistrarProducto extends JDialog implements ActionListener{
 	 * Etiqueta precio unidad medida
 	 */
 	private JLabel lbPrecioUnidadMedida;
-
+	private JLabel lbCategoria;
 	/**
 	 * Campo de texto para mostrar el nombre
 	 */
@@ -53,6 +55,7 @@ public class DialogoRegistrarProducto extends JDialog implements ActionListener{
 	 * Campo de texto para mostrar la marca
 	 */
 	private JTextField txtMarca;
+	private JTextField txtCategoria;
 
 	/**
 	 * Campo de texto para mostrar el precio unitario
@@ -68,7 +71,9 @@ public class DialogoRegistrarProducto extends JDialog implements ActionListener{
 	 * Botón registrar
 	 */
 	private JButton btnRegistrar;
-
+	private JButton btnRegistrarCategoria;
+	private JButton btnRegistrarProductoCategoria;
+	private JButton btnRegistrarTipo;
 	/**
 	 * Botón cancelar
 	 */
@@ -141,7 +146,7 @@ public class DialogoRegistrarProducto extends JDialog implements ActionListener{
 	public DialogoRegistrarProducto( InterfazSuperAndesApp principalP )
 	{
 		principal = principalP;
-		setLayout( new GridLayout( 12, 2 ) );
+		setLayout( new GridLayout( 14, 3 ) );
 		this.setSize( 800, 450 );
 		setTitle( "Agregar producto" );
 
@@ -210,16 +215,37 @@ public class DialogoRegistrarProducto extends JDialog implements ActionListener{
 
 		add( lbFechaVencimiento );
 		add( txtFechaVencimiento );
+		
+		lbCategoria = new JLabel( "Categoria:" );
+		txtCategoria = new JTextField( );
 
+		add( lbCategoria );
+		add( txtCategoria );
+		
 		btnRegistrar = new JButton( "Registrar" );
 		btnRegistrar.setActionCommand( REGISTRAR );
 		btnRegistrar.addActionListener( this );
 
+		btnRegistrarCategoria = new JButton( "Registrar categoria" );
+		btnRegistrarCategoria.setActionCommand( REGISTRAR_CATEGORIA );
+		btnRegistrarCategoria.addActionListener( this );
+		
+		btnRegistrarTipo = new JButton( "Registrar tipo" );
+		btnRegistrarTipo.setActionCommand( REGISTRAR_TIPO );
+		btnRegistrarTipo.addActionListener( this );
+		
+		btnRegistrarProductoCategoria = new JButton( "Registrar producto a una categoria" );
+		btnRegistrarProductoCategoria.setActionCommand( REGISTRAR_PRODUCTO_CATEGORIA );
+		btnRegistrarProductoCategoria.addActionListener( this );
+		
 		btnCancelar = new JButton( "Cancelar" );
 		btnCancelar.setActionCommand( CANCELAR );
 		btnCancelar.addActionListener( this );
 
 		add( btnRegistrar );
+		add( btnRegistrarCategoria );
+		add( btnRegistrarTipo );
+		add( btnRegistrarProductoCategoria );
 		add( btnCancelar );
 
 		setModal( true );
@@ -229,7 +255,33 @@ public class DialogoRegistrarProducto extends JDialog implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if( e.getActionCommand( ).equals( REGISTRAR ) )
 		{
-			principal.adicionarProducto2(txtNombre.getText(), txtMarca.getText(),txtPrecioUnitario.getText(),txtPresentacion.getText(),txtPrecioUnidadMedida.getText(),txtCantidadPresentacion.getText(),txtUnidadMedida.getText(),txtEspecificacion.getText(),txtCodigoBarras.getText(),txtCalidad.getText(),txtFechaVencimiento.getText());
+			try
+			{
+				double precioU = Double.parseDouble(txtPrecioUnitario.getText());
+				double precioUniMed = Double.parseDouble(txtPrecioUnidadMedida.getText());
+				int codigo = Integer.parseInt(txtCodigoBarras.getText());
+				int cantidadPrese = Integer.parseInt(txtCodigoBarras.getText());
+				principal.adicionarProducto2(txtNombre.getText(), txtMarca.getText(),precioU,txtPresentacion.getText(),precioUniMed,cantidadPrese,txtUnidadMedida.getText(),txtEspecificacion.getText(),codigo,txtCalidad.getText(),txtFechaVencimiento.getText());
+			}
+			catch(NumberFormatException ex)
+			{
+				JOptionPane.showMessageDialog (this, "Valores ingresados no validos", "Agregar producto: no exitoso", JOptionPane.ERROR_MESSAGE);
+			}
+			
+		}
+		else if(e.getActionCommand( ).equals( REGISTRAR_CATEGORIA ))
+		{
+			principal.adicionarCategoria(JOptionPane.showInputDialog(this, "Nombre de la categoria: ", "Agregar categoria", JOptionPane.INFORMATION_MESSAGE));
+		}
+		else if(e.getActionCommand( ).equals( REGISTRAR_TIPO ))
+		{
+			DialogoRegistrarTipo registrar = new DialogoRegistrarTipo(principal);
+			registrar.setVisible( true );
+		}
+		else if(e.getActionCommand( ).equals( REGISTRAR_PRODUCTO_CATEGORIA ))
+		{
+			DialogoRegistrarProductoCategoria registrar = new DialogoRegistrarProductoCategoria(principal);
+			registrar.setVisible( true );
 		}
 		else
 		{

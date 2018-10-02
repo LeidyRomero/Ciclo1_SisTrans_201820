@@ -2,6 +2,7 @@ package uniandes.isis2304.superAndes.persistencia;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+import uniandes.isis2304.superAndes.negocio.TipoProducto;
 
 /**
  * 
@@ -24,5 +25,12 @@ class SQLTipoProducto
 		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlTipoProducto()+"(nombre_tipo, nombre_categoria) values (?,?)");
 		q.setParameters(pNombreTipo, pNombreCategoria);
 		return (long) q.executeUnique();
+	}
+	public TipoProducto buscarNombre(PersistenceManager manager,String pNombre)
+	{
+		Query q = manager.newQuery(SQL, "SELECT nombre_tipo FROM "+persistencia.getSqlTipoProducto()+"WHERE nombre_tipo = ?");
+		q.setResultClass(TipoProducto.class);
+		q.setParameters(pNombre);
+		return (TipoProducto) q.executeUnique();
 	}
 }
