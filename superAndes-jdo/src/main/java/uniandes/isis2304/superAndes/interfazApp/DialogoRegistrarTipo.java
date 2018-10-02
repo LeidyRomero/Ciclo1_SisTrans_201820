@@ -60,7 +60,7 @@ public class DialogoRegistrarTipo extends JDialog implements ActionListener{
         principal = principalP;
 
         setLayout( new GridLayout( 3, 2 ) );
-        this.setSize( 300, 100 );
+        this.setSize( 300, 200 );
         setTitle( "Agregar tipo de producto" );
 
         lbTipo = new JLabel( "Tipo:" );

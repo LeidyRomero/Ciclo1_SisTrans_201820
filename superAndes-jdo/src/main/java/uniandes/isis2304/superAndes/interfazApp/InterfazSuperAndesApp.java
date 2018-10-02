@@ -470,7 +470,16 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	//
 	//        METODOS
 	//
-
+	
+	//TODO CRUD Productos
+	//TODO CRUD Clientes
+	//TODO CRUD Sucursal
+	//TODO CRUD Bodega
+	//TODO CRUD Estante
+	//TODO CRUD Promoción
+	//TODO CRUD Pedidos
+	//TODO CRUD Ventas
+	
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTOS
 	//-------------------------------------------------------------------------------
@@ -507,33 +516,21 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	//-------------------------------------------------------------------------------
 	public void adicionarCategoria(String pNombre)
 	{
-		Categoria encontro = superAndes.adicionarCategoria(pNombre);
-		if(encontro!=null)
-			JOptionPane.showMessageDialog(this, "La categoria ya existe","Registro no exitoso", JOptionPane.ERROR_MESSAGE);
-		else
-			JOptionPane.showMessageDialog(this, "Registro exitoso","Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+		superAndes.adicionarCategoria(pNombre);
 	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar TIPO
 	//-------------------------------------------------------------------------------
 	public void adicionarTipo(String pNombre, String pCategoria)
 	{
-		TipoProducto encontro = superAndes.adicionarTipoProducto(pNombre, pCategoria);
-		if(encontro!=null)
-			JOptionPane.showMessageDialog(this, "El tipo ya existe","Registro no exitoso", JOptionPane.ERROR_MESSAGE);
-		else
-			JOptionPane.showMessageDialog(this, "Registro exitoso","Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+		superAndes.adicionarTipoProducto(pNombre, pCategoria);
 	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTO CATEGORIA
 	//-------------------------------------------------------------------------------
 	public void adicionarProductoCategoria(String pNombreCategoria, String pCodigoBarras)
 	{
-		ProductoCategoria encontro = superAndes.adicionarProductoCategoria(pNombreCategoria,Integer.parseInt( pCodigoBarras));
-		if(encontro!=null)
-			JOptionPane.showMessageDialog(this, "El producto ya esta registrado en esta categoria","Registro no exitoso", JOptionPane.ERROR_MESSAGE);
-		else
-			JOptionPane.showMessageDialog(this, "Registro exitoso","Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+		superAndes.adicionarProductoCategoria(pNombreCategoria,Integer.parseInt( pCodigoBarras));
 	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar BODEGA
@@ -564,7 +561,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	}
 	public void buscarIndiceBodega()
 	{
-		superAndes.buscarIndiceBodega();
+		panelDatos.actualizarInterfaz(superAndes.buscarIndiceBodega());
 	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar ESTANTE
@@ -592,7 +589,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 		}
 	}
-
+	public void buscarIndiceEstante()
+	{
+		panelDatos.actualizarInterfaz(superAndes.buscarIndiceEstante());
+	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar SUCURSAL
 	//-------------------------------------------------------------------------------
@@ -742,16 +742,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			resultado += "\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
 		}
-	}
-
-	//TODO CRUD Bodega
-	//TODO CRUD Estante
-	//TODO CRUD Promoción
-	//TODO CRUD Pedidos
-	//TODO CRUD Ventas
-	public void buscarIndiceEstante()
-	{
-		superAndes.buscarIndiceEstante();
 	}
 	// -----------------------------------------------------------------
 	// Programa principal

@@ -103,7 +103,7 @@ public class DialogoRegistrarEstante extends JDialog implements ActionListener{
         principal = principalP;
 
         setLayout( new GridLayout( 7, 2 ) );
-        this.setSize( 600, 200 );
+        this.setSize( 600, 280 );
         setTitle( "Agregar estante" );
 
         lbTipo = new JLabel( "Tipo:" );

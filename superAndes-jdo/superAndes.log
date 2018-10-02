@@ -31,6 +31,20 @@ ORA-00942: la tabla o vista no existe
 01:47:12,353 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 6845132, ASERDCTFVYBU
 02:13:03,754 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 8645, estdryftugihuoji
 02:13:04,703 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 8645, estdryftugihuoji
+
+13:49:15,941 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la categoria null
+13:49:16,771 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_CATEGORIA (nombre_categoria) values (?)".
+ORA-01400: no se puede realizar una inserción NULL en ("ISIS2304A231820"."A_CATEGORIA"."NOMBRE_CATEGORIA")
+
+13:49:16,809 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la categoria null
+13:51:21,145 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Iniciando calculo de indice de bodega 
+13:51:21,754 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de calculo de indice de bodega 
+14:22:49,553 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la categoria null
+14:22:50,232 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_CATEGORIA (nombre_categoria) values (?)".
+ORA-01400: no se puede realizar una inserción NULL en ("ISIS2304A231820"."A_CATEGORIA"."NOMBRE_CATEGORIA")
+
+14:22:50,276 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la categoria null
+
 11:36:50,689 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 8645, esdtfyguh
 11:36:51,638 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
 ORA-00001: restricción única (ISIS2304A231820.A_PROVEEDOR_PK) violada
@@ -91,6 +105,7 @@ ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
 ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
 
 14:19:26,804 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente tyv, fytgjh
+<<<<<<< HEAD
 14:28:59,049 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando cliente dryftugyihu, dryftguyhi
 14:28:59,995 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente dryftugyihu, dryftguyhi
 14:28:59,995 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la empresa 794
@@ -99,3 +114,6 @@ ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
 14:31:58,698 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente tfuygink, 5e4tfuygiuh
 14:31:58,698 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la empresa 9865
 14:31:58,825 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la empresa 9865
+=======
+
+>>>>>>> 93dc49d820a30fe9e874400f6cb7808607314b32

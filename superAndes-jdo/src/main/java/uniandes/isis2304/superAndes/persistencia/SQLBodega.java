@@ -33,10 +33,10 @@ class SQLBodega
 		return (long) add.executeUnique();
 	}
 	//TODO RFC3 - Mostrar el indice de ocupacion de cada estante
-	public List<Double> buscarIndice(PersistenceManager manager)
+	public List<Bodega> buscarBodegas(PersistenceManager manager)
 	{
 		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlBodega());
 		q.setResultClass(Bodega.class);
-		return (List<Double>) q.executeList();
+		return (List<Bodega>) q.executeList();
 	}
 }
