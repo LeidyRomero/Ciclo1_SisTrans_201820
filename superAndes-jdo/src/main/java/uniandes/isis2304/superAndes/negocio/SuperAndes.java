@@ -49,29 +49,41 @@ public class SuperAndes {
 	//------------------------------------------------------------------
 	public ProductoCategoria adicionarProductoCategoria(String pNombreCategoria, int pCodigoBarras)
 	{
-		Log.info("Adicionando el producto categoria "+pCodigoBarras);
-		ProductoCategoria productoCategoria = pp.adicionarProductoCategoria(pNombreCategoria, pCodigoBarras);
-		Log.info("Saliendo de adicionar el producto "+ pCodigoBarras);
-		return productoCategoria;
+		if(pp.buscarCategoriaNombre(pNombreCategoria) == null)
+		{
+			Log.info("Adicionando el producto categoria "+pCodigoBarras);
+			ProductoCategoria productoCategoria = pp.adicionarProductoCategoria(pNombreCategoria, pCodigoBarras);
+			Log.info("Saliendo de adicionar el producto "+ pCodigoBarras);
+			return productoCategoria;
+		}
+		return null;
 	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar CATEGORIA
 	//------------------------------------------------------------------
 	public Categoria adicionarCategoria(String pNombre)
 	{
-		Log.info("Adicionando la categoria "+pNombre);
-		Categoria categoria = pp.adicionarCategoria(pNombre);
-		Log.info("Saliendo de adicionar la categoria "+ pNombre);
-		return categoria;
+		if(pp.buscarCategoriaNombre(pNombre) == null)
+		{
+			Log.info("Adicionando la categoria "+pNombre);
+			Categoria categoria = pp.adicionarCategoria(pNombre);
+			Log.info("Saliendo de adicionar la categoria "+ pNombre);
+			return categoria;
+		}
+		return null;
 	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar TIPO_PRODUCTO
 	//------------------------------------------------------------------
 	public TipoProducto adicionarTipoProducto(String pNombreTipo, String pNombreCategoria)
 	{
-		Log.info("Adicionando el tipo de producto "+pNombreTipo);
-		TipoProducto tipoProducto = pp.adicionarTipoProducto(pNombreTipo, pNombreCategoria);
-		Log.info("Saliendo de adicionar el producto "+ pNombreTipo);
+		TipoProducto tipoProducto = null;
+		if(pp.buscarTipoNombre(pNombreTipo) == null)
+		{
+			Log.info("Adicionando el tipo de producto "+pNombreTipo);
+			tipoProducto = pp.adicionarTipoProducto(pNombreTipo, pNombreCategoria);
+			Log.info("Saliendo de adicionar el producto "+ pNombreTipo);
+		}
 		return tipoProducto;
 	}
 	//------------------------------------------------------------------

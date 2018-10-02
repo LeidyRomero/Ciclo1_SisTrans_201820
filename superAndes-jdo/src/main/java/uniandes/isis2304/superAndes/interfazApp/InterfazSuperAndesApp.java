@@ -14,6 +14,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 
 import javax.jdo.JDODataStoreException;
@@ -34,6 +36,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.superAndes.interfazApp.PanelDatos;
+import uniandes.isis2304.superAndes.negocio.*;
 import uniandes.isis2304.superAndes.negocio.SuperAndes;
 
 @SuppressWarnings("serial")
@@ -481,19 +484,61 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		DialogoRegistrarProducto registrar = new DialogoRegistrarProducto(this);
 		registrar.setVisible( true );
 	}
-	public void adicionarProducto2(String pNombre, String pMarca, String pPrecioUnitario, String pPresentacion, String pPrecioUnidadMedida, String pCantidadPresentacion, String pUnidadMedida, String pEspecificacion, String pCodigoBarras, String pCalidad, String pFechaVencimiento)
+	public void adicionarProducto2(String pNombre, String pMarca, double pPrecioUnitario, String pPresentacion, double pPrecioUnidadMedida, int pCantidadPresentacion, String pUnidadMedida, String pEspecificacion, int pCodigoBarras, String pCalidad, String pFechaVencimiento)
 	{
 		try
 		{
-			if(!pNombre.equals(""))//TODO continuar validaciones
+			if(!pNombre.equals("") && !pMarca.equals("") && !pPresentacion.equals("") && pPrecioUnitario>0 && !pPresentacion.equals("")&&pPrecioUnidadMedida>0 && pCantidadPresentacion>0 && !pUnidadMedida.equals("") && pCodigoBarras>=0 )//TODO continuar validaciones
 			{
-				superAndes.adicionarProducto(pNombre, pMarca, pPresentacion, pUnidadMedida, pEspecificacion, pCalidad, Double.parseDouble(pPrecioUnitario), Double.parseDouble(pPrecioUnidadMedida),Integer.parseInt(pCantidadPresentacion), Integer.parseInt(pCodigoBarras),pFechaVencimiento);
+				superAndes.adicionarProducto(pNombre, pMarca, pPresentacion, pUnidadMedida, pEspecificacion, pCalidad, pPrecioUnitario, pPrecioUnidadMedida,pCantidadPresentacion, pCodigoBarras,formatoFecha(pFechaVencimiento));
+			}
+			else
+			{
+				JOptionPane.showMessageDialog (this, "Valores obligatorios no ingresados", "Agregar producto: no exitoso", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		catch(Exception e)
 		{
 
 		}
+	}
+	public Date formatoFecha( String cadena ) throws ParseException
+	{
+		SimpleDateFormat formato1 = new SimpleDateFormat( "yyyy-MM-dd HH:mm");
+		return (Date)formato1.parse( cadena );
+	}
+	//-------------------------------------------------------------------------------
+	//  Metodos para manejar CATEGORIA
+	//-------------------------------------------------------------------------------
+	public void adicionarCategoria(String pNombre)
+	{
+		Categoria encontro = superAndes.adicionarCategoria(pNombre);
+		if(encontro!=null)
+			JOptionPane.showMessageDialog(this, "La categoria ya existe","Registro no exitoso", JOptionPane.ERROR_MESSAGE);
+		else
+			JOptionPane.showMessageDialog(this, "Registro exitoso","Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+	}
+	//-------------------------------------------------------------------------------
+	//  Metodos para manejar TIPO
+	//-------------------------------------------------------------------------------
+	public void adicionarTipo(String pNombre, String pCategoria)
+	{
+		TipoProducto encontro = superAndes.adicionarTipoProducto(pNombre, pCategoria);
+		if(encontro!=null)
+			JOptionPane.showMessageDialog(this, "El tipo ya existe","Registro no exitoso", JOptionPane.ERROR_MESSAGE);
+		else
+			JOptionPane.showMessageDialog(this, "Registro exitoso","Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+	}
+	//-------------------------------------------------------------------------------
+	//  Metodos para manejar PRODUCTO CATEGORIA
+	//-------------------------------------------------------------------------------
+	public void adicionarProductoCategoria(String pNombreCategoria, String pCodigoBarras)
+	{
+		ProductoCategoria encontro = superAndes.adicionarProductoCategoria(pNombreCategoria,Integer.parseInt( pCodigoBarras));
+		if(encontro!=null)
+			JOptionPane.showMessageDialog(this, "El producto ya esta registrado en esta categoria","Registro no exitoso", JOptionPane.ERROR_MESSAGE);
+		else
+			JOptionPane.showMessageDialog(this, "Registro exitoso","Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
 	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar BODEGA
@@ -502,14 +547,19 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	{
 		DialogoRegistrarBodega registrar = new DialogoRegistrarBodega(this);
 		registrar.setVisible( true );
+
 	}
-	public void adicionarBodega2(String pTipo,String pVolumen, String pPeso, String pDireccionBodega, String pDireccionSucursal, String pCiudad)
+	public void adicionarBodega2(String pTipo,double pVolumen, double pPeso, String pDireccionBodega, String pDireccionSucursal, String pCiudad)
 	{
 		try
 		{
-			if(!pTipo.equals(""))//TODO continuar validaciones
+			if(!pTipo.equals("") && !pDireccionBodega.equals("") && !pDireccionSucursal.equals("") && !pCiudad.equals("") && pVolumen>0 && pPeso >0)//TODO continuar validaciones
 			{
-				superAndes.adicionarBodega(pTipo,Double.parseDouble( pVolumen),Double.parseDouble( pPeso), pDireccionBodega, pDireccionSucursal, pCiudad);
+				superAndes.adicionarBodega(pTipo,pVolumen,pPeso, pDireccionBodega, pDireccionSucursal, pCiudad);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog (this, "Valores obligatorios no ingresados", "Agregar bodega: no exitoso", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		catch(Exception e)
@@ -529,13 +579,17 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		DialogoRegistrarEstante registrar = new DialogoRegistrarEstante(this);
 		registrar.setVisible( true );
 	}
-	public void adicionarEstante2(String pTipoEstante,String  pVolumen,String  pId, String pPeso, String pNivelAbastecimiento, String pDireccionSucursal,String pCiudad)
+	public void adicionarEstante2(String pTipoEstante,double pVolumen,long pId, double pPeso, double pNivelAbastecimiento, String pDireccionSucursal,String pCiudad)
 	{
 		try
 		{
-			if(!pTipoEstante.equals(""))//TODO continuar validaciones
+			if(!pTipoEstante.equals("") && !pDireccionSucursal.equals("")&& !pCiudad.equals("")&& pVolumen>0 && pPeso>0 && pId>=0 && pNivelAbastecimiento>0)//TODO continuar validaciones
 			{
-				superAndes.adicionarEstante(pTipoEstante,Double.parseDouble(pVolumen), Long.parseLong(pId),Double.parseDouble (pPeso),Double.parseDouble( pNivelAbastecimiento), pDireccionSucursal, pCiudad);
+				superAndes.adicionarEstante(pTipoEstante,pVolumen, pId,pPeso, pNivelAbastecimiento, pDireccionSucursal, pCiudad);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog (this, "Valores obligatorios no ingresados", "Agregar estante: no exitoso", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		catch(Exception e)

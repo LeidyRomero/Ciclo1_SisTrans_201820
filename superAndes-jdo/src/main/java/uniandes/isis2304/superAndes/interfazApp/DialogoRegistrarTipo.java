@@ -5,11 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class DialogoRegistrarEmpresa extends JDialog implements ActionListener{
+public class DialogoRegistrarTipo extends JDialog implements ActionListener{
 	 /**
      * Comando para agregar un producto
      */
-    private final static String TERINAR = "TERINAR";
+    private final static String REGISTRAR = "REGISTRAR";
 
     /**
      * Comando para cancelar la operación
@@ -17,26 +17,26 @@ public class DialogoRegistrarEmpresa extends JDialog implements ActionListener{
     private final static String CANCELAR = "CANCELAR";
 	private InterfazSuperAndesApp principal;
 	/**
-     * Etiqueta tipo
+     * Etiqueta nombre
      */
-    private JLabel lbNit;
+    private JLabel lbTipo;
 
     /**
-     * Etiqueta volumen
+     * Etiqueta marca
      */
-    private JLabel lbDireccion;
+    private JLabel lbCategoria;
 
-
+    
     /**
      * Campo de texto para mostrar el nombre
      */
-    private JTextField txtNit;
+    private JTextField txtTipo;
 
     /**
-     * Campo de texto para mostrar la presentacion
+     * Campo de texto para mostrar la marca
      */
-    private JTextField txtDireccion;
-   
+    private JTextField txtCategoria;
+
     /**
      * Botón registrar
      */
@@ -55,28 +55,28 @@ public class DialogoRegistrarEmpresa extends JDialog implements ActionListener{
      * Construye un nuevo dialogo para agregar un crédito
      * @param principalP es la referencia al panel padre del diálogo
      */
-    public DialogoRegistrarEmpresa( InterfazSuperAndesApp principalP )
+    public DialogoRegistrarTipo( InterfazSuperAndesApp principalP )
     {
         principal = principalP;
 
-        setLayout( new GridLayout( 7, 2 ) );
-        this.setSize( 600, 200 );
-        setTitle( "Agregar empresa" );
+        setLayout( new GridLayout( 3, 2 ) );
+        this.setSize( 300, 100 );
+        setTitle( "Agregar tipo de producto" );
 
-        lbNit = new JLabel( "NIT:" );
-        txtNit = new JTextField( );
+        lbTipo = new JLabel( "Tipo:" );
+        txtTipo = new JTextField( );
 
-        add( lbNit );
-        add( txtNit );
+        add( lbTipo );
+        add( txtTipo );
 
-        lbDireccion = new JLabel( "Dirección:" );
-        txtDireccion = new JTextField( );
+        lbCategoria = new JLabel( "Ctaegoria:" );
+        txtCategoria = new JTextField( );
         
-        add( lbDireccion );
-        add( txtDireccion );
+        add( lbCategoria );
+        add( txtCategoria );
         
-        btnRegistrar = new JButton( "Terminar" );
-        btnRegistrar.setActionCommand( TERINAR );
+        btnRegistrar = new JButton( "Registrar" );
+        btnRegistrar.setActionCommand( REGISTRAR );
         btnRegistrar.addActionListener( this );
 
         btnCancelar = new JButton( "Cancelar" );
@@ -90,6 +90,14 @@ public class DialogoRegistrarEmpresa extends JDialog implements ActionListener{
         setLocationRelativeTo( null );
     }
 	public void actionPerformed(ActionEvent e) {
-		
+		if( e.getActionCommand( ).equals( REGISTRAR ) )
+		{
+			principal.adicionarTipo(txtTipo.getText(),txtCategoria.getText());
+		}
+		else
+		{
+			this.dispose();
+		}
 	}
+
 }

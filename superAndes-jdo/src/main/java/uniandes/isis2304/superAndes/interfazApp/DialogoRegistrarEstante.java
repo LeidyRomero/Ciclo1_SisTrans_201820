@@ -159,7 +159,19 @@ public class DialogoRegistrarEstante extends JDialog implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if( e.getActionCommand( ).equals( REGISTRAR ) )
 		{
-			principal.adicionarEstante2(txtTipo.getText(),txtVolumen.getText(),txtId.getText(),txtPeso.getText(), txtNivelAbastecimiento.getText(),txtDireccionSucursal.getText(), txtCiudad.getText());
+			try
+			{
+				double peso = Double.parseDouble(txtPeso.getText());
+				double volumen = Double.parseDouble(txtVolumen.getText());
+				double nivel = Double.parseDouble(txtNivelAbastecimiento.getText());
+				long id = Integer.parseInt(txtId.getText());
+				principal.adicionarEstante2(txtTipo.getText(),volumen,id,peso, nivel,txtDireccionSucursal.getText(), txtCiudad.getText());
+			}
+			catch(NumberFormatException ex)
+			{
+				JOptionPane.showMessageDialog (this, "Valores ingresados no validos", "Agregar estante: no exitoso", JOptionPane.ERROR_MESSAGE);
+			}
+			
 		}
 		else
 		{
