@@ -53,4 +53,12 @@ class SQLCantidadEnEstantes
         q.setParameters(codigoBarras, idEstante, cantidadActual, cantidadMinima);
         return (long) q.executeUnique();
 	}
+	
+	public int buscarCantidadActual(PersistenceManager manager, long idEstante)
+	{
+		Query q = manager.newQuery(SQL, "SELECT cantidad_actual FROM " + persistencia.getSqlCantidadEnEstantes()+" WHERE id_estante = ?");
+		q.setParameters(idEstante);
+		q.setResultClass(Integer.class);
+		return (Integer) q.executeUnique();
+	}
 }

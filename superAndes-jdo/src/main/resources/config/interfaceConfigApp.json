@@ -1,7 +1,7 @@
 {
 	"title": "Aplicación transaccional superAndes",
 	"frameH": 600,
-	"frameW": 1000,
+	"frameW": 1400,
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menu":
 	[

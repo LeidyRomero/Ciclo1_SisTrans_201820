@@ -542,6 +542,32 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+	
+	public int buscarCantidadActualEstante(long idEstante)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction t = pm.currentTransaction();
+		try 
+		{
+			t.begin();
+			int q = sqlCantidadEnEstantes.buscarCantidadActual(pm, idEstante);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			pm.close();
+		}
+	}
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar las PRODUCTOS OFRECIDOS
