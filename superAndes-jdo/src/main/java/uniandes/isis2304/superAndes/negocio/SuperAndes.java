@@ -1,5 +1,6 @@
 package uniandes.isis2304.superAndes.negocio;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -157,5 +158,127 @@ public class SuperAndes {
 		Comprados comprado = pp.adicionarComprados(pCodigoBarras, pCantidad, pPrecioTotal, pIdFactura);
 		Log.info("Saliendo de adicionar comprados "+ pCodigoBarras+", "+pCodigoBarras+", "+pIdFactura);
 		return comprado;
+	}
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar CLIENTE
+	//---------------------------------------------------------------------
+	public Cliente adicionarCliente(String correo, String nombre)
+	{
+		Log.info("Adicionando cliente "+ correo+", "+nombre);
+		Cliente cliente = pp.adicionarCliente(correo, nombre);
+		Log.info("Saliendo de adicionar cliente "+ correo+", "+nombre);
+		return cliente;
+	}
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar SUCURSAL
+	//---------------------------------------------------------------------
+	public Sucursal adicionarSucursal(String tamanio, String direccion, String ciudad, String nombre)
+	{
+		Log.info("Adicionando sucursal "+ tamanio+", "+direccion+", "+ciudad+", "+nombre);
+		Sucursal sucursal = pp.adicionarSucursal(tamanio, direccion, ciudad, nombre);
+		Log.info("Saliendo de adicionar sucursal "+ tamanio+", "+direccion+", "+ciudad+", "+nombre);
+		return sucursal;
+	}
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar PROMOCION
+	//---------------------------------------------------------------------
+	public Promocion adicionarPromocion(Timestamp fechaInicio, Timestamp fechaFin, String descripcion, int codBarras, int uniDisponibles, int uniVendidas)
+	{
+		Log.info("Adicionando promocion "+ fechaInicio+", "+fechaFin+", "+descripcion+", "+codBarras+", "+uniDisponibles+", "+uniVendidas);
+		Promocion promocion = pp.adicionarPromocion(fechaInicio, fechaFin, descripcion, codBarras, uniDisponibles, uniVendidas);
+		Log.info("Saliendo de adicionar promocion "+ fechaInicio+", "+fechaFin+", "+descripcion+", "+codBarras+", "+uniDisponibles+", "+uniVendidas);
+		return promocion;
+	}
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar ORDEN PEDIDO
+	//---------------------------------------------------------------------
+	public OrdenPedido adicionarOrdenPedido(Timestamp fechaEsperada, int nitProveedor, String ciudad, String direccionSucursal, String direccionBodega)
+	{
+		Log.info("Adicionando orden pedido "+ nitProveedor+", "+fechaEsperada+", "+ciudad+", "+direccionSucursal+", "+direccionBodega);
+		OrdenPedido ordenPedido = pp.adicionarOrdenPedido(fechaEsperada, nitProveedor, ciudad, direccionSucursal, direccionBodega);
+		Log.info("Saliendo de adicionar orden pedido "+ nitProveedor+", "+fechaEsperada+", "+ciudad+", "+direccionSucursal+", "+direccionBodega);
+		return ordenPedido;
+	}
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar FACTURA
+	//---------------------------------------------------------------------
+	public Factura adicionarFactura(double costoTotal, Timestamp fecha)
+	{
+		Log.info("Adicionando factura "+ costoTotal+", "+fecha);
+		Factura factura = pp.adicionarFactura(costoTotal, fecha);
+		Log.info("Saliendo de adicionar factura "+ costoTotal+", "+fecha);
+		return factura;
+	}
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar PROVEEDOR
+	//---------------------------------------------------------------------
+	public Proveedor adicionarProveedor(int nitProveedor, String nombreProveedor)
+	{
+		Log.info("Adicionando proveedor "+ nitProveedor+", "+nombreProveedor);
+		System.out.println("Pre persistence");
+		Proveedor proveedor = pp.adicionarProveedor(nitProveedor, nombreProveedor);
+		Log.info("Saliendo de adicionar proveedor "+ nitProveedor+", "+nombreProveedor);
+		return proveedor;
+	}
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar CANTIDAD EN ESTANTES
+	//---------------------------------------------------------------------
+	public CantidadEnEstantes adicionarCantidadEnEstantes(int codigoBarras, long idEstante, int cantidadActual, int cantidadMinima)
+	{
+		Log.info("Adicionando cantidad en estantes "+ codigoBarras+", "+idEstante+", "+cantidadActual+", "+cantidadMinima);
+		CantidadEnEstantes cantidadEstantes = pp.adicionarCantidadEnEstante(codigoBarras, idEstante, cantidadActual, cantidadMinima);
+		Log.info("Saliendo de adicionar cantidad en estantes "+ codigoBarras+", "+ idEstante+", "+cantidadActual+", "+cantidadMinima);
+		return cantidadEstantes;
+	}
+	
+	//---------------------------------------------------------------------
+	// Métodos para manejar PRODUCTOS OFRECIDOS
+	//---------------------------------------------------------------------
+	public ProductosOfrecidos adicionarProductosOfrecidos(int codigoBarras, String direccionSucursal, String ciudad)
+	{
+		Log.info("Adicionando productos ofrecidos "+ codigoBarras+", "+direccionSucursal+", "+ciudad);
+		ProductosOfrecidos productosOfrecidos = pp.adicionarProductosOfrecidos(codigoBarras, direccionSucursal, ciudad);
+		Log.info("Saliendo de adicionar productos ofrecidos "+ codigoBarras+", "+direccionSucursal+", "+ciudad);
+		return productosOfrecidos;
+	}
+	
+	//---------------------------------------------------------------------
+	// Métodos para manejar SUCURSAL FACTURAS
+	//---------------------------------------------------------------------
+	public SucursalFactura adicionarSucursalFacturas(long idFactura, String direccion, String ciudad)
+	{
+		Log.info("Adicionando sucursal facturas"+ idFactura+", "+direccion+", "+ciudad);
+		SucursalFactura sucursalFactura = pp.adicionarSucursalFactura(idFactura, direccion, ciudad);
+		Log.info("Saliendo de adicionar sucursal facturas "+ idFactura+", "+direccion+", "+ciudad);
+		return sucursalFactura;
+	}
+	
+	//---------------------------------------------------------------------
+	// Métodos para manejar HISTORIAL COMPRA
+	//---------------------------------------------------------------------
+	public HistorialCompras adicionarHistorialCompra(String correo, long idFactura)
+	{
+		Log.info("Adicionando historial compra "+ correo+", "+idFactura);
+		HistorialCompras historialCompra = pp.adicionarHistorialCompra(correo, idFactura);
+		Log.info("Saliendo de adicionar historial compra "+ correo+", "+idFactura);
+		return historialCompra;
+	}
+	
+	//---------------------------------------------------------------------
+	// Métodos para manejar PROVEEN
+	//---------------------------------------------------------------------
+	public Proveen adicionarProveen(int nitProveedor, int codigoBarras)
+	{
+		Log.info("Adicionando proveen "+ nitProveedor+", "+codigoBarras);
+		Proveen proveen = pp.adicionarProveen(nitProveedor, codigoBarras);
+		Log.info("Saliendo de adicionar proveen "+ nitProveedor+", "+codigoBarras);
+		return proveen;
 	}
 }

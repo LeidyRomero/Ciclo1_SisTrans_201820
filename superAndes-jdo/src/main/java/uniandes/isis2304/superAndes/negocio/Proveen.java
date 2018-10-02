@@ -1,5 +1,11 @@
 package uniandes.isis2304.superAndes.negocio;
 
+/**
+ * Clase para modelar el concepto PROVEEN del negocio de los SuperAndes
+ * 
+ * @author María Ocampo - mj.ocampov
+ *
+ */
 public class Proveen implements VOProveen {
 
 	//-----------------------------------------------------
@@ -20,12 +26,20 @@ public class Proveen implements VOProveen {
 	// CONSTRUCTORES
 	//-----------------------------------------------------
 	
+	/**
+	 * Constructor por defecto
+	 */
 	public Proveen()
 	{
 		nitProveedor = 0;
 		codigoBarras = 0;
 	}
-
+	
+	/**
+	 * Cosntructor con valores
+	 * @param nitProveedor Nit del proveedor
+	 * @param codigoBarras Código de barras del producto
+	 */
 	public Proveen(int nitProveedor, int codigoBarras) 
 	{
 		this.nitProveedor = nitProveedor;
@@ -36,18 +50,32 @@ public class Proveen implements VOProveen {
 	// MÉTODOS
 	//-----------------------------------------------------
 	
+	/**
+	 * Retorna el nit del proveedor
+	 */
 	public int getNitProveedor() {
 		return nitProveedor;
 	}
 
+	/**
+	 * Modifica el nit del proveedor
+	 * @param nitProveedor Nuevo nit
+	 */
 	public void setNitProveedor(int nitProveedor) {
 		this.nitProveedor = nitProveedor;
 	}
 
+	/**
+	 * Retorna el código de barras del producto
+	 */
 	public int getCodigoBarras() {
 		return codigoBarras;
 	}
 
+	/**
+	 * Modifica el código de barras del producto
+	 * @param codigoBarras Nuevo código
+	 */
 	public void setCodigoBarras(int codigoBarras) {
 		this.codigoBarras = codigoBarras;
 	}

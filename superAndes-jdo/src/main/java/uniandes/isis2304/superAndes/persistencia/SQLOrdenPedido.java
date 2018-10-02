@@ -48,12 +48,13 @@ class SQLOrdenPedido
 	 * @param ciudad - Ciudad de la sucursal que genera el pedido
 	 * @param direccionSucursal - Dirección de la sucursal que genera el pedido
 	 * @param direccionBodega - Dirección de la bodega que recibe el pedido
-	 * @return
+	 * @param idPedido - id del pedido
+	 * @return Número de tuplas insertadas
 	 */
-	public long adicionaroOrdenPedido (PersistenceManager pm, Timestamp fechaEsperada, long nitProveedor, String ciudad, String direccionSucursal, String direccionBodega) 
+	public long adicionaroOrdenPedido (PersistenceManager pm, Timestamp fechaEsperada, int nitProveedor, String ciudad, String direccionSucursal, String direccionBodega, long idPedido) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlOrdenPedido() + "(fecha_esperada_entrega, estado, fecha_entrega, calificacion_pedido, nit_proveedor, ciudad, direccion_sucursal, direccion_bodega) values (?, ?, ?, ?, ?, ?, ?, ?)");
-        q.setParameters(fechaEsperada, "En espera", null, null, nitProveedor, ciudad, direccionSucursal, direccionBodega);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlOrdenPedido() + "(fecha_esperada_entrega, estado, fecha_entrega, calificacion_pedido, nit_proveedor, ciudad, direccion_sucursal, direccion_bodega, id_pedido) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        q.setParameters(fechaEsperada, "En espera", null, null, nitProveedor, ciudad, direccionSucursal, direccionBodega, idPedido);
         return (long) q.executeUnique();
 	}
 	

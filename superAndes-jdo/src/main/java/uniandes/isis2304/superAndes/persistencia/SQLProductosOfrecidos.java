@@ -4,12 +4,12 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto CANTIDAD EN ESTANTES de SuperAndes
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto PRODCTOS OFRECIDOS de SuperAndes
  * 
  * @author María Ocampo - mj.ocampov
  */
-class SQLCantidadEnEstantes
-{
+public class SQLProductosOfrecidos {
+	
 	//------------------------------------------------------------------
 	// CONSTANTES
 	//------------------------------------------------------------------
@@ -33,24 +33,23 @@ class SQLCantidadEnEstantes
 	 * Constructor
 	 * @param persistencia - El Manejador de persistencia de la aplicación
 	 */
-	public SQLCantidadEnEstantes(PersistenciaSuperAndes persistencia) 
+	public SQLProductosOfrecidos(PersistenciaSuperAndes persistencia) 
 	{
 		this.persistencia = persistencia;
-	}	
+	}
 	
 	/**
-	 * Crea y ejecuta una sentencia sql que adiciona uns CANTIDAD EN ESTANTES a la base de datos de SuperAndes
+	 * Crea y ejecuta la sentencia sql que adiciona un PRODUCTO OFRECIDO a la base de datos de SuperAndes
 	 * @param pm
 	 * @param codigoBarras
-	 * @param idEstante
-	 * @param cantidadActual
-	 * @param cantidadMinima
+	 * @param direccionSucursal
+	 * @param ciudad
 	 * @return
 	 */
-	public long adicionarCantidadEstantes (PersistenceManager pm, int codigoBarras, long idEstante, int cantidadActual, int cantidadMinima) 
+	public long adicionarProductoOfrecido (PersistenceManager pm, int codigoBarras, String direccionSucursal, String ciudad) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlCantidadEnEstantes() + "(cod_barras, id_estante, cantidad_actual, cantidad_minima) values (?, ?, ?, ?)");
-        q.setParameters(codigoBarras, idEstante, cantidadActual, cantidadMinima);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlProductosOfrecidos() + "(codigo_barras, direccion_sucursal, ciudad) values (?, ?, ?)");
+        q.setParameters(codigoBarras, direccionSucursal, ciudad);
         return (long) q.executeUnique();
 	}
 }

@@ -1,0 +1,33 @@
+01:10:35,430 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 894651, 5dftguyihjop
+01:10:36,318 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO PROVEEN(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00942: la tabla o vista no existe
+
+01:10:36,411 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 894651, 5dftguyihjop
+01:29:52,861 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 85632, retryftugyihuoj
+01:29:53,854 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEN(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00942: la tabla o vista no existe
+
+01:29:53,943 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 85632, retryftugyihuoj
+01:31:50,067 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 8456132, sredtrfytguhi
+01:31:51,033 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEN(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00942: la tabla o vista no existe
+
+01:31:51,169 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 8456132, sredtrfytguhi
+01:33:46,555 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 563, stdryfugihoj
+01:33:46,644 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : SQL query "INSERT INTO A_PROVEEN(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)" necesita 3 parametros pero no hay ninguno
+
+01:33:46,648 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 563, stdryfugihoj
+01:39:24,977 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 8645, SREDTRFYGUHI
+01:39:26,090 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEN(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00942: la tabla o vista no existe
+
+01:39:26,172 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 8645, SREDTRFYGUHI
+01:41:56,615 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 84651, ARETYUYIH
+01:41:58,826 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00942: la tabla o vista no existe
+
+01:41:59,152 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 84651, ARETYUYIH
+01:47:11,337 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 6845132, ASERDCTFVYBU
+01:47:12,353 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 6845132, ASERDCTFVYBU
+02:13:03,754 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 8645, estdryftugihuoji
+02:13:04,703 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 8645, estdryftugihuoji

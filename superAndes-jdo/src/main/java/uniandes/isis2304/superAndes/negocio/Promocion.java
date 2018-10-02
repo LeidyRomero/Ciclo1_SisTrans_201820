@@ -34,6 +34,21 @@ public class Promocion implements VOPromocion {
 	 */
 	private long idPromocion;
 	
+	/**
+	 * Codigo de barras del procudto en promoción.
+	 */
+	private int codigoBarras;
+	
+	/**
+	 * Unidades vendidas
+	 */
+	private int unidadesVendidas;
+	
+	/**
+	 * Unidades disponibles.
+	 */
+	private int unidadesDisponibles;
+	
 	//-----------------------------------------------------
 	// CONSTRUCTORES
 	//-----------------------------------------------------
@@ -44,13 +59,19 @@ public class Promocion implements VOPromocion {
 	 * @param fechaFinal Fecha final. fechaFinal != null
 	 * @param descripcion Descripcion de la promocion. descripcion != null && descripcion != ""
 	 * @param idPromocion Id de la promocion. idPromocion >= 0
+	 * @param codigoBarras Codigo barras del producto. codigoBarras > 0
+	 * @param unidadesDisponibles Unidades disponibles. unidadesDisponibles > 0
+	 * @param unidadesVendidas Unidades vendidas. unidadesVendidas > 0
 	 */
-	public Promocion(Timestamp fechaInicial, Timestamp fechaFinal, String descripcion, long idPromocion) 
+	public Promocion(Timestamp fechaInicial, Timestamp fechaFinal, String descripcion, long idPromocion, int codigoBarras, int unidadesVendidas, int unidadesDisponibles) 
 	{
 		this.fechaInicial = fechaInicial;
 		this.fechaFinal = fechaFinal;
 		this.descripcion = descripcion;
 		this.idPromocion = idPromocion;
+		this.codigoBarras = codigoBarras;
+		this.unidadesDisponibles = unidadesDisponibles;
+		this.unidadesVendidas = unidadesVendidas;
 	}
 	
 	/**
@@ -62,6 +83,9 @@ public class Promocion implements VOPromocion {
 		this.fechaFinal = null;
 		this.descripcion = null;
 		this.idPromocion = 0;
+		this.codigoBarras = 0;
+		this.unidadesDisponibles = 0;
+		this.unidadesVendidas = 0;
 	}
 	
 	//-----------------------------------------------------
@@ -126,6 +150,51 @@ public class Promocion implements VOPromocion {
 	 */
 	public void setIdPromocion(long idPromocion) {
 		this.idPromocion = idPromocion;
+	}
+
+	/**
+	 * Retorna el código de barras.
+	 */
+	public int getCodigoBarras() {
+		return codigoBarras;
+	}
+
+	/**
+	 * Modifica el código de barras
+	 * @param codigoBarras Nuevo código
+	 */
+	public void setCodigoBarras(int codigoBarras) {
+		this.codigoBarras = codigoBarras;
+	}
+	
+	/**
+	 * Retorna las unidades vendidas
+	 */
+	public int getUnidadesVendidas() {
+		return unidadesVendidas;
+	}
+
+	/**
+	 * Modifica las unidades vendidas
+	 * @param unidadesVendidas Nuevas unidades
+	 */
+	public void setUnidadesVendidas(int unidadesVendidas) {
+		this.unidadesVendidas = unidadesVendidas;
+	}
+
+	/**
+	 * Retorna las unidades disponibles
+	 */
+	public int getUnidadesDisponibles() {
+		return unidadesDisponibles;
+	}
+
+	/**
+	 * Modifica las unidades disponibles
+	 * @param unidadesDisponibles Nuevas unidades
+	 */
+	public void setUnidadesDisponibles(int unidadesDisponibles) {
+		this.unidadesDisponibles = unidadesDisponibles;
 	}
 
 	@Override
