@@ -38,6 +38,10 @@
 				{
 					"label": "Adicionar",
 					"event": "adicionarBodega"
+				},
+				{
+					"label": "Consultar indice",
+					"event": "buscarIndiceBodega"
 				}
 			]
 		},
@@ -47,6 +51,10 @@
 				{
 					"label": "Adicionar",
 					"event": "adicionarEstante"
+				},
+				{
+					"label": "Consultar indice",
+					"event": "buscarIndiceEstante"
 				}
 			]
 		},

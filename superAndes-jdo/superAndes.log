@@ -29,3 +29,5 @@ ORA-00942: la tabla o vista no existe
 01:41:59,152 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 84651, ARETYUYIH
 01:47:11,337 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 6845132, ASERDCTFVYBU
 01:47:12,353 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 6845132, ASERDCTFVYBU
+02:13:03,754 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 8645, estdryftugihuoji
+02:13:04,703 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 8645, estdryftugihuoji

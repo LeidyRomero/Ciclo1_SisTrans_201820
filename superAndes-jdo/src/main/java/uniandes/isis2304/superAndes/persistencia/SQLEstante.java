@@ -31,10 +31,10 @@ class SQLEstante
 	} 
 	
 	//TODO RFC3 - Mostrar el indice de ocupacion de cada estante
-	public List<Estante> darIndiceOcupacionPorEstante (PersistenceManager manager)
+	public List<Double> buscarIndice(PersistenceManager manager)
 	{
 		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlEstante());
 		q.setResultClass(Estante.class);
-		return (List<Estante>) q.executeList();
+		return (List<Double>) q.executeList();
 	}
 }

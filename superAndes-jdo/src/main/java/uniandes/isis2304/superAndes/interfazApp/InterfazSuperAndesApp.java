@@ -509,6 +509,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 		}
 	}
+	public void buscarIndiceBodega()
+	{
+		superAndes.buscarIndiceBodega();
+	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar ESTANTE
 	//-------------------------------------------------------------------------------
@@ -607,6 +611,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	//TODO CRUD Promoción
 	//TODO CRUD Pedidos
 	//TODO CRUD Ventas
+	public void buscarIndiceEstante()
+	{
+		superAndes.buscarIndiceEstante();
+	}
 	// -----------------------------------------------------------------
 	// Programa principal
 	// -----------------------------------------------------------------

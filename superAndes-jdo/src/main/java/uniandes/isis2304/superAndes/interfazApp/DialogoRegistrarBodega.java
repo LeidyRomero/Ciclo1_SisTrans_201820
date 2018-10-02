@@ -109,22 +109,22 @@ public class DialogoRegistrarBodega extends JDialog implements ActionListener{
         add( txtTipo );
 
         lbVolumen = new JLabel( "Volumen:" );
-        txtPeso = new JTextField( );
-        
-        add( lbVolumen );
-        add( txtPeso );
-
-        lbPeso = new JLabel( "Peso:" );
-        txtDireccionBodega = new JTextField( );
-
-        add( lbPeso );
-        add( txtDireccionBodega );
-        
-        lbDireccionBodega = new JLabel( "Direccion de la bodega:" );
         txtVolumen = new JTextField( );
         
-        add( lbDireccionBodega );
+        add( lbVolumen );
         add( txtVolumen );
+
+        lbPeso = new JLabel( "Peso:" );
+        txtPeso = new JTextField( );
+       
+        add( lbPeso );
+        add( txtPeso );
+        
+        lbDireccionBodega = new JLabel( "Direccion de la bodega:" );
+        txtDireccionBodega = new JTextField( );
+        
+        add( lbDireccionBodega );
+        add( txtDireccionBodega );
         
         lbDireccionSucursal = new JLabel( "Direccion de la sucursal:" );
         txtDireccionSucursal = new JTextField( );

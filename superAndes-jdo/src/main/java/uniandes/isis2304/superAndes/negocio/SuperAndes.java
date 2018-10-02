@@ -2,6 +2,7 @@ package uniandes.isis2304.superAndes.negocio;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -104,6 +105,12 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar la bodega "+ pDireccionBodega+", "+pDireccionSucursal+","+pCiudad);
 		return bodega;
 	}
+	public void buscarIndiceBodega()
+	{
+		Log.info("Iniciando calculo de indice de bodega ");
+		List<Double> indices = pp.buscarIndiceBodega();
+		Log.info("Saliendo de calculo de indice de bodega ");
+	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar ESTANTE
 	//------------------------------------------------------------------
@@ -113,6 +120,12 @@ public class SuperAndes {
 		Estante estante = pp.adicionarEstante(pTipoEstante, pVolumen, pId, pPeso, pNivelAbastecimiento, pDireccionSucursal, pCiudad);
 		Log.info("Saliendo de adicionar el estante "+ pId);
 		return estante;
+	}
+	public void buscarIndiceEstante()
+	{
+		Log.info("Iniciando calculo de indice de bodega ");
+		List<Double> indices = pp.buscarIndiceEstante();
+		Log.info("Saliendo de calculo de indice de bodega ");
 	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar PEDIDO PRODUCTO
