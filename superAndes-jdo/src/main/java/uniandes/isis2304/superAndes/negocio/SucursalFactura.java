@@ -1,6 +1,6 @@
 package uniandes.isis2304.superAndes.negocio;
 
-public class SucursalCliente implements VOSucursalCliente {
+public class SucursalFactura implements VOSucursalFactura {
 
 	//-----------------------------------------------------
 	// ATRIBUTOS
@@ -19,24 +19,24 @@ public class SucursalCliente implements VOSucursalCliente {
 	/**
 	 * 
 	 */
-	private String correoCliente;
+	private long idFactura;
 	
 	//-----------------------------------------------------
 	// CONSTRUCTORES
 	//-----------------------------------------------------
 	
-	public SucursalCliente()
+	public SucursalFactura()
 	{
 		direccionSucursal = null;
 		ciudadSucursal = null;
-		correoCliente = null;
+		idFactura = 0;
 	}
 
-	public SucursalCliente(String direccionSucursal, String ciudadSucursal, String correoCliente) 
+	public SucursalFactura(String direccionSucursal, String ciudadSucursal, long idFactura) 
 	{
 		this.direccionSucursal = direccionSucursal;
 		this.ciudadSucursal = ciudadSucursal;
-		this.correoCliente = correoCliente;
+		this.idFactura = idFactura;
 	}
 	
 	//-----------------------------------------------------
@@ -60,18 +60,18 @@ public class SucursalCliente implements VOSucursalCliente {
 		this.ciudadSucursal = ciudadSucursal;
 	}
 
-	public String getCorreoCliente() {
-		return correoCliente;
+	public long getIdFactura() {
+		return idFactura;
 	}
 
-	public void setCorreoCliente(String correoCliente) {
-		this.correoCliente = correoCliente;
+	public void setIdFactura(long idFactura) {
+		this.idFactura = idFactura;
 	}
 
 	@Override
 	public String toString() {
 		return "SucursalCliente [direccionSucursal=" + direccionSucursal + ", ciudadSucursal=" + ciudadSucursal
-				+ ", correoCliente=" + correoCliente + "]";
+				+ ", correoCliente=" + idFactura + "]";
 	}
 	
 }

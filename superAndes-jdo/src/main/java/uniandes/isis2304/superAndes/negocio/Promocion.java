@@ -1,7 +1,13 @@
 package uniandes.isis2304.superAndes.negocio;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
+/**
+ * Clase para modelar el concepto PROMOCION del negocio de los SuperAndes
+ * 
+ * @author María Ocampo - mj.ocampov
+ *
+ */
 public class Promocion implements VOPromocion {
 
 	//-----------------------------------------------------
@@ -11,12 +17,12 @@ public class Promocion implements VOPromocion {
 	/**
 	 * Fecha en que inicia la promoción
 	 */
-	private Date fechaInicial;
+	private Timestamp fechaInicial;
 	
 	/**
 	 * Fecha en que termina la promoción
 	 */
-	private Date fechaFinal;
+	private Timestamp fechaFinal;
 	
 	/**
 	 * Descripcion de la promoción
@@ -32,7 +38,14 @@ public class Promocion implements VOPromocion {
 	// CONSTRUCTORES
 	//-----------------------------------------------------
 	
-	public Promocion(Date fechaInicial, Date fechaFinal, String descripcion, long idPromocion) 
+	/**
+	 * Constructor con valores.
+	 * @param fechaInicial Fecha inicio. fechaInicial != null
+	 * @param fechaFinal Fecha final. fechaFinal != null
+	 * @param descripcion Descripcion de la promocion. descripcion != null && descripcion != ""
+	 * @param idPromocion Id de la promocion. idPromocion >= 0
+	 */
+	public Promocion(Timestamp fechaInicial, Timestamp fechaFinal, String descripcion, long idPromocion) 
 	{
 		this.fechaInicial = fechaInicial;
 		this.fechaFinal = fechaFinal;
@@ -40,6 +53,9 @@ public class Promocion implements VOPromocion {
 		this.idPromocion = idPromocion;
 	}
 	
+	/**
+	 * Constructor por defecto
+	 */
 	public Promocion() 
 	{
 		this.fechaInicial = null;
@@ -52,35 +68,62 @@ public class Promocion implements VOPromocion {
 	// MÉTODOS
 	//-----------------------------------------------------
 	
-
-	public Date getFechaInicial() {
+	/**
+	 * Retorna la fecha inicial de la promoción.
+	 */
+	public Timestamp getFechaInicial() {
 		return fechaInicial;
 	}
 
-	public void setFechaInicial(Date fechaInicial) {
+	/**
+	 * Modifica la fecha inicial de la promoción. 
+	 * @param fechaInicial Nueva fecha inicial.
+	 */
+	public void setFechaInicial(Timestamp fechaInicial) {
 		this.fechaInicial = fechaInicial;
 	}
 
-	public Date getFechaFinal() {
+	/**
+	 *  Retorna la fecha final de la promoción.
+	 */
+	public Timestamp getFechaFinal() {
 		return fechaFinal;
 	}
 
-	public void setFechaFinal(Date fechaFinal) {
+	/**
+	 * Modifica la fecha final de la promoción.
+	 * @param fechaFinal Nueva fecha final.
+	 */
+	public void setFechaFinal(Timestamp fechaFinal) {
 		this.fechaFinal = fechaFinal;
 	}
 
+	/**
+	 * Retorna la descripción de la promoción.
+	 */
 	public String getDescripcion() {
 		return descripcion;
 	}
 
+	/**
+	 * Modifica la descripción de la promoción.
+	 * @param descripcion Nueva descripción.
+	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
+	/**
+	 * Retorna el id de la promoción.
+	 */
 	public long getIdPromocion() {
 		return idPromocion;
 	}
 
+	/**
+	 * Modifica el id de la promocón.
+	 * @param idPromocion Nueva id.
+	 */
 	public void setIdPromocion(long idPromocion) {
 		this.idPromocion = idPromocion;
 	}
