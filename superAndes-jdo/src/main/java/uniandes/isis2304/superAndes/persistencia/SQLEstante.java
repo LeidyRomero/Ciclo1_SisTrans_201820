@@ -5,6 +5,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.superAndes.negocio.Bodega;
 import uniandes.isis2304.superAndes.negocio.Estante;
 
 /**
@@ -31,10 +32,10 @@ class SQLEstante
 	} 
 	
 	//TODO RFC3 - Mostrar el indice de ocupacion de cada estante
-	public List<Double> buscarIndice(PersistenceManager manager)
+	public List<Estante> buscarEstantes(PersistenceManager manager)
 	{
 		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlEstante());
 		q.setResultClass(Estante.class);
-		return (List<Double>) q.executeList();
+		return (List<Estante>) q.executeList();
 	}
 }

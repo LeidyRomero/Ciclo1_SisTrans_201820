@@ -50,41 +50,30 @@ public class SuperAndes {
 	//------------------------------------------------------------------
 	public ProductoCategoria adicionarProductoCategoria(String pNombreCategoria, int pCodigoBarras)
 	{
-		if(pp.buscarCategoriaNombre(pNombreCategoria) == null)
-		{
-			Log.info("Adicionando el producto categoria "+pCodigoBarras);
-			ProductoCategoria productoCategoria = pp.adicionarProductoCategoria(pNombreCategoria, pCodigoBarras);
-			Log.info("Saliendo de adicionar el producto "+ pCodigoBarras);
-			return productoCategoria;
-		}
-		return null;
+		Log.info("Adicionando el producto categoria "+pCodigoBarras);
+		ProductoCategoria productoCategoria = pp.adicionarProductoCategoria(pNombreCategoria, pCodigoBarras);
+		Log.info("Saliendo de adicionar el producto "+ pCodigoBarras);
+		return productoCategoria;
 	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar CATEGORIA
 	//------------------------------------------------------------------
 	public Categoria adicionarCategoria(String pNombre)
 	{
-		if(pp.buscarCategoriaNombre(pNombre) == null)
-		{
-			Log.info("Adicionando la categoria "+pNombre);
-			Categoria categoria = pp.adicionarCategoria(pNombre);
-			Log.info("Saliendo de adicionar la categoria "+ pNombre);
-			return categoria;
-		}
-		return null;
+		Log.info("Adicionando la categoria "+pNombre);
+		Categoria categoria = pp.adicionarCategoria(pNombre);
+		Log.info("Saliendo de adicionar la categoria "+ pNombre);
+		return categoria;
 	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar TIPO_PRODUCTO
 	//------------------------------------------------------------------
 	public TipoProducto adicionarTipoProducto(String pNombreTipo, String pNombreCategoria)
 	{
-		TipoProducto tipoProducto = null;
-		if(pp.buscarTipoNombre(pNombreTipo) == null)
-		{
-			Log.info("Adicionando el tipo de producto "+pNombreTipo);
-			tipoProducto = pp.adicionarTipoProducto(pNombreTipo, pNombreCategoria);
-			Log.info("Saliendo de adicionar el producto "+ pNombreTipo);
-		}
+
+		Log.info("Adicionando el tipo de producto "+pNombreTipo);
+		TipoProducto tipoProducto = pp.adicionarTipoProducto(pNombreTipo, pNombreCategoria);
+		Log.info("Saliendo de adicionar el producto "+ pNombreTipo);
 		return tipoProducto;
 	}
 	//------------------------------------------------------------------
@@ -117,11 +106,18 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar la bodega "+ pDireccionBodega+", "+pDireccionSucursal+","+pCiudad);
 		return bodega;
 	}
-	public void buscarIndiceBodega()
+	public String buscarIndiceBodega()
 	{
+		String mensaje = "El indice de ocupación ";
 		Log.info("Iniciando calculo de indice de bodega ");
-		List<Double> indices = pp.buscarIndiceBodega();
+		List<Bodega> bodegas = pp.buscarBodegas();
 		Log.info("Saliendo de calculo de indice de bodega ");
+		for(int i = 0;i<bodegas.size();i++)
+		{
+			double indice = (double)(pp.buscarCantidadActualBodega(bodegas.get(i).darDireccion(),bodegas.get(i).getDireccionSucursal(),bodegas.get(i).getCiudad())/bodegas.get(i).darVolumen())*100;
+			mensaje+="de la bodega con dirección"+bodegas.get(i).darDireccion()+", de la ciudad"+bodegas.get(i).getCiudad()+"es: "+indice+"\n";
+		}
+		return mensaje;
 	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar ESTANTE
@@ -133,11 +129,18 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar el estante "+ pId);
 		return estante;
 	}
-	public void buscarIndiceEstante()
+	public String buscarIndiceEstante()
 	{
-		Log.info("Iniciando calculo de indice de bodega ");
-		List<Double> indices = pp.buscarIndiceEstante();
-		Log.info("Saliendo de calculo de indice de bodega ");
+		String mensaje = "El indice de ocupación ";
+		Log.info("Iniciando calculo de indice de estante ");
+		List<Estante> estantes = pp.buscarEstantes();
+		Log.info("Saliendo de calculo de indice de estante ");
+		for(int i = 0;i<estantes.size();i++)
+		{
+			double indice = (double)(pp.buscarCantidadActualEstante(estantes.get(i).darId())*100);
+			mensaje+="del estante con id: "+estantes.get(i).darId()+"es: "+indice+"\n";
+		}
+		return mensaje;
 	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar PEDIDO PRODUCTO
@@ -237,7 +240,7 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar cantidad en estantes "+ codigoBarras+", "+ idEstante+", "+cantidadActual+", "+cantidadMinima);
 		return cantidadEstantes;
 	}
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar PRODUCTOS OFRECIDOS
 	//---------------------------------------------------------------------
@@ -248,7 +251,7 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar productos ofrecidos "+ codigoBarras+", "+direccionSucursal+", "+ciudad);
 		return productosOfrecidos;
 	}
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar SUCURSAL FACTURAS
 	//---------------------------------------------------------------------
@@ -259,7 +262,7 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar sucursal facturas "+ idFactura+", "+direccion+", "+ciudad);
 		return sucursalFactura;
 	}
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar HISTORIAL COMPRA
 	//---------------------------------------------------------------------
@@ -270,7 +273,7 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar historial compra "+ correo+", "+idFactura);
 		return historialCompra;
 	}
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar PROVEEN
 	//---------------------------------------------------------------------

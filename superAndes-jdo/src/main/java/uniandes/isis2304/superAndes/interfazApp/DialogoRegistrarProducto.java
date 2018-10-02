@@ -1,5 +1,6 @@
 package uniandes.isis2304.superAndes.interfazApp;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -146,7 +147,7 @@ public class DialogoRegistrarProducto extends JDialog implements ActionListener{
 	public DialogoRegistrarProducto( InterfazSuperAndesApp principalP )
 	{
 		principal = principalP;
-		setLayout( new GridLayout( 14, 3 ) );
+		setLayout( new GridLayout( 15, 2 ) );
 		this.setSize( 800, 450 );
 		setTitle( "Agregar producto" );
 

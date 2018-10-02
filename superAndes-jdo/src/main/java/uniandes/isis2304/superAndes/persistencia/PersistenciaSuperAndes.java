@@ -575,7 +575,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar las SUCURSAL FACTURAS
 	//---------------------------------------------------------------------
@@ -606,7 +606,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar los HISTORIALES COMPRAS
 	//---------------------------------------------------------------------
@@ -637,7 +637,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar PROVEEN
 	//---------------------------------------------------------------------
@@ -668,7 +668,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTOS
 	//------------------------------------------------------------------
@@ -797,7 +797,7 @@ public class PersistenciaSuperAndes {
 			long tuplasInsertadas = sqlTipoProducto.agregarTipoDeProducto(manager, pNombreTipo, pNombreCategoria );
 			t.commit();
 			Log.trace("Inserccion tipo producto: "+ pNombreTipo +": "+tuplasInsertadas+ " tuplas insertadas");
-			return new TipoProducto(pNombreTipo);
+			return new TipoProducto(pNombreTipo, pNombreCategoria);
 		}
 		catch(Exception e)
 		{
@@ -911,7 +911,7 @@ public class PersistenciaSuperAndes {
 			long tuplasInsertadas = sqlBodega.agregarBodega(manager, pTipo,pVolumen,pPeso,pDireccionBodega,pDireccionSucursal,pCiudad);
 			t.commit();
 			Log.trace("Inserccion X: "+ pDireccionBodega+", "+pDireccionSucursal+","+pCiudad+": "+tuplasInsertadas+ " tuplas insertadas");
-			return new Bodega(pDireccionBodega,pTipo,pPeso,pVolumen);
+			return new Bodega(pDireccionBodega,pTipo,pPeso,pVolumen, pDireccionSucursal, pCiudad);
 		}
 		catch(Exception e)
 		{
@@ -927,14 +927,14 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	public List<Double> buscarIndiceBodega()
+	public List<Bodega> buscarBodegas()
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
 		Transaction t = manager.currentTransaction();
 		try 
 		{
 			t.begin();
-			List<Double> q = sqlBodega.buscarIndice(manager);
+			List<Bodega> q = sqlBodega.buscarBodegas(manager);
 			t.commit();
 			return q;
 		}
@@ -982,14 +982,14 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	public List<Double> buscarIndiceEstante()
+	public List<Estante> buscarEstantes()
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
 		Transaction t = manager.currentTransaction();
 		try 
 		{
 			t.begin();
-			List<Double> q = sqlEstante.buscarIndice(manager);
+			List<Estante> q = sqlEstante.buscarEstantes(manager);
 			t.commit();
 			return q;
 		}
@@ -1065,8 +1065,34 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-
-
+	//------------------------------------------------------------------
+	//  Metodos para manejar CANTIDAD EN BODEGA
+	//------------------------------------------------------------------
+	public int buscarCantidadActualBodega(String pDireccionBodega, String pDireccionSucursal, String pCiudad)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			int q = sqlCantidadEnBodega.buscarCantidadActual(manager,pDireccionBodega,pDireccionSucursal,pCiudad);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
 	//BORRADOR
 	//	public X adicionarX()
 	//	{

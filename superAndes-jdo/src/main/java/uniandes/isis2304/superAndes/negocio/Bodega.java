@@ -11,8 +11,10 @@ public class Bodega implements VOBodega{
 	//----------------------------------------------
 	private String tipo;
 	private double volumen;
-	private String direccion;
+	private String direccionBodega;
 	private double peso;
+	private String direccionSucursal;
+	private String ciudad;
 	//----------------------------------------------
 	//Constructores
 	//----------------------------------------------
@@ -21,18 +23,34 @@ public class Bodega implements VOBodega{
 		this.tipo = "";
 		this.volumen = 0;
 		this.peso = 0;
-		this.direccion = "";
+		this.direccionBodega = "";
+		this.direccionSucursal = "";
+		this.ciudad = "";
 	}
-	public Bodega(String pDireccion, String pTipo, double pPeso, double pVolumen)
+	public Bodega(String pDireccion, String pTipo, double pPeso, double pVolumen, String pDireccionSucursal, String pCiudad)
 	{
 		this.volumen = pVolumen;
 		this.peso = pPeso;
-		this.direccion=pDireccion;
+		this.direccionBodega=pDireccion;
 		this.tipo = pTipo;
+		this.direccionSucursal = "";
+		this.ciudad = "";
 	}
 	//----------------------------------------------
 	//Metodos
 	//----------------------------------------------
+	public String getDireccionSucursal() {
+		return direccionSucursal;
+	}
+	public void setDireccionSucursal(String direccionSucursal) {
+		this.direccionSucursal = direccionSucursal;
+	}
+	public String getCiudad() {
+		return ciudad;
+	}
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
 	public String darTipo() {
 		return tipo;
 	}
@@ -53,12 +71,15 @@ public class Bodega implements VOBodega{
 		this.peso = pPeso;
 	}
 	public String darDireccion() {
-		return direccion;
+		return direccionBodega;
 	}
 	public void cambiarDireccion(String pDireccion) {
-		this.direccion = pDireccion;
+		this.direccionBodega = pDireccion;
 	}
+
 	public String toString() {
-		return "Bodega [tipo = "+tipo+", volumen"+volumen+", peso"+peso+", direccion"+direccion+"]";
+		return "Bodega [tipo=" + tipo + ", volumen=" + volumen + ", direccionBodega=" + direccionBodega + ", peso="
+				+ peso + ", direccionSucursal=" + direccionSucursal + ", ciudad=" + ciudad + "]";
 	}
+	
 }

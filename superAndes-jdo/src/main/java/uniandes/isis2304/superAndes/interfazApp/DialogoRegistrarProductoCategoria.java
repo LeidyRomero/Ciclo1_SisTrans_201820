@@ -60,7 +60,7 @@ public class DialogoRegistrarProductoCategoria extends JDialog implements Action
         principal = principalP;
 
         setLayout( new GridLayout( 3, 2 ) );
-        this.setSize( 300, 100 );
+        this.setSize( 300, 200 );
         setTitle( "Agregar producto a una categoria" );
 
         lbCodigoBarras = new JLabel( "Código de barras:" );
