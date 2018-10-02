@@ -32,6 +32,21 @@ public interface VOPromocion {
 	public long getIdPromocion();
 	
 	/**
+	 *@return El código de barras.
+	 */
+	public int getCodigoBarras() ;
+	
+	/**
+	 * @return Las unidades disponibles
+	 */
+	public int getUnidadesDisponibles();
+	
+	/**
+	 * @return Las unidades vendidas
+	 */
+	public int getUnidadesVendidas();
+	
+	/**
 	 * @return Una cadena con la información básica de la Promoción.
 	 */
 	public String toString();

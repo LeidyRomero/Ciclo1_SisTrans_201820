@@ -35,6 +35,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.superAndes.interfazApp.PanelDatos;
 import uniandes.isis2304.superAndes.negocio.SuperAndes;
+import uniandes.isis2304.superAndes.negocio.VOProveedor;
+import uniandes.isis2304.superAndes.negocio.VOSucursal;
 
 @SuppressWarnings("serial")
 public class InterfazSuperAndesApp extends JFrame implements ActionListener{
@@ -233,16 +235,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			e.printStackTrace();
 		} 
 	}
-
-	//TODO CRUD Proveedores
-	//TODO CRUD Productos
-	//TODO CRUD Clientes
-	//TODO CRUD Sucursal
-	//TODO CRUD Bodega
-	//TODO CRUD Estante
-	//TODO CRUD Promoción
-	//TODO CRUD Pedidos
-	//TODO CRUD Ventas	
 
 	//--------------------------------------------------------------------------------------
 	//* 			Métodos administrativos
@@ -487,7 +479,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		{
 			if(!pNombre.equals(""))//TODO continuar validaciones
 			{
-				superAndes.adicionarProducto(pNombre, pMarca, pPresentacion, pUnidadMedida, pEspecificacion, pCalidad, Double.parseDouble(pPrecioUnitario), Double.parseDouble(pPrecioUnidadMedida),Integer.parseInt(pCantidadPresentacion), Integer.parseInt(pCodigoBarras),pFechaVencimiento);
+				//superAndes.adicionarProducto(pNombre, pMarca, pPresentacion, pUnidadMedida, pEspecificacion, pCalidad, Double.parseDouble(pPrecioUnitario), Double.parseDouble(pPrecioUnidadMedida),Integer.parseInt(pCantidadPresentacion), Integer.parseInt(pCodigoBarras),pFechaVencimiento);
 			}
 		}
 		catch(Exception e)
@@ -539,6 +531,82 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 		}
 	}
+
+	//-------------------------------------------------------------------------------
+	//  Metodos para manejar SUCURSAL
+	//-------------------------------------------------------------------------------
+	public void adicionarSucursal()
+	{
+		DialogoRegistrarSucursal registrar = new DialogoRegistrarSucursal(this);
+		registrar.setVisible( true );
+	}
+	public void adicionarSucursal2(String tamanio, String direccion, String ciudad, String nombre)
+	{
+		try
+		{
+			if(!tamanio.equals("") && !direccion.equals("") && !ciudad.equals("") && !nombre.equals(""))
+			{
+				VOSucursal sc = superAndes.adicionarSucursal(tamanio, direccion, ciudad, nombre);
+				if(sc == null)
+				{
+					throw new Exception ("No se pudo crear una sucursal con direccion: " + direccion + ", "+ciudad);
+				}
+				String resultado = "En adicionarSucursal\n\n";
+				resultado += "Sucursal adicionada exitosamente: " + sc;
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+		}
+		catch(Exception e)
+		{
+
+		}
+	}
+
+	//-------------------------------------------------------------------------------
+	//  Metodos para manejar PROVEEDOR
+	//-------------------------------------------------------------------------------
+	public void adicionarProveedor()
+	{
+		DialogoRegistrarProveedor registrar = new DialogoRegistrarProveedor(this);
+		registrar.setVisible( true );
+	}
+	public void adicionarProveedor2(int nitProveedor, String nombreProveedor)
+	{
+		try
+		{
+			if(nitProveedor > 0 && !nombreProveedor.equals(""))
+			{
+				System.out.println("Pre negocio");
+				VOProveedor pv = superAndes.adicionarProveedor(nitProveedor, nombreProveedor);
+				if(pv == null)
+				{
+					throw new Exception ("No se pudo crear un proveedor con nit: " + nitProveedor);
+				}
+				String resultado = "En adicionarProveedor\n\n";
+				resultado += "Proveedor adicionado exitosamente: " + pv;
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+		}
+		catch(Exception e)
+		{
+
+		}
+	}
+
+	//TODO CRUD Productos
+	//TODO CRUD Clientes
+	//TODO CRUD Sucursal
+	//TODO CRUD Bodega
+	//TODO CRUD Estante
+	//TODO CRUD Promoción
+	//TODO CRUD Pedidos
+	//TODO CRUD Ventas
 	// -----------------------------------------------------------------
 	// Programa principal
 	// -----------------------------------------------------------------
@@ -560,4 +628,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			e.printStackTrace( );
 		}
 	}
+
+
 }

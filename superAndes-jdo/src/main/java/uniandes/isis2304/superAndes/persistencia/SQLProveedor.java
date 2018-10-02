@@ -49,6 +49,7 @@ class SQLProveedor
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlProveedor() + "(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)");
         q.setParameters(nitProveedor, nombreProveedor, null);
+        System.out.println(persistencia.getSqlProveedor());
         return (long) q.executeUnique();
 	}
 }
