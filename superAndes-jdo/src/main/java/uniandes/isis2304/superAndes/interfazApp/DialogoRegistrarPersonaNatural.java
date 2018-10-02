@@ -9,7 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class DialogoRegistrarProveedor extends JDialog implements ActionListener{
+public class DialogoRegistrarPersonaNatural extends JDialog implements ActionListener{
 	 /**
      * Comando para agregar un producto
      */
@@ -31,7 +31,12 @@ public class DialogoRegistrarProveedor extends JDialog implements ActionListener
     /**
      * Etiqueta direccion
      */
-    private JLabel lbNit; 
+    private JLabel lbCorreo; 
+    
+	/**
+	 * Etiqueta direccion
+	 */
+	private JLabel lbDocumento; 
 
     /**
      * Campo de texto para mostrar el nombre
@@ -41,7 +46,13 @@ public class DialogoRegistrarProveedor extends JDialog implements ActionListener
     /**
      * Campo de texto para mostrar la direccion
      */
-    private JTextField txtNit;
+    private JTextField txtCorreo;
+    
+	/**
+	 * Campo de texto para mostrar la direccion
+	 */
+	private JTextField txtDocumento;
+
 
     /**
      * Botón registrar
@@ -63,7 +74,7 @@ public class DialogoRegistrarProveedor extends JDialog implements ActionListener
      * Construye un nuevo dialogo para agregar un crédito
      * @param principalP es la referencia al panel padre del diálogo
      */
-    public DialogoRegistrarProveedor( InterfazSuperAndesApp pPrincipal )
+    public DialogoRegistrarPersonaNatural( InterfazSuperAndesApp pPrincipal )
     {
         principal = pPrincipal;
 
@@ -77,11 +88,17 @@ public class DialogoRegistrarProveedor extends JDialog implements ActionListener
         add( lbNombre );
         add( txtNombre );
 
-        lbNit = new JLabel( "NIT:" );
-        txtNit = new JTextField( );
+        lbCorreo = new JLabel( "Correo:" );
+        txtCorreo = new JTextField( );
         
-        add( lbNit );
-        add( txtNit );
+        add( lbCorreo );
+        add( txtCorreo );
+        
+		lbDocumento = new JLabel( "Documento identificación:" );
+		txtDocumento = new JTextField( );
+
+		add( lbDocumento );
+		add( txtDocumento );
         
         btnRegistrar = new JButton( "Registrar" );
         btnRegistrar.setActionCommand( REGISTRAR );
@@ -101,7 +118,7 @@ public class DialogoRegistrarProveedor extends JDialog implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if( e.getActionCommand( ).equals( REGISTRAR ) )
 		{
-			principal.adicionarProveedor2(Integer.parseInt(txtNit.getText()), txtNombre.getText());
+			principal.adicionarPersona2(txtDocumento.getText(), txtCorreo.getText(), txtNombre.getText());
 			this.dispose();
 		}
 		else

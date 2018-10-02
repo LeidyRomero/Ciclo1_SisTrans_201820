@@ -93,8 +93,12 @@
 		  "options":
 			[
 				{
-					"label": "Adicionar",
-					"event": "adicionarCliente"
+					"label": "Adicionar Empresa",
+					"event": "adicionarEmpresa"
+				},
+				{
+					"label": "Adicionar Persona Natural",
+					"event": "adicionarPersona"
 				}
 			]
 		},

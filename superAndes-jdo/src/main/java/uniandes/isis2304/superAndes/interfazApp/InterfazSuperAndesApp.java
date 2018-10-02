@@ -35,6 +35,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.superAndes.interfazApp.PanelDatos;
 import uniandes.isis2304.superAndes.negocio.SuperAndes;
+import uniandes.isis2304.superAndes.negocio.VOCliente;
+import uniandes.isis2304.superAndes.negocio.VOEmpresa;
+import uniandes.isis2304.superAndes.negocio.VOPersonaNatural;
 import uniandes.isis2304.superAndes.negocio.VOProveedor;
 import uniandes.isis2304.superAndes.negocio.VOSucursal;
 
@@ -583,7 +586,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		{
 			if(nitProveedor > 0 && !nombreProveedor.equals(""))
 			{
-				System.out.println("Pre negocio");
 				VOProveedor pv = superAndes.adicionarProveedor(nitProveedor, nombreProveedor);
 				if(pv == null)
 				{
@@ -599,13 +601,95 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		}
 		catch(Exception e)
 		{
-
+			String resultado = "En adicionarProveedor \n\n";
+			resultado += e.getMessage();
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
 
-	//TODO CRUD Productos
-	//TODO CRUD Clientes
-	//TODO CRUD Sucursal
+	//-------------------------------------------------------------------------------
+	//  Metodos para manejar EMPRESA
+	//-------------------------------------------------------------------------------
+	public void adicionarEmpresa()
+	{
+		DialogoRegistrarEmpresa registrar = new DialogoRegistrarEmpresa(this);
+		registrar.setVisible( true );
+	}
+	public void adicionarEmpresa2(String pDireccion, int pNit, String pCorreo, String pNombre)
+	{
+		try
+		{
+			if(!pDireccion.equals("") && pNit >= 0 && !pCorreo.equals("") && !pNombre.equals(""))
+			{
+				VOCliente cl = superAndes.adicionarCliente(pCorreo, pNombre);
+				if(cl == null)
+				{
+					throw new Exception ("No se pudo crear un cliente con correo: " + pCorreo);
+				}
+				VOEmpresa em = superAndes.adicionarEmpresa(pDireccion, pNit, pCorreo);
+				if(em == null)
+				{
+					throw new Exception ("No se pudo crear una empresa con nit: " + pNit);
+				}
+				String resultado = "En adicionarEmpresa \n\n";
+				resultado += "Empresa adicionada exitosamente: " + em;
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+		}
+		catch(Exception e)
+		{
+			String resultado = "En adicionarEmpresa \n\n";
+			resultado += e.getMessage();
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	//-------------------------------------------------------------------------------
+	//  Metodos para manejar PERSONA NATURAL
+	//-------------------------------------------------------------------------------
+	public void adicionarPersona()
+	{
+		DialogoRegistrarPersonaNatural registrar = new DialogoRegistrarPersonaNatural(this);
+		registrar.setVisible( true );
+	}
+	public void adicionarPersona2(String pDocumento, String pCorreo, String pNombre)
+	{
+		try
+		{
+			if(!pDocumento.equals("") && !pCorreo.equals("") && !pNombre.equals(""))
+			{
+				VOCliente cl = superAndes.adicionarCliente(pCorreo, pNombre);
+				if(cl == null)
+				{
+					throw new Exception ("No se pudo crear un cliente con correo: " + pCorreo);
+				}
+				VOPersonaNatural pn = superAndes.adicionarPersonaNatural(pDocumento, pCorreo);
+				if(pn == null)
+				{
+					throw new Exception ("No se pudo crear una persona natural con documento: " + pDocumento);
+				}
+				String resultado = "En adicionarPersonaNatural \n\n";
+				resultado += "Persona Natural adicionada exitosamente: " + pn;
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+		}
+		catch(Exception e)
+		{
+			String resultado = "En adicionarPersonaNatural \n\n";
+			resultado += e.getMessage();
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
 	//TODO CRUD Bodega
 	//TODO CRUD Estante
 	//TODO CRUD Promoción

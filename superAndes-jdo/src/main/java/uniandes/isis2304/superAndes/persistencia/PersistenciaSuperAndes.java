@@ -326,9 +326,7 @@ public class PersistenciaSuperAndes {
 		try
 		{
 			tx.begin();
-			System.out.println("Pre sql");
 			long tuplasInsertadas = sqlProveedor.adicionarProveedor(pm, nitProveedor, nombreProveedor);
-			System.out.println("Post sql");
 			tx.commit();
 
 			Log.trace("Insercción proveedor: " + nitProveedor + ": "+tuplasInsertadas);
