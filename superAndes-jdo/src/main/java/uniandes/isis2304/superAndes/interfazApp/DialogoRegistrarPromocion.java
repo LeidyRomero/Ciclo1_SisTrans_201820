@@ -3,6 +3,7 @@ package uniandes.isis2304.superAndes.interfazApp;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -26,32 +27,52 @@ public class DialogoRegistrarPromocion extends JDialog implements ActionListener
 	/**
      * Etiqueta nombre
      */
-    private JLabel lbNombre;
+    private JLabel lbDescripcion;
 
     /**
      * Etiqueta direccion
      */
-    private JLabel lbCorreo; 
+    private JLabel lbUniDisponibles; 
     
 	/**
 	 * Etiqueta direccion
 	 */
-	private JLabel lbDocumento; 
-
+	private JLabel lbCodigoBarras;
+	
+	/**
+	 * Etiqueta fecha de inicio
+	 */
+	private JLabel lbFechaInicio;
+	
+	/**
+	 * Etiqueta fecha de fin
+	 */
+	private JLabel lbFechaFin;
+	
     /**
      * Campo de texto para mostrar el nombre
      */
-    private JTextField txtNombre;
+    private JTextField txtDescripcion;
 
     /**
      * Campo de texto para mostrar la direccion
      */
-    private JTextField txtCorreo;
+    private JTextField txtUniDisponibles;
     
 	/**
 	 * Campo de texto para mostrar la direccion
 	 */
-	private JTextField txtDocumento;
+	private JTextField txtCodBarras;
+	
+	/**
+	 * Campo texto fecha inicio
+	 */
+	private JTextField txtFechaInicio;
+	
+	/**
+	 * Campo texto fecha fin
+	 */
+	private JTextField txtFechaFin;
 
 
     /**
@@ -82,23 +103,35 @@ public class DialogoRegistrarPromocion extends JDialog implements ActionListener
         this.setSize( 600, 200 );
         setTitle( "Agregar proveedor" );
 
-        lbNombre = new JLabel( "Nombre:" );
-        txtNombre = new JTextField( );
+        lbDescripcion = new JLabel( "Descripción:" );
+        txtDescripcion = new JTextField( );
 
-        add( lbNombre );
-        add( txtNombre );
+        add( lbDescripcion );
+        add( txtDescripcion );
 
-        lbCorreo = new JLabel( "Correo:" );
-        txtCorreo = new JTextField( );
+        lbUniDisponibles = new JLabel( "Unidades disponibles:" );
+        txtUniDisponibles = new JTextField( );
         
-        add( lbCorreo );
-        add( txtCorreo );
+        add( lbUniDisponibles );
+        add( txtUniDisponibles );
         
-		lbDocumento = new JLabel( "Documento identificación:" );
-		txtDocumento = new JTextField( );
+		lbCodigoBarras = new JLabel( "Código de barras:" );
+		txtCodBarras = new JTextField( );
 
-		add( lbDocumento );
-		add( txtDocumento );
+		add( lbCodigoBarras );
+		add( txtCodBarras );
+		
+		lbFechaInicio = new JLabel("Fecha de inicio: (2018-5-6)");
+		txtFechaInicio = new JTextField();
+		
+		add(lbFechaInicio);
+		add(txtFechaInicio);
+		
+		lbFechaFin = new JLabel("Fecha de fin: (2018-5-6)");
+		txtFechaFin = new JTextField();
+		
+		add(lbFechaFin);
+		add(txtFechaFin);
         
         btnRegistrar = new JButton( "Registrar" );
         btnRegistrar.setActionCommand( REGISTRAR );
@@ -118,7 +151,7 @@ public class DialogoRegistrarPromocion extends JDialog implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if( e.getActionCommand( ).equals( REGISTRAR ) )
 		{
-			principal.adicionarPersona2(txtDocumento.getText(), txtCorreo.getText(), txtNombre.getText());
+			principal.adicionarPersona2(txtCodBarras.getText(), txtUniDisponibles.getText(), txtDescripcion.getText());
 			this.dispose();
 		}
 		else
