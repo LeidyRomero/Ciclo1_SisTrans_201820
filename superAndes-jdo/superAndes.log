@@ -31,6 +31,7 @@ ORA-00942: la tabla o vista no existe
 01:47:12,353 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 6845132, ASERDCTFVYBU
 02:13:03,754 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 8645, estdryftugihuoji
 02:13:04,703 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 8645, estdryftugihuoji
+
 13:49:15,941 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la categoria null
 13:49:16,771 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_CATEGORIA (nombre_categoria) values (?)".
 ORA-01400: no se puede realizar una inserción NULL en ("ISIS2304A231820"."A_CATEGORIA"."NOMBRE_CATEGORIA")
@@ -43,3 +44,65 @@ ORA-01400: no se puede realizar una inserción NULL en ("ISIS2304A231820"."A_CATE
 ORA-01400: no se puede realizar una inserción NULL en ("ISIS2304A231820"."A_CATEGORIA"."NOMBRE_CATEGORIA")
 
 14:22:50,276 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la categoria null
+
+11:36:50,689 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 8645, esdtfyguh
+11:36:51,638 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A231820.A_PROVEEDOR_PK) violada
+
+11:36:51,726 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 8645, esdtfyguh
+11:38:54,112 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 8645, wrdtcfyvgtubyh
+11:38:55,862 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A231820.A_PROVEEDOR_PK) violada
+
+11:38:56,006 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 8645, wrdtcfyvgtubyh
+13:35:44,722 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 8645, rrhjk
+13:35:46,366 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A231820.A_PROVEEDOR_PK) violada
+
+13:35:46,546 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 8645, rrhjk
+13:43:25,975 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 8645, rtsdyugihojpk
+13:43:26,918 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A231820.A_PROVEEDOR_PK) violada
+
+13:43:27,008 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 8645, rtsdyugihojpk
+13:45:13,499 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 8645, dtryhfgtjuhijok
+13:45:14,423 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A231820.A_PROVEEDOR_PK) violada
+
+13:45:14,509 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 8645, dtryhfgtjuhijok
+14:10:31,196 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando cliente esdtryftguyihu@e5drtfyt.es, sretdryftugyih
+14:10:32,218 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_CLIENTE(correo, nombre_consumidor, puntos) values (?, ?, ?)".
+ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
+
+14:10:32,304 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente esdtryftguyihu@e5drtfyt.es, sretdryftugyih
+14:11:53,289 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando cliente hola@fhh.com, tesryftgh
+14:11:53,372 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_CLIENTE(correo, nombre_consumidor, puntos) values (?, ?, ?)".
+ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
+
+14:11:53,452 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente hola@fhh.com, tesryftgh
+14:14:02,197 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando cliente trfgjh@drytfuy.com, estrdtfuygiuh
+14:14:03,117 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_CLIENTE(correo, nombre_consumidor, puntos) values (?, ?, ?)".
+ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
+
+14:14:03,368 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente trfgjh@drytfuy.com, estrdtfuygiuh
+14:15:27,445 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando cliente dftyug@fytguh.com, setryfugiu
+14:15:27,530 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_CLIENTE(correo, nombre_consumidor, puntos) values (?, ?, ?)".
+ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
+
+14:15:27,801 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente dftyug@fytguh.com, setryfugiu
+14:16:42,526 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando cliente ftguyhi, r6dftguyiu
+14:16:42,631 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_CLIENTE(correo, nombre_consumidor, puntos) values (?, ?, ?)".
+ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
+
+14:16:42,730 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente ftguyhi, r6dftguyiu
+14:18:04,105 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando cliente rtfugyihu, 4trdytfugy
+14:18:05,243 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_CLIENTE(correo, nombre_consumidor, puntos) values (?, ?, ?)".
+ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
+
+14:18:05,330 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente rtfugyihu, 4trdytfugy
+14:19:26,644 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando cliente tyv, fytgjh
+14:19:26,727 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_CLIENTE(correo, nombre_consumidor, puntos) values (?, ?, ?)".
+ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
+
+14:19:26,804 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente tyv, fytgjh
+

@@ -47,8 +47,9 @@ class SQLCliente
 	 */
 	public long adicionarCliente (PersistenceManager pm, String correo, String nombre) 
 	{
+		int puntos = 0;
         Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlCliente() + "(correo, nombre_consumidor, puntos) values (?, ?, ?)");
-        q.setParameters(correo, nombre, 0.0);
+        q.setParameters(correo, nombre, puntos);
         return (long) q.executeUnique();
 	}
 }

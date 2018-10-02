@@ -224,7 +224,6 @@ public class SuperAndes {
 	public Proveedor adicionarProveedor(int nitProveedor, String nombreProveedor)
 	{
 		Log.info("Adicionando proveedor "+ nitProveedor+", "+nombreProveedor);
-		System.out.println("Pre persistence");
 		Proveedor proveedor = pp.adicionarProveedor(nitProveedor, nombreProveedor);
 		Log.info("Saliendo de adicionar proveedor "+ nitProveedor+", "+nombreProveedor);
 		return proveedor;
