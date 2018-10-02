@@ -558,6 +558,31 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	public List<Double> buscarIndiceBodega()
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Double> q = sqlBodega.buscarIndice(manager);
+			t.commit();
+			return q;
+		}
+			catch(Exception e)
+			{
+				Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+				return null;
+			}
+			finally
+			{
+				if (t.isActive())
+				{
+					t.rollback();
+				}
+				manager.close();
+			}
+	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar ESTANTE
 	//------------------------------------------------------------------
@@ -588,7 +613,31 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-
+	public List<Double> buscarIndiceEstante()
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Double> q = sqlEstante.buscarIndice(manager);
+			t.commit();
+			return q;
+		}
+			catch(Exception e)
+			{
+				Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+				return null;
+			}
+			finally
+			{
+				if (t.isActive())
+				{
+					t.rollback();
+				}
+				manager.close();
+			}
+	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar PEDIDO PRODUCTO
 	//------------------------------------------------------------------
