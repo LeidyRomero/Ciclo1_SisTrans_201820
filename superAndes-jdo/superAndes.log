@@ -86,3 +86,8 @@ ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
 ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
 
 14:18:05,330 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente rtfugyihu, 4trdytfugy
+14:19:26,644 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando cliente tyv, fytgjh
+14:19:26,727 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_CLIENTE(correo, nombre_consumidor, puntos) values (?, ?, ?)".
+ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
+
+14:19:26,804 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente tyv, fytgjh
