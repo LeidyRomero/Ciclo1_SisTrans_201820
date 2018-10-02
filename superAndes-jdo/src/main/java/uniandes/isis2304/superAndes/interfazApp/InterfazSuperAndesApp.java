@@ -1,7 +1,7 @@
 package uniandes.isis2304.superAndes.interfazApp;
 /**
-* Clase principal de la interfaz
-*/
+ * Clase principal de la interfaz
+ */
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -25,6 +25,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+
+import org.datanucleus.store.types.wrappers.Date;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -36,8 +39,8 @@ import uniandes.isis2304.superAndes.negocio.SuperAndes;
 @SuppressWarnings("serial")
 public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	// -----------------------------------------------------------------
-    // Constantes
-    // -----------------------------------------------------------------
+	// Constantes
+	// -----------------------------------------------------------------
 	/**
 	 * Logger para escribir la traza de la ejecución
 	 */
@@ -51,8 +54,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	 */
 	private static final String CONFIGURACION_TABLAS = "./src/main/resources/config/TablasBD_A.json";
 	// -----------------------------------------------------------------
-    // Atributos 
-    // -----------------------------------------------------------------
+	// Atributos 
+	// -----------------------------------------------------------------
 	/**
 	 * Objeto JSON con los nombres de las tablas de la base de datos que se quieren utilizar
 	 */
@@ -63,8 +66,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	 */
 	private SuperAndes superAndes;
 	// -----------------------------------------------------------------
-    // Atributos de la interfaz
-    // -----------------------------------------------------------------
+	// Atributos de la interfaz
+	// -----------------------------------------------------------------
 	/**
 	 * Objeto JSON con la configuración de interfaz de la app.
 	 */
@@ -78,8 +81,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	 */
 	private JMenuBar menuSA;
 	// -----------------------------------------------------------------
-    // Constructores
-    // -----------------------------------------------------------------
+	// Constructores
+	// -----------------------------------------------------------------
 	/**
 	 * Construye la ventana principal de la aplicación. <br>
 	 * <b>post:</b> Todos los componentes de la interfaz fueron inicializados.
@@ -88,21 +91,21 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	{
 		// Carga la configuración de la interfaz desde un archivo JSON
 		guiConfig = openConfig ("Interfaz", CONFIGURACION_INTERFAZ);
-		
+
 		// Configura la apariencia del frame que contiene la interfaz gráfica
 		configurarFrame ( );
-		
+
 		if (guiConfig != null) 
 		{
 			crearMenu( guiConfig.getAsJsonArray("menu") );
 		}
-		
+
 		String path = guiConfig.get("bannerPath").getAsString();
-		
+
 		tableConfig = openConfig ("Tablas BD", CONFIGURACION_TABLAS);
 		superAndes = new SuperAndes(tableConfig);
-		
-	
+
+
 		panelDatos = new PanelDatos ( );
 
 		setLayout (new BorderLayout());
@@ -110,8 +113,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		add( panelDatos, BorderLayout.CENTER );   
 	}
 	// -----------------------------------------------------------------
-    // Configuracion de la interfaz
-    // -----------------------------------------------------------------
+	// Configuracion de la interfaz
+	// -----------------------------------------------------------------
 	/**
 	 * Lee datos de configuración para la aplicacion, a partir de un archivo JSON o con valores por defecto si hay errores.
 	 * @param tipo - El tipo de configuración deseada
@@ -139,7 +142,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		}	
 		return config;
 	}
-	
+
 	/**
 	 * Método para configurar el frame principal de la aplicación
 	 */
@@ -209,8 +212,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		setJMenuBar ( menuSA );	
 	}
 	// -----------------------------------------------------------------
-    // Métodos de interacción
-    // -----------------------------------------------------------------
+	// Métodos de interacción
+	// -----------------------------------------------------------------
 	/**
 	 * Método para la ejecución de los eventos que enlazan el menú con los métodos de negocio
 	 * Invoca al método correspondiente según el evento recibido
@@ -230,7 +233,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			e.printStackTrace();
 		} 
 	}
-	
+
 	//TODO CRUD Proveedores
 	//TODO CRUD Productos
 	//TODO CRUD Clientes
@@ -240,9 +243,9 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	//TODO CRUD Promoción
 	//TODO CRUD Pedidos
 	//TODO CRUD Ventas	
-	
+
 	//--------------------------------------------------------------------------------------
-	 //* 			Métodos administrativos
+	//* 			Métodos administrativos
 	//--------------------------------------------------------------------------------------/
 	/**
 	 * Muestra el log de Parranderos
@@ -251,7 +254,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	{
 		mostrarArchivo ("parranderos.log");
 	}
-	
+
 	/**
 	 * Muestra el log de datanucleus
 	 */
@@ -259,7 +262,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	{
 		mostrarArchivo ("datanucleus.log");
 	}
-	
+
 	/**
 	 * Limpia el contenido del log de parranderos
 	 * Muestra en el panel de datos la traza de la ejecución
@@ -276,7 +279,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 		panelDatos.actualizarInterfaz(resultado);
 	}
-	
+
 	/**
 	 * Limpia el contenido del log de datanucleus
 	 * Muestra en el panel de datos la traza de la ejecución
@@ -293,7 +296,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 		panelDatos.actualizarInterfaz(resultado);
 	}
-	
+
 	/**
 	 * Limpia todas las tuplas de todas las tablas de la base de datos de parranderos
 	 * Muestra en el panel de datos el número de tuplas eliminadas de cada tabla
@@ -302,31 +305,31 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	{
 		try 
 		{
-    		// Ejecución de la demo y recolección de los resultados
+			// Ejecución de la demo y recolección de los resultados
 			//TODO Terminar SuperAndes
-//			long eliminados [] = superAndes.limpiarParranderos();
-//			
-//			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
-//			String resultado = "\n\n************ Limpiando la base de datos ************ \n";
-//			resultado += eliminados [0] + " Gustan eliminados\n";
-//			resultado += eliminados [1] + " Sirven eliminados\n";
-//			resultado += eliminados [2] + " Visitan eliminados\n";
-//			resultado += eliminados [3] + " Bebidas eliminadas\n";
-//			resultado += eliminados [4] + " Tipos de bebida eliminados\n";
-//			resultado += eliminados [5] + " Bebedores eliminados\n";
-//			resultado += eliminados [6] + " Bares eliminados\n";
-//			resultado += "\nLimpieza terminada";
-//   
-//			panelDatos.actualizarInterfaz(resultado);
+			//			long eliminados [] = superAndes.limpiarParranderos();
+			//			
+			//			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			//			String resultado = "\n\n************ Limpiando la base de datos ************ \n";
+			//			resultado += eliminados [0] + " Gustan eliminados\n";
+			//			resultado += eliminados [1] + " Sirven eliminados\n";
+			//			resultado += eliminados [2] + " Visitan eliminados\n";
+			//			resultado += eliminados [3] + " Bebidas eliminadas\n";
+			//			resultado += eliminados [4] + " Tipos de bebida eliminados\n";
+			//			resultado += eliminados [5] + " Bebedores eliminados\n";
+			//			resultado += eliminados [6] + " Bares eliminados\n";
+			//			resultado += "\nLimpieza terminada";
+			//   
+			//			panelDatos.actualizarInterfaz(resultado);
 		} 
 		catch (Exception e) 
 		{
-//			e.printStackTrace();
+			//			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	/**
 	 * Muestra el modelo conceptual de Parranderos
 	 */
@@ -335,7 +338,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		//TODO Poner el modelo conceptual 
 		mostrarArchivo ("data/Modelo Conceptual Parranderos.pdf");
 	}
-	
+
 	/**
 	 * Muestra el esquema de la base de datos de Parranderos
 	 */
@@ -344,7 +347,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		//TODO Esquema BD Parranderos
 		mostrarArchivo ("data/Esquema BD Parranderos.pdf");
 	}
-	
+
 	/**
 	 * Muestra el script de creación de la base de datos
 	 */
@@ -353,7 +356,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		//TODO Script de BD
 		mostrarArchivo ("data/EsquemaParranderos.sql");
 	}
-	
+
 	/**
 	 * Muestra la arquitectura de referencia para Parranderos
 	 */
@@ -362,7 +365,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		//TODO Arquitectura Referencia
 		mostrarArchivo ("data/ArquitecturaReferencia.pdf");
 	}
-	
+
 	/**
 	 * Muestra la documentación Javadoc del proyectp
 	 */
@@ -371,12 +374,12 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		//TODO Javadoc ¿?
 		mostrarArchivo ("doc/index.html");
 	}
-	
+
 	/**
-     * Muestra la información acerca del desarrollo de esta apicación
-     */
-    public void acercaDe ()
-    {
+	 * Muestra la información acerca del desarrollo de esta apicación
+	 */
+	public void acercaDe ()
+	{
 		String resultado = "\n\n ************************************\n\n";
 		resultado += " * Universidad	de	los	Andes	(Bogotá	- Colombia)\n";
 		resultado += " * Departamento	de	Ingeniería	de	Sistemas	y	Computación\n";
@@ -393,17 +396,17 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		resultado += "\n ************************************\n\n";
 
 		panelDatos.actualizarInterfaz(resultado);		
-    }
-    
-    //--------------------------------------------------------------------------------------
+	}
+
+	//--------------------------------------------------------------------------------------
 	//* 			Métodos privados para la presentación de resultados y otras operaciones
 	//--------------------------------------------------------------------------------------
-	
-    /**
-     * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO
-     * @param e - La excepción recibida
-     * @return La descripción de la excepción, cuando es javax.jdo.JDODataStoreException, "" de lo contrario
-     */
+
+	/**
+	 * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO
+	 * @param e - La excepción recibida
+	 * @return La descripción de la excepción, cuando es javax.jdo.JDODataStoreException, "" de lo contrario
+	 */
 	private String darDetalleException(Exception e) 
 	{
 		String resp = "";
@@ -445,7 +448,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		} 
 		catch (IOException e) 
 		{
-//			e.printStackTrace();
+			//			e.printStackTrace();
 			return false;
 		}
 	}
@@ -466,10 +469,79 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			e.printStackTrace();
 		}
 	}
-	
+	//
+	//        METODOS
+	//
+
+	//-------------------------------------------------------------------------------
+	//  Metodos para manejar PRODUCTOS
+	//-------------------------------------------------------------------------------
+	public void adicionarProducto()
+	{
+		DialogoRegistrarProducto registrar = new DialogoRegistrarProducto(this);
+		registrar.setVisible( true );
+	}
+	public void adicionarProducto2(String pNombre, String pMarca, String pPrecioUnitario, String pPresentacion, String pPrecioUnidadMedida, String pCantidadPresentacion, String pUnidadMedida, String pEspecificacion, String pCodigoBarras, String pCalidad, String pFechaVencimiento)
+	{
+		try
+		{
+			if(!pNombre.equals(""))//TODO continuar validaciones
+			{
+				superAndes.adicionarProducto(pNombre, pMarca, pPresentacion, pUnidadMedida, pEspecificacion, pCalidad, Double.parseDouble(pPrecioUnitario), Double.parseDouble(pPrecioUnidadMedida),Integer.parseInt(pCantidadPresentacion), Integer.parseInt(pCodigoBarras),pFechaVencimiento);
+			}
+		}
+		catch(Exception e)
+		{
+
+		}
+	}
+	//-------------------------------------------------------------------------------
+	//  Metodos para manejar BODEGA
+	//-------------------------------------------------------------------------------
+	public void adicionarBodega()
+	{
+		DialogoRegistrarBodega registrar = new DialogoRegistrarBodega(this);
+		registrar.setVisible( true );
+	}
+	public void adicionarBodega2(String pTipo,String pVolumen, String pPeso, String pDireccionBodega, String pDireccionSucursal, String pCiudad)
+	{
+		try
+		{
+			if(!pTipo.equals(""))//TODO continuar validaciones
+			{
+				superAndes.adicionarBodega(pTipo,Double.parseDouble( pVolumen),Double.parseDouble( pPeso), pDireccionBodega, pDireccionSucursal, pCiudad);
+			}
+		}
+		catch(Exception e)
+		{
+
+		}
+	}
+	//-------------------------------------------------------------------------------
+	//  Metodos para manejar ESTANTE
+	//-------------------------------------------------------------------------------
+	public void adicionarEstante()
+	{
+		DialogoRegistrarEstante registrar = new DialogoRegistrarEstante(this);
+		registrar.setVisible( true );
+	}
+	public void adicionarEstante2(String pTipoEstante,String  pVolumen,String  pId, String pPeso, String pNivelAbastecimiento, String pDireccionSucursal,String pCiudad)
+	{
+		try
+		{
+			if(!pTipoEstante.equals(""))//TODO continuar validaciones
+			{
+				superAndes.adicionarEstante(pTipoEstante,Double.parseDouble(pVolumen), Long.parseLong(pId),Double.parseDouble (pPeso),Double.parseDouble( pNivelAbastecimiento), pDireccionSucursal, pCiudad);
+			}
+		}
+		catch(Exception e)
+		{
+
+		}
+	}
 	// -----------------------------------------------------------------
-    // Programa principal
-    // -----------------------------------------------------------------
+	// Programa principal
+	// -----------------------------------------------------------------
 	/**
 	 * Este método ejecuta la aplicación, creando una nueva interfaz
 	 * @param args Arreglo de argumentos que se recibe por línea de comandos

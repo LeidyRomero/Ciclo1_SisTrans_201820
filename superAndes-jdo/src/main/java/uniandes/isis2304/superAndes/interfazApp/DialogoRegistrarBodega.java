@@ -1,0 +1,165 @@
+package uniandes.isis2304.superAndes.interfazApp;
+
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
+public class DialogoRegistrarBodega extends JDialog implements ActionListener{
+	 /**
+     * Comando para agregar un producto
+     */
+    private final static String REGISTRAR = "REGISTRAR";
+
+    /**
+     * Comando para cancelar la operación
+     */
+    private final static String CANCELAR = "CANCELAR";
+	private InterfazSuperAndesApp principal;
+	/**
+     * Etiqueta tipo
+     */
+    private JLabel lbTipo;
+
+    /**
+     * Etiqueta volumen
+     */
+    private JLabel lbVolumen;
+
+    /**
+     * Etiqueta peso
+     */
+    private JLabel lbPeso;
+    /**
+     * Etiqueta direccion
+     */
+    private JLabel lbDireccionBodega;
+
+    /**
+     * Etiqueta direccionSucursal
+     */
+    private JLabel lbDireccionSucursal;
+    
+
+    /**
+     * Campo de texto para mostrar el nombre
+     */
+    private JTextField txtTipo;
+
+    /**
+     * Campo de texto para mostrar la presentacion
+     */
+    private JTextField txtVolumen;
+    /**
+     * Campo de texto para mostrar la marca
+     */
+    private JTextField txtPeso;
+
+    /**
+     * Campo de texto para mostrar el precio unitario
+     */
+    private JTextField txtDireccionBodega;
+
+    /**
+     * Campo de texto para mostrar el precio unidad medida
+     */
+    private JTextField txtDireccionSucursal;
+
+    /**
+     * Botón registrar
+     */
+    private JButton btnRegistrar;
+
+    /**
+     * Botón cancelar
+     */
+    private JButton btnCancelar;
+
+    /**
+     * Etiqueta ciudad
+     */
+    private JLabel lbCiudad;
+
+    /**
+     * Campo de texto para mostrar el nombre
+     */
+    private JTextField txtCiudad;
+    
+
+    // --------------------------------------------------------
+    // Constructores
+    // --------------------------------------------------------
+
+    /**
+     * Construye un nuevo dialogo para agregar un crédito
+     * @param principalP es la referencia al panel padre del diálogo
+     */
+    public DialogoRegistrarBodega( InterfazSuperAndesApp principalP )
+    {
+        principal = principalP;
+
+        setLayout( new GridLayout( 7, 2 ) );
+        this.setSize( 600, 200 );
+        setTitle( "Agregar bodega" );
+
+        lbTipo = new JLabel( "Tipo:" );
+        txtTipo = new JTextField( );
+
+        add( lbTipo );
+        add( txtTipo );
+
+        lbVolumen = new JLabel( "Volumen:" );
+        txtPeso = new JTextField( );
+        
+        add( lbVolumen );
+        add( txtPeso );
+
+        lbPeso = new JLabel( "Peso:" );
+        txtDireccionBodega = new JTextField( );
+
+        add( lbPeso );
+        add( txtDireccionBodega );
+        
+        lbDireccionBodega = new JLabel( "Direccion de la bodega:" );
+        txtVolumen = new JTextField( );
+        
+        add( lbDireccionBodega );
+        add( txtVolumen );
+        
+        lbDireccionSucursal = new JLabel( "Direccion de la sucursal:" );
+        txtDireccionSucursal = new JTextField( );
+        
+        add( lbDireccionSucursal );
+        add( txtDireccionSucursal );
+        
+        lbCiudad = new JLabel( "Ciudad:" );
+        txtCiudad = new JTextField( );
+        
+        add( lbCiudad );
+        add( txtCiudad );
+        
+        btnRegistrar = new JButton( "Registrar" );
+        btnRegistrar.setActionCommand( REGISTRAR );
+        btnRegistrar.addActionListener( this );
+
+        btnCancelar = new JButton( "Cancelar" );
+        btnCancelar.setActionCommand( CANCELAR );
+        btnCancelar.addActionListener( this );
+        
+        add( btnRegistrar );
+        add( btnCancelar );
+
+        setModal( true );
+        setLocationRelativeTo( null );
+    }
+	public void actionPerformed(ActionEvent e) {
+		if( e.getActionCommand( ).equals( REGISTRAR ) )
+		{
+			principal.adicionarBodega2(txtTipo.getText(),txtVolumen.getText(),txtPeso.getText(),txtDireccionBodega.getText(),txtDireccionSucursal.getText(),txtCiudad.getText());
+		}
+		else
+		{
+			this.dispose();
+		}
+	}
+}

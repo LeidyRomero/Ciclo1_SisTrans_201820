@@ -1,7 +1,7 @@
 {
-	"title": "Aplicación transaccional de Parranderos Uniandes",
+	"title": "Aplicación transaccional superAndes",
 	"frameH": 600,
-	"frameW": 800,
+	"frameW": 1000,
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menu":
 	[
@@ -78,6 +78,15 @@
 				{
 					"label": "Adicionar",
 					"event": "adicionarVenta"
+				}
+			]
+		},
+		{ "menuTitle": "Cliente",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarCliente"
 				}
 			]
 		},
