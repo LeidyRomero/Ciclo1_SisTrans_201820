@@ -91,3 +91,11 @@ ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
 ORA-02290: restricción de control (ISIS2304A231820.CK_CLIENTE_PT) violada
 
 14:19:26,804 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente tyv, fytgjh
+14:28:59,049 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando cliente dryftugyihu, dryftguyhi
+14:28:59,995 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente dryftugyihu, dryftguyhi
+14:28:59,995 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la empresa 794
+14:29:00,127 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la empresa 794
+14:31:57,639 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando cliente tfuygink, 5e4tfuygiuh
+14:31:58,698 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente tfuygink, 5e4tfuygiuh
+14:31:58,698 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la empresa 9865
+14:31:58,825 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la empresa 9865

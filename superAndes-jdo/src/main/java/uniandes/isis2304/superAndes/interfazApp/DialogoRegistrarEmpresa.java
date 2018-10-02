@@ -73,9 +73,6 @@ public class DialogoRegistrarEmpresa extends JDialog implements ActionListener{
 	 */
 	private JButton btnCancelar;
 
-
-<<<<<<< HEAD
-
 	// --------------------------------------------------------
 	// Constructores
 	// --------------------------------------------------------
@@ -97,14 +94,9 @@ public class DialogoRegistrarEmpresa extends JDialog implements ActionListener{
 
 		add( lbNombre );
 		add( txtNombre );
-=======
-        setLayout( new GridLayout( 7, 2 ) );
-        this.setSize( 600, 200 );
-        setTitle( "Agregar empresa" );
 
         lbNit = new JLabel( "NIT:" );
         txtNit = new JTextField( );
->>>>>>> d36ad856604d5bf05b4ade53b7bafb81df620c6f
 
 		lbCorreo = new JLabel( "Correo:" );
 		txtCorreo = new JTextField( );
@@ -117,11 +109,7 @@ public class DialogoRegistrarEmpresa extends JDialog implements ActionListener{
         
         add( lbNit );
         add( txtNit );
-<<<<<<< HEAD
         
-=======
-
->>>>>>> d36ad856604d5bf05b4ade53b7bafb81df620c6f
         lbDireccion = new JLabel( "Dirección:" );
         txtDireccion = new JTextField( );
         
