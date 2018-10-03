@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
+
 import javax.swing.*;
 
 public class DialogoRegistrarProducto extends JDialog implements ActionListener{
@@ -239,15 +241,16 @@ public class DialogoRegistrarProducto extends JDialog implements ActionListener{
 			{
 				double precioU = Double.parseDouble(txtPrecioUnitario.getText());
 				double precioUniMed = Double.parseDouble(txtPrecioUnidadMedida.getText());
-				int cantidadPrese = Integer.parseInt(txtCodigoBarras.getText());
+				int cantidadPrese = Integer.parseInt(txtCantidadPresentacion.getText());
 				String [] especificaciones = txtEspecificacion.getText().split(",");
-				principal.adicionarProducto2(txtNombre.getText(), txtMarca.getText(),precioU,txtPresentacion.getText(),precioUniMed,cantidadPrese,txtUnidadMedida.getText(),txtCodigoBarras.getText(),txtCalidad.getText(),txtFechaVencimiento.getText(), especificaciones[1], especificaciones[0]);
+				Timestamp fecha = Timestamp.valueOf(txtFechaVencimiento.getText()+" 00:00:00");
+				principal.adicionarProducto2(txtNombre.getText(), txtMarca.getText(),precioU,txtPresentacion.getText(),precioUniMed,cantidadPrese,txtUnidadMedida.getText(),txtCodigoBarras.getText(),txtCalidad.getText(),fecha, especificaciones[1], especificaciones[0]);
+				this.dispose();
 			}
-			catch(NumberFormatException ex)
+			catch(Exception ex)
 			{
-				JOptionPane.showMessageDialog (this, "Valores ingresados no validos", "Agregar producto: no exitoso", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog (this, "Valores ingresados no validos ", "Agregar producto: no exitoso", JOptionPane.ERROR_MESSAGE);
 			}
-
 		}
 		else
 		{

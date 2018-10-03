@@ -160,6 +160,7 @@ public class DialogoRegistrarBodega extends JDialog implements ActionListener{
 				double peso = Double.parseDouble(txtPeso.getText());
 				double volumen = Double.parseDouble(txtVolumen.getText());
 				principal.adicionarBodega2(txtTipo.getText(),volumen,peso,txtDireccionBodega.getText(),txtDireccionSucursal.getText(),txtCiudad.getText());
+				this.dispose();
 			}
 			catch(NumberFormatException ex)
 			{

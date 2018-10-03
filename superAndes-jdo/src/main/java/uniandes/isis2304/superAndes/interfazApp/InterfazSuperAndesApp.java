@@ -497,13 +497,23 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		DialogoRegistrarProducto registrar = new DialogoRegistrarProducto(this);
 		registrar.setVisible( true );
 	}
-	public void adicionarProducto2(String pNombre, String pMarca, double pPrecioUnitario, String pPresentacion, double pPrecioUnidadMedida, int pCantidadPresentacion, String pUnidadMedida, String pCodigoBarras, String pCalidad, String pFechaVencimiento, String pPeso, String pVolumen)
+	public void adicionarProducto2(String pNombre, String pMarca, double pPrecioUnitario, String pPresentacion, double pPrecioUnidadMedida, int pCantidadPresentacion, String pUnidadMedida, String pCodigoBarras, String pCalidad, Timestamp pFechaVencimiento, String pPeso, String pVolumen)
 	{
 		try
 		{
 			if(!pNombre.equals("") && !pMarca.equals("") && !pPresentacion.equals("") && pPrecioUnitario>0 && !pPresentacion.equals("")&&pPrecioUnidadMedida>0 && pCantidadPresentacion>0 && !pUnidadMedida.equals("") && !pCodigoBarras.equals("") && !pPeso.equals("") && !pVolumen.equals(""))//TODO continuar validaciones
 			{
-				superAndes.adicionarProducto(pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida,pCantidadPresentacion, pCodigoBarras,formatoFecha(pFechaVencimiento), pPeso, pVolumen);
+				Producto registrado = superAndes.adicionarProducto(pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida,pCantidadPresentacion, pCodigoBarras,pFechaVencimiento, pPeso, pVolumen);
+				if(registrado!=null)
+				{
+					JOptionPane.showMessageDialog (this, "Producto registrado", "Agregar producto: exitoso", JOptionPane.INFORMATION_MESSAGE);
+					String resultado = "En adicionarProducto\n\n";
+					resultado += "Producto adicionado exitosamente: " + registrado.getCodigoBarras();
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else
+					JOptionPane.showMessageDialog (this, "Producto no registrado", "Agregar producto: no exitoso", JOptionPane.ERROR_MESSAGE);
 			}
 			else if(!isHexNumber(pCodigoBarras))
 			{
@@ -529,10 +539,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			return false;
 		}
 	}
-	public Date formatoFecha( String cadena ) throws ParseException
+	public java.util.Date formatoFecha( String cadena ) throws ParseException
 	{
 		SimpleDateFormat formato1 = new SimpleDateFormat( "yyyy-MM-dd HH:mm");
-		return (Date)formato1.parse( cadena );
+		return formato1.parse( cadena );
 	}
 	public void buscarProductoCaracteristica() throws HeadlessException, ParseException
 	{
@@ -686,7 +696,12 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	//-------------------------------------------------------------------------------
 	public void adicionarCategoria()
 	{
-		superAndes.adicionarCategoria(JOptionPane.showInputDialog(this, "Registrar categoria","Categoria:", JOptionPane.QUESTION_MESSAGE));
+		Categoria registrado = superAndes.adicionarCategoria(JOptionPane.showInputDialog(this, "Registrar categoria","Categoria:", JOptionPane.QUESTION_MESSAGE));
+		if(registrado!=null)
+			JOptionPane.showMessageDialog (this, "Categoria registrada", "Agregar categoria: exitoso", JOptionPane.INFORMATION_MESSAGE);
+		else
+			JOptionPane.showMessageDialog (this, "Categoria no registrada", "Agregar categoria: no exitoso", JOptionPane.ERROR_MESSAGE);
+
 	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar TIPO
@@ -705,7 +720,12 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 		int result = JOptionPane.showConfirmDialog(null, aux,"Registrar tipo", JOptionPane.OK_CANCEL_OPTION);
 		if (result == JOptionPane.OK_OPTION) {
-			superAndes.adicionarTipoProducto(tipoField.getText(), categoriaField.getText());
+			TipoProducto registrado = superAndes.adicionarTipoProducto(tipoField.getText(), categoriaField.getText());
+			if(registrado!=null)
+				JOptionPane.showMessageDialog (this, "Tipo registrado", "Agregar tipo: exitoso", JOptionPane.INFORMATION_MESSAGE);
+			else
+				JOptionPane.showMessageDialog (this, "Tipo no registrado", "Agregar tipo: no exitoso", JOptionPane.ERROR_MESSAGE);
+
 		}
 	}
 	//-------------------------------------------------------------------------------
@@ -743,7 +763,17 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		{
 			if(!pTipo.equals("") && !pDireccionBodega.equals("") && !pDireccionSucursal.equals("") && !pCiudad.equals("") && pVolumen>0 && pPeso >0)//TODO continuar validaciones
 			{
-				superAndes.adicionarBodega(pTipo,pVolumen,pPeso, pDireccionBodega, pDireccionSucursal, pCiudad);
+				Bodega registrado = superAndes.adicionarBodega(pTipo,pVolumen,pPeso, pDireccionBodega, pDireccionSucursal, pCiudad);
+				if(registrado!=null)
+				{
+					JOptionPane.showMessageDialog (this, "Bodega registrado", "Agregar bodega: exitoso", JOptionPane.INFORMATION_MESSAGE);
+					String resultado = "En adicionarBodega\n\n";
+					resultado += "Bodega adicionada exitosamente: " + registrado.darDireccion();
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else
+					JOptionPane.showMessageDialog (this, "Bodega no registrado", "Agregar bodega: no exitoso", JOptionPane.ERROR_MESSAGE);
 			}
 			else
 			{
@@ -786,7 +816,18 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		{
 			if(!pTipoEstante.equals("") && !pDireccionSucursal.equals("")&& !pCiudad.equals("")&& pVolumen>0 && pPeso>0 && pId>=0 && pNivelAbastecimiento>0)//TODO continuar validaciones
 			{
-				superAndes.adicionarEstante(pTipoEstante,pVolumen, pId,pPeso, pNivelAbastecimiento, pDireccionSucursal, pCiudad);
+				Estante registrado = superAndes.adicionarEstante(pTipoEstante,pVolumen, pId,pPeso, pNivelAbastecimiento, pDireccionSucursal, pCiudad);
+				if(registrado!=null)
+				{
+					JOptionPane.showMessageDialog (this, "Estante registrado", "Agregar estante: exitoso", JOptionPane.INFORMATION_MESSAGE);
+					String resultado = "En adicionarEstante\n\n";
+					resultado += "Estante adicionada exitosamente: " + registrado.darId();
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else
+					JOptionPane.showMessageDialog (this, "Estante no registrado", "Agregar estante: no exitoso", JOptionPane.ERROR_MESSAGE);
+
 			}
 			else
 			{
@@ -919,7 +960,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void darPromocionesMasPopulares()
 	{
 		try
@@ -1141,18 +1182,18 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			}
 		}
 	}
-	
+
 
 	//-----------------------------------------------------------------------
 	// Métodos para manejar VENTAS
 	//-----------------------------------------------------------------------
-	
+
 	public void adicionarVenta()
 	{
 		JTextField minField = new JTextField(15);
 		JTextField maxField = new JTextField(15);
 		JTextField corField = new JTextField(15);
-		
+
 		JPanel aux = new JPanel();
 		aux.add(new JLabel("Código de barras:"));
 		aux.add(minField);
@@ -1162,7 +1203,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		aux.add(Box.createHorizontalStrut(15));
 		aux.add(new JLabel("Correo cliente:"));
 		aux.add(corField);
-		
+
 		int result = JOptionPane.showConfirmDialog(null, aux,"Venta", JOptionPane.OK_CANCEL_OPTION);
 		if (result == JOptionPane.OK_OPTION) 
 		{
@@ -1193,19 +1234,19 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			}
 		}
 	}
-	
+
 	public void dineroSucursalEnRango()
 	{
 		JTextField minField = new JTextField(15);
 		JTextField maxField = new JTextField(15);
-		
+
 		JPanel aux = new JPanel();
 		aux.add(new JLabel("Fecha inicio: (2018-5-6) "));
 		aux.add(minField);
 		aux.add(Box.createHorizontalStrut(15)); // a spacer
 		aux.add(new JLabel("Fecha fin: (2018-5-6) "));
 		aux.add(maxField);
-		
+
 		int result = JOptionPane.showConfirmDialog(null, aux,"Venta", JOptionPane.OK_CANCEL_OPTION);
 		if (result == JOptionPane.OK_OPTION) 
 		{

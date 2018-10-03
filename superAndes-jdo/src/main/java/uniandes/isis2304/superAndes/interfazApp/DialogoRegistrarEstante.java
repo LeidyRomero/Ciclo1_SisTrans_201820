@@ -102,7 +102,7 @@ public class DialogoRegistrarEstante extends JDialog implements ActionListener{
     {
         principal = principalP;
 
-        setLayout( new GridLayout( 7, 2 ) );
+        setLayout( new GridLayout( 8, 2 ) );
         this.setSize( 600, 280 );
         setTitle( "Agregar estante" );
 
@@ -142,6 +142,12 @@ public class DialogoRegistrarEstante extends JDialog implements ActionListener{
         add( lbCiudad );
         add( txtCiudad );
         
+        lbId = new JLabel( "Id:" );
+        txtId = new JTextField( );
+        
+        add( lbId );
+        add( txtId );
+        
         btnRegistrar = new JButton( "Registrar" );
         btnRegistrar.setActionCommand( REGISTRAR );
         btnRegistrar.addActionListener( this );
@@ -166,6 +172,7 @@ public class DialogoRegistrarEstante extends JDialog implements ActionListener{
 				double nivel = Double.parseDouble(txtNivelAbastecimiento.getText());
 				long id = Integer.parseInt(txtId.getText());
 				principal.adicionarEstante2(txtTipo.getText(),volumen,id,peso, nivel,txtDireccionSucursal.getText(), txtCiudad.getText());
+				this.dispose();
 			}
 			catch(NumberFormatException ex)
 			{
