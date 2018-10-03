@@ -1753,6 +1753,31 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	public List<Bodega> buscarBodegasSucursal(String pDireccion, String pCiudad)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Bodega> q = sqlBodega.buscarBodegasSucursal(manager, pDireccion, pCiudad);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
 	public long eliminarBodega(String direccionBodega, String direccionSucursal,String ciudad)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
@@ -1896,6 +1921,31 @@ public class PersistenciaSuperAndes {
 		{
 			t.begin();
 			List<Estante> q = sqlEstante.buscarEstantes(manager);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Estante> buscarEstantesSucursal(String pDireccion, String pCiudad)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Estante> q = sqlEstante.buscarEstantesSucursal(manager, pDireccion, pCiudad);
 			t.commit();
 			return q;
 		}

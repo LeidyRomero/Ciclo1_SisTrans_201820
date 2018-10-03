@@ -337,11 +337,11 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar la bodega "+ pDireccionBodega+", "+pDireccionSucursal+","+pCiudad);
 		return bodega;
 	}
-	public String buscarIndiceBodega()
+	public String buscarIndiceBodega(String pDireccion, String pCiudad)
 	{
 		String mensaje = "El indice de ocupación ";
 		Log.info("Iniciando calculo de indice de bodega ");
-		List<Bodega> bodegas = pp.buscarBodegas();
+		List<Bodega> bodegas = pp.buscarBodegasSucursal(pDireccion, pCiudad);
 		Log.info("Saliendo de calculo de indice de bodega ");
 		for(int i = 0;i<bodegas.size();i++)
 		{
@@ -406,11 +406,11 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar el estante "+ pId);
 		return estante;
 	}
-	public String buscarIndiceEstante()
+	public String buscarIndiceEstante(String pDireccion, String pCiudad)
 	{
 		String mensaje = "El indice de ocupación ";
 		Log.info("Iniciando calculo de indice de estante ");
-		List<Estante> estantes = pp.buscarEstantes();
+		List<Estante> estantes = pp.buscarEstantesSucursal(pDireccion, pCiudad);
 		Log.info("Saliendo de calculo de indice de estante ");
 		for(int i = 0;i<estantes.size();i++)
 		{

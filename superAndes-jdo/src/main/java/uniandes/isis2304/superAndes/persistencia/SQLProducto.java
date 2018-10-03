@@ -148,7 +148,7 @@ class SQLProducto
 	//Caracteristica 10:
 	public List<Producto> darProductosVentasSuperioresAXEnRangoFechas (PersistenceManager manager, double pVentas, Date fechaInicial, Date fechaFinal)
 	{
-		Query q = manager.newQuery(SQL, "SELECT * FROM "+ "(SELECT SUM(precio_total), codigo_barras suma FROM " +"(SELECT * FROM "+persistencia.getSqlComprados()+","+persistencia.getSqlFactura()+" WHERE A_FACTURA.ID_FACTURA = A_COMPRADOS.ID_FACTURA AND A_FACTURA.FECHA BETWEEN ? AND ?)"+" GROUP BY CODIGO_BARRAS HAVING SUM(precio_total) > ? ) comprados , "+persistencia.getSqlProducto()+" WHERE A_PRODUCTO.COD_BARRAS = comprados.codigo_barras");
+		Query q = manager.newQuery(SQL, "SELECT * FROM "+ "(SELECT COUNT(cantidad) numeroUnidades, codigo_barras FROM " +"(SELECT * FROM "+persistencia.getSqlComprados()+","+persistencia.getSqlFactura()+" WHERE A_FACTURA.ID_FACTURA = A_COMPRADOS.ID_FACTURA AND A_FACTURA.FECHA BETWEEN ? AND ?)"+" GROUP BY CODIGO_BARRAS HAVING COUNT(cantidad) > ? ) comprados , "+persistencia.getSqlProducto()+" WHERE A_PRODUCTO.COD_BARRAS = comprados.codigo_barras");
 		q.setParameters(fechaInicial, fechaFinal, pVentas);
 		q.setResultClass(Producto.class);
 		return (List<Producto>) q.executeList();
