@@ -9,16 +9,16 @@ public class Comprados implements VOComprados{
 	private String codigoBarras;
 	private int cantidad;
 	private double precioTotal;
-	private String idFactura;
+	private long idFactura;
 
 	public Comprados()
 	{
 		codigoBarras = "";
 		cantidad = 0;
 		precioTotal=0;
-		idFactura = "";
+		idFactura = 0;
 	}
-	public Comprados(String pCodigoBarras, int pCantidad, double pPrecioTotal, String pIdFactura)
+	public Comprados(String pCodigoBarras, int pCantidad, double pPrecioTotal, long pIdFactura)
 	{
 		codigoBarras = pCodigoBarras;
 		cantidad = pCantidad;
@@ -30,7 +30,7 @@ public class Comprados implements VOComprados{
 		return codigoBarras;
 	}
 
-	public String darIdFactura() {
+	public long darIdFactura() {
 		return idFactura;
 	}
 
@@ -42,8 +42,9 @@ public class Comprados implements VOComprados{
 		return precioTotal;
 	}
 	//TODO completar
-	public String toString()
-	{
-		return "";
+	@Override
+	public String toString() {
+		return "Comprados [codigoBarras=" + codigoBarras + ", cantidad=" + cantidad + ", precioTotal=" + precioTotal
+				+ ", idFactura=" + idFactura + "]";
 	}
 }

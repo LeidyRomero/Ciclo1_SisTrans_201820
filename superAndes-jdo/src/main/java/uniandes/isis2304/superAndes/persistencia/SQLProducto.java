@@ -7,6 +7,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import oracle.net.aso.p;
+import uniandes.isis2304.superAndes.negocio.Bodega;
 import uniandes.isis2304.superAndes.negocio.Estante;
 import uniandes.isis2304.superAndes.negocio.Producto;
 
@@ -55,6 +56,18 @@ class SQLProducto
 		q.setParameters(pCodigoBarras);
 		q.setResultClass(Producto.class);
 		return (Producto) q.executeUnique();
+	}
+	public List<Producto> buscarProductos(PersistenceManager manager)
+	{
+		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlProducto());
+		q.setResultClass(Producto.class);
+		return (List<Producto>) q.executeList();
+	}
+	public long eliminarProducto(PersistenceManager manager, String pCodigo)
+	{
+		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlProducto()+ " WHERE cod_barras = ?");
+		add.setParameters();
+		return (long) add.executeUnique();
 	}
 	//------------------------------------------------------------------------
 	//TODO RFC4 - Mostrar los productos que cumplen con cierta caracteristica

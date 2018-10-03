@@ -1,7 +1,11 @@
 package uniandes.isis2304.superAndes.persistencia;
 
+import java.util.List;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
+import uniandes.isis2304.superAndes.negocio.Producto;
 import uniandes.isis2304.superAndes.negocio.TipoProducto;
 
 /**
@@ -26,11 +30,23 @@ class SQLTipoProducto
 		q.setParameters(pNombreTipo, pNombreCategoria);
 		return (long) q.executeUnique();
 	}
+	public List<TipoProducto> buscarTipos(PersistenceManager manager)
+	{
+		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlTipoProducto());
+		q.setResultClass(TipoProducto.class);
+		return (List<TipoProducto>) q.executeList();
+	}
 	public TipoProducto buscarNombre(PersistenceManager manager,String pNombre)
 	{
 		Query q = manager.newQuery(SQL, "SELECT nombre_tipo FROM "+persistencia.getSqlTipoProducto()+"WHERE nombre_tipo = ?");
 		q.setResultClass(TipoProducto.class);
 		q.setParameters(pNombre);
 		return (TipoProducto) q.executeUnique();
+	}
+	public long eliminarTipo(PersistenceManager manager, String pTipo)
+	{
+		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlTipoProducto()+ " WHERE nombre_tipo = ?");
+		add.setParameters(pTipo);
+		return (long) add.executeUnique();
 	}
 }

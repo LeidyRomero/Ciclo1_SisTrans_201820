@@ -313,48 +313,396 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		}
 		return resp;
 	}
-	
-	//BORRADOR
-//	public void demoX ( )
-//	{
-//		try 
-//		{
-//			// Ejecución de la demo y recolección de los resultados
-//			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-//			VOX x1 = superAndes.adicionarX();
-//
-//			List <VOX> lista = superAndes.darVOX ();
-//
-//			long xsEliminadas = superAndes.eliminarX();
-//
-//			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
-//			String resultado = "Demo de creación y listado de \n\n";
-//			resultado += "\n\n************ Generando datos de prueba ************ \n";
-//			resultado += "Adicionado la : " + x1 + "\n";
-//			resultado += "\n\n************ Ejecutando la demo ************ \n";
-//			resultado += "\n" + listarYs (lista);
-//			resultado += "\n\n************ Limpiando la base de datos ************ \n";
-//			resultado += xsEliminadas + "  eliminados\n";
-//			resultado += "\n Demo terminada";
-//
-//			panelDatos.actualizarInterfaz(resultado);
-//		} 
-//		catch (Exception e) 
-//		{
-//			String resultado = generarMensajeError(e);
-//			panelDatos.actualizarInterfaz(resultado);
-//		}
-//	}
-//	private String listarX (List<VOX> lista) 
-//	{
-//		String resp = "Las  existentes son:\n";
-//		int i = 1;
-//		for (VOX x : lista)
-//		{
-//			resp += i++ + ". " + x.toString() + "\n";
-//		}
-//		return resp;
-//	}
+	//----------------------------------------------------------------------------------------------
+	// ESTANTE
+	//----------------------------------------------------------------------------------------------
+	public void demoEstante ( )
+	{
+		try 
+		{
+			// Ejecución de la demo y recolección de los resultados
+			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
+			VOEstante estante1 = superAndes.adicionarEstante("Congelados", 2000, 1, 50, 10, "Cl. 39 #20A-04", "Bogota");
+
+			List <VOEstante> lista = superAndes.darVOEstante();
+
+			long estantesEliminados = superAndes.eliminarEstante(1);
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de estates\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado el estante: " + estante1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarEstantes (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += estantesEliminados + "  eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private String listarEstantes (List<VOEstante> lista) 
+	{
+		String resp = "Las  existentes son:\n";
+		int i = 1;
+		for (VOEstante estante : lista)
+		{
+			resp += i++ + ". " + estante.toString() + "\n";
+		}
+		return resp;
+	}
+
+	//----------------------------------------------------------------------------------------------
+	// PRODUCTO
+	//----------------------------------------------------------------------------------------------
+	public void demoProducto ( )
+	{
+		try 
+		{
+			// Ejecución de la demo y recolección de los resultados
+			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
+			VOProducto producto1 = superAndes.adicionarProducto("papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32");
+
+			List <VOProducto> lista = superAndes.darVOProducto();
+
+			long productosEliminados = superAndes.eliminarProducto("FFFF");
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de productos\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado el poducto: " + producto1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarProductos (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += productosEliminados + " productos eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private String listarProductos (List<VOProducto> lista) 
+	{
+		String resp = "Los productos existentes son:\n";
+		int i = 1;
+		for (VOProducto producto: lista)
+		{
+			resp += i++ + ". " + producto.toString() + "\n";
+		}
+		return resp;
+	}
+	//----------------------------------------------------------------------------------------------
+	// CATEGORIA
+	//----------------------------------------------------------------------------------------------
+	public void demoCategoria ( )
+	{
+		try 
+		{
+			// Ejecución de la demo y recolección de los resultados
+			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
+			VOCategoria categoria1 = superAndes.adicionarCategoria("Congelados");
+
+			List <VOCategoria> lista = superAndes.darVOCategoria ();
+
+			long categoriasEliminadas = superAndes.eliminarCategoria("Congelados");
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de categorias\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado la categoria: " + categoria1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarCategorias (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += categoriasEliminadas + " categorias eliminadas\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private String listarCategorias (List<VOCategoria> lista) 
+	{
+		String resp = "Las  existentes son:\n";
+		int i = 1;
+		for (VOCategoria categoria : lista)
+		{
+			resp += i++ + ". " + categoria.toString() + "\n";
+		}
+		return resp;
+	}
+	//----------------------------------------------------------------------------------------------
+	// TIPO PRODUCTO
+	//----------------------------------------------------------------------------------------------
+	public void demoTipoProducto ( )
+	{
+		try 
+		{
+			// Ejecución de la demo y recolección de los resultados
+			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
+			VOTipoProducto tipoProducto1 = superAndes.adicionarTipoProducto("Galletas", "No perecedero");
+
+			List <VOTipoProducto> lista = superAndes.darVOTipoProducto ();
+
+			long productosEliminadas = superAndes.eliminarTipoProducto("Galletas");
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de tipos\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado el tipo: " + tipoProducto1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarTipoProductos (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += productosEliminadas + " tipos eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private String listarTipoProductos (List<VOTipoProducto> lista) 
+	{
+		String resp = "Las  existentes son:\n";
+		int i = 1;
+		for (VOTipoProducto tipoProducto : lista)
+		{
+			resp += i++ + ". " + tipoProducto.toString() + "\n";
+		}
+		return resp;
+	}
+	//----------------------------------------------------------------------------------------------
+	// CATEGORIA PRODUCTOS
+	//----------------------------------------------------------------------------------------------
+	public void demoProductoCategoria ( )
+	{
+		try 
+		{
+			// Ejecución de la demo y recolección de los resultados
+			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
+			VOProductoCategoria categoriaProductos1 = superAndes.adicionarProductoCategoria("Congelados", "FFFFFFF");
+
+			List <VOProductoCategoria> lista = superAndes.darVOProductoCategoria ();
+
+			long categoriaProductosEliminados = superAndes.eliminarProductoCategoria("FFFFFFF", "Congelados");
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de categorias productos\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado categoria producto: " + categoriaProductos1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarProductoCategorias (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += categoriaProductosEliminados + " categorias productos eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private String listarProductoCategorias (List<VOProductoCategoria> lista) 
+	{
+		String resp = "Los productos categoria existentes son:\n";
+		int i = 1;
+		for (VOProductoCategoria productoCategoria : lista)
+		{
+			resp += i++ + ". " + productoCategoria.toString() + "\n";
+		}
+		return resp;
+	}
+	//----------------------------------------------------------------------------------------------
+	// PEDIDO PRODUCTO
+	//----------------------------------------------------------------------------------------------
+	public void demoPedidoProducto ( )
+	{
+		try 
+		{
+			// Ejecución de la demo y recolección de los resultados
+			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
+			VOPedidoProducto pedidoProducto1 = superAndes.adicionarPedidoProducto("FFFFFFF",2, 1000, 1000);
+
+			List <VOPedidoProducto> lista = superAndes.darVOPedidoProducto ();
+
+			long pedidoProductosEliminadas = superAndes.eliminarPedidoProducto(2);
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de pedidos productos \n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado el pedido producto: " + pedidoProducto1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarPedidoProductos (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += pedidoProductosEliminadas + " pedidos productos eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private String listarPedidoProductos (List<VOPedidoProducto> lista) 
+	{
+		String resp = "Los pedidos productos existentes son:\n";
+		int i = 1;
+		for (VOPedidoProducto pedidoProducto : lista)
+		{
+			resp += i++ + ". " + pedidoProducto.toString() + "\n";
+		}
+		return resp;
+	}
+	//----------------------------------------------------------------------------------------------
+	// EMPRESA
+	//----------------------------------------------------------------------------------------------
+	public void demoEmpresa ( )
+	{
+		try 
+		{
+			// Ejecución de la demo y recolección de los resultados
+			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
+			VOEmpresa empresa1 = superAndes.adicionarEmpresa("KR. 100 #10-30", 11111111, "A@hotmail.com");
+
+			List <VOEmpresa> lista = superAndes.darVOEmpresa ();
+
+			long empresasEliminadas = superAndes.eliminarEmpresa("A@hotmail.com");
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de empresas\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado la empresa: " + empresa1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarEmpresas (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += empresasEliminadas + " empresas eliminadas\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private String listarEmpresas (List<VOEmpresa> lista) 
+	{
+		String resp = "Las empresas existentes son:\n";
+		int i = 1;
+		for (VOEmpresa empresa : lista)
+		{
+			resp += i++ + ". " + empresa.toString() + "\n";
+		}
+		return resp;
+	}
+	//----------------------------------------------------------------------------------------------
+	// PERSONA NATURAL
+	//----------------------------------------------------------------------------------------------
+	public void demoPersonaNatural ( )
+	{
+		try 
+		{
+			// Ejecución de la demo y recolección de los resultados
+			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
+			VOPersonaNatural personaNatural1 = superAndes.adicionarPersonaNatural("123334454", "B@hotmail.com");
+
+			List <VOPersonaNatural> lista = superAndes.darVOPersonaNatural();
+
+			long personaNaturalsEliminadas = superAndes.eliminarPersonaNatural("B@hotmail.com");
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de personas\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado la pesona: " + personaNatural1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarPersonasNatural (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += personaNaturalsEliminadas + " personas eliminadas\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private String listarPersonasNatural (List<VOPersonaNatural> lista) 
+	{
+		String resp = "Las  existentes son:\n";
+		int i = 1;
+		for (VOPersonaNatural personaNatural : lista)
+		{
+			resp += i++ + ". " + personaNatural.toString() + "\n";
+		}
+		return resp;
+	}
+	//----------------------------------------------------------------------------------------------
+	// COMPRADOS
+	//----------------------------------------------------------------------------------------------
+	public void demoComprados( )
+	{
+		try 
+		{
+			// Ejecución de la demo y recolección de los resultados
+			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
+			VOComprados comprados1 = superAndes.adicionarComprados("FFFF", 10, 5000.0, 2);
+
+			List <VOComprados> lista = superAndes.darVOComprados ();
+
+			long compradosEliminadas = superAndes.eliminarComprados("FFFF", 2);
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de comprados\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado compra : " + comprados1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarComprados (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += compradosEliminadas + "  eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private String listarComprados (List<VOComprados> lista) 
+	{
+		String resp = "Las  existentes son:\n";
+		int i = 1;
+		for (VOComprados comprados : lista)
+		{
+			resp += i++ + ". " + comprados.toString() + "\n";
+		}
+		return resp;
+	}
+
+
 	//-------------------------------------------------------------------------------------
 	//* 			Métodos administrativos
 	//--------------------------------------------------------------------------------------
