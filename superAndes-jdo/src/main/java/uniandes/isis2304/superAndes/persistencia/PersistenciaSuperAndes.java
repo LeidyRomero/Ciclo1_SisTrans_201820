@@ -355,6 +355,39 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
+	public List<Proveedor> buscarProveedores()
+	{
+		return sqlProveedor.darProveedores(managerFactory.getPersistenceManager());
+	}
+
+	public long eliminarProveedorPorNit(int nitProveedor)
+
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasEliminadas = sqlProveedor.eliminarProveedorPorNit(pm, nitProveedor);
+			tx.commit();
+
+			Log.trace("Eliminación proveedor: " + nitProveedor + ": "+tuplasEliminadas);
+			return tuplasEliminadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar los CLIENTES
 	//---------------------------------------------------------------------
@@ -393,8 +426,46 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
+	public List<Cliente> buscarClientes()
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		return sqlCliente.darClientes(pm);
+	}
+
+	public long eliminarClientePorCorreo(String correo)
+
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasEliminadas = sqlCliente.eliminarClientePorCorreo(pm, correo);
+			tx.commit();
+
+			Log.trace("Eliminación cliente: " + correo + ": "+tuplasEliminadas);
+			return tuplasEliminadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar las SUCURSALES
+	//---------------------------------------------------------------------
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar los SUCURSALES
 	//---------------------------------------------------------------------
 	public Sucursal adicionarSucursal(String tamanio, String direccion, String ciudad, String nombre)
 	{
@@ -455,6 +526,40 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las PROMOCIONES
 	//---------------------------------------------------------------------
+	public List<Sucursal> buscarSucursales()
+	{
+		return sqlSucursal.darSucursales(managerFactory.getPersistenceManager());
+	}
+	public long eliminarSucursalPorDireccionYCiudad(String direccion, String ciudad)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasEliminadas = sqlSucursal.eliminarSucursalPorDireccionYCiudad(pm, direccion, ciudad);
+			tx.commit();
+
+			Log.trace("Eliminación sucursal: " +direccion+", "+ciudad + ": "+tuplasEliminadas);
+			return tuplasEliminadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	//---------------------------------------------------------------------
+	// Métodos para manejar los PROMOCIÓN
+	//---------------------------------------------------------------------
 	public Promocion adicionarPromocion(Timestamp fechaInicio, Timestamp fechaFin, String descripcion, String codBarras, int uniDisponibles, int uniVendidas)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -509,7 +614,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	public void finalizarPromocionesPendientes()
 	{
 		// Cada vez que inicia el sistema debe verificar si hay promociones por finalizar
@@ -520,7 +625,7 @@ public class PersistenciaSuperAndes {
 			sqlPromocion.finalizarPromocion(pm, actual.getIdPromocion());
 		}
 	}
-	
+
 	public List<Promocion> darPromocionesMasPopulares()
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -549,8 +654,44 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
+	public List<Promocion> darPromociones()
+	{
+		return sqlPromocion.darPromociones(managerFactory.getPersistenceManager());
+	}
+
+	public long eliminarPromocionPorId(long idPromocion)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasEliminadas = sqlPromocion.eliminarPromocionPorId(pm, idPromocion);
+			tx.commit();
+
+			Log.trace("Insercción promocion: " + idPromocion +": "+tuplasEliminadas);
+			return tuplasEliminadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar las ORDENES DE PEDIDO
+	//---------------------------------------------------------------------
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar los ORDEN PEDIDO
 	//---------------------------------------------------------------------
 	public OrdenPedido adicionarOrdenPedido(Timestamp fechaEsperada, int nitProveedor, String ciudad, String direccionSucursal, String direccionBodega)
 	{
@@ -580,7 +721,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	public OrdenPedido llegadaOrdenPedido(long idPedido, String calificacion)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -612,8 +753,45 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
+	public List<OrdenPedido> darPedidos()
+	{
+		return sqlOrdenPedido.darPedidos(managerFactory.getPersistenceManager());
+	}
+
+	public long eliminarPedidoPorId(long idPedido)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasEliminadas = sqlOrdenPedido.eliminarPedidoPorId(pm, idPedido);
+			tx.commit();
+
+			Log.trace("Eliminación pedido: " + idPedido +": "+tuplasEliminadas);
+			return tuplasEliminadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar las FACTURAS
+	//---------------------------------------------------------------------
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar los FACTURA
 	//---------------------------------------------------------------------
 	public Factura adicionarFactura(double costoTotal, Timestamp fecha)
 	{
@@ -646,6 +824,10 @@ public class PersistenciaSuperAndes {
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar las CANTIDADES EN ESTANTE
+	//---------------------------------------------------------------------
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar los CANTIDAD EN ESTANTES
 	//---------------------------------------------------------------------
 	public CantidadEnEstantes adicionarCantidadEnEstante(String codigoBarras, long idEstante, int cantidadActual, int cantidadMinima)
 	{
@@ -704,6 +886,10 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las PRODUCTOS OFRECIDOS
 	//---------------------------------------------------------------------
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar los PRODUCTOS OFRECIDOS
+	//---------------------------------------------------------------------
 	public ProductosOfrecidos adicionarProductosOfrecidos(String codigoBarras, String direccionSucursal, String ciudad)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -735,6 +921,10 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las SUCURSAL FACTURAS
 	//---------------------------------------------------------------------
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar los SUCURSAL FACTURA
+	//---------------------------------------------------------------------
 	public SucursalFactura adicionarSucursalFactura(long idFactura, String direccion, String ciudad)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -762,7 +952,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	public List<String> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -790,10 +980,13 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
- 
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar los HISTORIALES COMPRAS
+	//---------------------------------------------------------------------
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar los HISTORIAL COMPRAS
 	//---------------------------------------------------------------------
 	public HistorialCompras adicionarHistorialCompra(String correo, long idFactura)
 	{
@@ -826,6 +1019,10 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar PROVEEN
 	//---------------------------------------------------------------------
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar los PROVEEN
+	//---------------------------------------------------------------------
 	public Proveen adicionarProveen(int nitProveedor, String codigoBarras)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -856,6 +1053,10 @@ public class PersistenciaSuperAndes {
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar SUCURSAL PROMOCIONES
+	//---------------------------------------------------------------------
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar los SUCURSAL PROMOCIONES
 	//---------------------------------------------------------------------
 	public SucursalPromociones adicionarSucursalPromociones(long idPromocion, String direccion, String ciudad)
 	{
@@ -888,6 +1089,7 @@ public class PersistenciaSuperAndes {
 	//------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTOS
 	//------------------------------------------------------------------
+
 	public Producto adicionarProducto(String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, String pCodigoBarras, Timestamp pFechaVencimiento, String pPeso, String pVolumen)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();

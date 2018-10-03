@@ -54,6 +54,12 @@ class SQLCantidadEnEstantes
         return (long) q.executeUnique();
 	}
 	
+	/**
+	 * 
+	 * @param manager
+	 * @param idEstante
+	 * @return
+	 */
 	public int buscarCantidadActual(PersistenceManager manager, long idEstante)
 	{
 		Query q = manager.newQuery(SQL, "SELECT cantidad_actual FROM " + persistencia.getSqlCantidadEnEstantes()+" WHERE id_estante = ?");
@@ -62,6 +68,14 @@ class SQLCantidadEnEstantes
 		return (Integer) q.executeUnique();
 	}
 	
+	/**
+	 * 
+	 * @param manager
+	 * @param ciudad
+	 * @param direccion
+	 * @param codigoBarras
+	 * @return
+	 */
 	public int buscarCantidadActual(PersistenceManager manager, String ciudad, String direccion, String codigoBarras)
 	{
 		Query q = manager.newQuery(SQL, "SELECT SUM(cant.cantidad_actual) "

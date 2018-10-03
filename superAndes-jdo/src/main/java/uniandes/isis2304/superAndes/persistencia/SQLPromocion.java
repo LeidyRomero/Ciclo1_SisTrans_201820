@@ -131,4 +131,28 @@ class SQLPromocion
 		return (List<Promocion>) q.executeList();
 	}
 	
+	/**
+	 * 
+	 * @param pm
+	 * @return
+	 */
+	public List<Promocion> darPromociones (PersistenceManager pm) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlPromocion());
+		q.setResultClass(Promocion.class);
+		return (List<Promocion>) q.executeList();
+	}
+	
+	/**
+	 * 
+	 * @param pm
+	 * @param idPromocion
+	 * @return
+	 */
+	public long eliminarPromocionPorId(PersistenceManager pm, long idPromocion)
+	{
+		 Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlPromocion() + " WHERE id_promocion = ?");
+	     q.setParameters(idPromocion);
+	     return (long) q.executeUnique();
+	}
 }
