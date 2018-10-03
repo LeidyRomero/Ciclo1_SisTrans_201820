@@ -27,7 +27,7 @@ public class CantidadEnEstantes implements VOCantidadEnEstantes {
 	/**
 	 * Código de barras del producto
 	 */
-	private int codigoBarrasProducto;
+	private String codigoBarrasProducto;
 	
 	/**
 	 * Id del estante
@@ -44,7 +44,7 @@ public class CantidadEnEstantes implements VOCantidadEnEstantes {
 	{
 		cantidadActual = 0;
 		cantidadMinima = 0;
-		codigoBarrasProducto = 0;
+		codigoBarrasProducto = null;
 		idEstante = 0;
 	}
 	
@@ -55,7 +55,7 @@ public class CantidadEnEstantes implements VOCantidadEnEstantes {
 	 * @param pCodigoBarras Codigo de barras del producto. pCodigoBarras != null && pCodigoBarras >= 0
 	 * @param pIdEstante Id del estante. pIdEstante != null && pIdEstante >= 0
 	 */
-	public CantidadEnEstantes(int pCantidadActual, int pCantidadMinima, int pCodigoBarras, long pIdEstante)
+	public CantidadEnEstantes(int pCantidadActual, int pCantidadMinima, String pCodigoBarras, long pIdEstante)
 	{
 		cantidadActual = pCantidadActual;
 		cantidadMinima = pCantidadMinima;
@@ -100,7 +100,7 @@ public class CantidadEnEstantes implements VOCantidadEnEstantes {
 	/**
 	 * Retorna el código de barras del producto.
 	 */
-	public int getCodigoBarrasProducto() {
+	public String getCodigoBarrasProducto() {
 		return codigoBarrasProducto;
 	}
 
@@ -108,7 +108,7 @@ public class CantidadEnEstantes implements VOCantidadEnEstantes {
 	 * Modifica el código de barras del producto.
 	 * @param codigoBarrasProducto Nuevo código de barras.
 	 */
-	public void setCodigoBarrasProducto(int codigoBarrasProducto) {
+	public void setCodigoBarrasProducto(String codigoBarrasProducto) {
 		this.codigoBarrasProducto = codigoBarrasProducto;
 	}
 

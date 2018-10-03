@@ -3,6 +3,9 @@ package uniandes.isis2304.superAndes.persistencia;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.superAndes.negocio.Proveedor;
+import uniandes.isis2304.superAndes.negocio.Sucursal;
+
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto SUCURSAL de SuperAndes
  * 
@@ -53,5 +56,20 @@ class SQLSucursal
         Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlSucursal() + "(tamanio, direccion_sucursal, ciudad, nombre_sucursal) values (?, ?, ?, ?)");
         q.setParameters(tamanio, direccion, ciudad, nombre);
         return (long) q.executeUnique();
+	}
+	
+	/**
+	 * 
+	 * @param pm
+	 * @param direccion
+	 * @param ciudad
+	 * @return
+	 */
+	public Sucursal darSucursalPorDireccionYCiudad (PersistenceManager pm, String direccion, String ciudad) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlSucursal() + " WHERE ciudad = ? AND direccion_sucursal = ?");
+		q.setResultClass(Sucursal.class);
+		q.setParameters(ciudad, direccion);
+		return (Sucursal) q.executeUnique();
 	}
 }

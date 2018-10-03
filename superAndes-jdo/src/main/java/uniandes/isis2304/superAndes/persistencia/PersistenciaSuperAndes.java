@@ -64,6 +64,7 @@ public class PersistenciaSuperAndes {
 	private SQLSucursal sqlSucursal;
 	private SQLSucursalFactura sqlSucursalFactura;
 	private SQLTipoProducto sqlTipoProducto;
+	private SQLSucursalPromociones sqlSucursalPromociones;
 
 
 
@@ -98,6 +99,7 @@ public class PersistenciaSuperAndes {
 		tablas.add("TIPO_PRODUCTO");
 		tablas.add("PRODUCTO_CATEGORIA");
 		tablas.add("PRODUCTOS_OFRECIDOS");
+		tablas.add("PROMOCIONES");
 	}
 
 	private PersistenciaSuperAndes(JsonObject tableConfig)
@@ -182,6 +184,7 @@ public class PersistenciaSuperAndes {
 		sqlTipoProducto = new SQLTipoProducto(this);
 		sqlProductoCategoria = new SQLProductoCategoria(this);
 		sqlProductosOfrecidos = new SQLProductosOfrecidos(this);
+		sqlSucursalPromociones = new SQLSucursalPromociones(this);
 		sqlUtil = new SQLUtil(this);
 	}
 	public String darSecuenciaSuperAndes()
@@ -275,6 +278,11 @@ public class PersistenciaSuperAndes {
 
 	public String getSqlProductosOfrecidos() {
 		return tablas.get(22);
+	}
+	
+	public String getSqlSucursalPromociones()
+	{
+		return tablas.get(23);
 	}
 
 	/**
@@ -415,11 +423,39 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+	
+	public Sucursal buscarSucursal(String direccion, String ciudad)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			Sucursal buscada = sqlSucursal.darSucursalPorDireccionYCiudad(pm, direccion, ciudad);
+			tx.commit();
+
+			Log.trace("Consulta sucursal: " + buscada.toString());
+			return buscada;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar las PROMOCIONES
 	//---------------------------------------------------------------------
-	public Promocion adicionarPromocion(Timestamp fechaInicio, Timestamp fechaFin, String descripcion, int codBarras, int uniDisponibles, int uniVendidas)
+	public Promocion adicionarPromocion(Timestamp fechaInicio, Timestamp fechaFin, String descripcion, String codBarras, int uniDisponibles, int uniVendidas)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -515,7 +551,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las CANTIDADES EN ESTANTE
 	//---------------------------------------------------------------------
-	public CantidadEnEstantes adicionarCantidadEnEstante(int codigoBarras, long idEstante, int cantidadActual, int cantidadMinima)
+	public CantidadEnEstantes adicionarCantidadEnEstante(String codigoBarras, long idEstante, int cantidadActual, int cantidadMinima)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -572,7 +608,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las PRODUCTOS OFRECIDOS
 	//---------------------------------------------------------------------
-	public ProductosOfrecidos adicionarProductosOfrecidos(int codigoBarras, String direccionSucursal, String ciudad)
+	public ProductosOfrecidos adicionarProductosOfrecidos(String codigoBarras, String direccionSucursal, String ciudad)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -665,7 +701,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar PROVEEN
 	//---------------------------------------------------------------------
-	public Proveen adicionarProveen(int nitProveedor, int codigoBarras)
+	public Proveen adicionarProveen(int nitProveedor, String codigoBarras)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();

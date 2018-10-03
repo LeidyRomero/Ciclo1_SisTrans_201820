@@ -37,7 +37,7 @@ public class Promocion implements VOPromocion {
 	/**
 	 * Codigo de barras del procudto en promoción.
 	 */
-	private int codigoBarras;
+	private String codigoBarras;
 	
 	/**
 	 * Unidades vendidas
@@ -63,7 +63,7 @@ public class Promocion implements VOPromocion {
 	 * @param unidadesDisponibles Unidades disponibles. unidadesDisponibles > 0
 	 * @param unidadesVendidas Unidades vendidas. unidadesVendidas > 0
 	 */
-	public Promocion(Timestamp fechaInicial, Timestamp fechaFinal, String descripcion, long idPromocion, int codigoBarras, int unidadesVendidas, int unidadesDisponibles) 
+	public Promocion(Timestamp fechaInicial, Timestamp fechaFinal, String descripcion, long idPromocion, String codigoBarras, int unidadesVendidas, int unidadesDisponibles) 
 	{
 		this.fechaInicial = fechaInicial;
 		this.fechaFinal = fechaFinal;
@@ -83,7 +83,7 @@ public class Promocion implements VOPromocion {
 		this.fechaFinal = null;
 		this.descripcion = null;
 		this.idPromocion = 0;
-		this.codigoBarras = 0;
+		this.codigoBarras = null;
 		this.unidadesDisponibles = 0;
 		this.unidadesVendidas = 0;
 	}
@@ -155,7 +155,7 @@ public class Promocion implements VOPromocion {
 	/**
 	 * Retorna el código de barras.
 	 */
-	public int getCodigoBarras() {
+	public String getCodigoBarras() {
 		return codigoBarras;
 	}
 
@@ -163,7 +163,7 @@ public class Promocion implements VOPromocion {
 	 * Modifica el código de barras
 	 * @param codigoBarras Nuevo código
 	 */
-	public void setCodigoBarras(int codigoBarras) {
+	public void setCodigoBarras(String codigoBarras) {
 		this.codigoBarras = codigoBarras;
 	}
 	

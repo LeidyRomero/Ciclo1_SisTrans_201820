@@ -34,7 +34,7 @@ public interface VOPromocion {
 	/**
 	 *@return El código de barras.
 	 */
-	public int getCodigoBarras() ;
+	public String getCodigoBarras() ;
 	
 	/**
 	 * @return Las unidades disponibles

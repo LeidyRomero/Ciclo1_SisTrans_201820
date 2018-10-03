@@ -49,7 +49,7 @@ class SQLPromocion
 	 * @param codBarras - Código de barras del producto en promoción
 	 * @return El número de tuplas insertadas
 	 */
-	public long adicionarPromocion (PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin, String descripcion, int codBarras, long idPromocion, int uniVendidas, int uniDisponibles) 
+	public long adicionarPromocion (PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin, String descripcion, String codBarras, long idPromocion, int uniVendidas, int uniDisponibles) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlPromocion() + "(fecha_inicial, fecha_final, descripcion, codigo_barras, id_promocion, uni_vendidas, uni_disponibles) values (?, ?, ?, ?, ?, ?, ?)");
         q.setParameters(fechaInicio, fechaFin, descripcion, codBarras, idPromocion, uniVendidas, uniDisponibles);

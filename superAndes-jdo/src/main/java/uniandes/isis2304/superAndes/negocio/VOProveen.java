@@ -17,7 +17,7 @@ public interface VOProveen {
 	/**
 	 * @return Código de barras del producto
 	 */
-	public int getCodigoBarras();
+	public String getCodigoBarras();
 
 	/**
 	 * @return Una cadena con la información básica de PROVEEN.

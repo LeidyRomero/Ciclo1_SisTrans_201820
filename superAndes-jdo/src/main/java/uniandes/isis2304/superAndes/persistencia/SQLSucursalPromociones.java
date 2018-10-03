@@ -1,14 +1,15 @@
 package uniandes.isis2304.superAndes.persistencia;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto PROVEEN de SuperAndes
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto SUCURSAL PROMOCIONES de SuperAndes
  * 
  * @author María Ocampo - mj.ocampov
  */
-class SQLProveen
-{
+public class SQLSucursalPromociones {
+
 	//------------------------------------------------------------------
 	// CONSTANTES
 	//------------------------------------------------------------------
@@ -32,16 +33,15 @@ class SQLProveen
 	 * Constructor
 	 * @param persistencia - El Manejador de persistencia de la aplicación
 	 */
-	public SQLProveen(PersistenciaSuperAndes persistencia) 
+	public SQLSucursalPromociones(PersistenciaSuperAndes persistencia) 
 	{
 		this.persistencia = persistencia;
-	}
+	}	
 	
-	public long adicionarProveen (PersistenceManager pm, int nitProveedor, String codigoBarras) 
+	public long adicionarSucursalPromociones (PersistenceManager pm, long idPromocion, String direccion, String ciudad) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlProveen() + "(nit_proveedor, cod_barras) values (?, ?)");
-        q.setParameters(nitProveedor, codigoBarras);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlSucursalFactura() + "(id_promocion, direccion_sucursal, ciudad) values (?, ?, ?)");
+        q.setParameters(idPromocion, direccion, ciudad);
         return (long) q.executeUnique();
 	}
-	
 }

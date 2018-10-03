@@ -188,10 +188,15 @@ public class SuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar PROMOCION
 	//---------------------------------------------------------------------
-	public Promocion adicionarPromocion(Timestamp fechaInicio, Timestamp fechaFin, String descripcion, int codBarras, int uniDisponibles, int uniVendidas)
+	public Promocion adicionarPromocion(Timestamp fechaInicio, Timestamp fechaFin, String descripcion, int codBarras, int uniDisponibles, int uniVendidas, String direccionSucursal, String ciudad)
 	{
 		Log.info("Adicionando promocion "+ fechaInicio+", "+fechaFin+", "+descripcion+", "+codBarras+", "+uniDisponibles+", "+uniVendidas);
-		Promocion promocion = pp.adicionarPromocion(fechaInicio, fechaFin, descripcion, codBarras, uniDisponibles, uniVendidas);
+		Sucursal sucursal = pp.buscarSucursal(direccionSucursal, ciudad);
+		Promocion promocion = null;
+		if(sucursal != null)
+		{
+			promocion = pp.adicionarPromocion(fechaInicio, fechaFin, descripcion, codBarras, uniDisponibles, 0);
+		}
 		Log.info("Saliendo de adicionar promocion "+ fechaInicio+", "+fechaFin+", "+descripcion+", "+codBarras+", "+uniDisponibles+", "+uniVendidas);
 		return promocion;
 	}
@@ -232,7 +237,7 @@ public class SuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar CANTIDAD EN ESTANTES
 	//---------------------------------------------------------------------
-	public CantidadEnEstantes adicionarCantidadEnEstantes(int codigoBarras, long idEstante, int cantidadActual, int cantidadMinima)
+	public CantidadEnEstantes adicionarCantidadEnEstantes(String codigoBarras, long idEstante, int cantidadActual, int cantidadMinima)
 	{
 		Log.info("Adicionando cantidad en estantes "+ codigoBarras+", "+idEstante+", "+cantidadActual+", "+cantidadMinima);
 		CantidadEnEstantes cantidadEstantes = pp.adicionarCantidadEnEstante(codigoBarras, idEstante, cantidadActual, cantidadMinima);

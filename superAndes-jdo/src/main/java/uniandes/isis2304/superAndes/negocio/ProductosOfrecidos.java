@@ -24,7 +24,7 @@ public class ProductosOfrecidos implements VOProductosOfrecidos{
 	/**
 	 * Código de barras del producto ofrecido
 	 */
-	private long codigoBarras;
+	private String codigoBarras;
 
 	//-----------------------------------------------------
 	// CONSTRUCTORES
@@ -36,7 +36,7 @@ public class ProductosOfrecidos implements VOProductosOfrecidos{
 	 * @param ciudad Ciudad de la sucursal
 	 * @param codigoBarras Código de barras del producto
 	 */
-	public ProductosOfrecidos(String direccionSucursal, String ciudad, long codigoBarras) {
+	public ProductosOfrecidos(String direccionSucursal, String ciudad, String codigoBarras) {
 		this.direccionSucursal = direccionSucursal;
 		this.ciudad = ciudad;
 		this.codigoBarras = codigoBarras;
@@ -48,7 +48,7 @@ public class ProductosOfrecidos implements VOProductosOfrecidos{
 	public ProductosOfrecidos() {
 		this.direccionSucursal = null;
 		this.ciudad = null;
-		this.codigoBarras = 0;
+		this.codigoBarras = null;
 	}
 
 	//-----------------------------------------------------
@@ -88,7 +88,7 @@ public class ProductosOfrecidos implements VOProductosOfrecidos{
 	/**
 	 * Retorna el código de barras del producto.
 	 */
-	public long getCodigoBarras() {
+	public String getCodigoBarras() {
 		return codigoBarras;
 	}
 
@@ -96,7 +96,7 @@ public class ProductosOfrecidos implements VOProductosOfrecidos{
 	 * Modifica el código de barras
 	 * @param codigoBarras Nuevo código.
 	 */
-	public void setCodigoBarras(long codigoBarras) {
+	public void setCodigoBarras(String codigoBarras) {
 		this.codigoBarras = codigoBarras;
 	}
 

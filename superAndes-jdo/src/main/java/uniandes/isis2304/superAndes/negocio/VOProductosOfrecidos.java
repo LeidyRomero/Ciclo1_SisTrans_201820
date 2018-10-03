@@ -15,7 +15,7 @@ public interface VOProductosOfrecidos {
 	/**
 	 * @return El código de barras del producto
 	 */
-	public long getCodigoBarras();
+	public String getCodigoBarras();
 
 	/**
 	 * @return Una cadena con la información básica de los productos ofrecidos

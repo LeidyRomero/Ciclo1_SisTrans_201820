@@ -22,7 +22,7 @@ public interface VOCantidadEnEstantes {
 	/**
 	 * @return El código de barras del producto.
 	 */
-	public int getCodigoBarrasProducto();
+	public String getCodigoBarrasProducto();
 
 	/**
 	 * @return El id del estante.

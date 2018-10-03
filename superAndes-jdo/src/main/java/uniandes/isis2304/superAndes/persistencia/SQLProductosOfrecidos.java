@@ -46,7 +46,7 @@ public class SQLProductosOfrecidos {
 	 * @param ciudad
 	 * @return
 	 */
-	public long adicionarProductoOfrecido (PersistenceManager pm, int codigoBarras, String direccionSucursal, String ciudad) 
+	public long adicionarProductoOfrecido (PersistenceManager pm, String codigoBarras, String direccionSucursal, String ciudad) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlProductosOfrecidos() + "(codigo_barras, direccion_sucursal, ciudad) values (?, ?, ?)");
         q.setParameters(codigoBarras, direccionSucursal, ciudad);
