@@ -1148,14 +1148,14 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	public List<Producto> buscarProductosVentasSuperiores(double pVentasMinimas)
+	public List<Producto> buscarProductosVentasSuperiores(double pVentasMinimas, Date pFechaInicial, Date pFechaFinal)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
 		Transaction t = manager.currentTransaction();
 		try 
 		{
 			t.begin();
-			List<Producto> productos = sqlProducto.darProductosVentasSuperioresAXEnRangoFechas(manager, pVentasMinimas);
+			List<Producto> productos = sqlProducto.darProductosVentasSuperioresAXEnRangoFechas(manager, pVentasMinimas, pFechaInicial, pFechaFinal);
 			t.commit();
 			Log.trace("Saliendo de buscar productos ventas superiores: ");
 			return productos;
