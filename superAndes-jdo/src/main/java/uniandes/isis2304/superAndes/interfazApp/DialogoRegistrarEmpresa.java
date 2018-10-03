@@ -94,13 +94,6 @@ public class DialogoRegistrarEmpresa extends JDialog implements ActionListener{
 
 		add( lbNombre );
 		add( txtNombre );
-<<<<<<< HEAD
-=======
-
-        setLayout( new GridLayout( 7, 2 ) );
-        this.setSize( 600, 200 );
-        setTitle( "Agregar empresa" );
->>>>>>> 413449f798a4495b34cbbabb061dfa0f6f6beee0
 
         lbNit = new JLabel( "NIT:" );
         txtNit = new JTextField( );

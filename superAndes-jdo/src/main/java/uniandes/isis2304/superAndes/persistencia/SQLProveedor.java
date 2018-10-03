@@ -129,7 +129,7 @@ class SQLProveedor
 	 * @param calificacion - Nueva calificación
 	 * @return Número de tuplas modificadas
 	 */
-	public long cambiarCalificacionBebedor (PersistenceManager pm, int nitProveedor, String calificacion) 
+	public long cambiarCalificacionProveedor (PersistenceManager pm, int nitProveedor, String calificacion) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlProveedor()+ " SET calificacion_proveedor = ? WHERE nit_proveedor = ?");
 	     q.setParameters(calificacion, nitProveedor);
