@@ -49,6 +49,13 @@ class SQLProducto
 		return (long) q.executeUnique();
 	}
 
+	public Producto buscarProductoPorCodigo (PersistenceManager manager, String pCodigoBarras)
+	{
+		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlProducto()+" WHERE cod_barras = ?");
+		q.setParameters(pCodigoBarras);
+		q.setResultClass(Producto.class);
+		return (Producto) q.executeUnique();
+	}
 	//------------------------------------------------------------------------
 	//TODO RFC4 - Mostrar los productos que cumplen con cierta caracteristica
 	//------------------------------------------------------------------------

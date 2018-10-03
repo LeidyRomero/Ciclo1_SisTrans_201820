@@ -109,7 +109,7 @@ public class PersistenciaSuperAndes {
 		String unidadPersistencia = tableConfig.get("unidadPersistencia").getAsString();
 		Log.trace("Accediendo a la unidad de persistencia: "+ unidadPersistencia);
 		managerFactory = JDOHelper.getPersistenceManagerFactory(unidadPersistencia);
-		
+
 		// Cada vez que inicia el sistema debe verificar si hay promociones por finalizar
 	}
 
@@ -281,7 +281,7 @@ public class PersistenciaSuperAndes {
 	public String getSqlProductosOfrecidos() {
 		return tablas.get(22);
 	}
-	
+
 	public String getSqlSucursalPromociones()
 	{
 		return tablas.get(23);
@@ -425,7 +425,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	public Sucursal buscarSucursal(String direccion, String ciudad)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -485,7 +485,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	public void finalizarPromocion(long idPromocion)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -606,7 +606,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	public int buscarCantidadActualEstante(long idEstante)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -756,7 +756,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar SUCURSAL PROMOCIONES
 	//---------------------------------------------------------------------
@@ -1331,6 +1331,111 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	public long eliminarBodega(String direccionBodega, String direccionSucursal,String ciudad)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long q = sqlBodega.eliminarBodega(manager, direccionBodega, direccionSucursal, ciudad);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	//---------------------------------------------------------------------
+	// Métodos para manejar las CANTIDADES EN BODEGA
+	//---------------------------------------------------------------------
+	public CantidadEnBodega adicionarCantidadEnBodega( String pDireccionBodega, String pDireccionSucursal, String pCiudad, int pCantidadActual, int pCantidadMinima, String pCodigoBarras)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlCantidadEnBodega.adicionarCantidadEnBodega(pm, pDireccionBodega, pDireccionSucursal, pCiudad, pCantidadActual, pCantidadMinima, pCodigoBarras);
+			tx.commit();
+
+			Log.trace("Insercción cantidad en bodega: " + pDireccionBodega +": "+tuplasInsertadas);
+			return new CantidadEnBodega();
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	public List<CantidadEnBodega> buscarCantidadEnBodega()
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<CantidadEnBodega> q = sqlCantidadEnBodega.buscarCantidadEnBodega(manager);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public long eliminarCantidadEnBodega(String pCodigo, String pDireccionSucursal, String pDireccionBodega, String pCiudad)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long q = sqlCantidadEnBodega.eliminarCantidadEnBodega(manager,pCodigo, pDireccionSucursal, pDireccionBodega, pCiudad);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar ESTANTE
 	//------------------------------------------------------------------
@@ -1472,32 +1577,4 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	//BORRADOR
-	//	public X adicionarX()
-	//	{
-	//		PersistenceManager manager = managerFactory.getPersistenceManager();
-	//		Transaction t = manager.currentTransaction();
-	//		try 
-	//		{
-	//			t.begin();
-	//			long tuplasInsertadas = sqlX.agregarX(manager, );
-	//			t.commit();
-	//			Log.trace("Inserccion X: "+ +": "+tuplasInsertadas+ " tuplas insertadas");
-	//			return new X();
-	//		}
-	//		catch(Exception e)
-	//		{
-	//			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-	//			return null;
-	//		}
-	//		finally
-	//		{
-	//			if (t.isActive())
-	//			{
-	//				t.rollback();
-	//			}
-	//			manager.close();
-	//		}
-	//	}
-
 }

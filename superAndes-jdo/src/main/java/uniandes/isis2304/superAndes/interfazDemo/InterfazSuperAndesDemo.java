@@ -11,6 +11,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.jdo.JDODataStoreException;
 import javax.swing.ImageIcon;
@@ -27,10 +29,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
-
 import uniandes.isis2304.superAndes.interfazApp.InterfazSuperAndesApp;
 import uniandes.isis2304.superAndes.interfazApp.PanelDatos;
 import uniandes.isis2304.superAndes.negocio.SuperAndes;
+import uniandes.isis2304.superAndes.negocio.*;
 
 
 @SuppressWarnings("serial")
@@ -49,8 +51,8 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 	 */
 	private static final String CONFIGURACION_TABLAS = "./src/main/resources/config/TablasBD_A.json";
 	// -----------------------------------------------------------------
-    // Atributos 
-    // -----------------------------------------------------------------
+	// Atributos 
+	// -----------------------------------------------------------------
 	/**
 	 * Objeto JSON con los nombres de las tablas de la base de datos que se quieren utilizar
 	 */
@@ -61,8 +63,8 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 	 */
 	private SuperAndes superAndes;
 	// -----------------------------------------------------------------
-    // Atributos de la interfaz
-    // -----------------------------------------------------------------
+	// Atributos de la interfaz
+	// -----------------------------------------------------------------
 	/**
 	 * Objeto JSON con la configuración de interfaz de la app.
 	 */
@@ -83,21 +85,21 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 	{
 		// Carga la configuración de la interfaz desde un archivo JSON
 		guiConfig = openConfig ("Interfaz", CONFIGURACION_INTERFAZ);
-		
+
 		// Configura la apariencia del frame que contiene la interfaz gráfica
 		configurarFrame ( );
-		
+
 		if (guiConfig != null) 
 		{
 			crearMenu( guiConfig.getAsJsonArray("menu") );
 		}
-		
+
 		String path = guiConfig.get("bannerPath").getAsString();
-		
+
 		tableConfig = openConfig ("Tablas BD", CONFIGURACION_TABLAS);
 		superAndes = new SuperAndes(tableConfig);
-		
-	
+
+
 		panelDatos = new PanelDatos ( );
 
 		setLayout (new BorderLayout());
@@ -105,8 +107,8 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		add( panelDatos, BorderLayout.CENTER );   
 	}
 	// -----------------------------------------------------------------
-    // Configuracion de la interfaz
-    // -----------------------------------------------------------------
+	// Configuracion de la interfaz
+	// -----------------------------------------------------------------
 	/**
 	 * Lee datos de configuración para la aplicacion, a partir de un archivo JSON o con valores por defecto si hay errores.
 	 * @param tipo - El tipo de configuración deseada
@@ -134,7 +136,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		}	
 		return config;
 	}
-	
+
 	/**
 	 * Método para configurar el frame principal de la aplicación
 	 */
@@ -185,7 +187,6 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			JsonArray opciones = jom.getAsJsonArray("options");
 
 			JMenu menu = new JMenu( menuTitle);
-
 			for (JsonElement op : opciones)
 			{       	
 				// Creación de cada una de las opciones del menú
@@ -204,8 +205,8 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		setJMenuBar ( menuSA );	
 	}
 	// -----------------------------------------------------------------
-    // Métodos de interacción
-    // -----------------------------------------------------------------
+	// Métodos de interacción
+	// -----------------------------------------------------------------
 	/**
 	 * Método para la ejecución de los eventos que enlazan el menú con los métodos de negocio
 	 * Invoca al método correspondiente según el evento recibido
@@ -226,6 +227,134 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		} 
 	}
 	//TODO all CRUD 
+	//----------------------------------------------------------------------------------------------
+	// BODEGA
+	//----------------------------------------------------------------------------------------------
+	public void demoBodega ( )
+	{
+		try 
+		{
+			// Ejecución de la demo y recolección de los resultados
+			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
+			VOBodega bodega1 = superAndes.adicionarBodega("Congelados",1000, 50, "KR 163B #57-29", "Cl. 39 #20A-04", "Bogota");
+
+			List <VOBodega> lista = superAndes.darVOBodegas ();
+
+			long bodegasEliminadas = superAndes.eliminarBodega("KR 163B #57-29", "Cl. 39 #20A-04", "Bogota");
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de Bodegas\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado la bodega: " + bodega1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarBodegas (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += bodegasEliminadas + " Bodegas eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private String listarBodegas (List<VOBodega> lista) 
+	{
+		String resp = "Las bodegas existentes son:\n";
+		int i = 1;
+		for (VOBodega bodega : lista)
+		{
+			resp += i++ + ". " + bodega.toString() + "\n";
+		}
+		return resp;
+	}
+	//----------------------------------------------------------------------------------------------
+	// CANTIDAD EN BODEGA
+	//----------------------------------------------------------------------------------------------
+	public void demoCantidadEnBodega ( )
+	{
+		try 
+		{
+			// Ejecución de la demo y recolección de los resultados
+			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
+			VOCantidadEnBodega cantidadEnBodega1 = superAndes.adicionarCantidadEnBodega("KR 163B #57-29", "Cl. 39 #20A-04", "Bogota", 20, 10, "F000AC6");
+
+			List <VOCantidadEnBodega> lista = superAndes.darVOCantidadEnBodega ();
+
+			long cantidadesEnBodegaEliminadas = superAndes.eliminarCantidadEnBodega("F000AC6","Cl. 39 #20A-04", "KR 163B #57-29", "Bogota");
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado del inventario en bodega\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado la cantidad: " + cantidadEnBodega1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarCantidadesEnBodega (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += cantidadesEnBodegaEliminadas + "  eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private String listarCantidadesEnBodega (List<VOCantidadEnBodega> lista) 
+	{
+		String resp = "Las cantidades existentes son:\n";
+		int i = 1;
+		for (VOCantidadEnBodega cantidadesEnBodega : lista)
+		{
+			resp += i++ + ". " + cantidadesEnBodega.toString() + "\n";
+		}
+		return resp;
+	}
+	
+	//BORRADOR
+//	public void demoX ( )
+//	{
+//		try 
+//		{
+//			// Ejecución de la demo y recolección de los resultados
+//			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
+//			VOX x1 = superAndes.adicionarX();
+//
+//			List <VOX> lista = superAndes.darVOX ();
+//
+//			long xsEliminadas = superAndes.eliminarX();
+//
+//			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+//			String resultado = "Demo de creación y listado de \n\n";
+//			resultado += "\n\n************ Generando datos de prueba ************ \n";
+//			resultado += "Adicionado la : " + x1 + "\n";
+//			resultado += "\n\n************ Ejecutando la demo ************ \n";
+//			resultado += "\n" + listarYs (lista);
+//			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+//			resultado += xsEliminadas + "  eliminados\n";
+//			resultado += "\n Demo terminada";
+//
+//			panelDatos.actualizarInterfaz(resultado);
+//		} 
+//		catch (Exception e) 
+//		{
+//			String resultado = generarMensajeError(e);
+//			panelDatos.actualizarInterfaz(resultado);
+//		}
+//	}
+//	private String listarX (List<VOX> lista) 
+//	{
+//		String resp = "Las  existentes son:\n";
+//		int i = 1;
+//		for (VOX x : lista)
+//		{
+//			resp += i++ + ". " + x.toString() + "\n";
+//		}
+//		return resp;
+//	}
 	//-------------------------------------------------------------------------------------
 	//* 			Métodos administrativos
 	//--------------------------------------------------------------------------------------
@@ -236,7 +365,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 	{
 		mostrarArchivo ("parranderos.log");
 	}
-	
+
 	/**
 	 * Muestra el log de datanucleus
 	 */
@@ -244,7 +373,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 	{
 		mostrarArchivo ("datanucleus.log");
 	}
-	
+
 	/**
 	 * Limpia el contenido del log de parranderos
 	 * Muestra en el panel de datos la traza de la ejecución
@@ -261,7 +390,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 
 		panelDatos.actualizarInterfaz(resultado);
 	}
-	
+
 	/**
 	 * Limpia el contenido del log de datanucleus
 	 * Muestra en el panel de datos la traza de la ejecución
@@ -278,7 +407,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 
 		panelDatos.actualizarInterfaz(resultado);
 	}
-	
+
 	/**
 	 * Limpia todas las tuplas de todas las tablas de la base de datos de parranderos
 	 * Muestra en el panel de datos el número de tuplas eliminadas de cada tabla
@@ -287,31 +416,31 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 	{
 		try 
 		{
-    		// Ejecución de la demo y recolección de los resultados
+			// Ejecución de la demo y recolección de los resultados
 			//TODO Terminar SuperAndes
-//			long eliminados [] = superAndes.limpiarParranderos();
-//			
-//			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
-//			String resultado = "\n\n************ Limpiando la base de datos ************ \n";
-//			resultado += eliminados [0] + " Gustan eliminados\n";
-//			resultado += eliminados [1] + " Sirven eliminados\n";
-//			resultado += eliminados [2] + " Visitan eliminados\n";
-//			resultado += eliminados [3] + " Bebidas eliminadas\n";
-//			resultado += eliminados [4] + " Tipos de bebida eliminados\n";
-//			resultado += eliminados [5] + " Bebedores eliminados\n";
-//			resultado += eliminados [6] + " Bares eliminados\n";
-//			resultado += "\nLimpieza terminada";
-//   
-//			panelDatos.actualizarInterfaz(resultado);
+			//			long eliminados [] = superAndes.limpiarParranderos();
+			//			
+			//			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			//			String resultado = "\n\n************ Limpiando la base de datos ************ \n";
+			//			resultado += eliminados [0] + " Gustan eliminados\n";
+			//			resultado += eliminados [1] + " Sirven eliminados\n";
+			//			resultado += eliminados [2] + " Visitan eliminados\n";
+			//			resultado += eliminados [3] + " Bebidas eliminadas\n";
+			//			resultado += eliminados [4] + " Tipos de bebida eliminados\n";
+			//			resultado += eliminados [5] + " Bebedores eliminados\n";
+			//			resultado += eliminados [6] + " Bares eliminados\n";
+			//			resultado += "\nLimpieza terminada";
+			//   
+			//			panelDatos.actualizarInterfaz(resultado);
 		} 
 		catch (Exception e) 
 		{
-//			e.printStackTrace();
+			//			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	/**
 	 * Muestra el modelo conceptual de Parranderos
 	 */
@@ -320,7 +449,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		//TODO Poner el modelo conceptual 
 		mostrarArchivo ("data/Modelo Conceptual Parranderos.pdf");
 	}
-	
+
 	/**
 	 * Muestra el esquema de la base de datos de Parranderos
 	 */
@@ -329,7 +458,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		//TODO Esquema BD Parranderos
 		mostrarArchivo ("data/Esquema BD Parranderos.pdf");
 	}
-	
+
 	/**
 	 * Muestra el script de creación de la base de datos
 	 */
@@ -338,7 +467,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		//TODO Script de BD
 		mostrarArchivo ("data/EsquemaParranderos.sql");
 	}
-	
+
 	/**
 	 * Muestra la arquitectura de referencia para Parranderos
 	 */
@@ -347,7 +476,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		//TODO Arquitectura Referencia
 		mostrarArchivo ("data/ArquitecturaReferencia.pdf");
 	}
-	
+
 	/**
 	 * Muestra la documentación Javadoc del proyectp
 	 */
@@ -356,12 +485,12 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		//TODO Javadoc ¿?
 		mostrarArchivo ("doc/index.html");
 	}
-	
+
 	/**
-     * Muestra la información acerca del desarrollo de esta apicación
-     */
-    public void acercaDe ()
-    {
+	 * Muestra la información acerca del desarrollo de esta apicación
+	 */
+	public void acercaDe ()
+	{
 		String resultado = "\n\n ************************************\n\n";
 		resultado += " * Universidad	de	los	Andes	(Bogotá	- Colombia)\n";
 		resultado += " * Departamento	de	Ingeniería	de	Sistemas	y	Computación\n";
@@ -378,17 +507,17 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		resultado += "\n ************************************\n\n";
 
 		panelDatos.actualizarInterfaz(resultado);		
-    }
-    
-    //--------------------------------------------------------------------------------------
-	 // 			Métodos privados para la presentación de resultados y otras operaciones
-	 //--------------------------------------------------------------------------------------
-	
-    /**
-     * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO
-     * @param e - La excepción recibida
-     * @return La descripción de la excepción, cuando es javax.jdo.JDODataStoreException, "" de lo contrario
-     */
+	}
+
+	//--------------------------------------------------------------------------------------
+	// 			Métodos privados para la presentación de resultados y otras operaciones
+	//--------------------------------------------------------------------------------------
+
+	/**
+	 * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO
+	 * @param e - La excepción recibida
+	 * @return La descripción de la excepción, cuando es javax.jdo.JDODataStoreException, "" de lo contrario
+	 */
 	private String darDetalleException(Exception e) 
 	{
 		String resp = "";
@@ -430,7 +559,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		} 
 		catch (IOException e) 
 		{
-//			e.printStackTrace();
+			//			e.printStackTrace();
 			return false;
 		}
 	}
@@ -451,10 +580,10 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			e.printStackTrace();
 		}
 	}
-	
+
 	// -----------------------------------------------------------------
-    // Programa principal
-    // -----------------------------------------------------------------
+	// Programa principal
+	// -----------------------------------------------------------------
 	/**
 	 * Este método ejecuta la aplicación, creando una nueva interfaz
 	 * @param args Arreglo de argumentos que se recibe por línea de comandos
@@ -465,7 +594,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		{
 			// Unifica la interfaz para Mac y para Windows.
 			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
-			InterfazSuperAndesApp interfaz = new InterfazSuperAndesApp( );
+			InterfazSuperAndesDemo interfaz = new InterfazSuperAndesDemo( );
 			interfaz.setVisible( true );
 		}
 		catch( Exception e )
