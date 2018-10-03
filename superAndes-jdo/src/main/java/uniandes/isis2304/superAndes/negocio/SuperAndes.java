@@ -332,12 +332,12 @@ public class SuperAndes {
 		return comprado;
 	}
 	
-	public Comprados registrarCompra(String pCodigoBarras,int pCantidad)
+	public Comprados registrarCompra(String pCodigoBarras,int pCantidad, String correo)
 	{
 		Log.info("Registrando comprados "+ pCodigoBarras+", "+pCodigoBarras);
-		//TODO Pedir el producto
-		Producto producto = pp.da
+		Producto producto = pp.buscarProductoCodigoBarras(pCodigoBarras);
 		Factura factura = pp.adicionarFactura(pCantidad*producto.getPrecioUnitario(), new Timestamp(System.currentTimeMillis()));
+		HistorialCompras hc = pp.adicionarHistorialCompra(correo, factura.getIdFactura());
 		Comprados comprado = pp.adicionarComprados(pCodigoBarras, pCantidad, pCantidad*producto.getPrecioUnitario(), ""+factura.getIdFactura());
 		Log.info("Saliendo de registrar comprados "+ pCodigoBarras+", "+pCodigoBarras);
 		return comprado;
@@ -375,6 +375,14 @@ public class SuperAndes {
 		pp.adicionarSucursalPromociones(promocion.getIdPromocion(), direccionSucursal, ciudad);
 		Log.info("Saliendo de adicionar promocion "+ fechaInicio+", "+fechaFin+", "+descripcion+", "+codBarras+", "+uniDisponibles+", "+uniVendidas);
 		return promocion;
+	}
+	
+	public List<Promocion> darPromocionesMasPopulares()
+	{
+		Log.info("Consultando promociones mas populares ");
+		List<Promocion> promociones = pp.darPromocionesMasPopulares();
+		Log.info("Saliendo de consultar promociones mas populares ");
+		return promociones;
 	}
 
 	//---------------------------------------------------------------------
@@ -449,6 +457,14 @@ public class SuperAndes {
 		SucursalFactura sucursalFactura = pp.adicionarSucursalFactura(idFactura, direccion, ciudad);
 		Log.info("Saliendo de adicionar sucursal facturas "+ idFactura+", "+direccion+", "+ciudad);
 		return sucursalFactura;
+	}
+	
+	public List<String> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
+	{
+		Log.info("Consultando el dinero recolectado por sucursales en periodo de tiempo: " + fechaInicio + ", "+fechaFin);
+		List<String> list = pp.dineroSucursalEnRango(fechaInicio, fechaFin);
+		Log.info("Saliendo de consultar el dinero recolectado por sucursales en periodo de tiempo: " + fechaInicio + ", "+fechaFin);
+		return list;
 	}
 
 	//---------------------------------------------------------------------

@@ -61,3 +61,12 @@ ORA-02291: restricción de integridad (ISIS2304A231820.FK_B_ORDEN_PEDIDO) violada
 ORA-00904: "ID": identificador no válido
 
 00:05:35,848 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de modificar orden pedido 89645, trfyguhij
+02:47:17,967 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando promociones mas populares 
+02:47:18,740 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar promociones mas populares 
+03:10:18,878 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando el dinero recolectado por sucursales en periodo de tiempo: 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0
+03:10:19,859 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT SUM(fac.costo_total) AS dinero_recolectado, direccion_sucursal, ciudad FROM A_FACTURA fac, A_FACTURASfa WHERE fac.id_factura = fa.id_factura AND fac.fecha BETWEEN ? AND ? GROUP BY direccion_sucursal, ciudad".
+ORA-00942: la tabla o vista no existe
+
+03:10:19,944 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar el dinero recolectado por sucursales en periodo de tiempo: 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0
+03:11:25,142 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando el dinero recolectado por sucursales en periodo de tiempo: 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0
+03:11:25,958 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar el dinero recolectado por sucursales en periodo de tiempo: 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0

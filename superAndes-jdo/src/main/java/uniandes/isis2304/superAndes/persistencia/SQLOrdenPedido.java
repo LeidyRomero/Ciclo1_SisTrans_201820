@@ -72,7 +72,7 @@ class SQLOrdenPedido
 	public long cambiarEstadoOrdenPedido (PersistenceManager pm, long idPedido, String calificacion) 
 	{
 		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-		Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlOrdenPedido() + " SET estado = ?, calificacion_pedido = ?, fecha_entrega = ?  WHERE id = ?");
+		Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlOrdenPedido() + " SET estado = ?, calificacion_pedido = ?, fecha_entrega = ?  WHERE id_pedido = ?");
 		q.setParameters("Recibido",calificacion, fechaActual, idPedido);
 		return (long) q.executeUnique();            
 	}

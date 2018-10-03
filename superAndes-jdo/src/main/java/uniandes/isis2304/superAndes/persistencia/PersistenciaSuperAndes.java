@@ -109,11 +109,6 @@ public class PersistenciaSuperAndes {
 		String unidadPersistencia = tableConfig.get("unidadPersistencia").getAsString();
 		Log.trace("Accediendo a la unidad de persistencia: "+ unidadPersistencia);
 		managerFactory = JDOHelper.getPersistenceManagerFactory(unidadPersistencia);
-<<<<<<< HEAD
-=======
-
-		// Cada vez que inicia el sistema debe verificar si hay promociones por finalizar
->>>>>>> d724df3282d6cf496fa736f8d826486850eeeafa
 	}
 
 
@@ -525,6 +520,34 @@ public class PersistenciaSuperAndes {
 			sqlPromocion.finalizarPromocion(pm, actual.getIdPromocion());
 		}
 	}
+	
+	public List<Promocion> darPromocionesMasPopulares()
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			List<Promocion> proms = sqlPromocion.darPromocionesMasPopulares(pm);
+			tx.commit();
+
+			Log.trace("Consulta 20 promociones más populares: " + proms.size());
+			return proms;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar las ORDENES DE PEDIDO
@@ -567,8 +590,8 @@ public class PersistenciaSuperAndes {
 			tx.begin();
 			long tuplasInsertadas = sqlOrdenPedido.cambiarEstadoOrdenPedido(pm, idPedido, calificacion);
 			OrdenPedido op = sqlOrdenPedido.darPedidoPorId(pm, idPedido);
-			//TODO PedidoProducto
-			//sqlCantidadEnBodega.subirInventario(pm, , op.getCiudadSucursal(), op.getDireccionSucursal(), op.getDireccionBodega());
+			int numProductos = sqlPedidoProducto.darNumeroProductosPedido(pm, idPedido);
+			sqlCantidadEnBodega.subirInventario(pm, numProductos, op.getCiudadSucursal(), op.getDireccionSucursal(), op.getDireccionBodega());
 			tx.commit();
 
 			Log.trace("Insercción promocion: " + idPedido +": "+tuplasInsertadas);
@@ -739,6 +762,35 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+	
+	public List<String> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			List<String> sucursales = sqlSucursalFactura.dineroSucursalEnRango(pm, fechaInicio, fechaFin);
+			tx.commit();
+
+			Log.trace("Consulta dinero recolectado por sucursales en periodo de tiempo: " + fechaInicio + ", "+fechaFin);
+			return sucursales;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+ 
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar los HISTORIALES COMPRAS
@@ -847,6 +899,32 @@ public class PersistenciaSuperAndes {
 			t.commit();
 			Log.trace("Inserccion producto: "+ pNombre+": "+tuplasInsertadas+ " tuplas insertadas");
 			return new Producto(pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento, pPeso, pVolumen);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public Producto buscarProductoCodigoBarras(String pCodigoBarras)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			Producto buscado = sqlProducto.buscarProductoPorCodigo(manager, pCodigoBarras);
+			t.commit();
+			Log.trace("Busqueda producto: "+ pCodigoBarras);
+			return buscado;
 		}
 		catch(Exception e)
 		{
