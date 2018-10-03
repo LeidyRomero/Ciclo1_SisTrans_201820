@@ -915,20 +915,40 @@ public class PersistenciaSuperAndes {
 		}
 	}
 	public Producto buscarProductoCodigoBarras(String pCodigoBarras)
-
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			Producto buscado = sqlProducto.buscarProductoPorCodigo(manager, pCodigoBarras);
+			t.commit();
+			Log.trace("Busqueda producto: "+ pCodigoBarras);
+			return buscado;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Producto> buscarProductos()
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
 		Transaction t = manager.currentTransaction();
 		try 
 		{
 			t.begin();
-			Producto q = sqlProducto.buscarProductos(manager);
+			List<Producto> q = sqlProducto.buscarProductos(manager);
 			t.commit();
 			return q;
-			Producto buscado = sqlProducto.buscarProductoPorCodigo(manager, pCodigoBarras);
-			t.commit();
-			Log.trace("Busqueda producto: "+ pCodigoBarras);
-			return buscado;
 		}
 		catch(Exception e)
 		{
@@ -1161,6 +1181,32 @@ public class PersistenciaSuperAndes {
 			List<Producto> productos = sqlProducto.darProductosTipo(manager, pTipo);
 			t.commit();
 			Log.trace("Saliendo de buscar productos de un tipo: ");
+			return productos;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Producto> buscarProductosCategoria(String pCategoria)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Producto> productos = sqlProducto.darProductosCategoria(manager, pCategoria);
+			t.commit();
+			Log.trace("Saliendo de buscar productos de una categoria: ");
 			return productos;
 		}
 		catch(Exception e)
