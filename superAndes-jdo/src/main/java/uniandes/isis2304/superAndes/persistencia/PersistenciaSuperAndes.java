@@ -948,7 +948,6 @@ public class PersistenciaSuperAndes {
 		Transaction t = manager.currentTransaction();
 		try 
 		{
-			t.begin();
 			Producto buscado = sqlProducto.buscarProductoPorCodigo(manager, pCodigoBarras);
 			t.commit();
 			Log.trace("Busqueda producto: "+ pCodigoBarras);
@@ -958,6 +957,56 @@ public class PersistenciaSuperAndes {
 		{
 			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
 			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Producto> buscarProductos()
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Producto> q = sqlProducto.buscarProductos(manager);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public long eliminarProducto(String pCodigo)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long q = sqlProducto.eliminarProducto(manager, pCodigo);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
 		}
 		finally
 		{
@@ -1176,6 +1225,32 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	public List<Producto> buscarProductosCategoria(String pCategoria)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Producto> productos = sqlProducto.darProductosCategoria(manager, pCategoria);
+			t.commit();
+			Log.trace("Saliendo de buscar productos de una categoria: ");
+			return productos;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
 	public List<Producto> buscarProductosVentasSuperiores(double pVentasMinimas, Date pFechaInicial, Date pFechaFinal)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
@@ -1221,6 +1296,56 @@ public class PersistenciaSuperAndes {
 		{
 			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
 			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<ProductoCategoria> buscarProductoCategoria()
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<ProductoCategoria> q = sqlProductoCategoria.buscarProductoCategoria(manager);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public long eliminarProductoCategoria(String pCodigo, String pCategoria)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long q = sqlProductoCategoria.eliminarProductoCategoria(manager, pCodigo, pCategoria);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
 		}
 		finally
 		{
@@ -1277,6 +1402,56 @@ public class PersistenciaSuperAndes {
 		{
 			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
 			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Categoria> buscarCategorias()
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Categoria> q = sqlCategoria.buscarCategorias(manager);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public long eliminarCategoria(String pCategoria)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long q = sqlCategoria.eliminarCategoria(manager, pCategoria);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
 		}
 		finally
 		{
@@ -1344,6 +1519,56 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	public List<TipoProducto> buscarTiposProductos()
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<TipoProducto> q = sqlTipoProducto.buscarTipos(manager);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public long eliminarTipo( String pTipo)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long q = sqlTipoProducto.eliminarTipo(manager, pTipo);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar EMPRESA
 	//------------------------------------------------------------------
@@ -1373,6 +1598,56 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	public List<Empresa> buscarEmpresas()
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Empresa> q = sqlEmpresa.buscarEmpresas(manager);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public long eliminarEmpresa(String pCorreo)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long q = sqlEmpresa.eliminarEmpresa(manager, pCorreo);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar PERSONA_NATURAL
 	//------------------------------------------------------------------
@@ -1392,6 +1667,56 @@ public class PersistenciaSuperAndes {
 		{
 			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
 			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<PersonaNatural> buscarPersonaNatural()
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<PersonaNatural> q = sqlPersonaNatural.buscarPersonas(manager);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public long eliminarPersonaNatural( String pCorreo)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long q = sqlPersonaNatural.eliminarPersona(manager, pCorreo);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
 		}
 		finally
 		{
@@ -1616,6 +1941,31 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	public long eliminarEstante(long id)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long q = sqlEstante.eliminarEstante(manager,id);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar PEDIDO PRODUCTO
 	//------------------------------------------------------------------
@@ -1645,10 +1995,60 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	public List<PedidoProducto> buscarPedidoProducto()
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<PedidoProducto> q = sqlPedidoProducto.buscarPedidoProducto(manager);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public long eliminarPedidoProducto(long id)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long q = sqlPedidoProducto.eliminarPedidoProducto(manager, id);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar COMPRADOS
 	//------------------------------------------------------------------
-	public Comprados adicionarComprados(String pCodigoBarras,int pCantidad, double pPrecioTotal, String pIdFactura)
+	public Comprados adicionarComprados(String pCodigoBarras,int pCantidad, double pPrecioTotal, long pIdFactura)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
 		Transaction t = manager.currentTransaction();
@@ -1664,6 +2064,56 @@ public class PersistenciaSuperAndes {
 		{
 			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
 			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Comprados> buscarComprados()
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Comprados> q = sqlComprados.buscarComprados(manager);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public long eliminarComprados(String pCodigo, long idFactura)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			long q = sqlComprados.eliminarComprados(manager, pCodigo, idFactura);
+			t.commit();
+			return q;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
 		}
 		finally
 		{

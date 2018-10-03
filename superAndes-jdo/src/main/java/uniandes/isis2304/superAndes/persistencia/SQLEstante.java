@@ -38,4 +38,10 @@ class SQLEstante
 		q.setResultClass(Estante.class);
 		return (List<Estante>) q.executeList();
 	}
+	public long eliminarEstante(PersistenceManager manager, long id)
+	{
+		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlEstante() + " WHERE id_Estante = ? ");
+		add.setParameters(id);
+		return (long) add.executeUnique();
+	}
 }

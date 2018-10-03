@@ -39,8 +39,8 @@
 					"event": "demoEstante"
 				},
 				{
-					"label": "Cambiar estante de sucursal",
-					"event": "demoCambiarEstanteSucursal"
+					"label": "CRD Cantidad en estantes",
+					"event": "demoCantidadEnEstantes"
 				},
 				{
 					"label": "Disminuir nivel abastecimiento",
@@ -49,10 +49,6 @@
 				{
 					"label": "Aumentar nivel abastecimiento",
 					"event": "demoAumentarNivelAbastecimiento"
-				},
-				{
-					"label": "CRD Cantidad en estantes",
-					"event": "demoCantidadEnEstantes"
 				}
 			]
 		},
