@@ -355,6 +355,26 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 //		}
 //		return resp;
 //	}
+	
+	public void demoProveedores()
+	{
+		try
+		{
+			//Ejecución de la demo y recolección de los resultados
+			VOProveedor pro1 = superAndes.adicionarProveedor(123456789, "Alpina");
+			VOProveedor pro2 = superAndes.adicionarProveedor(234567891, "Doria");
+			VOProveedor pro3 = superAndes.adicionarProveedor(345678912, "Saltín");
+			
+			List<VOProveedor> proveedores = superAndes.darVO
+			
+			
+		}
+		catch(Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
 	//-------------------------------------------------------------------------------------
 	//* 			Métodos administrativos
 	//--------------------------------------------------------------------------------------

@@ -426,6 +426,17 @@ public class SuperAndes {
 		return proveedor;
 	}
 
+	public List<VOProveedor> darVOProveedores ()
+	{
+		Log.info ("Generando los VO de Proveedor");
+		List<VOProveedor> voProveedor = new LinkedList<VOProveedor> ();
+		for (Proveedor proveedor: pp.buscarProveedores())
+		{
+			voProveedor.add (proveedor);
+		}
+		Log.info ("Generando los VO de Proveedor: " + voProveedor.size () + " bodegas existentes");
+		return voProveedor;
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar CANTIDAD EN ESTANTES
 	//---------------------------------------------------------------------

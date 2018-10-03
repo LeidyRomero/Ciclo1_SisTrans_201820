@@ -354,6 +354,34 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+	
+	public List<Proveedor> buscarProveedores()
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			List<Proveedor> proveedores = sqlProveedor.darProveedores(pm);
+			tx.commit();
+
+			Log.trace("Consultando todos los proveedores");
+			return proveedores;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar los CLIENTES
