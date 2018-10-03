@@ -6,6 +6,7 @@ package uniandes.isis2304.superAndes.interfazApp;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.jdo.JDODataStoreException;
@@ -858,7 +860,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	}
 
 	//-------------------------------------------------------------------------------
-	//  Metodos para manejar PROVEEDOR
+	//  Metodos para manejar PROMOCION
 	//-------------------------------------------------------------------------------
 	public void adicionarPromocion()
 	{
@@ -887,6 +889,29 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		catch(Exception e)
 		{
 			String resultado = "En adicionarPromoción \n\n";
+			resultado += e.getMessage();
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void darPromocionesMasPopulares()
+	{
+		try
+		{
+			String resultado = "En consultarPromociones \n\n";
+			List<Promocion> proms = superAndes.darPromocionesMasPopulares();
+			for(Promocion actual: proms)
+			{
+				resultado += actual+"\n";
+			}
+
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+		}
+		catch(Exception e)
+		{
+			String resultado = "En consultarPromociones \n\n";
 			resultado += e.getMessage();
 			resultado += "\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
@@ -973,6 +998,223 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+
+	//-------------------------------------------------------------------------------
+	//  Metodos para manejar ORDEN PEDIDO
+	//-------------------------------------------------------------------------------
+	public void adicionarPedido()
+	{
+		JTextField txtFechaEspera = new JTextField();
+		JTextField txtNitProveedor = new JTextField();
+		JTextField txtCiudad = new JTextField();
+		JTextField txtDireccionBodega = new JTextField();
+		JTextField txtDireccionSucursal = new JTextField();
+		JTextField txtCodigoBarras = new JTextField();
+		JTextField txtCantidadProducto = new JTextField();
+		JTextField txtPrecioAcordado = new JTextField();
+		JPanel aux = new JPanel();
+		aux.setLayout(new GridLayout(8, 2));
+		aux.add(new JLabel("Fecha esperada entrega: (2018-5-6)"));
+		aux.add(txtFechaEspera);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Nit del proveedor:"));
+		aux.add(txtNitProveedor);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Ciudad de la sucursal:"));
+		aux.add(txtCiudad);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Dirección de la sucursal:"));
+		aux.add(txtDireccionSucursal);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Dirección de entrega (bodega):"));
+		aux.add(txtDireccionBodega);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Código de barras del producto:"));
+		aux.add(txtCodigoBarras);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Cantidad del producto:"));
+		aux.add(txtCantidadProducto);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Precio acordado por unidad:"));
+		aux.add(txtPrecioAcordado);
+
+		int result = JOptionPane.showConfirmDialog(null, aux,"Orden pedido", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) 
+		{
+			try
+			{
+				if(!txtFechaEspera.getText().equals("") && !txtNitProveedor.getText().equals(""))
+				{
+					Timestamp fechaEsperada = Timestamp.valueOf(txtFechaEspera.getText()+" 00:00:00");
+					VOOrdenPedido pd = superAndes.adicionarOrdenPedido(fechaEsperada, Integer.parseInt(txtNitProveedor.getText()), txtCiudad.getText(), txtDireccionSucursal.getText(), txtDireccionBodega.getText());
+					if(pd != null && !txtCantidadProducto.getText().equals("") && !txtPrecioAcordado.getText().equals(""))
+					{
+						superAndes.adicionarPedidoProducto(txtCodigoBarras.getText(), pd.getIdPedido(), Integer.parseInt(txtCantidadProducto.getText()), Integer.parseInt(txtPrecioAcordado.getText()));
+					}
+					else
+					{
+						throw new Exception("No se pudo crear orden de pedido para el producto: "+ txtCodigoBarras.getText());
+					}
+
+					String resultado = "En adicionarPedido \n\n";
+					resultado += "Pedido adicionado exitosamente: " + pd;
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+
+			}
+			catch(Exception e)
+			{
+				String resultado = "En adicionarPedido \n\n";
+				resultado += e.getMessage();
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+		}
+	}
+
+	public void registrarLlegadaPedido()
+	{
+		JTextField minField = new JTextField(15);
+		JTextField maxField = new JTextField(15);
+
+		JPanel aux = new JPanel();
+		aux.add(new JLabel("Id del pedido:"));
+		aux.add(minField);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Calificación:"));
+		aux.add(maxField);
+		int result = JOptionPane.showConfirmDialog(null, aux,"Llegada pedido", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) 
+		{
+			try
+			{
+				if(!minField.getText().equals("") && !maxField.getText().equals(""))
+				{
+					VOOrdenPedido op = superAndes.llegadaOrdenPedido(Long.parseLong(minField.getText()), maxField.getText());
+					if(op == null)
+					{
+						throw new Exception("No se pudo registrar la llegada del pedido: " + minField.getText());
+					}
+
+					String resultado = "En registrarLlegadaPedido \n\n";
+					resultado += "Llegada registrada exitosamente: " + op;
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+			catch(Exception e)
+			{
+				String resultado = "En registrarLlegadaPedido \n\n";
+				resultado += e.getMessage();
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+		}
+	}
+	
+
+	//-----------------------------------------------------------------------
+	// Métodos para manejar VENTAS
+	//-----------------------------------------------------------------------
+	
+	public void adicionarVenta()
+	{
+		JTextField minField = new JTextField(15);
+		JTextField maxField = new JTextField(15);
+		JTextField corField = new JTextField(15);
+		
+		JPanel aux = new JPanel();
+		aux.add(new JLabel("Código de barras:"));
+		aux.add(minField);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Cantidad:"));
+		aux.add(maxField);
+		aux.add(Box.createHorizontalStrut(15));
+		aux.add(new JLabel("Correo cliente:"));
+		aux.add(corField);
+		
+		int result = JOptionPane.showConfirmDialog(null, aux,"Venta", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) 
+		{
+			try
+			{
+				if(!minField.getText().equals("") && !maxField.getText().equals("") && !corField.getText().equals(""))
+				{
+					VOComprados venta = superAndes.registrarCompra(minField.getText(), Integer.parseInt(maxField.getText()), corField.getText());
+					if(venta == null)
+					{
+						throw new Exception("No se pudo registrar la compra del pedido: " + minField.getText());
+					}
+
+					String resultado = "En registrarVenta \n\n";
+					resultado += "Venta registrada exitosamente: " + venta;
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+			catch(Exception e)
+			{
+				String resultado = "En registrarVenta \n\n";
+				resultado += e.getMessage();
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+		}
+	}
+	
+	public void dineroSucursalEnRango()
+	{
+		JTextField minField = new JTextField(15);
+		JTextField maxField = new JTextField(15);
+		
+		JPanel aux = new JPanel();
+		aux.add(new JLabel("Fecha inicio: (2018-5-6) "));
+		aux.add(minField);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Fecha fin: (2018-5-6) "));
+		aux.add(maxField);
+		
+		int result = JOptionPane.showConfirmDialog(null, aux,"Venta", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) 
+		{
+			try
+			{
+				if(!minField.getText().equals("") && !maxField.getText().equals(""))
+				{
+					List<String> list = superAndes.dineroSucursalEnRango(Timestamp.valueOf(minField.getText()+" 00:00:00"), Timestamp.valueOf(maxField.getText()+" 00:00:00"));
+					if(list == null)
+					{
+						throw new Exception("No se pudo consultar el dinero de las sucursales en el periodo: " + minField.getText() + ", "+maxField.getText());
+					}
+
+					String resultado = "En consultaDinero \n\n";
+					for(String actual: list)
+					{
+						resultado+= actual+"\n";
+					}
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+			catch(Exception e)
+			{
+				String resultado = "En consultaDinero \n\n";
+				resultado += e.getMessage();
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+		}
+	}
+
 	// -----------------------------------------------------------------
 	// Programa principal
 	// -----------------------------------------------------------------

@@ -36,6 +36,7 @@ public class SuperAndes {
 	public SuperAndes (JsonObject tableConfig)
 	{
 		pp = PersistenciaSuperAndes.getInstance (tableConfig);
+		pp.finalizarPromocionesPendientes();
 	}
 	//-----------------------------------------------------------------------------
 	//   Metodos para manejar los PRODUCTOS
@@ -492,6 +493,17 @@ public class SuperAndes {
 		Log.info("Saliendo de borrar las compras");
 		return numero;
 	}
+	
+	public Comprados registrarCompra(String pCodigoBarras,int pCantidad, String correo)
+	{
+		Log.info("Registrando comprados "+ pCodigoBarras+", "+pCodigoBarras);
+		Producto producto = pp.buscarProductoCodigoBarras(pCodigoBarras);
+		Factura factura = pp.adicionarFactura(pCantidad*producto.getPrecioUnitario(), new Timestamp(System.currentTimeMillis()));
+		HistorialCompras hc = pp.adicionarHistorialCompra(correo, factura.getIdFactura());
+		Comprados comprado = pp.adicionarComprados(pCodigoBarras, pCantidad, pCantidad*producto.getPrecioUnitario(), ""+factura.getIdFactura());
+		Log.info("Saliendo de registrar comprados "+ pCodigoBarras+", "+pCodigoBarras);
+		return comprado;
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar CLIENTE
 	//---------------------------------------------------------------------
@@ -525,6 +537,14 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar promocion "+ fechaInicio+", "+fechaFin+", "+descripcion+", "+codBarras+", "+uniDisponibles+", "+uniVendidas);
 		return promocion;
 	}
+	
+	public List<Promocion> darPromocionesMasPopulares()
+	{
+		Log.info("Consultando promociones mas populares ");
+		List<Promocion> promociones = pp.darPromocionesMasPopulares();
+		Log.info("Saliendo de consultar promociones mas populares ");
+		return promociones;
+	}
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar ORDEN PEDIDO
@@ -534,6 +554,14 @@ public class SuperAndes {
 		Log.info("Adicionando orden pedido "+ nitProveedor+", "+fechaEsperada+", "+ciudad+", "+direccionSucursal+", "+direccionBodega);
 		OrdenPedido ordenPedido = pp.adicionarOrdenPedido(fechaEsperada, nitProveedor, ciudad, direccionSucursal, direccionBodega);
 		Log.info("Saliendo de adicionar orden pedido "+ nitProveedor+", "+fechaEsperada+", "+ciudad+", "+direccionSucursal+", "+direccionBodega);
+		return ordenPedido;
+	}
+	
+	public OrdenPedido llegadaOrdenPedido(long idPedido, String calificacion)
+	{
+		Log.info("Modificando orden pedido "+ idPedido +", "+calificacion);
+		OrdenPedido ordenPedido = pp.llegadaOrdenPedido(idPedido, calificacion);
+		Log.info("Saliendo de modificar orden pedido "+ idPedido +", "+calificacion);
 		return ordenPedido;
 	}
 
@@ -590,6 +618,14 @@ public class SuperAndes {
 		SucursalFactura sucursalFactura = pp.adicionarSucursalFactura(idFactura, direccion, ciudad);
 		Log.info("Saliendo de adicionar sucursal facturas "+ idFactura+", "+direccion+", "+ciudad);
 		return sucursalFactura;
+	}
+	
+	public List<String> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
+	{
+		Log.info("Consultando el dinero recolectado por sucursales en periodo de tiempo: " + fechaInicio + ", "+fechaFin);
+		List<String> list = pp.dineroSucursalEnRango(fechaInicio, fechaFin);
+		Log.info("Saliendo de consultar el dinero recolectado por sucursales en periodo de tiempo: " + fechaInicio + ", "+fechaFin);
+		return list;
 	}
 
 	//---------------------------------------------------------------------
