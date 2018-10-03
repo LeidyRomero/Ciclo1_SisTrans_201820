@@ -561,10 +561,13 @@ public class PersistenciaSuperAndes {
 		{
 			tx.begin();
 			long tuplasInsertadas = sqlOrdenPedido.cambiarEstadoOrdenPedido(pm, idPedido, calificacion);
+			OrdenPedido op = sqlOrdenPedido.darPedidoPorId(pm, idPedido);
+			//TODO PedidoProducto
+			//sqlCantidadEnBodega.subirInventario(pm, , op.getCiudadSucursal(), op.getDireccionSucursal(), op.getDireccionBodega());
 			tx.commit();
 
 			Log.trace("Insercción promocion: " + idPedido +": "+tuplasInsertadas);
-			return sqlOrdenPedido.darPedidoPorId(pm, idPedido);
+			return op;
 		}
 		catch(Exception e)
 		{
@@ -1062,40 +1065,14 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	public List<Producto> buscarProductosCategoria(String pCategoria)
+	public List<Producto> buscarProductosVentasSuperiores(double pVentasMinimas)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
 		Transaction t = manager.currentTransaction();
 		try 
 		{
 			t.begin();
-			List<Producto> productos = sqlProducto.darProductosCategoria(manager, pCategoria);
-			t.commit();
-			Log.trace("Saliendo de buscar productos de una categoria: ");
-			return productos;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-	public List<Producto> buscarProductosVentasSuperiores(double pVentasMinimas, Date pFechaInicial, Date pFechaFinal)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			List<Producto> productos = sqlProducto.darProductosVentasSuperioresAXEnRangoFechas(manager, pVentasMinimas, pFechaInicial, pFechaFinal);
+			List<Producto> productos = sqlProducto.darProductosVentasSuperioresAXEnRangoFechas(manager, pVentasMinimas);
 			t.commit();
 			Log.trace("Saliendo de buscar productos ventas superiores: ");
 			return productos;

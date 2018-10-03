@@ -284,6 +284,17 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar comprados "+ pCodigoBarras+", "+pCodigoBarras+", "+pIdFactura);
 		return comprado;
 	}
+	
+	public Comprados registrarCompra(String pCodigoBarras,int pCantidad)
+	{
+		Log.info("Registrando comprados "+ pCodigoBarras+", "+pCodigoBarras);
+		//TODO Pedir el producto
+		Producto producto = pp.da
+		Factura factura = pp.adicionarFactura(pCantidad*producto.getPrecioUnitario(), new Timestamp(System.currentTimeMillis()));
+		Comprados comprado = pp.adicionarComprados(pCodigoBarras, pCantidad, pCantidad*producto.getPrecioUnitario(), ""+factura.getIdFactura());
+		Log.info("Saliendo de registrar comprados "+ pCodigoBarras+", "+pCodigoBarras);
+		return comprado;
+	}
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar CLIENTE
