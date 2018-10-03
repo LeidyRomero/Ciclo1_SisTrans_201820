@@ -70,3 +70,80 @@ ORA-00942: la tabla o vista no existe
 03:10:19,944 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar el dinero recolectado por sucursales en periodo de tiempo: 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0
 03:11:25,142 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando el dinero recolectado por sucursales en periodo de tiempo: 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0
 03:11:25,958 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar el dinero recolectado por sucursales en periodo de tiempo: 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0
+04:51:22,812 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123456789, Alpina
+04:51:23,595 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123456789, Alpina
+04:51:23,595 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor
+04:52:51,934 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123456789, Alpina
+04:52:52,042 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A231820.A_PROVEEDOR_PK) violada
+
+04:52:52,122 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123456789, Alpina
+04:52:52,122 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor
+04:54:23,330 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123456789, Alpina
+04:54:24,065 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A231820.A_PROVEEDOR_PK) violada
+
+04:54:24,285 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123456789, Alpina
+04:54:24,285 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor
+04:56:56,343 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123456789, Alpina
+04:56:57,133 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A231820.A_PROVEEDOR_PK) violada
+
+04:56:57,218 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123456789, Alpina
+04:56:57,218 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor
+05:00:59,527 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123456789, Alpina
+05:01:00,263 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A231820.A_PROVEEDOR_PK) violada
+
+05:01:00,345 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123456789, Alpina
+05:01:00,345 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor
+05:02:45,813 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123456789, Alpina
+05:02:46,565 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A231820.A_PROVEEDOR_PK) violada
+
+05:02:46,651 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123456789, Alpina
+05:02:46,651 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor
+05:03:08,912 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123456789, Alpina
+05:03:09,779 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A231820.A_PROVEEDOR_PK) violada
+
+05:03:09,865 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123456789, Alpina
+05:03:09,865 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor
+05:03:59,471 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123456789, Alpina
+05:04:00,546 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A231820.A_PROVEEDOR_PK) violada
+
+05:04:00,705 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123456789, Alpina
+05:04:00,705 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor
+05:04:01,047 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 0 bodegas existentes
+05:04:01,047 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminando proveedor 123456789
+05:04:01,313 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar proveedor 123456789
+05:08:58,244 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+05:08:59,004 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123546987, Alpina
+05:08:59,004 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor
+05:08:59,351 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 0 bodegas existentes
+05:08:59,352 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminando proveedor 123456789
+05:08:59,476 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar proveedor 123456789
+05:18:04,782 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+05:19:08,104 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+05:20:45,231 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+05:23:04,740 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+05:24:24,684 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+05:26:45,408 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+05:27:44,154 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+05:28:24,426 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+09:03:56,079 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el estante 1
+09:03:56,895 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_ESTANTE(tipo_estante,volumen_estante,id_estante,peso_estante,nivel_abastecimiento, direccion_sucursal, ciudad) values (?,?,?,?,?,?,?)".
+ORA-02291: restricción de integridad (ISIS2304A231820.FK_DS_ESTANTE) violada - clave principal no encontrada
+
+09:03:56,979 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el estante 1
+09:03:56,979 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Estante
+09:03:57,129 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Estante: 0 estantes existentes
+09:03:57,129 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Borrar el Estante 
+09:03:57,249 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de borrar el Estante 
+09:05:09,206 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+09:05:09,343 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123546987, Alpina
+09:05:09,343 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor
+09:05:09,589 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 0 proveedores existentes
+09:05:09,590 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminando proveedor 123546987
+09:05:09,731 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar proveedor 123546987

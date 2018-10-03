@@ -1,5 +1,7 @@
 package uniandes.isis2304.superAndes.persistencia;
 
+import java.util.List;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
@@ -59,11 +61,11 @@ class SQLSucursal
 	}
 	
 	/**
-	 * 
-	 * @param pm
-	 * @param direccion
-	 * @param ciudad
-	 * @return
+	 * Crea y ejecuta una sentenca que consulta una SUCURSAL de la base de datos de SuperAndes
+	 * @param pm - El manejador de la base de datos
+	 * @param direccion - La direccion de la sucursal
+	 * @param ciudad - La ciudad de la sucursal
+	 * @return La sucursal consultada
 	 */
 	public Sucursal darSucursalPorDireccionYCiudad (PersistenceManager pm, String direccion, String ciudad) 
 	{
@@ -71,5 +73,31 @@ class SQLSucursal
 		q.setResultClass(Sucursal.class);
 		q.setParameters(ciudad, direccion);
 		return (Sucursal) q.executeUnique();
+	}
+	
+	/**
+	 * Crea y ejecuta una sentenca que elimina una SUCURSAL de la base de datos de SuperAndes
+	 * @param pm - El manejador de la base de datos
+	 * @param direccion - La direccion de la sucursal
+	 * @param ciudad - La ciudad de la sucursal
+	 * @return Número de tuplas eliminadas
+	 */
+	public long eliminarSucursalPorDireccionYCiudad (PersistenceManager pm, String direccion, String ciudad) 
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlSucursal() + " WHERE ciudad = ? AND direccion_sucursal = ?");
+		q.setParameters(ciudad, direccion);
+		return (long) q.executeUnique();
+	}
+	
+	/**
+	 * Crea y ejecuta una sentencia que consulta todad las SUCURSALES de la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Lista de tuplas de sucursal
+	 */
+	public List<Sucursal> darSucursales (PersistenceManager pm) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlSucursal() );
+		q.setResultClass(Sucursal.class);
+		return (List<Sucursal>) q.executeUnique();
 	}
 }

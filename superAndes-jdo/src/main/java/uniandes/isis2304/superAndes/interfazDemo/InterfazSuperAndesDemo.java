@@ -29,6 +29,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
+
 import uniandes.isis2304.superAndes.interfazApp.InterfazSuperAndesApp;
 import uniandes.isis2304.superAndes.interfazApp.PanelDatos;
 import uniandes.isis2304.superAndes.negocio.SuperAndes;
@@ -204,28 +205,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		}        
 		setJMenuBar ( menuSA );	
 	}
-	// -----------------------------------------------------------------
-	// Métodos de interacción
-	// -----------------------------------------------------------------
-	/**
-	 * Método para la ejecución de los eventos que enlazan el menú con los métodos de negocio
-	 * Invoca al método correspondiente según el evento recibido
-	 * @param pEvento - El evento del usuario
-	 */
-	@Override
-	public void actionPerformed(ActionEvent pEvento)
-	{
-		String evento = pEvento.getActionCommand( );		
-		try 
-		{
-			Method req = InterfazSuperAndesApp.class.getMethod ( evento );			
-			req.invoke ( this );
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		} 
-	}
+
 	//TODO all CRUD 
 	//----------------------------------------------------------------------------------------------
 	// BODEGA
@@ -313,65 +293,181 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		}
 		return resp;
 	}
-<<<<<<< HEAD
-	
+
+
 	//BORRADOR
-//	public void demoX ( )
-//	{
-//		try 
-//		{
-//			// Ejecución de la demo y recolección de los resultados
-//			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-//			VOX x1 = superAndes.adicionarX();
-//
-//			List <VOX> lista = superAndes.darVOX ();
-//
-//			long xsEliminadas = superAndes.eliminarX();
-//
-//			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
-//			String resultado = "Demo de creación y listado de \n\n";
-//			resultado += "\n\n************ Generando datos de prueba ************ \n";
-//			resultado += "Adicionado la : " + x1 + "\n";
-//			resultado += "\n\n************ Ejecutando la demo ************ \n";
-//			resultado += "\n" + listarYs (lista);
-//			resultado += "\n\n************ Limpiando la base de datos ************ \n";
-//			resultado += xsEliminadas + "  eliminados\n";
-//			resultado += "\n Demo terminada";
-//
-//			panelDatos.actualizarInterfaz(resultado);
-//		} 
-//		catch (Exception e) 
-//		{
-//			String resultado = generarMensajeError(e);
-//			panelDatos.actualizarInterfaz(resultado);
-//		}
-//	}
-//	private String listarX (List<VOX> lista) 
-//	{
-//		String resp = "Las  existentes son:\n";
-//		int i = 1;
-//		for (VOX x : lista)
-//		{
-//			resp += i++ + ". " + x.toString() + "\n";
-//		}
-//		return resp;
-//	}
-	
+	//	public void demoX ( )
+	//	{
+	//		try 
+	//		{
+	//			// Ejecución de la demo y recolección de los resultados
+	//			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
+	//			VOX x1 = superAndes.adicionarX();
+	//
+	//			List <VOX> lista = superAndes.darVOX ();
+	//
+	//			long xsEliminadas = superAndes.eliminarX();
+	//
+	//			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+	//			String resultado = "Demo de creación y listado de \n\n";
+	//			resultado += "\n\n************ Generando datos de prueba ************ \n";
+	//			resultado += "Adicionado la : " + x1 + "\n";
+	//			resultado += "\n\n************ Ejecutando la demo ************ \n";
+	//			resultado += "\n" + listarYs (lista);
+	//			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+	//			resultado += xsEliminadas + "  eliminados\n";
+	//			resultado += "\n Demo terminada";
+	//
+	//			panelDatos.actualizarInterfaz(resultado);
+	//		} 
+	//		catch (Exception e) 
+	//		{
+	//			String resultado = generarMensajeError(e);
+	//			panelDatos.actualizarInterfaz(resultado);
+	//		}
+	//	}
+	//	private String listarX (List<VOX> lista) 
+	//	{
+	//		String resp = "Las  existentes son:\n";
+	//		int i = 1;
+	//		for (VOX x : lista)
+	//		{
+	//			resp += i++ + ". " + x.toString() + "\n";
+	//		}
+	//		return resp;
+	//	}
+
+	//--------------------------------------------------------------------
+	// Demo PROVEEDOR
+	//--------------------------------------------------------------------
 	public void demoProveedores()
 	{
 		try
 		{
 			//Ejecución de la demo y recolección de los resultados
-			VOProveedor pro1 = superAndes.adicionarProveedor(123456789, "Alpina");
-			VOProveedor pro2 = superAndes.adicionarProveedor(234567891, "Doria");
-			VOProveedor pro3 = superAndes.adicionarProveedor(345678912, "Saltín");
-			
-			List<VOProveedor> proveedores = superAndes.darVO
-			
-			
+			VOProveedor pro1 = superAndes.adicionarProveedor(123546987, "Alpina");
+
+			List<VOProveedor> lista = superAndes.darVOProveedores();
+
+			long proveedoresEliminados = superAndes.eliminarProveedorPorNit(123546987);
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de Proveedores\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado el proveedor: " + pro1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarProveedores (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += proveedoresEliminados + " Proveedores eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);	
 		}
 		catch(Exception e)
-=======
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	private String listarProveedores (List<VOProveedor> lista) 
+	{
+		String resp = "Los proveedores existentes son:\n";
+		int i = 1;
+		for (VOProveedor proveedor : lista)
+		{
+			resp += i++ + ". " + proveedor.toString() + "\n";
+		}
+		return resp;
+	}
+
+	//--------------------------------------------------------------------
+	// Demo CLIENTE
+	//--------------------------------------------------------------------
+	public void demoClientes()
+	{
+		try
+		{
+			//Ejecución de la demo y recolección de los resultados
+			VOCliente cli1 = superAndes.adicionarCliente("majocava0417@hotmail.com", "María Ocampo");
+
+			List<VOCliente> lista = superAndes.darVOClientes();
+
+			long clientesEliminados = superAndes.eliminarClientePorCorreo("majocava0417@hotmail.com");
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de Proveedores\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado el cliente: " + cli1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarClientes (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += clientesEliminados + " Clientes eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);	
+		}
+		catch(Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	private String listarClientes (List<VOCliente> lista) 
+	{
+		String resp = "Los clientes existentes son:\n";
+		int i = 1;
+		for (VOCliente cliente : lista)
+		{
+			resp += i++ + ". " + cliente.toString() + "\n";
+		}
+		return resp;
+	}
+
+	//--------------------------------------------------------------------
+	// Demo SUCURSAL
+	//--------------------------------------------------------------------
+	public void demoSucursales()
+	{
+		try
+		{
+			//Ejecución de la demo y recolección de los resultados
+			VOSucursal cli1 = superAndes.adicionarSucursal("50 m^2", "Calle 7 #5-74", "Bogotá", "Candelaria");
+
+			List<VOSucursal> lista = superAndes.darVOSucursales();
+
+			long clientesEliminados = superAndes.eliminarSucursal("Calle 7 #5-74", "Bogotá");
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de Proveedores\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado el cliente: " + cli1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarSucursales (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += clientesEliminados + " Sucursales eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);	
+		}
+		catch(Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	private String listarSucursales (List<VOSucursal> lista) 
+	{
+		String resp = "Las sucursales existentes son:\n";
+		int i = 1;
+		for (VOSucursal cliente : lista)
+		{
+			resp += i++ + ". " + cliente.toString() + "\n";
+		}
+		return resp;
+	}
 	//----------------------------------------------------------------------------------------------
 	// ESTANTE
 	//----------------------------------------------------------------------------------------------
@@ -530,14 +626,12 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		} 
 		catch (Exception e) 
->>>>>>> b711668ad3f2a450f71d0b33a67542803f8388ba
+
 		{
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-<<<<<<< HEAD
-=======
 	private String listarTipoProductos (List<VOTipoProducto> lista) 
 	{
 		String resp = "Las  existentes son:\n";
@@ -765,7 +859,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 	}
 
 
->>>>>>> b711668ad3f2a450f71d0b33a67542803f8388ba
+
 	//-------------------------------------------------------------------------------------
 	//* 			Métodos administrativos
 	//--------------------------------------------------------------------------------------
@@ -990,6 +1084,29 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	// -----------------------------------------------------------------
+	// Métodos de interacción
+	// -----------------------------------------------------------------
+	/**
+	 * Método para la ejecución de los eventos que enlazan el menú con los métodos de negocio
+	 * Invoca al método correspondiente según el evento recibido
+	 * @param pEvento - El evento del usuario
+	 */
+	@Override
+	public void actionPerformed(ActionEvent pEvento)
+	{
+		String evento = pEvento.getActionCommand( );		
+		try 
+		{
+			Method req = InterfazSuperAndesDemo.class.getMethod ( evento );			
+			req.invoke ( this );
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
 	}
 
 	// -----------------------------------------------------------------

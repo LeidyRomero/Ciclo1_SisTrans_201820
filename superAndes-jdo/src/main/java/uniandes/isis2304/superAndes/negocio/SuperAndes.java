@@ -493,7 +493,7 @@ public class SuperAndes {
 		Log.info("Saliendo de borrar las compras");
 		return numero;
 	}
-	
+
 	public Comprados registrarCompra(String pCodigoBarras,int pCantidad, String correo)
 	{
 		Log.info("Registrando comprados "+ pCodigoBarras+", "+pCodigoBarras);
@@ -515,6 +515,25 @@ public class SuperAndes {
 		return cliente;
 	}
 
+	public List<VOCliente> darVOClientes ()
+	{
+		Log.info ("Generando los VO de Cliente");
+		List<VOCliente> voCliente = new LinkedList<VOCliente> ();
+		for (Cliente cliente : pp.buscarClientes())
+		{
+			voCliente.add (cliente);
+		}
+		Log.info ("Generando los VO de Cliente: " + voCliente.size () + " clientes existentes");
+		return voCliente;
+	}
+
+	public long eliminarClientePorCorreo(String correo)
+	{
+		Log.info("Eliminando cliente "+ correo);
+		long cliente = pp.eliminarClientePorCorreo(correo);
+		Log.info("Saliendo de eliminar cliente "+ correo);
+		return cliente;
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar SUCURSAL
 	//---------------------------------------------------------------------
@@ -525,7 +544,26 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar sucursal "+ tamanio+", "+direccion+", "+ciudad+", "+nombre);
 		return sucursal;
 	}
+	
+	public List<VOSucursal> darVOSucursales ()
+	{
+		Log.info ("Generando los VO de Sucursal");
+		List<VOSucursal> voSucursal = new LinkedList<VOSucursal> ();
+		for (Sucursal sucursal : pp.buscarSucursales())
+		{
+			voSucursal.add (sucursal);
+		}
+		Log.info ("Generando los VO de Sucursal: " + voSucursal.size () + " sucursales existentes");
+		return voSucursal;
+	}
 
+	public long eliminarSucursal(String direccion, String ciudad)
+	{
+		Log.info("Eliminando sucursal "+ direccion+", "+ciudad);
+		long sucursal = pp.eliminarSucursalPorDireccionYCiudad(direccion, ciudad);
+		Log.info("Saliendo de eliminar sucursal "+ direccion+", "+ciudad);
+		return sucursal;
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar PROMOCION
 	//---------------------------------------------------------------------
@@ -537,7 +575,7 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar promocion "+ fechaInicio+", "+fechaFin+", "+descripcion+", "+codBarras+", "+uniDisponibles+", "+uniVendidas);
 		return promocion;
 	}
-	
+
 	public List<Promocion> darPromocionesMasPopulares()
 	{
 		Log.info("Consultando promociones mas populares ");
@@ -556,7 +594,7 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar orden pedido "+ nitProveedor+", "+fechaEsperada+", "+ciudad+", "+direccionSucursal+", "+direccionBodega);
 		return ordenPedido;
 	}
-	
+
 	public OrdenPedido llegadaOrdenPedido(long idPedido, String calificacion)
 	{
 		Log.info("Modificando orden pedido "+ idPedido +", "+calificacion);
@@ -591,12 +629,23 @@ public class SuperAndes {
 	{
 		Log.info ("Generando los VO de Proveedor");
 		List<VOProveedor> voProveedor = new LinkedList<VOProveedor> ();
-		for (Proveedor proveedor: pp.buscarProveedores())
+		if(pp.buscarProveedores().size() > 0)
 		{
-			voProveedor.add (proveedor);
+			for (Proveedor proveedor: pp.buscarProveedores())
+			{
+				voProveedor.add (proveedor);
+			}
 		}
-		Log.info ("Generando los VO de Proveedor: " + voProveedor.size () + " bodegas existentes");
+		Log.info ("Generando los VO de Proveedor: " + voProveedor.size () + " proveedores existentes");
 		return voProveedor;
+	}
+
+	public long eliminarProveedorPorNit(int nitProveedor)
+	{
+		Log.info("Eliminando proveedor "+ nitProveedor);
+		long proveedor = pp.eliminarProveedorPorNit(nitProveedor);
+		Log.info("Saliendo de eliminar proveedor "+ nitProveedor);
+		return proveedor;
 	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar CANTIDAD EN ESTANTES
@@ -630,7 +679,7 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar sucursal facturas "+ idFactura+", "+direccion+", "+ciudad);
 		return sucursalFactura;
 	}
-	
+
 	public List<String> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
 	{
 		Log.info("Consultando el dinero recolectado por sucursales en periodo de tiempo: " + fechaInicio + ", "+fechaFin);
