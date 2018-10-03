@@ -966,14 +966,40 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	public List<Producto> buscarProductosVentasSuperiores(double pVentasMinimas)
+	public List<Producto> buscarProductosCategoria(String pCategoria)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
 		Transaction t = manager.currentTransaction();
 		try 
 		{
 			t.begin();
-			List<Producto> productos = sqlProducto.darProductosVentasSuperioresAXEnRangoFechas(manager, pVentasMinimas);
+			List<Producto> productos = sqlProducto.darProductosCategoria(manager, pCategoria);
+			t.commit();
+			Log.trace("Saliendo de buscar productos de una categoria: ");
+			return productos;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Producto> buscarProductosVentasSuperiores(double pVentasMinimas, Date pFechaInicial, Date pFechaFinal)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Producto> productos = sqlProducto.darProductosVentasSuperioresAXEnRangoFechas(manager, pVentasMinimas, pFechaInicial, pFechaFinal);
 			t.commit();
 			Log.trace("Saliendo de buscar productos ventas superiores: ");
 			return productos;

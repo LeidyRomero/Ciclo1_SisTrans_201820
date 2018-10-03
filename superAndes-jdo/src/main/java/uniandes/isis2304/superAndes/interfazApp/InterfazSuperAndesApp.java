@@ -518,15 +518,15 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		}
 	}
 	private static boolean isHexNumber (String cadena) {
-		  try {
-		    Long.parseLong(cadena, 16);
-		    return true;
-		  }
-		  catch (NumberFormatException ex) {
-		    // Error handling code...
-		    return false;
-		  }
+		try {
+			Long.parseLong(cadena, 16);
+			return true;
 		}
+		catch (NumberFormatException ex) {
+			// Error handling code...
+			return false;
+		}
+	}
 	public Date formatoFecha( String cadena ) throws ParseException
 	{
 		SimpleDateFormat formato1 = new SimpleDateFormat( "yyyy-MM-dd HH:mm");
@@ -534,7 +534,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	}
 	public void buscarProductoCaracteristica() throws HeadlessException, ParseException
 	{
-		String[] opciones = {"Precio en rango", "Fecha de vencimiento", "Peso en rango", "Volumen en rango","Vendidos por proveedor","Disponibles en ciudad", "Disponibles en sucursal", "Por tipo","Ventas superiores a un valor"};
+		String[] opciones = {"Precio en rango", "Fecha de vencimiento", "Peso en rango", "Volumen en rango","Vendidos por proveedor","Disponibles en ciudad", "Disponibles en sucursal", "Por tipo", "Por categoria","Ventas superiores a un valor"};
 		ImageIcon icon = new ImageIcon("./data/informacion.png");
 		String seleccion = (String)JOptionPane.showInputDialog(null, "Criterio de busqueda: ", "Buscar productos", JOptionPane.QUESTION_MESSAGE, icon, opciones, opciones[0]);
 
@@ -552,13 +552,19 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 			int result = JOptionPane.showConfirmDialog(null, aux,"Rango de precios", JOptionPane.OK_CANCEL_OPTION);
 			if (result == JOptionPane.OK_OPTION) {
-				//TODO
+				try
+				{
+					superAndes.buscarProductosPrecioEnRango(Double.parseDouble(minField.getText()), Double.parseDouble(maxField.getText()));
+				}
+				catch(NumberFormatException e)
+				{
+					JOptionPane.showMessageDialog (this, "Valores ingresados no validos", "Buscar producto no exitoso", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 		else if(seleccion.equals(opciones[1]))
 		{
-			Date fecha = formatoFecha(JOptionPane.showInputDialog(this, "Fecha de vencimiento","Fecha: ",JOptionPane.QUESTION_MESSAGE));
-			//TODO: negocio
+			superAndes.buscarProductosFechaVencimiento(formatoFecha(JOptionPane.showInputDialog(this, "Fecha de vencimiento","Fecha: ",JOptionPane.QUESTION_MESSAGE)));
 		}
 		else if(seleccion.equals(opciones[2]))
 		{
@@ -574,7 +580,14 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 			int result = JOptionPane.showConfirmDialog(null, aux,"Rango de pesos", JOptionPane.OK_CANCEL_OPTION);
 			if (result == JOptionPane.OK_OPTION) {
-				//TODO: negocio
+				try
+				{
+					superAndes.buscarProductosPesoEnRango(Double.parseDouble(minField.getText()),Double.parseDouble( maxField.getText()));
+				}
+				catch(NumberFormatException e)
+				{
+					JOptionPane.showMessageDialog (this, "Valores ingresados no validos", "Buscar producto no exitoso", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 		else if(seleccion.equals(opciones[3]))
@@ -591,17 +604,25 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 			int result = JOptionPane.showConfirmDialog(null, aux,"Rango de vólumenes", JOptionPane.OK_CANCEL_OPTION);
 			if (result == JOptionPane.OK_OPTION) {
-				//TODO: negocio
+				try
+				{
+					superAndes.buscarProductosVolumenEnRango(Double.parseDouble(minField.getText()), Double.parseDouble(maxField.getText()));
+				}
+				catch(NumberFormatException e)
+				{
+					JOptionPane.showMessageDialog (this, "Valores ingresados no validos", "Buscar producto no exitoso", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 		else if(seleccion.equals(opciones[4]))
 		{
 			int proveedor = Integer.parseInt(JOptionPane.showInputDialog(this, "Proveedor","NIT: ",JOptionPane.QUESTION_MESSAGE));
-			//TODO: negocio
+			superAndes.buscarProductosVendidosPorProveedor(proveedor);
 		}
 		else if(seleccion.equals(opciones[5]))
 		{
 			String ciudad = JOptionPane.showInputDialog(this, "Disponibles","Ciudad: ",JOptionPane.QUESTION_MESSAGE);
+			superAndes.buscarProductosDisponiblesCiudad(ciudad);
 		}
 		else if(seleccion.equals(opciones[6]))
 		{
@@ -617,16 +638,45 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 			int result = JOptionPane.showConfirmDialog(null, aux,"Sucursal", JOptionPane.OK_CANCEL_OPTION);
 			if (result == JOptionPane.OK_OPTION) {
-				//TODO: negocio
+				superAndes.buscarProductosDisponiblesSucursal(ciudadField.getText(), direccionField.getText());
 			}
 		}
 		else if(seleccion.equals(opciones[7]))
 		{
 			String tipo = JOptionPane.showInputDialog(this, "Tipo","Tipo: ",JOptionPane.QUESTION_MESSAGE);
+			superAndes.buscarProductosTipo(tipo);
 		}
 		else if(seleccion.equals(opciones[8]))
 		{
-			double ventas = Integer.parseInt(JOptionPane.showInputDialog(this, "Número de ventas","Ventas: ",JOptionPane.QUESTION_MESSAGE));
+			String categoria = JOptionPane.showInputDialog(this, "Categoria","Categoria: ",JOptionPane.QUESTION_MESSAGE);
+			superAndes.buscarProductosCategoria(categoria);
+		}
+		else if(seleccion.equals(opciones[8]))
+		{
+			JTextField ventasField = new JTextField(15);
+			JTextField fechaInicialField = new JTextField(15);
+			JTextField fechaFinalField = new JTextField(15);
+
+			JPanel aux = new JPanel();
+			aux.add(new JLabel("Valor de ventas:"));
+			aux.add(ventasField);
+			aux.add(new JLabel("Fecha Inicial:"));
+			aux.add(fechaInicialField);
+			aux.add(Box.createHorizontalStrut(15)); // a spacer
+			aux.add(new JLabel("FechaFinal:"));
+			aux.add(fechaFinalField);
+
+			int result = JOptionPane.showConfirmDialog(null, aux,"Ventas", JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_OPTION) {
+				try
+				{
+					superAndes.buscarProductosVentasSuperiores(Double.parseDouble(ventasField.getText()),formatoFecha( fechaInicialField.getText()),formatoFecha( fechaFinalField.getText()));
+				}
+				catch(NumberFormatException e)
+				{
+					JOptionPane.showMessageDialog (this, "Valores ingresados no validos", "Buscar producto no exitoso", JOptionPane.ERROR_MESSAGE);
+				}
+			}
 		}
 	}
 	//-------------------------------------------------------------------------------
