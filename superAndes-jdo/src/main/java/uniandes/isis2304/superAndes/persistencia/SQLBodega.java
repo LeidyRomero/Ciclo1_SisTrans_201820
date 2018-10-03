@@ -35,7 +35,8 @@ class SQLBodega
 	//TODO RFC3 - Mostrar el indice de ocupacion de cada estante
 	public List<Bodega> buscarBodegasSucursal(PersistenceManager manager, String pDireccion, String pCiudad)
 	{
-		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlBodega()+"WHERE ciudad = ? AND direccion_sucursal = ?");
+		System.out.println("aqui");
+		Query q = manager.newQuery(SQL, "SELECT SUM(volumen_bodega) capTotal FROM (SELECT * FROM" + persistencia.getSqlBodega()+"WHERE ciudad = ? AND direccion_sucursal = ?) GROUP BY ciudad,direccion_sucursal,direccion_bodega");
 		q.setParameters(pCiudad,pDireccion);
 		q.setResultClass(Bodega.class);
 		return (List<Bodega>) q.executeList();

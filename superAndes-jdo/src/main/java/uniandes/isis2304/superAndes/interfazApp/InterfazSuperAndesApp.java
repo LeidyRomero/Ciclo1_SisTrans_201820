@@ -787,6 +787,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	}
 	public void buscarIndiceBodega()
 	{
+		System.out.println("entra");
 		JTextField ciudadField = new JTextField(15);
 		JTextField direccionField = new JTextField(15);
 
@@ -800,6 +801,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		int result = JOptionPane.showConfirmDialog(null, aux,"Buscar indice de ocupabilidad bodegas", JOptionPane.OK_CANCEL_OPTION);
 		if (result == JOptionPane.OK_OPTION) {
 			panelDatos.actualizarInterfaz(superAndes.buscarIndiceBodega(direccionField.getText(), ciudadField.getText()));
+
 		}
 	}
 	//-------------------------------------------------------------------------------

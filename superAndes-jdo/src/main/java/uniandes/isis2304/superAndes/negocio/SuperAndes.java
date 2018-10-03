@@ -343,9 +343,17 @@ public class SuperAndes {
 		Log.info("Iniciando calculo de indice de bodega ");
 		List<Bodega> bodegas = pp.buscarBodegasSucursal(pDireccion, pCiudad);
 		Log.info("Saliendo de calculo de indice de bodega ");
+		double capActual = 0;
+		double capTotal = 0;
+
 		for(int i = 0;i<bodegas.size();i++)
 		{
-			double indice = (double)(pp.buscarCantidadActualBodega(bodegas.get(i).darDireccion(),bodegas.get(i).getDireccionSucursal(),bodegas.get(i).getCiudad())/bodegas.get(i).darVolumen())*100;
+			capActual += (double)(pp.buscarCantidadActualBodega(bodegas.get(i).darDireccion(),bodegas.get(i).getDireccionSucursal(),bodegas.get(i).getCiudad()));
+			capTotal += bodegas.get(i).darVolumen();
+		}
+		for(int i = 0;i<bodegas.size();i++)
+		{
+			double indice = (double)(capActual/capTotal)*100;
 			mensaje+="de la bodega con dirección"+bodegas.get(i).darDireccion()+", de la ciudad"+bodegas.get(i).getCiudad()+"es: "+indice+"\n";
 		}
 		return mensaje;

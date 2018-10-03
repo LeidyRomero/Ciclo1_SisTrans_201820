@@ -1,0 +1,20 @@
+17:32:10,246 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Iniciando calculo de indice de bodega 
+17:32:10,812 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "SELECT * FROM A_BODEGAWHERE ciudad = ? AND direccion_sucursal = ?".
+ORA-00933: comando SQL no terminado correctamente
+
+17:32:10,946 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de calculo de indice de bodega 
+17:34:55,929 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Iniciando calculo de indice de bodega 
+17:34:56,272 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "SELECT * FROM A_BODEGAWHERE ciudad = ? AND direccion_sucursal = ?".
+ORA-00933: comando SQL no terminado correctamente
+
+17:34:56,311 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de calculo de indice de bodega 
+17:58:41,392 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Iniciando calculo de indice de bodega 
+17:58:41,826 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "SELECT * FROM A_BODEGAWHERE ciudad = ? AND direccion_sucursal = ?".
+ORA-00933: comando SQL no terminado correctamente
+
+17:58:41,872 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de calculo de indice de bodega 
+17:59:41,084 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Iniciando calculo de indice de bodega 
+17:59:41,450 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "SELECT * FROM A_BODEGAWHERE ciudad = ? AND direccion_sucursal = ?".
+ORA-00933: comando SQL no terminado correctamente
+
+17:59:41,486 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de calculo de indice de bodega 
