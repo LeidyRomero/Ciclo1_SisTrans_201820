@@ -1,7 +1,7 @@
 {
 	"title": "Demostracion de SuperAndes",
 	"frameH": 600,
-	"frameW": 800,
+	"frameW": 1400,
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menu":
 	[
@@ -11,6 +11,10 @@
 				{
 					"label": "CRD de Sucursales",
 					"event": "demoSucursales"
+				},
+				{
+					"label": "CRD Productos ofrecidos",
+					"event": "demoProductosOfrecidos"
 				}
 			]
 		},		
@@ -22,8 +26,9 @@
 					"event": "demoBodega"
 				},
 				{
-					"label": "Eliminar Bodega por direccion",
-					"event": "demoElimarBodega"
+					"label": "CRD Cantidad en bodega",
+					"event": "demoCantidadEnBodega"
+				}
 			]
 		},
 		{ "menuTitle": "Estantes",
@@ -45,6 +50,10 @@
 					"label": "Aumentar nivel abastecimiento",
 					"event": "demoAumentarNivelAbastecimiento"
 				},
+				{
+					"label": "CRD Cantidad en estantes",
+					"event": "demoCantidadEnEstantes"
+				}
 			]
 		},
 		{ "menuTitle": "Productos",
@@ -61,6 +70,18 @@
 				{
 					"label": "Eliminar Producto por codigoBarras",
 					"event": "demoEliminarProductoCodigo"
+				},
+				{
+					"label": "CRD Categoria",
+					"event": "demoCategoria"
+				},
+				{
+					"label": "CRD Tipo",
+					"event": "demoTipo"
+				},
+				{
+					"label": "CRD categoria productos",
+					"event": "demoProductoCategoria"
 				}
 			]
 		},
@@ -68,17 +89,25 @@
 		  "options":
 			[
 				{
-					"label": "CRD",
-					"event": "demo"
+					"label": "CRD Proveedores",
+					"event": "demoProveedores"
+				},
+				{
+					"label": "CRD Proveen",
+					"event": "demoProveen"
 				}
 			]
 		},
-		{ "menuTitle": "Pedidos",
+		{ "menuTitle": "Orden pedido",
 		  "options":
 			[
 				{
-					"label": "CRD",
-					"event": "demo"
+					"label": "CRD Orden pedido",
+					"event": "demoPedidos"
+				},
+				{
+					"label": "CRD Pedido producto",
+					"event": "demoPedidoProducto"
 				}
 			]
 		},
@@ -86,21 +115,37 @@
 		  "options":
 			[
 				{
+					"label": "CRD Cliente",
+					"event": "demoCliente"
+				},
+				{
 					"label": "CRD Empresa",
 					"event": "demoEmpresa"
 				},
 				{
 					"label": "CRD Persona",
 					"event": "demoPersona"
-				}		
+				},	
+				{
+					"label": "CRD Historial facturas",
+					"event": "demoHistorial"
+				}	
 			]
 		},
 		{ "menuTitle": "Facturas",
 		  "options":
 			[
 				{
-					"label": "",
-					"event": "demo"
+					"label": "CRD Factura",
+					"event": "demoFactura"
+				},
+				{
+					"label": "CRD Facturas",
+					"event": "demoFacturas"
+				},
+				{
+					"label": "CRD Comprados",
+					"event": "demoComprados"
 				}
 			]
 		},	
@@ -108,9 +153,13 @@
 		  "options":
 			[
 				{
-					"label": "CRD",
-					"event": "demo"
-				}			
+					"label": "CRD Promocion",
+					"event": "demoPromocion"
+				},
+				{
+					"label": "CRD Promociones",
+					"event": "demoPromociones"
+				}	
 			]
 		},	
 		{ "menuTitle": "Documentacion",

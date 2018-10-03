@@ -2,6 +2,7 @@ package uniandes.isis2304.superAndes.negocio;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -240,6 +241,52 @@ public class SuperAndes {
 			mensaje+="de la bodega con dirección"+bodegas.get(i).darDireccion()+", de la ciudad"+bodegas.get(i).getCiudad()+"es: "+indice+"\n";
 		}
 		return mensaje;
+	}
+	public List<VOBodega> darVOBodegas ()
+	{
+		Log.info ("Generando los VO de Bodegas");
+		List<VOBodega> voBodega = new LinkedList<VOBodega> ();
+		for (Bodega bodega: pp.buscarBodegas())
+		{
+			voBodega.add (bodega);
+		}
+		Log.info ("Generando los VO de Bodegas: " + voBodega.size () + " bodegas existentes");
+		return voBodega;
+	}
+	public long eliminarBodega(String direccionBodega, String direccionSucursal,String ciudad)
+	{
+		Log.info("Borrar la bodega "+ direccionBodega+", "+direccionSucursal+","+ciudad);
+		long numero = pp.eliminarBodega(direccionBodega, direccionSucursal, ciudad);
+		Log.info("Saliendo de borrar la bodega "+ direccionBodega+", "+direccionSucursal+","+ciudad);
+		return numero;
+	}
+	//---------------------------------------------------------------------
+	// Métodos para manejar CANTIDAD EN BODEGA
+	//---------------------------------------------------------------------
+	public CantidadEnBodega adicionarCantidadEnBodega( String pDireccionBodega, String pDireccionSucursal, String pCiudad, int pCantidadActual, int pCantidadMinima, String pCodigoBarras)
+	{
+		Log.info("Adicionando cantidad enbodega "+ pDireccionBodega);
+		CantidadEnBodega cantidadBodega = pp.adicionarCantidadEnBodega(pDireccionBodega, pDireccionSucursal, pCiudad, pCantidadActual, pCantidadMinima, pCodigoBarras);
+		Log.info("Saliendo de adicionar cantidad en bodega "+ pDireccionBodega);
+		return cantidadBodega;
+	}
+	public List<VOCantidadEnBodega> darVOCantidadEnBodega ()
+	{
+		Log.info ("Generando los VO de Cantidad en bodegas");
+		List<VOCantidadEnBodega> voCantidadEnBodega = new LinkedList<VOCantidadEnBodega> ();
+		for (CantidadEnBodega cantidadEnBodega: pp.buscarCantidadEnBodega())
+		{
+			voCantidadEnBodega.add (cantidadEnBodega);
+		}
+		Log.info ("Generando los VO de Bodegas: " + voCantidadEnBodega.size () + " bodegas existentes");
+		return voCantidadEnBodega;
+	}
+	public long eliminarCantidadEnBodega(String pCodigo, String pDireccionSucursal, String pDireccionBodega, String pCiudad)
+	{
+		Log.info("Borrar la cantidad en bodega ");
+		long numero = pp.eliminarCantidadEnBodega(pCodigo, pDireccionSucursal, pDireccionBodega, pCiudad);
+		Log.info("Saliendo de borrar la cantidad en bodega ");
+		return numero;
 	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar ESTANTE

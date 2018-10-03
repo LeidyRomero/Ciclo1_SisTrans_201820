@@ -39,4 +39,10 @@ class SQLBodega
 		q.setResultClass(Bodega.class);
 		return (List<Bodega>) q.executeList();
 	}
+	public long eliminarBodega(PersistenceManager manager,String direccionBodega, String direccionSucursal,String ciudad)
+	{
+		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlBodega() + " WHERE direccion_bodega = ? AND direccion_sucursal = ? AND ciudad = ?");
+		add.setParameters(direccionBodega,direccionSucursal,ciudad);
+		return (long) add.executeUnique();
+	}
 }
