@@ -500,7 +500,7 @@ public class SuperAndes {
 		Producto producto = pp.buscarProductoCodigoBarras(pCodigoBarras);
 		Factura factura = pp.adicionarFactura(pCantidad*producto.getPrecioUnitario(), new Timestamp(System.currentTimeMillis()));
 		HistorialCompras hc = pp.adicionarHistorialCompra(correo, factura.getIdFactura());
-		Comprados comprado = pp.adicionarComprados(pCodigoBarras, pCantidad, pCantidad*producto.getPrecioUnitario(), ""+factura.getIdFactura());
+		Comprados comprado = pp.adicionarComprados(pCodigoBarras, pCantidad, pCantidad*producto.getPrecioUnitario(), factura.getIdFactura());
 		Log.info("Saliendo de registrar comprados "+ pCodigoBarras+", "+pCodigoBarras);
 		return comprado;
 	}
