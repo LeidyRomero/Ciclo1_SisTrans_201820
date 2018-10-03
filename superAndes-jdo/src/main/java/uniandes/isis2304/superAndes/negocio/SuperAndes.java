@@ -35,6 +35,7 @@ public class SuperAndes {
 	public SuperAndes (JsonObject tableConfig)
 	{
 		pp = PersistenciaSuperAndes.getInstance (tableConfig);
+		pp.finalizarPromocionesPendientes();
 	}
 	//-----------------------------------------------------------------------------
 	//   Metodos para manejar los PRODUCTOS
@@ -314,6 +315,14 @@ public class SuperAndes {
 		Log.info("Adicionando orden pedido "+ nitProveedor+", "+fechaEsperada+", "+ciudad+", "+direccionSucursal+", "+direccionBodega);
 		OrdenPedido ordenPedido = pp.adicionarOrdenPedido(fechaEsperada, nitProveedor, ciudad, direccionSucursal, direccionBodega);
 		Log.info("Saliendo de adicionar orden pedido "+ nitProveedor+", "+fechaEsperada+", "+ciudad+", "+direccionSucursal+", "+direccionBodega);
+		return ordenPedido;
+	}
+	
+	public OrdenPedido llegadaOrdenPedido(long idPedido, String calificacion)
+	{
+		Log.info("Modificando orden pedido "+ idPedido +", "+calificacion);
+		OrdenPedido ordenPedido = pp.llegadaOrdenPedido(idPedido, calificacion);
+		Log.info("Saliendo de modificar orden pedido "+ idPedido +", "+calificacion);
 		return ordenPedido;
 	}
 

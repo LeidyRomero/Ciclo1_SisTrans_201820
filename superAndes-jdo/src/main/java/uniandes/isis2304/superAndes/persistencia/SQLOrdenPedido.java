@@ -1,9 +1,13 @@
 package uniandes.isis2304.superAndes.persistencia;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
+import uniandes.isis2304.superAndes.negocio.OrdenPedido;
+import uniandes.isis2304.superAndes.negocio.Promocion;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto ORDEN PEDIDO de SuperAndes
@@ -15,17 +19,17 @@ class SQLOrdenPedido
 	//------------------------------------------------------------------
 	// CONSTANTES
 	//------------------------------------------------------------------
-	
+
 	/**
 	 * Cadena que representa el tipo de consulta que se va a realizar en las sentencias de acceso a la base de datos
 	 * Se renombra acá para facilitar la escritura de las sentencias
 	 */
 	private final static String SQL = PersistenciaSuperAndes.SQL;
-	
+
 	//------------------------------------------------------------------
 	// ATRIBUTOS
 	//------------------------------------------------------------------
-	
+
 	private PersistenciaSuperAndes persistencia;
 
 	//------------------------------------------------------------------
@@ -39,7 +43,7 @@ class SQLOrdenPedido
 	{
 		this.persistencia = persistencia;
 	}
-	
+
 	/**
 	 * Crea y ejecuta una sentencia sql que adiciona una ORDEN DE PEDIDO a la base de datos de SuperAndes
 	 * @param pm - El manejador de persistencia
@@ -53,11 +57,11 @@ class SQLOrdenPedido
 	 */
 	public long adicionaroOrdenPedido (PersistenceManager pm, Timestamp fechaEsperada, int nitProveedor, String ciudad, String direccionSucursal, String direccionBodega, long idPedido) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlOrdenPedido() + "(fecha_esperada_entrega, estado, fecha_entrega, calificacion_pedido, nit_proveedor, ciudad, direccion_sucursal, direccion_bodega, id_pedido) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        q.setParameters(fechaEsperada, "En espera", null, null, nitProveedor, ciudad, direccionSucursal, direccionBodega, idPedido);
-        return (long) q.executeUnique();
+		Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlOrdenPedido() + "(fecha_esperada_entrega, estado, fecha_entrega, calificacion_pedido, nit_proveedor, ciudad, direccion_sucursal, direccion_bodega, id_pedido) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		q.setParameters(fechaEsperada, "En espera", null, null, nitProveedor, ciudad, direccionSucursal, direccionBodega, idPedido);
+		return (long) q.executeUnique();
 	}
-	
+
 	/**
 	 * 
 	 * @param pm
@@ -67,8 +71,23 @@ class SQLOrdenPedido
 	 */
 	public long cambiarEstadoOrdenPedido (PersistenceManager pm, long idPedido, String calificacion) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlOrdenPedido() + " SET estado = ?, calificacion_pedido = ?  WHERE id = ?");
-	     q.setParameters("Recibido",calificacion, idPedido);
-	     return (long) q.executeUnique();            
+		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+		Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlOrdenPedido() + " SET estado = ?, calificacion_pedido = ?, fecha_entrega = ?  WHERE id = ?");
+		q.setParameters("Recibido",calificacion, fechaActual, idPedido);
+		return (long) q.executeUnique();            
+	}
+	
+	/**
+	 * 
+	 * @param pm
+	 * @param idPedido
+	 * @return
+	 */
+	public OrdenPedido darPedidoPorId (PersistenceManager pm, long idPedido) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlOrdenPedido() + " WHERE id_pedido = ?");
+		q.setParameters(idPedido);
+		q.setResultClass(OrdenPedido.class);
+		return (OrdenPedido) q.executeUnique();
 	}
 }

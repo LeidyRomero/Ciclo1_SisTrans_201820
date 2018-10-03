@@ -109,8 +109,6 @@ public class PersistenciaSuperAndes {
 		String unidadPersistencia = tableConfig.get("unidadPersistencia").getAsString();
 		Log.trace("Accediendo a la unidad de persistencia: "+ unidadPersistencia);
 		managerFactory = JDOHelper.getPersistenceManagerFactory(unidadPersistencia);
-		
-		// Cada vez que inicia el sistema debe verificar si hay promociones por finalizar
 	}
 
 
@@ -511,6 +509,17 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+	
+	public void finalizarPromocionesPendientes()
+	{
+		// Cada vez que inicia el sistema debe verificar si hay promociones por finalizar
+		PersistenceManager pm  = managerFactory.getPersistenceManager();
+		List<Promocion> porFinalizar = sqlPromocion.darPromocionesPorFinalizar(pm);
+		for(Promocion actual: porFinalizar)
+		{
+			sqlPromocion.finalizarPromocion(pm, actual.getIdPromocion());
+		}
+	}
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar las ORDENES DE PEDIDO
@@ -528,6 +537,34 @@ public class PersistenciaSuperAndes {
 
 			Log.trace("Insercción promocion: " + idPedido +": "+tuplasInsertadas);
 			return new OrdenPedido(fechaEsperada, "En espera", null, null, nitProveedor, idPedido, ciudad, direccionSucursal, direccionBodega);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public OrdenPedido llegadaOrdenPedido(long idPedido, String calificacion)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlOrdenPedido.cambiarEstadoOrdenPedido(pm, idPedido, calificacion);
+			tx.commit();
+
+			Log.trace("Insercción promocion: " + idPedido +": "+tuplasInsertadas);
+			return sqlOrdenPedido.darPedidoPorId(pm, idPedido);
 		}
 		catch(Exception e)
 		{

@@ -82,9 +82,36 @@ class SQLPromocion
 	public List<Promocion> darPromocionesPorFinalizar (PersistenceManager pm) 
 	{
 		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlPromocion() + " WHERE estado = ? AND (unidades_disponibles = ? OR fecha_final >= ?)");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlPromocion() + " WHERE estado = ? AND (unidades_disponibles = ? OR fecha_final <= ?)");
 		q.setParameters("VIGENTE", 0, fechaActual);
-		q.setResultClass(Proveedor.class);
+		q.setResultClass(Promocion.class);
+		return (List<Promocion>) q.executeList();
+	}
+	
+	/**
+	 * Crea y ejecuta una sentencia sql que modifica una PROMOCION en la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param codigoBarras - Codigo de barras de la promoción a modificar
+	 * @return El número de tuplas insertadas
+	 */
+	public long registrarCompraPromocion (PersistenceManager pm, String codigoBarras) 
+	{
+		 Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlPromocion()+ " SET unidades_disponibles = unidades_disponibles-1, unidades_vendidad = unidades_vendidad+1 WHERE codigo_barras = ?");
+	     q.setParameters(codigoBarras);
+	     return (long) q.executeUnique();            
+	}
+	
+	/**
+	 * Crea y ejecuta una sentencia sql que consultas las PROMOCIONES de la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Lista de tuplas que cumplen con las condiciones
+	 */
+	public List<Promocion> darPromocionesPorProducto (PersistenceManager pm, String codigoBarras) 
+	{
+		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlPromocion() + " WHERE codigo_barras = ?");
+		q.setParameters(codigoBarras);
+		q.setResultClass(Promocion.class);
 		return (List<Promocion>) q.executeList();
 	}
 	
