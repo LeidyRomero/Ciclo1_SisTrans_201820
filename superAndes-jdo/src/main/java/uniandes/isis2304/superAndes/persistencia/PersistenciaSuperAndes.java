@@ -109,6 +109,8 @@ public class PersistenciaSuperAndes {
 		String unidadPersistencia = tableConfig.get("unidadPersistencia").getAsString();
 		Log.trace("Accediendo a la unidad de persistencia: "+ unidadPersistencia);
 		managerFactory = JDOHelper.getPersistenceManagerFactory(unidadPersistencia);
+		
+		// Cada vez que inicia el sistema debe verificar si hay promociones por finalizar
 	}
 
 
@@ -483,6 +485,32 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+	
+	public void finalizarPromocion(long idPromocion)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlPromocion.finalizarPromocion(pm, idPromocion);
+			tx.commit();
+
+			Log.trace("Insercción promocion: " + idPromocion +": "+tuplasInsertadas);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar las ORDENES DE PEDIDO
@@ -713,6 +741,37 @@ public class PersistenciaSuperAndes {
 
 			Log.trace("Insercción proveen: " + nitProveedor +", "+ codigoBarras +": "+tuplasInsertadas);
 			return new Proveen(nitProveedor, codigoBarras);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	//---------------------------------------------------------------------
+	// Métodos para manejar SUCURSAL PROMOCIONES
+	//---------------------------------------------------------------------
+	public SucursalPromociones adicionarSucursalPromociones(long idPromocion, String direccion, String ciudad)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlSucursalPromociones.adicionarSucursalPromociones(pm, idPromocion, direccion, ciudad);
+			tx.commit();
+
+			Log.trace("Insercción sucursal promocion: " + idPromocion +", "+ direccion +", "+ ciudad+ ": "+tuplasInsertadas);
+			return new SucursalPromociones(idPromocion, ciudad, direccion);
 		}
 		catch(Exception e)
 		{

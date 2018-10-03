@@ -49,6 +49,16 @@ public class DialogoRegistrarPromocion extends JDialog implements ActionListener
 	 */
 	private JLabel lbFechaFin;
 	
+	/**
+	 * Etiqueta fecha de inicio
+	 */
+	private JLabel lbDireccion;
+	
+	/**
+	 * Etiqueta fecha de fin
+	 */
+	private JLabel lbCiudad;
+	
     /**
      * Campo de texto para mostrar el nombre
      */
@@ -74,6 +84,15 @@ public class DialogoRegistrarPromocion extends JDialog implements ActionListener
 	 */
 	private JTextField txtFechaFin;
 
+	/**
+	 * Campo texto fecha inicio
+	 */
+	private JTextField txtDireccion;
+	
+	/**
+	 * Campo texto fecha fin
+	 */
+	private JTextField txtCiudad;
 
     /**
      * Botón registrar
@@ -99,7 +118,7 @@ public class DialogoRegistrarPromocion extends JDialog implements ActionListener
     {
         principal = pPrincipal;
 
-        setLayout( new GridLayout( 7, 2 ) );
+        setLayout( new GridLayout( 8, 2 ) );
         this.setSize( 600, 200 );
         setTitle( "Agregar proveedor" );
 
@@ -132,6 +151,18 @@ public class DialogoRegistrarPromocion extends JDialog implements ActionListener
 		
 		add(lbFechaFin);
 		add(txtFechaFin);
+		
+		lbDireccion = new JLabel("Dirección de la sucursal:");
+		txtDireccion = new JTextField();
+		
+		add(lbDireccion);
+		add(txtDireccion);
+		
+		lbCiudad = new JLabel("Ciudad de la sucursal:");
+		txtCiudad = new JTextField();
+		
+		add(lbCiudad);
+		add(txtCiudad);
         
         btnRegistrar = new JButton( "Registrar" );
         btnRegistrar.setActionCommand( REGISTRAR );
@@ -151,7 +182,9 @@ public class DialogoRegistrarPromocion extends JDialog implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if( e.getActionCommand( ).equals( REGISTRAR ) )
 		{
-			principal.adicionarPersona2(txtCodBarras.getText(), txtUniDisponibles.getText(), txtDescripcion.getText());
+			Timestamp fechaInicio = Timestamp.valueOf(txtFechaInicio.getText()+" 00:00:00");
+			Timestamp fechaFin = Timestamp.valueOf(txtFechaInicio.getText()+" 00:00:00");
+			principal.adicionarPromocion2(fechaInicio, fechaFin, txtDescripcion.getText(), txtCodBarras.getText(), Integer.parseInt(txtUniDisponibles.getText()), 0, txtDireccion.getText(), txtCiudad.getText());
 			this.dispose();
 		}
 		else

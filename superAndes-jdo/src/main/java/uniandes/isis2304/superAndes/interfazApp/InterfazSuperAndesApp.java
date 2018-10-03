@@ -15,6 +15,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
@@ -856,6 +857,41 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		}
 	}
 
+	//-------------------------------------------------------------------------------
+	//  Metodos para manejar PROVEEDOR
+	//-------------------------------------------------------------------------------
+	public void adicionarPromocion()
+	{
+		DialogoRegistrarPromocion registrar = new DialogoRegistrarPromocion(this);
+		registrar.setVisible( true );
+	}
+	public void adicionarPromocion2(Timestamp fechaInicio, Timestamp fechaFin, String descripcion, String codBarras, int uniDisponibles, int uniVendidas, String direccionSucursal, String ciudad)
+	{
+		try
+		{
+			if(fechaInicio!= null && !descripcion.equals("") && !codBarras.equals("") && !direccionSucursal.equals("") && !ciudad.equals(""))
+			{
+				VOPromocion pm = superAndes.adicionarPromocion(fechaInicio, fechaFin, descripcion, codBarras, uniDisponibles, uniVendidas, direccionSucursal, ciudad);
+				if(pm == null)
+				{
+					throw new Exception ("No se pudo crear un promoción del producto: " + codBarras);
+				}
+				String resultado = "En adicionarPromocion\n\n";
+				resultado += "Promoción adicionada exitosamente: " + pm;
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+		}
+		catch(Exception e)
+		{
+			String resultado = "En adicionarPromoción \n\n";
+			resultado += e.getMessage();
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar EMPRESA
 	//-------------------------------------------------------------------------------

@@ -309,15 +309,11 @@ public class SuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar PROMOCION
 	//---------------------------------------------------------------------
-	public Promocion adicionarPromocion(Timestamp fechaInicio, Timestamp fechaFin, String descripcion, int codBarras, int uniDisponibles, int uniVendidas, String direccionSucursal, String ciudad)
+	public Promocion adicionarPromocion(Timestamp fechaInicio, Timestamp fechaFin, String descripcion, String codBarras, int uniDisponibles, int uniVendidas, String direccionSucursal, String ciudad)
 	{
 		Log.info("Adicionando promocion "+ fechaInicio+", "+fechaFin+", "+descripcion+", "+codBarras+", "+uniDisponibles+", "+uniVendidas);
-		Sucursal sucursal = pp.buscarSucursal(direccionSucursal, ciudad);
-		Promocion promocion = null;
-		if(sucursal != null)
-		{
-			promocion = pp.adicionarPromocion(fechaInicio, fechaFin, descripcion, codBarras, uniDisponibles, 0);
-		}
+		Promocion promocion = pp.adicionarPromocion(fechaInicio, fechaFin, descripcion, codBarras, uniDisponibles, 0);
+		pp.adicionarSucursalPromociones(promocion.getIdPromocion(), direccionSucursal, ciudad);
 		Log.info("Saliendo de adicionar promocion "+ fechaInicio+", "+fechaFin+", "+descripcion+", "+codBarras+", "+uniDisponibles+", "+uniVendidas);
 		return promocion;
 	}
@@ -369,7 +365,7 @@ public class SuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar PRODUCTOS OFRECIDOS
 	//---------------------------------------------------------------------
-	public ProductosOfrecidos adicionarProductosOfrecidos(int codigoBarras, String direccionSucursal, String ciudad)
+	public ProductosOfrecidos adicionarProductosOfrecidos(String codigoBarras, String direccionSucursal, String ciudad)
 	{
 		Log.info("Adicionando productos ofrecidos "+ codigoBarras+", "+direccionSucursal+", "+ciudad);
 		ProductosOfrecidos productosOfrecidos = pp.adicionarProductosOfrecidos(codigoBarras, direccionSucursal, ciudad);
@@ -402,7 +398,7 @@ public class SuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar PROVEEN
 	//---------------------------------------------------------------------
-	public Proveen adicionarProveen(int nitProveedor, int codigoBarras)
+	public Proveen adicionarProveen(int nitProveedor, String codigoBarras)
 	{
 		Log.info("Adicionando proveen "+ nitProveedor+", "+codigoBarras);
 		Proveen proveen = pp.adicionarProveen(nitProveedor, codigoBarras);
