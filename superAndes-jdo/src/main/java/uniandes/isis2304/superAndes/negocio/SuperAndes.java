@@ -584,13 +584,38 @@ public class SuperAndes {
 		return promociones;
 	}
 
+	public List<VOPromocion> darVOPromociones ()
+	{
+		Log.info ("Generando los VO de Promocion");
+		List<VOPromocion> voPromocion = new LinkedList<VOPromocion> ();
+		for (Promocion promocion : pp.darPromociones())
+		{
+			voPromocion.add (promocion);
+		}
+		Log.info ("Generando los VO de Promocion: " + voPromocion.size () + " sucursales existentes");
+		return voPromocion;
+	}
+
+	public long eliminarPromocion(long idPromocion)
+	{
+		Log.info("Eliminando promocion "+ idPromocion);
+		long promocion = pp.eliminarPromocionPorId(idPromocion);
+		Log.info("Saliendo de eliminar promocion "+ idPromocion);
+		return promocion;
+	}
+
+	public void finalizarPromocion(long idPromocion)
+	{
+		pp.finalizarPromocion(idPromocion);
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar ORDEN PEDIDO
 	//---------------------------------------------------------------------
-	public OrdenPedido adicionarOrdenPedido(Timestamp fechaEsperada, int nitProveedor, String ciudad, String direccionSucursal, String direccionBodega)
+	public OrdenPedido adicionarOrdenPedido(Timestamp fechaEsperada, int nitProveedor, String ciudad, String direccionSucursal, String direccionBodega, String pCodigoBarras, int pCantidadProducto, double pPrecioProducto)
 	{
 		Log.info("Adicionando orden pedido "+ nitProveedor+", "+fechaEsperada+", "+ciudad+", "+direccionSucursal+", "+direccionBodega);
 		OrdenPedido ordenPedido = pp.adicionarOrdenPedido(fechaEsperada, nitProveedor, ciudad, direccionSucursal, direccionBodega);
+		pp.adicionarPedidoProducto(pCodigoBarras, ordenPedido.getIdPedido(), pCantidadProducto, pPrecioProducto);
 		Log.info("Saliendo de adicionar orden pedido "+ nitProveedor+", "+fechaEsperada+", "+ciudad+", "+direccionSucursal+", "+direccionBodega);
 		return ordenPedido;
 	}
@@ -603,6 +628,22 @@ public class SuperAndes {
 		return ordenPedido;
 	}
 
+	public List<VOOrdenPedido> darVOPedidos()
+	{
+		Log.info ("Generando los VO de Promocion");
+		List<VOOrdenPedido> voPedido = new LinkedList<VOOrdenPedido> ();
+		for (OrdenPedido pedido : pp.darPedidos())
+		{
+			voPedido.add (pedido);
+		}
+		Log.info ("Generando los VO de Pedido: " + voPedido.size () + " pedidos existentes");
+		return voPedido;
+	}
+
+	public long eliminarPedido(long idPedido)
+	{
+		return pp.eliminarPedidoPorId(idPedido);
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar FACTURA
 	//---------------------------------------------------------------------

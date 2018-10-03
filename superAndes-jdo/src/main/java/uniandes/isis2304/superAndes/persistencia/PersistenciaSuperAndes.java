@@ -654,6 +654,38 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
+	public List<Promocion> darPromociones()
+	{
+		return sqlPromocion.darPromociones(managerFactory.getPersistenceManager());
+	}
+	
+	public long eliminarPromocionPorId(long idPromocion)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasEliminadas = sqlPromocion.eliminarPromocionPorId(pm, idPromocion);
+			tx.commit();
+
+			Log.trace("Insercción promocion: " + idPromocion +": "+tuplasEliminadas);
+			return tuplasEliminadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar las ORDENES DE PEDIDO
 	//---------------------------------------------------------------------
@@ -710,6 +742,39 @@ public class PersistenciaSuperAndes {
 		{
 			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	public List<OrdenPedido> darPedidos()
+	{
+		return sqlOrdenPedido.darPedidos(managerFactory.getPersistenceManager());
+	}
+	
+	public long eliminarPedidoPorId(long idPedido)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasEliminadas = sqlOrdenPedido.eliminarPedidoPorId(pm, idPedido);
+			tx.commit();
+
+			Log.trace("Eliminación pedido: " + idPedido +": "+tuplasEliminadas);
+			return tuplasEliminadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return 0;
 		}
 		finally
 		{

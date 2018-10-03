@@ -147,3 +147,31 @@ ORA-02291: restricción de integridad (ISIS2304A231820.FK_DS_ESTANTE) violada - c
 09:05:09,589 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 0 proveedores existentes
 09:05:09,590 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminando proveedor 123546987
 09:05:09,731 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar proveedor 123546987
+13:34:08,059 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+13:34:09,534 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_SUCURSAL(tamanio, direccion_sucursal, ciudad, nombre_sucursal) values (?, ?, ?, ?)".
+ORA-01722: número no válido
+
+13:34:09,749 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+13:34:09,749 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el producto papas de pollo
+13:34:09,759 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: SQL query tiene parametro "13" pero no existe en el query : INSERT INTO A_PRODUCTO(nombre_producto, marca,precio_unitario, presentacion, precio_uni_medida,cant_presentacion,unidad_medida, cod_barras, calidad, fecha_vencimiento, peso_producto, volumen_producto) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+
+13:34:09,759 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el producto papas de pollo
+13:49:28,857 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+13:49:30,311 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+13:49:30,312 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el producto papas de pollo
+13:49:30,327 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: SQL query tiene parametro "13" pero no existe en el query : INSERT INTO A_PRODUCTO(nombre_producto, marca,precio_unitario, presentacion, precio_uni_medida,cant_presentacion,unidad_medida, cod_barras, calidad, fecha_vencimiento, peso_producto, volumen_producto) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+
+13:49:30,328 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el producto papas de pollo
+14:41:16,235 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+14:41:18,708 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_SUCURSAL(tamanio, direccion_sucursal, ciudad, nombre_sucursal) values (?, ?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A231820.A_SUCURSAL_PK) violada
+
+14:41:19,211 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+14:41:19,211 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el producto papas de pollo
+14:41:19,219 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: SQL query tiene parametro "13" pero no existe en el query : INSERT INTO A_PRODUCTO(nombre_producto, marca,precio_unitario, presentacion, precio_uni_medida,cant_presentacion,unidad_medida, cod_barras, calidad, fecha_vencimiento, peso_producto, volumen_producto) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+
+14:41:19,220 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el producto papas de pollo
+14:41:19,220 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la bodega Calle 7 #5-74, Calle 7 #5-74,Bogotá
+14:41:20,064 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la bodega Calle 7 #5-74, Calle 7 #5-74,Bogotá
+14:41:20,064 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+14:41:21,483 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123546987, Alpina

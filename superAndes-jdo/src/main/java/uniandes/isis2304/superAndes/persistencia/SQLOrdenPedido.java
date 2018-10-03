@@ -90,4 +90,29 @@ class SQLOrdenPedido
 		q.setResultClass(OrdenPedido.class);
 		return (OrdenPedido) q.executeUnique();
 	}
+	
+	/**
+	 * 
+	 * @param pm
+	 * @param idPedido
+	 * @return
+	 */
+	public long eliminarPedidoPorId(PersistenceManager pm, long idPedido)
+	{
+		 Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlOrdenPedido()+ " WHERE id_pedido = ?");
+	     q.setParameters(idPedido);
+	     return (long) q.executeUnique();
+	}
+	
+	/**
+	 * 
+	 * @param pm
+	 * @return
+	 */
+	public List<OrdenPedido> darPedidos (PersistenceManager pm) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlOrdenPedido());
+		q.setResultClass(OrdenPedido.class);
+		return (List<OrdenPedido>) q.executeList();
+	}
 }

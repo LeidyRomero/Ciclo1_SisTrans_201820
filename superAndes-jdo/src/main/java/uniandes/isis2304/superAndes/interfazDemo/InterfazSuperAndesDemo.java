@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -396,7 +397,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			long clientesEliminados = superAndes.eliminarClientePorCorreo("majocava0417@hotmail.com");
 
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
-			String resultado = "Demo de creación y listado de Proveedores\n\n";
+			String resultado = "Demo de creación y listado de Clientes\n\n";
 			resultado += "\n\n************ Generando datos de prueba ************ \n";
 			resultado += "Adicionado el cliente: " + cli1 + "\n";
 			resultado += "\n\n************ Ejecutando la demo ************ \n";
@@ -440,9 +441,9 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			long clientesEliminados = superAndes.eliminarSucursal("Calle 7 #5-74", "Bogotá");
 
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
-			String resultado = "Demo de creación y listado de Proveedores\n\n";
+			String resultado = "Demo de creación y listado de Sucursales\n\n";
 			resultado += "\n\n************ Generando datos de prueba ************ \n";
-			resultado += "Adicionado el cliente: " + cli1 + "\n";
+			resultado += "Adicionado la sucursal: " + cli1 + "\n";
 			resultado += "\n\n************ Ejecutando la demo ************ \n";
 			resultado += "\n" + listarSucursales (lista);
 			resultado += "\n\n************ Limpiando la base de datos ************ \n";
@@ -463,6 +464,110 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		String resp = "Las sucursales existentes son:\n";
 		int i = 1;
 		for (VOSucursal cliente : lista)
+		{
+			resp += i++ + ". " + cliente.toString() + "\n";
+		}
+		return resp;
+	}
+	
+	//--------------------------------------------------------------------
+	// Demo PROMOCION
+	//--------------------------------------------------------------------
+	public void demoPromocion()
+	{
+		try
+		{
+			//Ejecución de la demo y recolección de los resultados
+			VOSucursal suc1 = superAndes.adicionarSucursal("50 m^2", "Calle 7 #5-74", "Bogotá", "Candelaria");
+			VOProducto pro1 = superAndes.adicionarProducto("papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32");
+			VOPromocion cli1 = superAndes.adicionarPromocion(Timestamp.valueOf("2018-10-3 00:00:00"), Timestamp.valueOf("2018-10-4 00:00:00"), "20% de descuento", pro1.getCodigoBarras(), 20, 0, suc1.getDireccion(), suc1.getCiudad());
+
+			List<VOPromocion> lista = superAndes.darVOPromociones();
+			
+			superAndes.finalizarPromocion(cli1.getIdPromocion());
+
+			long promoEliminada = superAndes.eliminarPromocion(cli1.getIdPromocion());
+			superAndes.eliminarProducto(pro1.getCodigoBarras());
+			superAndes.eliminarSucursal(suc1.getDireccion(), suc1.getCiudad());
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de Promociones\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado la promocion: " + cli1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarPromociones (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += promoEliminada + " Promociones eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);	
+		}
+		catch(Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	private String listarPromociones(List<VOPromocion> lista) 
+	{
+		String resp = "Las promociones existentes son:\n";
+		int i = 1;
+		for (VOPromocion cliente : lista)
+		{
+			resp += i++ + ". " + cliente.toString() + "\n";
+		}
+		return resp;
+	}
+	
+	//--------------------------------------------------------------------
+	// Demo PROMOCION
+	//--------------------------------------------------------------------
+	public void demoPedidos()
+	{
+		try
+		{
+			//Ejecución de la demo y recolección de los resultados
+			VOSucursal suc1 = superAndes.adicionarSucursal("50 m^2", "Calle 7 #5-74", "Bogotá", "Candelaria");
+			VOProducto pro1 = superAndes.adicionarProducto("papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32");
+			VOBodega bog = superAndes.adicionarBodega("Tipo", 200, 300, "Calle 7 #5-74", "Calle 7 #5-74", "Bogotá");
+			VOProveedor prov1 = superAndes.adicionarProveedor(123546987, "Alpina");
+			VOOrdenPedido cli1 = superAndes.adicionarOrdenPedido(new Timestamp(System.currentTimeMillis()), prov1.getNitProveedor(), suc1.getCiudad(), suc1.getDireccion(), bog.darDireccion(), pro1.getCodigoBarras(), 10, 5000);
+
+			List<VOOrdenPedido> lista = superAndes.darVOPedidos();
+			
+			superAndes.llegadaOrdenPedido(cli1.getIdPedido(), "Bueno");
+
+			long promoEliminada = superAndes.eliminarPedido(cli1.getIdPedido());
+			superAndes.eliminarProveedorPorNit(prov1.getNitProveedor());
+			superAndes.eliminarBodega(bog.darDireccion(), suc1.getDireccion(), suc1.getCiudad());
+			superAndes.eliminarProducto(pro1.getCodigoBarras());
+			superAndes.eliminarSucursal(suc1.getDireccion(), suc1.getCiudad());
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de Pedidos\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado la pedido: " + cli1 + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarPedidos (lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += promoEliminada + " Pedidos eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);	
+		}
+		catch(Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	private String listarPedidos(List<VOOrdenPedido> lista) 
+	{
+		String resp = "Los pedidos existentes son:\n";
+		int i = 1;
+		for (VOOrdenPedido cliente : lista)
 		{
 			resp += i++ + ". " + cliente.toString() + "\n";
 		}

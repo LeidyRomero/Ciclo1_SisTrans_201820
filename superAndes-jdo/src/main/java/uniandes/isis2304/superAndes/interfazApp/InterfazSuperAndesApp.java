@@ -1071,12 +1071,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 				if(!txtFechaEspera.getText().equals("") && !txtNitProveedor.getText().equals(""))
 				{
 					Timestamp fechaEsperada = Timestamp.valueOf(txtFechaEspera.getText()+" 00:00:00");
-					VOOrdenPedido pd = superAndes.adicionarOrdenPedido(fechaEsperada, Integer.parseInt(txtNitProveedor.getText()), txtCiudad.getText(), txtDireccionSucursal.getText(), txtDireccionBodega.getText());
-					if(pd != null && !txtCantidadProducto.getText().equals("") && !txtPrecioAcordado.getText().equals(""))
-					{
-						superAndes.adicionarPedidoProducto(txtCodigoBarras.getText(), pd.getIdPedido(), Integer.parseInt(txtCantidadProducto.getText()), Integer.parseInt(txtPrecioAcordado.getText()));
-					}
-					else
+					VOOrdenPedido pd = superAndes.adicionarOrdenPedido(fechaEsperada, Integer.parseInt(txtNitProveedor.getText()), txtCiudad.getText(), txtDireccionSucursal.getText(), txtDireccionBodega.getText(), txtCodigoBarras.getText(), Integer.parseInt(txtCantidadProducto.getText()), Integer.parseInt(txtPrecioAcordado.getText()));
+					if(pd == null)
 					{
 						throw new Exception("No se pudo crear orden de pedido para el producto: "+ txtCodigoBarras.getText());
 					}
