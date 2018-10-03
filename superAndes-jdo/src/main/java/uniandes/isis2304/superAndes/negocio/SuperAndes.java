@@ -143,11 +143,23 @@ public class SuperAndes {
 		}
 		return mensaje;
 	}
-	public String buscarProductosVentasSuperiores(double pVentasMinimas)
+	public String buscarProductosCategoria(String pCategoria)
+	{
+		String mensaje = "Los productos de categoria: "+pCategoria+" son:";
+		Log.info("Buscar los productos de tipo: "+pCategoria);
+		List<Producto> productos = pp.buscarProductosCategoria(pCategoria);
+		Log.info("Saliendo de buscar los productos de tipo: "+pCategoria);
+		for(int i = 0;i<productos.size();i++)
+		{
+			mensaje+=productos.get(i).getNombre();
+		}
+		return mensaje;
+	}
+	public String buscarProductosVentasSuperiores(double pVentasMinimas, Date pFechaInicial, Date pFechaFinal)
 	{
 		String mensaje = "";
 		Log.info("Buscar los productos cuyas ventas sean superiores a: "+pVentasMinimas);
-		List<Producto> productos = pp.buscarProductosVentasSuperiores(pVentasMinimas);
+		List<Producto> productos = pp.buscarProductosVentasSuperiores(pVentasMinimas,pFechaInicial, pFechaFinal);
 		Log.info("Saliendo de buscar los productos cuyas ventas sean superiores a: "+pVentasMinimas);
 		for(int i = 0;i<productos.size();i++)
 		{
