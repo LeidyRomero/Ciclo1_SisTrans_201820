@@ -1,0 +1,5 @@
+16:51:15,645 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la categoria null
+16:51:16,336 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_CATEGORIA (nombre_categoria) values (?)".
+ORA-01400: no se puede realizar una inserción NULL en ("ISIS2304A231820"."A_CATEGORIA"."NOMBRE_CATEGORIA")
+
+16:51:16,368 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la categoria null

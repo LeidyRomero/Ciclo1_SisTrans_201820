@@ -6,19 +6,19 @@ package uniandes.isis2304.superAndes.negocio;
  */
 public class Comprados implements VOComprados{
 
-	private int codigoBarras;
+	private String codigoBarras;
 	private int cantidad;
 	private double precioTotal;
 	private String idFactura;
 
 	public Comprados()
 	{
-		codigoBarras = 0;
+		codigoBarras = "";
 		cantidad = 0;
 		precioTotal=0;
 		idFactura = "";
 	}
-	public Comprados(int pCodigoBarras, int pCantidad, double pPrecioTotal, String pIdFactura)
+	public Comprados(String pCodigoBarras, int pCantidad, double pPrecioTotal, String pIdFactura)
 	{
 		codigoBarras = pCodigoBarras;
 		cantidad = pCantidad;
@@ -26,7 +26,7 @@ public class Comprados implements VOComprados{
 		idFactura = pIdFactura;
 	}
 	//TODO SET de esta clase
-	public int darCodigoBarras() {
+	public String darCodigoBarras() {
 		return codigoBarras;
 	}
 

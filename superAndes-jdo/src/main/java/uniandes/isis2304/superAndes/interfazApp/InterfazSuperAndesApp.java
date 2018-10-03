@@ -6,6 +6,7 @@ package uniandes.isis2304.superAndes.interfazApp;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -19,13 +20,17 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 
 import javax.jdo.JDODataStoreException;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import org.datanucleus.store.types.wrappers.Date;
@@ -88,6 +93,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	 * Menú de la aplicación
 	 */
 	private JMenuBar menuSA;
+
+	private JComboBox<String> cbBuscarProductos;
 	// -----------------------------------------------------------------
 	// Constructores
 	// -----------------------------------------------------------------
@@ -118,7 +125,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 		setLayout (new BorderLayout());
 		add (new JLabel (new ImageIcon (path)), BorderLayout.NORTH );          
-		add( panelDatos, BorderLayout.CENTER );   
+		add( panelDatos, BorderLayout.CENTER ); 
 	}
 	// -----------------------------------------------------------------
 	// Configuracion de la interfaz
@@ -470,7 +477,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	//
 	//        METODOS
 	//
-	
+
 	//TODO CRUD Productos
 	//TODO CRUD Clientes
 	//TODO CRUD Sucursal
@@ -479,7 +486,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	//TODO CRUD Promoción
 	//TODO CRUD Pedidos
 	//TODO CRUD Ventas
-	
+
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTOS
 	//-------------------------------------------------------------------------------
@@ -488,13 +495,17 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		DialogoRegistrarProducto registrar = new DialogoRegistrarProducto(this);
 		registrar.setVisible( true );
 	}
-	public void adicionarProducto2(String pNombre, String pMarca, double pPrecioUnitario, String pPresentacion, double pPrecioUnidadMedida, int pCantidadPresentacion, String pUnidadMedida, String pEspecificacion, int pCodigoBarras, String pCalidad, String pFechaVencimiento)
+	public void adicionarProducto2(String pNombre, String pMarca, double pPrecioUnitario, String pPresentacion, double pPrecioUnidadMedida, int pCantidadPresentacion, String pUnidadMedida, String pCodigoBarras, String pCalidad, String pFechaVencimiento, String pPeso, String pVolumen)
 	{
 		try
 		{
-			if(!pNombre.equals("") && !pMarca.equals("") && !pPresentacion.equals("") && pPrecioUnitario>0 && !pPresentacion.equals("")&&pPrecioUnidadMedida>0 && pCantidadPresentacion>0 && !pUnidadMedida.equals("") && pCodigoBarras>=0 )//TODO continuar validaciones
+			if(!pNombre.equals("") && !pMarca.equals("") && !pPresentacion.equals("") && pPrecioUnitario>0 && !pPresentacion.equals("")&&pPrecioUnidadMedida>0 && pCantidadPresentacion>0 && !pUnidadMedida.equals("") && !pCodigoBarras.equals("") && !pPeso.equals("") && !pVolumen.equals(""))//TODO continuar validaciones
 			{
-				superAndes.adicionarProducto(pNombre, pMarca, pPresentacion, pUnidadMedida, pEspecificacion, pCalidad, pPrecioUnitario, pPrecioUnidadMedida,pCantidadPresentacion, pCodigoBarras,formatoFecha(pFechaVencimiento));
+				superAndes.adicionarProducto(pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida,pCantidadPresentacion, pCodigoBarras,formatoFecha(pFechaVencimiento), pPeso, pVolumen);
+			}
+			else if(!isHexNumber(pCodigoBarras))
+			{
+				JOptionPane.showMessageDialog (this, "Codigo de barras invalido", "Agregar producto: no exitoso", JOptionPane.ERROR_MESSAGE);	
 			}
 			else
 			{
@@ -506,31 +517,164 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 		}
 	}
+	private static boolean isHexNumber (String cadena) {
+		  try {
+		    Long.parseLong(cadena, 16);
+		    return true;
+		  }
+		  catch (NumberFormatException ex) {
+		    // Error handling code...
+		    return false;
+		  }
+		}
 	public Date formatoFecha( String cadena ) throws ParseException
 	{
 		SimpleDateFormat formato1 = new SimpleDateFormat( "yyyy-MM-dd HH:mm");
 		return (Date)formato1.parse( cadena );
 	}
+	public void buscarProductoCaracteristica() throws HeadlessException, ParseException
+	{
+		String[] opciones = {"Precio en rango", "Fecha de vencimiento", "Peso en rango", "Volumen en rango","Vendidos por proveedor","Disponibles en ciudad", "Disponibles en sucursal", "Por tipo","Ventas superiores a un valor"};
+		ImageIcon icon = new ImageIcon("./data/informacion.png");
+		String seleccion = (String)JOptionPane.showInputDialog(null, "Criterio de busqueda: ", "Buscar productos", JOptionPane.QUESTION_MESSAGE, icon, opciones, opciones[0]);
+
+		if(seleccion.equals(opciones[0]))
+		{
+			JTextField minField = new JTextField(15);
+			JTextField maxField = new JTextField(15);
+
+			JPanel aux = new JPanel();
+			aux.add(new JLabel("Precio minimo:"));
+			aux.add(minField);
+			aux.add(Box.createHorizontalStrut(15)); // a spacer
+			aux.add(new JLabel("Precio máximo:"));
+			aux.add(maxField);
+
+			int result = JOptionPane.showConfirmDialog(null, aux,"Rango de precios", JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_OPTION) {
+				//TODO
+			}
+		}
+		else if(seleccion.equals(opciones[1]))
+		{
+			Date fecha = formatoFecha(JOptionPane.showInputDialog(this, "Fecha de vencimiento","Fecha: ",JOptionPane.QUESTION_MESSAGE));
+			//TODO: negocio
+		}
+		else if(seleccion.equals(opciones[2]))
+		{
+			JTextField minField = new JTextField(15);
+			JTextField maxField = new JTextField(15);
+
+			JPanel aux = new JPanel();
+			aux.add(new JLabel("Peso minimo:"));
+			aux.add(minField);
+			aux.add(Box.createHorizontalStrut(15)); // a spacer
+			aux.add(new JLabel("Peso máximo:"));
+			aux.add(maxField);
+
+			int result = JOptionPane.showConfirmDialog(null, aux,"Rango de pesos", JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_OPTION) {
+				//TODO: negocio
+			}
+		}
+		else if(seleccion.equals(opciones[3]))
+		{
+			JTextField minField = new JTextField(15);
+			JTextField maxField = new JTextField(15);
+
+			JPanel aux = new JPanel();
+			aux.add(new JLabel("Vólumen minimo:"));
+			aux.add(minField);
+			aux.add(Box.createHorizontalStrut(15)); // a spacer
+			aux.add(new JLabel("Vólumen máximo:"));
+			aux.add(maxField);
+
+			int result = JOptionPane.showConfirmDialog(null, aux,"Rango de vólumenes", JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_OPTION) {
+				//TODO: negocio
+			}
+		}
+		else if(seleccion.equals(opciones[4]))
+		{
+			int proveedor = Integer.parseInt(JOptionPane.showInputDialog(this, "Proveedor","NIT: ",JOptionPane.QUESTION_MESSAGE));
+			//TODO: negocio
+		}
+		else if(seleccion.equals(opciones[5]))
+		{
+			String ciudad = JOptionPane.showInputDialog(this, "Disponibles","Ciudad: ",JOptionPane.QUESTION_MESSAGE);
+		}
+		else if(seleccion.equals(opciones[6]))
+		{
+			JTextField ciudadField = new JTextField(15);
+			JTextField direccionField = new JTextField(15);
+
+			JPanel aux = new JPanel();
+			aux.add(new JLabel("Ciudad:"));
+			aux.add(ciudadField);
+			aux.add(Box.createHorizontalStrut(15)); // a spacer
+			aux.add(new JLabel("Dirección:"));
+			aux.add(direccionField);
+
+			int result = JOptionPane.showConfirmDialog(null, aux,"Sucursal", JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_OPTION) {
+				//TODO: negocio
+			}
+		}
+		else if(seleccion.equals(opciones[7]))
+		{
+			String tipo = JOptionPane.showInputDialog(this, "Tipo","Tipo: ",JOptionPane.QUESTION_MESSAGE);
+		}
+		else if(seleccion.equals(opciones[8]))
+		{
+			double ventas = Integer.parseInt(JOptionPane.showInputDialog(this, "Número de ventas","Ventas: ",JOptionPane.QUESTION_MESSAGE));
+		}
+	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar CATEGORIA
 	//-------------------------------------------------------------------------------
-	public void adicionarCategoria(String pNombre)
+	public void adicionarCategoria()
 	{
-		superAndes.adicionarCategoria(pNombre);
+		superAndes.adicionarCategoria(JOptionPane.showInputDialog(this, "Registrar categoria","Categoria:", JOptionPane.QUESTION_MESSAGE));
 	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar TIPO
 	//-------------------------------------------------------------------------------
-	public void adicionarTipo(String pNombre, String pCategoria)
+	public void adicionarTipo()
 	{
-		superAndes.adicionarTipoProducto(pNombre, pCategoria);
+		JTextField tipoField = new JTextField(15);
+		JTextField categoriaField = new JTextField(15);
+
+		JPanel aux = new JPanel();
+		aux.add(new JLabel("Tipo:"));
+		aux.add(tipoField);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Categoria:"));
+		aux.add(categoriaField);
+
+		int result = JOptionPane.showConfirmDialog(null, aux,"Registrar tipo", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) {
+			superAndes.adicionarTipoProducto(tipoField.getText(), categoriaField.getText());
+		}
 	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTO CATEGORIA
 	//-------------------------------------------------------------------------------
-	public void adicionarProductoCategoria(String pNombreCategoria, String pCodigoBarras)
+	public void adicionarProductoCategoria()
 	{
-		superAndes.adicionarProductoCategoria(pNombreCategoria,Integer.parseInt( pCodigoBarras));
+		JTextField codigoField = new JTextField(15);
+		JTextField categoriaField = new JTextField(15);
+
+		JPanel aux = new JPanel();
+		aux.add(new JLabel("Código de barras:"));
+		aux.add(codigoField);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Categoria:"));
+		aux.add(categoriaField);
+
+		int result = JOptionPane.showConfirmDialog(null, aux,"Registrar producto a una categoria", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) {
+			superAndes.adicionarProductoCategoria( categoriaField.getText(),codigoField.getText());
+		}
 	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar BODEGA
@@ -702,7 +846,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar PERSONA NATURAL
 	//-------------------------------------------------------------------------------

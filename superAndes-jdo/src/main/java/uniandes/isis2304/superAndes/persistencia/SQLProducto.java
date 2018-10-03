@@ -41,10 +41,10 @@ class SQLProducto
 	 * @return
 	 */
 	//TODO RF2 - Registrar productos
-	public long agregarProducto(PersistenceManager manager, String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pEspecificacionEmpacado, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, int pCodigoBarras, Date pFechaVencimiento)
+	public long agregarProducto(PersistenceManager manager, String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, String pCodigoBarras, Date pFechaVencimiento, String pPeso, String pVolumen)
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlProducto()+"(nombre_producto, marca,precio_unitario, presentacion, precio_uni_medida,cant_presentacion,unidad_medida, espe_empacado, cod_barras, calidad, fecha_vencimiento) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-		q.setParameters(pNombre, pMarca, pPrecioUnitario, pPresentacion, pPrecioUnidadMedida, pCantidadPresentacion, pUnidadMedida, pEspecificacionEmpacado, pCodigoBarras, pCalidad, pFechaVencimiento);
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlProducto()+"(nombre_producto, marca,precio_unitario, presentacion, precio_uni_medida,cant_presentacion,unidad_medida, cod_barras, calidad, fecha_vencimiento, peso_producto, volumen_producto) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		q.setParameters(pNombre, pMarca, pPrecioUnitario, pPresentacion, pPrecioUnidadMedida, pCantidadPresentacion, pUnidadMedida, pCodigoBarras, pCalidad, pFechaVencimiento, pPeso, pVolumen);
 		return (long) q.executeUnique();
 	}
 
@@ -71,14 +71,14 @@ class SQLProducto
 	//*Caracteristica 3:*
 	//TODO UNIDAD DE MEDIDA! Tocarevisar, en el caso de volumen si esta en unidades de volumen, o en peso, si esta en unidades de peso
 	//TODO El peso del producto si es la cantidad por presentacion?, 2: revisar between
-	public List<Producto> darProductosPesoEnRango (PersistenceManager manager, int pesoMinimo, int pesoMaximo)
+	public List<Producto> darProductosPesoEnRango (PersistenceManager manager, double pesoMinimo, double pesoMaximo)
 	{
 		Query q = manager.newQuery(SQL, "SELECT nombre_producto, cant_presentacion FROM " + persistencia.getSqlProducto()+ " WHERE cant_presentacion BETWEEN "+pesoMinimo +" AND "+pesoMaximo);
 		q.setResultClass(Producto.class);
 		return (List<Producto>) q.executeList();
 	}
 	//*Caracteristica 4:*
-	public List<Producto> darProductosVolumenEnRango (PersistenceManager manager)
+	public List<Producto> darProductosVolumenEnRango (PersistenceManager manager, double volumenMinimo, double volumenMaximo)
 	{
 		Query q = manager.newQuery(SQL, "SELECT nombre_producto FROM " + persistencia.getSqlProducto());
 		q.setResultClass(Producto.class);
@@ -102,14 +102,14 @@ class SQLProducto
 		return null;
 	}
 	//Caracteristica 7:
-	public List<Producto> darProductosDisponiblesSucursal (PersistenceManager manager)
+	public List<Producto> darProductosDisponiblesSucursal (PersistenceManager manager, String pCiudad, String pDireccion)
 	{
 		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlProducto());
 		q.setResultClass(Producto.class);
 		return (List<Producto>) q.executeList();
 	}
 	//Caracteristica 8:
-	public List<Producto> darProductosTipo (PersistenceManager manager)
+	public List<Producto> darProductosTipo (PersistenceManager manager, String pTipo)
 	{
 		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlProducto());
 		q.setResultClass(Producto.class);
@@ -123,7 +123,7 @@ class SQLProducto
 		return (List<Producto>) q.executeList();
 	}
 	//Caracteristica 10:
-	public List<Producto> darProductosVentasSuperioresAXEnRangoFechas (PersistenceManager manager)
+	public List<Producto> darProductosVentasSuperioresAXEnRangoFechas (PersistenceManager manager, double pVentas)
 	{
 		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlProducto());
 		q.setResultClass(Producto.class);

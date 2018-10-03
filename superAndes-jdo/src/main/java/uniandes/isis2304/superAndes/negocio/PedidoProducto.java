@@ -5,18 +5,18 @@ package uniandes.isis2304.superAndes.negocio;
  *
  */
 public class PedidoProducto implements VOPedidoProducto{
-	private int codigoBarras;
+	private String codigoBarras;
 	private long id;
 	private double cantidadProducto;
 	private double precioProducto;
 	public PedidoProducto()
 	{
-		codigoBarras = 0;
+		codigoBarras = "";
 		id = 0;
 		cantidadProducto=0;
 		precioProducto=0;
 	}
-	public PedidoProducto(int pCodigoBarras, long pId, double pCantidadProducto, double pPrecioProducto )
+	public PedidoProducto(String pCodigoBarras, long pId, double pCantidadProducto, double pPrecioProducto )
 	{
 		codigoBarras = pCodigoBarras;
 		id = pId;
@@ -24,7 +24,7 @@ public class PedidoProducto implements VOPedidoProducto{
 		precioProducto=pPrecioProducto;
 	}
 	//TODO SET
-	public int darCodigoBarras() {
+	public String darCodigoBarras() {
 		return codigoBarras;
 	}
 
