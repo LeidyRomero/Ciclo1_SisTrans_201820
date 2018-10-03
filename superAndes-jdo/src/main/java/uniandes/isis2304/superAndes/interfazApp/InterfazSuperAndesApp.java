@@ -146,7 +146,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		try 
 		{
 			Gson gson = new Gson( );
-			File aja =new File(archConfig);
 			FileReader file = new FileReader (archConfig);
 			JsonReader reader = new JsonReader ( file );
 			config = gson.fromJson(reader, JsonObject.class);
@@ -758,7 +757,20 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	}
 	public void buscarIndiceBodega()
 	{
-		panelDatos.actualizarInterfaz(superAndes.buscarIndiceBodega());
+		JTextField ciudadField = new JTextField(15);
+		JTextField direccionField = new JTextField(15);
+
+		JPanel aux = new JPanel();
+		aux.add(new JLabel("Ciudad:"));
+		aux.add(ciudadField);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Direccion de la sucursal:"));
+		aux.add(direccionField);
+
+		int result = JOptionPane.showConfirmDialog(null, aux,"Buscar indice de ocupabilidad bodegas", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) {
+			panelDatos.actualizarInterfaz(superAndes.buscarIndiceBodega(direccionField.getText(), ciudadField.getText()));
+		}
 	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar ESTANTE
@@ -788,7 +800,20 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	}
 	public void buscarIndiceEstante()
 	{
-		panelDatos.actualizarInterfaz(superAndes.buscarIndiceEstante());
+		JTextField ciudadField = new JTextField(15);
+		JTextField direccionField = new JTextField(15);
+
+		JPanel aux = new JPanel();
+		aux.add(new JLabel("Ciudad:"));
+		aux.add(ciudadField);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Direccion de la sucursal:"));
+		aux.add(direccionField);
+
+		int result = JOptionPane.showConfirmDialog(null, aux,"Buscar indice de ocupabilidad estantes", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) {
+			panelDatos.actualizarInterfaz(superAndes.buscarIndiceEstante(direccionField.getText(), ciudadField.getText()));
+		}
 	}
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar SUCURSAL

@@ -32,6 +32,13 @@ class SQLEstante
 	} 
 	
 	//TODO RFC3 - Mostrar el indice de ocupacion de cada estante
+	public List<Estante> buscarEstantesSucursal(PersistenceManager manager, String pDireccion, String pCiudad)
+	{
+		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlEstante()+ " WHERE ciudad = ? AND direccion_sucursal = ?");
+		q.setParameters(pCiudad, pDireccion);
+		q.setResultClass(Estante.class);
+		return (List<Estante>) q.executeList();
+	}
 	public List<Estante> buscarEstantes(PersistenceManager manager)
 	{
 		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlEstante());
