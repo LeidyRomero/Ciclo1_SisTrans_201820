@@ -18,8 +18,24 @@
 		  "options":
 			[
 				{
-					"label": "Adicionar",
+					"label": "Adicionar producto",
 					"event": "adicionarProducto"
+				},
+				{
+					"label": "Adicionar producto a una categoria",
+					"event": "adicionarProductoCategoria"
+				},
+				{
+					"label": "Adicionar tipo",
+					"event": "adicionarTipo"
+				},
+				{
+					"label": "Adicionar categoria",
+					"event": "adicionarCategoria"
+				},
+				{
+					"label": "Buscar productos por caracteristica",
+					"event": "buscarProductoCaracteristica"
 				}
 			]
 		},

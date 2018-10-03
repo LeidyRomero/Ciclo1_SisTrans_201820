@@ -12,12 +12,13 @@ public class Producto implements VOProducto{
 	private String marca;
 	private String presentacion;
 	private String unidadMedida;
-	private String especificacionEmpacado;
+	private String peso;
+	private String volumen;
 	private String calidad;
 	private double precioUnitario;
 	private double precioUnidadMedida;
 	private int cantidadPresentacion;
-	private int codigoBarras;
+	private String codigoBarras;
 	private Date fechaVencimiento;
 
 	public Producto()
@@ -27,21 +28,23 @@ public class Producto implements VOProducto{
 		precioUnidadMedida = 0;
 		presentacion = "";
 		unidadMedida = "";
-		especificacionEmpacado= "";
+		peso= "";
+		volumen ="";
 		calidad ="";
 		precioUnitario=0;
 		cantidadPresentacion = 0;
-		codigoBarras = 0;
+		codigoBarras = "";
 		fechaVencimiento = null;
 	}
-	public Producto(String pNombre, String pMarca, String pUnidadMedida, String pPresentacion, String pEspecificacionEmpacado, String pCalidad, double pPrecioUnitario,double pPrecioUnidadMedida,int pCantidadPresentacion, int pCodigoBarras, Date pFechaVencimiento)
+	public Producto(String pNombre, String pMarca, String pUnidadMedida, String pPresentacion, String pCalidad, double pPrecioUnitario,double pPrecioUnidadMedida,int pCantidadPresentacion, String pCodigoBarras, Date pFechaVencimiento, String pPeso, String pVolumen)
 	{
 		nombre = pNombre;
 		marca = pMarca;
 		precioUnidadMedida = pPrecioUnidadMedida;
 		presentacion = pPresentacion;
 		unidadMedida = pUnidadMedida;
-		especificacionEmpacado= pEspecificacionEmpacado;
+		peso= pPeso;
+		volumen =pVolumen;
 		calidad =pCalidad;
 		precioUnitario=pPrecioUnitario;
 		cantidadPresentacion = pCantidadPresentacion;
@@ -49,47 +52,84 @@ public class Producto implements VOProducto{
 		fechaVencimiento = pFechaVencimiento;
 	}
 	//TODO SET
-	public String darNombre() {
+	public String getNombre() {
 		return nombre;
 	}
-	public String darMarca() {
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getMarca() {
 		return marca;
 	}
-	public double darPrecioUnitario() {
-		return precioUnitario;
+	public void setMarca(String marca) {
+		this.marca = marca;
 	}
-
-	public String darPresentacion() {
+	public String getPresentacion() {
 		return presentacion;
 	}
-	public double darPrecioUnitarioMedida() {
-		return precioUnidadMedida;
+	public void setPresentacion(String presentacion) {
+		this.presentacion = presentacion;
 	}
-	public int darCantidadPresentacion() {
-		return cantidadPresentacion;
-	}
-	public String darUnidadMedida() {
+	public String getUnidadMedida() {
 		return unidadMedida;
 	}
-	public String darEspecificacionEmpacado() {
-		return especificacionEmpacado;
+	public void setUnidadMedida(String unidadMedida) {
+		this.unidadMedida = unidadMedida;
 	}
-	public int darCodigoBarras() {
-		return codigoBarras;
+	public String getPeso() {
+		return peso;
 	}
-	public String darCalidad() {
+	public void setPeso(String peso) {
+		this.peso = peso;
+	}
+	public String getVolumen() {
+		return volumen;
+	}
+	public void setVolumen(String volumen) {
+		this.volumen = volumen;
+	}
+	public String getCalidad() {
 		return calidad;
 	}
-	public Date darFechaVencimiento() {
-		return fechaVencimiento;
+	public void setCalidad(String calidad) {
+		this.calidad = calidad;
+	}
+	public double getPrecioUnitario() {
+		return precioUnitario;
 	}
 	@Override
 	public String toString() {
 		return "Producto [nombre=" + nombre + ", marca=" + marca + ", presentacion=" + presentacion + ", unidadMedida="
-				+ unidadMedida + ", especificacionEmpacado=" + especificacionEmpacado + ", calidad=" + calidad
+				+ unidadMedida + ", peso=" + peso + ", volumen=" + volumen + ", calidad=" + calidad
 				+ ", precioUnitario=" + precioUnitario + ", precioUnidadMedida=" + precioUnidadMedida
 				+ ", cantidadPresentacion=" + cantidadPresentacion + ", codigoBarras=" + codigoBarras
 				+ ", fechaVencimiento=" + fechaVencimiento + "]";
 	}
-	
+	public void setPrecioUnitario(double precioUnitario) {
+		this.precioUnitario = precioUnitario;
+	}
+	public double getPrecioUnidadMedida() {
+		return precioUnidadMedida;
+	}
+	public void setPrecioUnidadMedida(double precioUnidadMedida) {
+		this.precioUnidadMedida = precioUnidadMedida;
+	}
+	public int getCantidadPresentacion() {
+		return cantidadPresentacion;
+	}
+	public void setCantidadPresentacion(int cantidadPresentacion) {
+		this.cantidadPresentacion = cantidadPresentacion;
+	}
+	public String getCodigoBarras() {
+		return codigoBarras;
+	}
+	public void setCodigoBarras(String codigoBarras) {
+		this.codigoBarras = codigoBarras;
+	}
+	public Date getFechaVencimiento() {
+		return fechaVencimiento;
+	}
+	public void setFechaVencimiento(Date fechaVencimiento) {
+		this.fechaVencimiento = fechaVencimiento;
+	}
 }

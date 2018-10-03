@@ -22,7 +22,7 @@ class SQLProductoCategoria
 		this.persistencia = pPersistencia;
 	}
 	// TODO RF2 - Registrar producto
-	public long agregarProductoCategoria(PersistenceManager manager, String pNombreCategoria, int pCodigoBarras)
+	public long agregarProductoCategoria(PersistenceManager manager, String pNombreCategoria, String pCodigoBarras)
 	{
 		Query add = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlProductoCategoria()+" (nombre_categoria, codigo_barras) values (?,?)");
 		add.setParameters(pNombreCategoria,pCodigoBarras);

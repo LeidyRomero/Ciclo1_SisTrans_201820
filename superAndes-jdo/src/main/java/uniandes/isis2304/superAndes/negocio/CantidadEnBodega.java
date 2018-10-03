@@ -14,7 +14,7 @@ public class CantidadEnBodega implements VOCantidadEnBodega{
 	private String ciudad;
 	private int cantidadActual;
 	private int cantidadMinima;
-	private int codigoBarras;
+	private String codigoBarras;
 	//----------------------------------------------
 	//Constructores
 	//----------------------------------------------
@@ -25,9 +25,9 @@ public class CantidadEnBodega implements VOCantidadEnBodega{
 		ciudad="";
 		cantidadActual = 0;
 		cantidadMinima = 0;
-		codigoBarras = 0;
+		codigoBarras = "";
 	}
-	public CantidadEnBodega(String pDireccionBodega,String pDireccionSucursal,String pCiudad,int pCantidadActual,int pCantidadMinima,int pCodigoBarras)
+	public CantidadEnBodega(String pDireccionBodega,String pDireccionSucursal,String pCiudad,int pCantidadActual,int pCantidadMinima,String pCodigoBarras)
 	{
 		direccionBodega = pDireccionBodega;
 		direccionSucursal = pDireccionSucursal;
@@ -39,10 +39,10 @@ public class CantidadEnBodega implements VOCantidadEnBodega{
 	//----------------------------------------------
 	//Metodos
 	//----------------------------------------------
-	public int darCodigoBarras() {
+	public String darCodigoBarras() {
 		return codigoBarras;
 	}
-	public void cambiarCodigoBarras(int pCodigoBarras)
+	public void cambiarCodigoBarras(String pCodigoBarras)
 	{
 		this.codigoBarras = pCodigoBarras;
 	}

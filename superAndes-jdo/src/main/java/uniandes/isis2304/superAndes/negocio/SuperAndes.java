@@ -7,6 +7,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.google.gson.JsonObject;
+
+import oracle.net.aso.p;
 import uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes;
 
 public class SuperAndes {
@@ -37,18 +39,125 @@ public class SuperAndes {
 	//-----------------------------------------------------------------------------
 	//   Metodos para manejar los PRODUCTOS
 	//-----------------------------------------------------------------------------
-	public Producto adicionarProducto(String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pEspecificacionEmpacado, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, int pCodigoBarras, Date pFechaVencimiento)
+	public Producto adicionarProducto(String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, String pCodigoBarras, Date pFechaVencimiento, String pPeso, String pVolumen)
 	{
 		Log.info("Adicionando el producto "+pNombre);
-		Producto producto = pp.adicionarProducto(pNombre, pMarca, pPresentacion, pUnidadMedida, pEspecificacionEmpacado, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento);
+		Producto producto = pp.adicionarProducto(pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento, pPeso, pVolumen);
 		Log.info("Saliendo de adicionar el producto "+ pNombre);
 		return producto;
 	}
-
+	public String buscarProductosPrecioEnRango(double pPrecioMinimo, double pPrecioMaximo)
+	{
+		String mensaje = "";
+		Log.info("Buscar los productos en un rango de precios, precio minimo: "+pPrecioMinimo+", precio maximo: "+pPrecioMaximo);
+		List<Producto> productos = pp.buscarProductosPrecioEnRango(pPrecioMinimo, pPrecioMaximo);
+		Log.info("Saliendo de buscar los productos en un rango de precios, precio minimo: "+pPrecioMinimo+", precio maximo: "+pPrecioMaximo);
+		for(int i = 0;i<productos.size();i++)
+		{
+			mensaje+=productos.get(i).getNombre()+", con precio: "+productos.get(i).getPrecioUnitario()+"\n";
+		}
+		return mensaje;
+	}
+	public String buscarProductosFechaVencimiento(Date pFecha)
+	{
+		String mensaje = "";
+		Log.info("Buscar los productos cuya fecha de nacimiento sea posterior a la fecha "+pFecha);
+		List<Producto> productos = pp.buscarProductosFechaVencimiento(pFecha);
+		Log.info("Saliendo de buscar los productos cuya fecha de nacimiento sea posterior a la fecha"+pFecha );
+		for(int i = 0;i<productos.size();i++)
+		{
+			mensaje+=productos.get(i).getNombre()+", con fecha de vencimiento: "+productos.get(i).getFechaVencimiento()+"\n";
+		}
+		return mensaje;
+	}
+	public String buscarProductosPesoEnRango(double pPesoMinimo, double pPesoMaximo)
+	{
+		String mensaje = "";
+		Log.info("Buscar los productos en un rango de pesos, peso minimo: "+pPesoMaximo+", peso maximo: "+pPesoMaximo);
+		List<Producto> productos = pp.buscarProductosPesoEnRango(pPesoMinimo, pPesoMaximo);
+		Log.info("Saliendo de buscar los productos en un rango de pesos, peso minimo: "+pPesoMaximo+", peso maximo: "+pPesoMaximo);
+		for(int i = 0;i<productos.size();i++)
+		{
+			mensaje+=productos.get(i).getNombre()+", con peso: "+productos.get(i).getPeso()+"\n";
+		}
+		return mensaje;
+	}
+	public String buscarProductosVolumenEnRango(double pVolumenMinimo, double pVolumenMaximo)
+	{
+		String mensaje = "";
+		Log.info("Buscar los productos en un rango de volumenes, volumen minimo: "+pVolumenMinimo+", volumen maximo: "+pVolumenMaximo);
+		List<Producto> productos = pp.buscarProductosVolumenEnRango(pVolumenMinimo, pVolumenMaximo);
+		Log.info("Saliendo de buscar los productos en un rango de volumenes, volumen minimo: "+pVolumenMinimo+", volumen maximo: "+pVolumenMaximo);
+		for(int i = 0;i<productos.size();i++)
+		{
+			mensaje+=productos.get(i).getNombre()+", con volumen: "+productos.get(i).getVolumen()+"\n";
+		}
+		return mensaje;
+	}
+	public String buscarProductosVendidosPorProveedor(int nit)
+	{
+		String mensaje = "Los productos del proveedor: "+nit+"son: ";
+		Log.info("Buscar los productos vendidos por el proveedor con NIT: "+nit);
+		List<Producto> productos = pp.buscarProductosVendidosPorProveedor(nit);
+		Log.info("Saliendo de buscar los productos vendidos por el proveedor con NIT: "+nit);
+		for(int i = 0;i<productos.size();i++)
+		{
+			mensaje+=productos.get(i).getNombre()+"\n";
+		}
+		return mensaje;
+	}
+	public String buscarProductosDisponiblesCiudad(String ciudad)
+	{
+		String mensaje = "Los productos disponibles en la ciudad: "+ciudad+" son:";
+		Log.info("Buscar los productos disponibles en la ciudad: "+ciudad);
+		List<Producto> productos = pp.buscarProductosDisponiblesCiudad(ciudad);
+		Log.info("Saliendo de buscar los productos disponibles en la ciudad: "+ciudad);
+		for(int i = 0;i<productos.size();i++)
+		{
+			mensaje+=productos.get(i).getNombre();
+		}
+		return mensaje;
+	}
+	public String buscarProductosDisponiblesSucursal(String pCiudad, String pDireccion)
+	{
+		String mensaje = "Los productos disponibles en la sucursal: "+pDireccion+" de la ciudad: "+pCiudad+" son: ";
+		Log.info("Buscar los productos disponibles en la sucursal: "+pDireccion+" en la ciudad: "+pCiudad);
+		List<Producto> productos = pp.buscarProductosDisponiblesSucursal(pCiudad, pDireccion);
+		Log.info("Saliendo de buscar los productos disponibles en la sucursal: "+pDireccion+" en la ciudad: "+pCiudad);
+		for(int i = 0;i<productos.size();i++)
+		{
+			mensaje+=productos.get(i).getNombre();
+		}
+		return mensaje;
+	}
+	public String buscarProductosTipo(String pTipo)
+	{
+		String mensaje = "Los productos de tipo: "+pTipo+" son:";
+		Log.info("Buscar los productos de tipo: "+pTipo);
+		List<Producto> productos = pp.buscarProductosTipo(pTipo);
+		Log.info("Saliendo de buscar los productos de tipo: "+pTipo);
+		for(int i = 0;i<productos.size();i++)
+		{
+			mensaje+=productos.get(i).getNombre();
+		}
+		return mensaje;
+	}
+	public String buscarProductosVentasSuperiores(double pVentasMinimas)
+	{
+		String mensaje = "";
+		Log.info("Buscar los productos cuyas ventas sean superiores a: "+pVentasMinimas);
+		List<Producto> productos = pp.buscarProductosVentasSuperiores(pVentasMinimas);
+		Log.info("Saliendo de buscar los productos cuyas ventas sean superiores a: "+pVentasMinimas);
+		for(int i = 0;i<productos.size();i++)
+		{
+			mensaje+=productos.get(i).getNombre()+", con ventas: "+"\n";
+		}
+		return mensaje;
+	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTO_CATEGORIA
 	//------------------------------------------------------------------
-	public ProductoCategoria adicionarProductoCategoria(String pNombreCategoria, int pCodigoBarras)
+	public ProductoCategoria adicionarProductoCategoria(String pNombreCategoria, String pCodigoBarras)
 	{
 		Log.info("Adicionando el producto categoria "+pCodigoBarras);
 		ProductoCategoria productoCategoria = pp.adicionarProductoCategoria(pNombreCategoria, pCodigoBarras);
@@ -145,7 +254,7 @@ public class SuperAndes {
 	//------------------------------------------------------------------
 	//  Metodos para manejar PEDIDO PRODUCTO
 	//------------------------------------------------------------------
-	public PedidoProducto adicionarPedidoProducto(int pCodigoBarras, long pIdPedido, double pCantidadProducto, double pPrecioProducto)
+	public PedidoProducto adicionarPedidoProducto(String pCodigoBarras, long pIdPedido, double pCantidadProducto, double pPrecioProducto)
 	{
 		Log.info("Adicionando el pedido producto "+ pCodigoBarras+", "+pIdPedido);
 		PedidoProducto pedidoProducto = pp.adicionarPedidoProducto(pCodigoBarras, pIdPedido, pCantidadProducto, pPrecioProducto);
@@ -155,7 +264,7 @@ public class SuperAndes {
 	//------------------------------------------------------------------
 	//  Metodos para manejar COMPRADOS
 	//------------------------------------------------------------------
-	public Comprados adicionarComprados(int pCodigoBarras,int pCantidad, double pPrecioTotal, String pIdFactura)
+	public Comprados adicionarComprados(String pCodigoBarras,int pCantidad, double pPrecioTotal, String pIdFactura)
 	{
 		Log.info("Adicionando comprados "+ pCodigoBarras+", "+pCodigoBarras+", "+pIdFactura);
 		Comprados comprado = pp.adicionarComprados(pCodigoBarras, pCantidad, pPrecioTotal, pIdFactura);

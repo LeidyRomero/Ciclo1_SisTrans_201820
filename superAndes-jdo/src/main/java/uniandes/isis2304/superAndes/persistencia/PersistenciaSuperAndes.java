@@ -732,17 +732,251 @@ public class PersistenciaSuperAndes {
 	//------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTOS
 	//------------------------------------------------------------------
-	public Producto adicionarProducto(String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pEspecificacionEmpacado, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, int pCodigoBarras, Date pFechaVencimiento)
+	public Producto adicionarProducto(String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, String pCodigoBarras, Date pFechaVencimiento, String pPeso, String pVolumen)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
 		Transaction t = manager.currentTransaction();
 		try 
 		{
 			t.begin();
-			long tuplasInsertadas = sqlProducto.agregarProducto(manager, pNombre, pMarca, pPresentacion, pUnidadMedida, pEspecificacionEmpacado, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento);
+			long tuplasInsertadas = sqlProducto.agregarProducto(manager, pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento,pPeso, pVolumen);
 			t.commit();
 			Log.trace("Inserccion producto: "+ pNombre+": "+tuplasInsertadas+ " tuplas insertadas");
-			return new Producto(pNombre, pMarca, pPresentacion, pUnidadMedida, pEspecificacionEmpacado, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento);
+			return new Producto(pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento, pPeso, pVolumen);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Producto> buscarProductosPrecioEnRango(double pPrecioMinimo, double pPrecioMaximo)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Producto> productos = sqlProducto.darProductosPrecioEnRango(manager, pPrecioMinimo, pPrecioMaximo);
+			t.commit();
+			Log.trace("Saliendo de buscar los productos rango precio");
+			return productos;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Producto> buscarProductosFechaVencimiento(Date pFecha)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Producto> productos = sqlProducto.darProductosFechaVencimiento(manager, pFecha);
+			t.commit();
+			Log.trace("Saliendo de buscar los productos fecha vecimiento: ");
+			return productos;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Producto> buscarProductosPesoEnRango(double pPesoMinimo, double pPesoMaximo)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Producto> productos = sqlProducto.darProductosPesoEnRango(manager, pPesoMinimo, pPesoMaximo);
+			t.commit();
+			Log.trace("Saliendo de buscar productos rango de peso: ");
+			return productos;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Producto> buscarProductosVolumenEnRango(double pVolumenMinimo, double pVolumenMaximo)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Producto> productos = sqlProducto.darProductosVolumenEnRango(manager,pVolumenMinimo,pVolumenMaximo);
+			t.commit();
+			Log.trace("Saliendo de buscar productos rango de volumen: ");
+			return productos;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Producto> buscarProductosVendidosPorProveedor(int nit)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Producto> productos = sqlProducto.darProductosVendidosPorProveedor(manager, nit);
+			t.commit();
+			Log.trace("Saliendo de buscar productos vendidos por proveedor: ");
+			return productos;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Producto> buscarProductosDisponiblesCiudad(String ciudad)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Producto> productos = sqlProducto.darProductosDisponiblesCiudad(manager, ciudad);
+			t.commit();
+			Log.trace("Saliendo de buscar productos disponibles en ciudad: ");
+			return productos;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Producto> buscarProductosDisponiblesSucursal(String pCiudad, String pDireccion)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Producto> productos = sqlProducto.darProductosDisponiblesSucursal(manager, pCiudad, pDireccion);
+			t.commit();
+			Log.trace("Saliendo de buscar productos disponibles en sucursal: ");
+			return productos;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Producto> buscarProductosTipo(String pTipo)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Producto> productos = sqlProducto.darProductosTipo(manager, pTipo);
+			t.commit();
+			Log.trace("Saliendo de buscar productos de un tipo: ");
+			return productos;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public List<Producto> buscarProductosVentasSuperiores(double pVentasMinimas)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			List<Producto> productos = sqlProducto.darProductosVentasSuperioresAXEnRangoFechas(manager, pVentasMinimas);
+			t.commit();
+			Log.trace("Saliendo de buscar productos ventas superiores: ");
+			return productos;
 		}
 		catch(Exception e)
 		{
@@ -761,7 +995,7 @@ public class PersistenciaSuperAndes {
 	//------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTO_CATEGORIA
 	//------------------------------------------------------------------
-	public ProductoCategoria adicionarProductoCategoria(String pNombreCategoria, int pCodigoBarras)
+	public ProductoCategoria adicionarProductoCategoria(String pNombreCategoria, String pCodigoBarras)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
 		Transaction t = manager.currentTransaction();
@@ -1070,7 +1304,7 @@ public class PersistenciaSuperAndes {
 	//------------------------------------------------------------------
 	//  Metodos para manejar PEDIDO PRODUCTO
 	//------------------------------------------------------------------
-	public PedidoProducto adicionarPedidoProducto(int pCodigoBarras, long pIdPedido, double pCantidadProducto, double pPrecioProducto)
+	public PedidoProducto adicionarPedidoProducto(String pCodigoBarras, long pIdPedido, double pCantidadProducto, double pPrecioProducto)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
 		Transaction t = manager.currentTransaction();
@@ -1099,7 +1333,7 @@ public class PersistenciaSuperAndes {
 	//------------------------------------------------------------------
 	//  Metodos para manejar COMPRADOS
 	//------------------------------------------------------------------
-	public Comprados adicionarComprados(int pCodigoBarras,int pCantidad, double pPrecioTotal, String pIdFactura)
+	public Comprados adicionarComprados(String pCodigoBarras,int pCantidad, double pPrecioTotal, String pIdFactura)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
 		Transaction t = manager.currentTransaction();

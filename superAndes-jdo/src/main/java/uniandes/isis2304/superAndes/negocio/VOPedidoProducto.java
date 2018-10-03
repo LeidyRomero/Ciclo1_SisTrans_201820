@@ -5,7 +5,7 @@ package uniandes.isis2304.superAndes.negocio;
  *
  */
 public interface VOPedidoProducto {
-	public int darCodigoBarras();
+	public String darCodigoBarras();
 	public long darIdPedido();
 	public double darCantidadProducto();
 	public double darPrecioProducto();

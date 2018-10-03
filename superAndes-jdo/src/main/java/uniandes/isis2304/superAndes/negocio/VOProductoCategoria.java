@@ -6,6 +6,6 @@ package uniandes.isis2304.superAndes.negocio;
  */
 public interface VOProductoCategoria{
 	public String getNombreCategoria();
-	public int getCodigoBarras();
+	public String getCodigoBarras();
 	public String toString();
 }

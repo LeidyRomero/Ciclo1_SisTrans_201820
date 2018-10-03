@@ -6,7 +6,7 @@ package uniandes.isis2304.superAndes.negocio;
  */
 public interface VOCantidadEnBodega {
 
-	public int darCodigoBarras();
+	public String darCodigoBarras();
 	public String darDireccionBodega();
 	public String darDireccionSucursal();
 	public String darCiudad();

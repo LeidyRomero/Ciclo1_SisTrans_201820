@@ -6,14 +6,14 @@ package uniandes.isis2304.superAndes.negocio;
  */
 public class ProductoCategoria implements VOProductoCategoria{
 	private String nombreCategoria;
-	private int codigoBarras;
+	private String codigoBarras;
 
 	public ProductoCategoria()
 	{
 		nombreCategoria = "";
-		codigoBarras = 0;
+		codigoBarras = "";
 	}
-	public ProductoCategoria(String pCategoria, int pCodigo)
+	public ProductoCategoria(String pCategoria, String pCodigo)
 	{
 		nombreCategoria = pCategoria;
 		codigoBarras = pCodigo;
@@ -26,11 +26,11 @@ public class ProductoCategoria implements VOProductoCategoria{
 		this.nombreCategoria = nombre;
 	}
 
-	public int getCodigoBarras() {
+	public String getCodigoBarras() {
 		return codigoBarras;
 	}
 
-	public void setCodigoBarras(int codigoBarras) {
+	public void setCodigoBarras(String codigoBarras) {
 		this.codigoBarras = codigoBarras;
 	}
 
