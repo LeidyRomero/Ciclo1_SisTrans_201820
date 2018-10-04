@@ -25,7 +25,7 @@ public class Proveedor implements VOProveedor {
 	/**
 	 * Calificaión del proveedor
 	 */
-	private String calificacion;
+	private String calificacionProveedor;
 	
 	//-----------------------------------------------------
 	// CONSTRUCTORES
@@ -38,7 +38,7 @@ public class Proveedor implements VOProveedor {
 	{
 		nitProveedor = 0;
 		nombreProveedor = null;
-		calificacion = null;
+		calificacionProveedor = null;
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class Proveedor implements VOProveedor {
 	{
 		this.nitProveedor = nitProveedor;
 		this.nombreProveedor = nombreProveedor;
-		this.calificacion = calificacion;
+		this.calificacionProveedor = calificacion;
 	}
 	
 	//-----------------------------------------------------
@@ -91,21 +91,21 @@ public class Proveedor implements VOProveedor {
 	/**
 	 * Retorna la calificación del proveedor.
 	 */
-	public String getCalificacion() {
-		return calificacion;
+	public String getCalificacionProveedor() {
+		return calificacionProveedor;
 	}
 
 	/**
 	 * Modifica la calificación del proveedor.
 	 * @param calificacion Nueva calificación.
 	 */
-	public void setCalificacion(String calificacion) {
-		this.calificacion = calificacion;
+	public void setCalificacionProveedor(String calificacion) {
+		this.calificacionProveedor = calificacion;
 	}
 
 	@Override
 	public String toString() {
 		return "Proveedor [nitProveedor=" + nitProveedor + ", nombreProveedor=" + nombreProveedor + ", calificacion="
-				+ calificacion + "]";
+				+ calificacionProveedor + "]";
 	}
 }

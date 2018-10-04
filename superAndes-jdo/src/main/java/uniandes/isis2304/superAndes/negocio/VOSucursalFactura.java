@@ -17,7 +17,7 @@ public interface VOSucursalFactura {
 	/**
 	 * @return Ciudad de la sucursal
 	 */
-	public String getCiudadSucursal();
+	public String getCiudad();
 
 	/**
 	 * @return Id de la factura

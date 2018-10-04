@@ -22,7 +22,7 @@ public interface VOSucursalPromociones {
 	/**
 	 * @return Dirección de la sucursal
 	 */
-	public String getDireccion();
+	public String getDireccionSucursal();
 	
 	/**
 	 * @return Una cadena con la información básica de SUCURSAL PROMOCIONES

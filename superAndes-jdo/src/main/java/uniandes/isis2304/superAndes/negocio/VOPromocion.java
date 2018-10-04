@@ -14,7 +14,7 @@ public interface VOPromocion {
 	/**
 	 * @return Fecha de inicio de la promoción.
 	 */
-	public Timestamp getFechaInicial();
+	public Timestamp getFechaIncial();
 
 	/**
 	 * @return Fecha de terminación de la promoción.
@@ -45,6 +45,11 @@ public interface VOPromocion {
 	 * @return Las unidades vendidas
 	 */
 	public int getUnidadesVendidas();
+	
+	/**
+	 * @return Retorna el estado de la promoción
+	 */
+	public String getEstado();
 	
 	/**
 	 * @return Una cadena con la información básica de la Promoción.

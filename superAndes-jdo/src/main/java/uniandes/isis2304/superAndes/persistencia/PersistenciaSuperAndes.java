@@ -463,7 +463,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las SUCURSALES
 	//---------------------------------------------------------------------
-
+	
 	//---------------------------------------------------------------------
 	// Métodos para manejar los SUCURSALES
 	//---------------------------------------------------------------------
@@ -530,6 +530,7 @@ public class PersistenciaSuperAndes {
 	{
 		return sqlSucursal.darSucursales(managerFactory.getPersistenceManager());
 	}
+	
 	public long eliminarSucursalPorDireccionYCiudad(String direccion, String ciudad)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -572,7 +573,7 @@ public class PersistenciaSuperAndes {
 			tx.commit();
 
 			Log.trace("Insercción promocion: " + idPromocion +": "+tuplasInsertadas);
-			return new Promocion(fechaInicio, fechaFin, descripcion, idPromocion, codBarras, uniVendidas, uniDisponibles);
+			return new Promocion(fechaInicio, fechaFin, descripcion, idPromocion, codBarras, uniVendidas, uniDisponibles, "VIGENTE");
 		}
 		catch(Exception e)
 		{
@@ -658,7 +659,7 @@ public class PersistenciaSuperAndes {
 	{
 		return sqlPromocion.darPromociones(managerFactory.getPersistenceManager());
 	}
-
+	
 	public long eliminarPromocionPorId(long idPromocion)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -689,7 +690,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las ORDENES DE PEDIDO
 	//---------------------------------------------------------------------
-
+	
 	//---------------------------------------------------------------------
 	// Métodos para manejar los ORDEN PEDIDO
 	//---------------------------------------------------------------------
@@ -732,7 +733,7 @@ public class PersistenciaSuperAndes {
 			long tuplasInsertadas = sqlOrdenPedido.cambiarEstadoOrdenPedido(pm, idPedido, calificacion);
 			OrdenPedido op = sqlOrdenPedido.darPedidoPorId(pm, idPedido);
 			int numProductos = sqlPedidoProducto.darNumeroProductosPedido(pm, idPedido);
-			sqlCantidadEnBodega.subirInventario(pm, numProductos, op.getCiudadSucursal(), op.getDireccionSucursal(), op.getDireccionBodega());
+			sqlCantidadEnBodega.subirInventario(pm, numProductos, op.getCiudad(), op.getDireccionSucursal(), op.getDireccionBodega());
 			tx.commit();
 
 			Log.trace("Insercción promocion: " + idPedido +": "+tuplasInsertadas);
@@ -757,7 +758,7 @@ public class PersistenciaSuperAndes {
 	{
 		return sqlOrdenPedido.darPedidos(managerFactory.getPersistenceManager());
 	}
-
+	
 	public long eliminarPedidoPorId(long idPedido)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -789,7 +790,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las FACTURAS
 	//---------------------------------------------------------------------
-
+	
 	//---------------------------------------------------------------------
 	// Métodos para manejar los FACTURA
 	//---------------------------------------------------------------------
@@ -825,7 +826,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las CANTIDADES EN ESTANTE
 	//---------------------------------------------------------------------
-
+	
 	//---------------------------------------------------------------------
 	// Métodos para manejar los CANTIDAD EN ESTANTES
 	//---------------------------------------------------------------------
@@ -886,7 +887,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las PRODUCTOS OFRECIDOS
 	//---------------------------------------------------------------------
-
+	
 	//---------------------------------------------------------------------
 	// Métodos para manejar los PRODUCTOS OFRECIDOS
 	//---------------------------------------------------------------------
@@ -901,7 +902,7 @@ public class PersistenciaSuperAndes {
 			tx.commit();
 
 			Log.trace("Insercción productos ofrecido: " + direccionSucursal + ", "+ ciudad +", "+ codigoBarras +": "+tuplasInsertadas);
-			return new ProductosOfrecidos(direccionSucursal, ciudad, codigoBarras);
+			return new ProductosOfrecidos(direccionSucursal, ciudad, codigoBarras, 0);
 		}
 		catch(Exception e)
 		{
@@ -921,7 +922,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las SUCURSAL FACTURAS
 	//---------------------------------------------------------------------
-
+	
 	//---------------------------------------------------------------------
 	// Métodos para manejar los SUCURSAL FACTURA
 	//---------------------------------------------------------------------
@@ -984,7 +985,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar los HISTORIALES COMPRAS
 	//---------------------------------------------------------------------
-
+	
 	//---------------------------------------------------------------------
 	// Métodos para manejar los HISTORIAL COMPRAS
 	//---------------------------------------------------------------------
@@ -1019,7 +1020,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar PROVEEN
 	//---------------------------------------------------------------------
-
+	
 	//---------------------------------------------------------------------
 	// Métodos para manejar los PROVEEN
 	//---------------------------------------------------------------------
@@ -1054,7 +1055,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar SUCURSAL PROMOCIONES
 	//---------------------------------------------------------------------
-
+	
 	//---------------------------------------------------------------------
 	// Métodos para manejar los SUCURSAL PROMOCIONES
 	//---------------------------------------------------------------------
@@ -1089,8 +1090,11 @@ public class PersistenciaSuperAndes {
 	//------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTOS
 	//------------------------------------------------------------------
-
-	public Producto adicionarProducto(String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, String pCodigoBarras, Timestamp pFechaVencimiento, String pPeso, String pVolumen)
+	
+	//---------------------------------------------------------------------
+	// Métodos para manejar los PRODUCTO
+	//---------------------------------------------------------------------
+	public Producto adicionarProducto(String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, String pCodigoBarras, Date pFechaVencimiento, String pPeso, String pVolumen)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
 		Transaction t = manager.currentTransaction();
@@ -2375,5 +2379,34 @@ public class PersistenciaSuperAndes {
 			}
 			manager.close();
 		}
+	}
+	
+	public long [] limpiarSuperAndes()
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long [] resp = sqlUtil.limpiarSuperAndes(pm);
+            tx.commit ();
+            Log.info ("Borrada la base de datos");
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	Log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return new long[] {-1, -1, -1, -1, -1, -1, -1};
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+		
 	}
 }

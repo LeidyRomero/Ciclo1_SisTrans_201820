@@ -7,85 +7,79 @@ package uniandes.isis2304.superAndes.negocio;
 public class Estante implements VOEstante{
 	private String ciudad;
 	private String direccionSucursal;
-	private String tipo;
+	private String tipoEstante;
 	private double nivelAbastecimiento;
-	private double peso;
-	private double volumen;
-	private long id;
+	private double pesoEstante;
+	private double volumenEstante;
+	private long idEstante;
 
 	public Estante()
 	{
 		ciudad="";
 		direccionSucursal = "";
-		tipo = "";
+		tipoEstante = "";
 		nivelAbastecimiento = 0;
-		peso = 0;
-		volumen = 0;
-		id = 0;
+		pesoEstante = 0;
+		volumenEstante = 0;
+		idEstante = 0;
 	}
 	public Estante(String pCiudad, String pDireccionSucursal, String pTipo, double pNivelAbastecimiento, double pPeso, double pVolumen, long pId)
 	{
 		ciudad=pCiudad;
 		direccionSucursal = pDireccionSucursal;
-		tipo = pTipo;
+		tipoEstante = pTipo;
 		nivelAbastecimiento = pNivelAbastecimiento;
-		peso = pPeso;
-		volumen = pVolumen;
-		id = pId;
+		pesoEstante = pPeso;
+		volumenEstante = pVolumen;
+		idEstante = pId;
 	}
-	public String darCiudad() {
+	public String getCiudad() {
 		return ciudad;
 	}
-	//TODO REVISAR SET
-	public void cambiarCiudad(String pCiudad)
-	{
-		this.ciudad = pCiudad;
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
 	}
-	public String darDireccionSucursal() {
+	public String getDireccionSucursal() {
 		return direccionSucursal;
 	}
-	public void cambiarDireccionSucursal(String pDireccion)
-	{
-		this.direccionSucursal=pDireccion;
+	public void setDireccionSucursal(String direccionSucursal) {
+		this.direccionSucursal = direccionSucursal;
 	}
-	public double darNivelAbastecimiento() {
+	public String getTipoEstante() {
+		return tipoEstante;
+	}
+	public void setTipoEstante(String tipoEstante) {
+		this.tipoEstante = tipoEstante;
+	}
+	public double getNivelAbastecimiento() {
 		return nivelAbastecimiento;
 	}
-	public void cambiarNivelAbastecimiento(double pNivel)
-	{
-		this.nivelAbastecimiento = pNivel;
+	public void setNivelAbastecimiento(double nivelAbastecimiento) {
+		this.nivelAbastecimiento = nivelAbastecimiento;
 	}
-	public double darPeso() {
-		return peso;
+	public double getPesoEstante() {
+		return pesoEstante;
 	}
-	public void cambiarPeso(double pPeso)
-	{
-		this.peso=pPeso;
+	public void setPesoEstante(double pesoEstante) {
+		this.pesoEstante = pesoEstante;
 	}
-	public long darId() {
-		return id;
+	public double getVolumenEstante() {
+		return volumenEstante;
 	}
-//TODO SET ID
-	public double darVolumen() {
-		return volumen;
+	public void setVolumenEstante(double volumenEstante) {
+		this.volumenEstante = volumenEstante;
 	}
-	public void cambiarVolumen(double pVolumen)
-	{
-		this.volumen=pVolumen;
+	public long getIdEstante() {
+		return idEstante;
 	}
-	public String darTipo() {
-
-		return tipo;
+	public void setIdEstante(long idEstante) {
+		this.idEstante = idEstante;
 	}
-	public void cambiarTipo(String pTipo)
-	{
-		this.tipo=pTipo;
-	}
-
+	@Override
 	public String toString() {
-		return "Estante [ciudad=" + ciudad + ", direccionSucursal=" + direccionSucursal + ", tipo=" + tipo
-				+ ", nivelAbastecimiento=" + nivelAbastecimiento + ", peso=" + peso + ", volumen=" + volumen + ", id="
-				+ id + "]";
+		return "Estante [ciudad=" + ciudad + ", direccionSucursal=" + direccionSucursal + ", tipoEstante=" + tipoEstante
+				+ ", nivelAbastecimiento=" + nivelAbastecimiento + ", pesoEstante=" + pesoEstante + ", volumenEstante="
+				+ volumenEstante + ", idEstante=" + idEstante + "]";
 	}
 	
 	

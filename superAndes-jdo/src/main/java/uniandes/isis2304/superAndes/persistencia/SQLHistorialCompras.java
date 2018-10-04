@@ -46,7 +46,7 @@ class SQLHistorialCompras
 	 */
 	public long adicionarHistorialCompras(PersistenceManager pm, String correo, long idFactura) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlHistorialCompras() + "(correo_cliente, id_factura) values (?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlHistorialCompras() + "(correocliente, idfactura) values (?, ?)");
         q.setParameters(correo, idFactura);
         return (long) q.executeUnique();
 	}

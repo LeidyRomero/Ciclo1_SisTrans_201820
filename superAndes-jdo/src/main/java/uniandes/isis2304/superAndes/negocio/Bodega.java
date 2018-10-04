@@ -9,10 +9,10 @@ public class Bodega implements VOBodega{
 	//----------------------------------------------
 	//Atributos
 	//----------------------------------------------
-	private String tipo;
-	private double volumen;
+	private String tipoBodega;
+	private double volumenBodega;
 	private String direccionBodega;
-	private double peso;
+	private double pesoBodega;
 	private String direccionSucursal;
 	private String ciudad;
 	//----------------------------------------------
@@ -20,25 +20,49 @@ public class Bodega implements VOBodega{
 	//----------------------------------------------
 	public Bodega()
 	{
-		this.tipo = "";
-		this.volumen = 0;
-		this.peso = 0;
+		this.tipoBodega = "";
+		this.volumenBodega = 0;
+		this.pesoBodega = 0;
 		this.direccionBodega = "";
 		this.direccionSucursal = "";
 		this.ciudad = "";
 	}
 	public Bodega(String pDireccion, String pTipo, double pPeso, double pVolumen, String pDireccionSucursal, String pCiudad)
 	{
-		this.volumen = pVolumen;
-		this.peso = pPeso;
+		this.volumenBodega = pVolumen;
+		this.pesoBodega = pPeso;
 		this.direccionBodega=pDireccion;
-		this.tipo = pTipo;
+		this.tipoBodega = pTipo;
 		this.direccionSucursal = "";
 		this.ciudad = "";
 	}
 	//----------------------------------------------
 	//Metodos
 	//----------------------------------------------
+	public String getTipoBodega() {
+		return tipoBodega;
+	}
+	public void setTipoBodega(String tipoBodega) {
+		this.tipoBodega = tipoBodega;
+	}
+	public double getVolumenBodega() {
+		return volumenBodega;
+	}
+	public void setVolumenBodega(double volumenBodega) {
+		this.volumenBodega = volumenBodega;
+	}
+	public String getDireccionBodega() {
+		return direccionBodega;
+	}
+	public void setDireccionBodega(String direccionBodega) {
+		this.direccionBodega = direccionBodega;
+	}
+	public double getPesoBodega() {
+		return pesoBodega;
+	}
+	public void setPesoBodega(double pesoBodega) {
+		this.pesoBodega = pesoBodega;
+	}
 	public String getDireccionSucursal() {
 		return direccionSucursal;
 	}
@@ -51,35 +75,12 @@ public class Bodega implements VOBodega{
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
-	public String darTipo() {
-		return tipo;
-	}
-	public void cambiarTipo(String pTipo) {
-		this.tipo = pTipo;
-	}
-
-	public double darVolumen() {
-		return volumen;
-	}
-	public void cambiarVolumen(double pVolumen) {
-		this.volumen = pVolumen;
-	}
-	public double darPeso() {
-		return peso;
-	}
-	public void cambiarPeso(double pPeso) {
-		this.peso = pPeso;
-	}
-	public String darDireccion() {
-		return direccionBodega;
-	}
-	public void cambiarDireccion(String pDireccion) {
-		this.direccionBodega = pDireccion;
-	}
-
+	@Override
 	public String toString() {
-		return "Bodega [tipo=" + tipo + ", volumen=" + volumen + ", direccionBodega=" + direccionBodega + ", peso="
-				+ peso + ", direccionSucursal=" + direccionSucursal + ", ciudad=" + ciudad + "]";
+		return "Bodega [tipoBodega=" + tipoBodega + ", volumenBodega=" + volumenBodega + ", direccionBodega="
+				+ direccionBodega + ", pesoBodega=" + pesoBodega + ", direccionSucursal=" + direccionSucursal
+				+ ", ciudad=" + ciudad + "]";
 	}
+
 	
 }

@@ -40,7 +40,7 @@ public class SQLSucursalPromociones {
 	
 	public long adicionarSucursalPromociones (PersistenceManager pm, long idPromocion, String direccion, String ciudad) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlSucursalFactura() + "(id_promocion, direccion_sucursal, ciudad) values (?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlSucursalFactura() + "(idpromocion, direccionsucursal, ciudad) values (?, ?, ?)");
         q.setParameters(idPromocion, direccion, ciudad);
         return (long) q.executeUnique();
 	}

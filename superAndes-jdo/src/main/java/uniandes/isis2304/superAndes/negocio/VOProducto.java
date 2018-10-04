@@ -2,21 +2,22 @@ package uniandes.isis2304.superAndes.negocio;
 
 import java.util.Date;
 /**
- * 
+ * Interfaz para los métodos get de PRODUCTO
+ * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz
  * @author lj.romero
  *
  */
 public interface VOProducto {
-	public String getNombre();
+	public String getNombreProducto();
 	public String getMarca();
 	public double getPrecioUnitario();
 	public String getPresentacion();
 	public double getPrecioUnidadMedida();
-	public int getCantidadPresentacion();
+	public int getCantPresentacion();
 	public String getUnidadMedida();
-	public String getPeso();
-	public String getVolumen();
-	public String getCodigoBarras();
+	public String getPesoProducto();
+	public String getVolumenProducto();
+	public String getCodBarras();
 	public String getCalidad();
 	public Date getFechaVencimiento();
 	

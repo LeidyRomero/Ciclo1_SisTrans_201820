@@ -5,27 +5,27 @@ package uniandes.isis2304.superAndes.negocio;
  *
  */
 public class Categoria implements VOCategoria{
-	private String nombre;
+	private String nombreCategoria;
 	
 	public Categoria()
 	{
-		nombre = "";
+		nombreCategoria = "";
 	}
 	public Categoria(String pCategoria)
 	{
-		nombre = pCategoria;
+		nombreCategoria = pCategoria;
 	}
 
-	public String darNombre() {
-		return nombre;
+	public String getNombreCategoria() {
+		return nombreCategoria;
 	}
-	public void cambiarNombre(String pNombre)
+	public void setNombreCategoria(String pNombre)
 	{
-		this.nombre = pNombre;
+		this.nombreCategoria = pNombre;
 	}
 
 	public String toString() {
-		return "Categoria [nombre=" + nombre + "]";
+		return "Categoria [nombre=" + nombreCategoria + "]";
 	}
 	
 }

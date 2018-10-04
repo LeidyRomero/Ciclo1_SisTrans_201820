@@ -5,28 +5,34 @@ package uniandes.isis2304.superAndes.negocio;
  *
  */
 public class Empresa extends Cliente implements VOEmpresa{
-	private int nit;
+	private int nitEmpresa;
 	private String direccion;
 
 	public Empresa()
 	{
-		nit = 0;
+		nitEmpresa = 0;
 		direccion = "";
 	}
 	public Empresa(int pNit,String pDireccion)
 	{
-		nit = pNit;
+		nitEmpresa = pNit;
 		direccion = pDireccion;
 	}
-	//TODO SET
-	public int darNitEmpresa() {
-		return nit;
+	public int getNitEmpresa() {
+		return nitEmpresa;
 	}
-	public String darDireccion() {
+	public void setNitEmpresa(int nitEmpresa) {
+		this.nitEmpresa = nitEmpresa;
+	}
+	public String getDireccion() {
 		return direccion;
 	}
-
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	@Override
 	public String toString() {
-		return "Empresa [nit=" + nit + ", direccion=" + direccion+ "]";
-	}	
+		return "Empresa [nitEmpresa=" + nitEmpresa + ", direccion=" + direccion + "]";
+	}
+
 }

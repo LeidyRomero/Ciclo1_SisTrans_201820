@@ -56,7 +56,7 @@ public class SuperAndes {
 		Log.info("Saliendo de buscar los productos en un rango de precios, precio minimo: "+pPrecioMinimo+", precio maximo: "+pPrecioMaximo);
 		for(int i = 0;i<productos.size();i++)
 		{
-			mensaje+=productos.get(i).getNombre()+", con precio: "+productos.get(i).getPrecioUnitario()+"\n";
+			mensaje+=productos.get(i).getNombreProducto()+", con precio: "+productos.get(i).getPrecioUnitario()+"\n";
 		}
 		return mensaje;
 	}
@@ -68,7 +68,7 @@ public class SuperAndes {
 		Log.info("Saliendo de buscar los productos cuya fecha de nacimiento sea posterior a la fecha"+pFecha );
 		for(int i = 0;i<productos.size();i++)
 		{
-			mensaje+=productos.get(i).getNombre()+", con fecha de vencimiento: "+productos.get(i).getFechaVencimiento()+"\n";
+			mensaje+=productos.get(i).getNombreProducto()+", con fecha de vencimiento: "+productos.get(i).getFechaVencimiento()+"\n";
 		}
 		return mensaje;
 	}
@@ -80,7 +80,7 @@ public class SuperAndes {
 		Log.info("Saliendo de buscar los productos en un rango de pesos, peso minimo: "+pPesoMaximo+", peso maximo: "+pPesoMaximo);
 		for(int i = 0;i<productos.size();i++)
 		{
-			mensaje+=productos.get(i).getNombre()+", con peso: "+productos.get(i).getPeso()+"\n";
+			mensaje+=productos.get(i).getNombreProducto()+", con peso: "+productos.get(i).getPesoProducto()+"\n";
 		}
 		return mensaje;
 	}
@@ -92,7 +92,7 @@ public class SuperAndes {
 		Log.info("Saliendo de buscar los productos en un rango de volumenes, volumen minimo: "+pVolumenMinimo+", volumen maximo: "+pVolumenMaximo);
 		for(int i = 0;i<productos.size();i++)
 		{
-			mensaje+=productos.get(i).getNombre()+", con volumen: "+productos.get(i).getVolumen()+"\n";
+			mensaje+=productos.get(i).getNombreProducto()+", con volumen: "+productos.get(i).getVolumenProducto()+"\n";
 		}
 		return mensaje;
 	}
@@ -104,7 +104,7 @@ public class SuperAndes {
 		Log.info("Saliendo de buscar los productos vendidos por el proveedor con NIT: "+nit);
 		for(int i = 0;i<productos.size();i++)
 		{
-			mensaje+=productos.get(i).getNombre()+"\n";
+			mensaje+=productos.get(i).getNombreProducto()+"\n";
 		}
 		return mensaje;
 	}
@@ -116,7 +116,7 @@ public class SuperAndes {
 		Log.info("Saliendo de buscar los productos disponibles en la ciudad: "+ciudad);
 		for(int i = 0;i<productos.size();i++)
 		{
-			mensaje+=productos.get(i).getNombre();
+			mensaje+=productos.get(i).getNombreProducto();
 		}
 		return mensaje;
 	}
@@ -128,7 +128,7 @@ public class SuperAndes {
 		Log.info("Saliendo de buscar los productos disponibles en la sucursal: "+pDireccion+" en la ciudad: "+pCiudad);
 		for(int i = 0;i<productos.size();i++)
 		{
-			mensaje+=productos.get(i).getNombre();
+			mensaje+=productos.get(i).getNombreProducto();
 		}
 		return mensaje;
 	}
@@ -140,7 +140,7 @@ public class SuperAndes {
 		Log.info("Saliendo de buscar los productos de tipo: "+pTipo);
 		for(int i = 0;i<productos.size();i++)
 		{
-			mensaje+=productos.get(i).getNombre();
+			mensaje+=productos.get(i).getNombreProducto();
 		}
 		return mensaje;
 	}
@@ -152,7 +152,7 @@ public class SuperAndes {
 		Log.info("Saliendo de buscar los productos de tipo: "+pCategoria);
 		for(int i = 0;i<productos.size();i++)
 		{
-			mensaje+=productos.get(i).getNombre();
+			mensaje+=productos.get(i).getNombreProducto();
 		}
 		return mensaje;
 	}
@@ -164,7 +164,7 @@ public class SuperAndes {
 		Log.info("Saliendo de buscar los productos cuyas ventas sean superiores a: "+pVentasMinimas);
 		for(int i = 0;i<productos.size();i++)
 		{
-			mensaje+=productos.get(i).getNombre()+", con ventas: "+"\n";
+			mensaje+=productos.get(i).getNombreProducto()+", con ventas: "+"\n";
 		}
 		return mensaje;
 	}
@@ -348,13 +348,13 @@ public class SuperAndes {
 
 		for(int i = 0;i<bodegas.size();i++)
 		{
-			capActual += (double)(pp.buscarCantidadActualBodega(bodegas.get(i).darDireccion(),bodegas.get(i).getDireccionSucursal(),bodegas.get(i).getCiudad()));
-			capTotal += bodegas.get(i).darVolumen();
+			capActual += (double)(pp.buscarCantidadActualBodega(bodegas.get(i).getDireccionBodega(),bodegas.get(i).getDireccionSucursal(),bodegas.get(i).getCiudad()));
+			capTotal += bodegas.get(i).getVolumenBodega();
 		}
 		for(int i = 0;i<bodegas.size();i++)
 		{
 			double indice = (double)(capActual/capTotal)*100;
-			mensaje+="de la bodega con dirección"+bodegas.get(i).darDireccion()+", de la ciudad"+bodegas.get(i).getCiudad()+"es: "+indice+"\n";
+			mensaje+="de la bodega con dirección"+bodegas.get(i).getDireccionBodega()+", de la ciudad"+bodegas.get(i).getCiudad()+"es: "+indice+"\n";
 		}
 		return mensaje;
 	}
@@ -422,8 +422,8 @@ public class SuperAndes {
 		Log.info("Saliendo de calculo de indice de estante ");
 		for(int i = 0;i<estantes.size();i++)
 		{
-			double indice = (double)(pp.buscarCantidadActualEstante(estantes.get(i).darId())*100);
-			mensaje+="del estante con id: "+estantes.get(i).darId()+"es: "+indice+"\n";
+			double indice = (double)(pp.buscarCantidadActualEstante(estantes.get(i).getIdEstante())*100);
+			mensaje+="del estante con id: "+estantes.get(i).getIdEstante()+"es: "+indice+"\n";
 		}
 		return mensaje;
 	}

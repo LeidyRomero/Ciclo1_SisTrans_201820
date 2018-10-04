@@ -25,7 +25,7 @@ public class SucursalPromociones implements VOSucursalPromociones{
 	/**
 	 * Direccion de la sucursal
 	 */
-	private String direccion;
+	private String direccionSucursal;
 
 	//-----------------------------------------------------
 	// CONSTRUCTORES
@@ -39,7 +39,7 @@ public class SucursalPromociones implements VOSucursalPromociones{
 	public SucursalPromociones(long idPromocion, String ciudad, String direccion) {
 		this.idPromocion = idPromocion;
 		this.ciudad = ciudad;
-		this.direccion = direccion;
+		this.direccionSucursal = direccion;
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class SucursalPromociones implements VOSucursalPromociones{
 	public SucursalPromociones() {
 		this.idPromocion = 0;
 		this.ciudad = null;
-		this.direccion = null;
+		this.direccionSucursal = null;
 	}
 	//-----------------------------------------------------
 	// MÉTODOS
@@ -86,21 +86,21 @@ public class SucursalPromociones implements VOSucursalPromociones{
 	/**
 	 * 
 	 */
-	public String getDireccion() {
-		return direccion;
+	public String getDireccionSucursal() {
+		return direccionSucursal;
 	}
 
 	/**
 	 * 
 	 * @param direccion
 	 */
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setDireccionSucursal(String direccion) {
+		this.direccionSucursal = direccion;
 	}
 
 	@Override
 	public String toString() {
-		return "SucursalPromociones [idPromocion=" + idPromocion + ", ciudad=" + ciudad + ", direccion=" + direccion
+		return "SucursalPromociones [idPromocion=" + idPromocion + ", ciudad=" + ciudad + ", direccion=" + direccionSucursal
 				+ "]";
 	}
 }

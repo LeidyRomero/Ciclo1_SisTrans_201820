@@ -48,7 +48,7 @@ public class SQLProductosOfrecidos {
 	 */
 	public long adicionarProductoOfrecido (PersistenceManager pm, String codigoBarras, String direccionSucursal, String ciudad) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlProductosOfrecidos() + "(codigo_barras, direccion_sucursal, ciudad) values (?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlProductosOfrecidos() + "(codigobarras, direccionsucursal, ciudad) values (?, ?, ?)");
         q.setParameters(codigoBarras, direccionSucursal, ciudad);
         return (long) q.executeUnique();
 	}

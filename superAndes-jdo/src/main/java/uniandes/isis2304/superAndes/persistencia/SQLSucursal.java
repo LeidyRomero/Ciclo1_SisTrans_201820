@@ -55,7 +55,7 @@ class SQLSucursal
 	 */
 	public long adicionarSucursal (PersistenceManager pm, String tamanio, String direccion, String ciudad, String nombre) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlSucursal() + "(tamanio, direccion_sucursal, ciudad, nombre_sucursal) values (?, ?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlSucursal() + "(tamanio, direccionsucursal, ciudad, nombresucursal) values (?, ?, ?, ?)");
         q.setParameters(tamanio, direccion, ciudad, nombre);
         return (long) q.executeUnique();
 	}
@@ -69,7 +69,7 @@ class SQLSucursal
 	 */
 	public Sucursal darSucursalPorDireccionYCiudad (PersistenceManager pm, String direccion, String ciudad) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlSucursal() + " WHERE ciudad = ? AND direccion_sucursal = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlSucursal() + " WHERE ciudad = ? AND direccionsucursal = ?");
 		q.setResultClass(Sucursal.class);
 		q.setParameters(ciudad, direccion);
 		return (Sucursal) q.executeUnique();
@@ -84,7 +84,7 @@ class SQLSucursal
 	 */
 	public long eliminarSucursalPorDireccionYCiudad (PersistenceManager pm, String direccion, String ciudad) 
 	{
-		Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlSucursal() + " WHERE ciudad = ? AND direccion_sucursal = ?");
+		Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlSucursal() + " WHERE ciudad = ? AND direccionsucursal = ?");
 		q.setParameters(ciudad, direccion);
 		return (long) q.executeUnique();
 	}
@@ -98,6 +98,6 @@ class SQLSucursal
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlSucursal() );
 		q.setResultClass(Sucursal.class);
-		return (List<Sucursal>) q.executeUnique();
+		return (List<Sucursal>) q.executeList();
 	}
 }

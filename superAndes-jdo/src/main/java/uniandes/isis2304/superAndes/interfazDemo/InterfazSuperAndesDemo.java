@@ -480,15 +480,15 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			//Ejecución de la demo y recolección de los resultados
 			VOSucursal suc1 = superAndes.adicionarSucursal("50 m^2", "Calle 7 #5-74", "Bogotá", "Candelaria");
 			VOProducto pro1 = superAndes.adicionarProducto("papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32");
-			VOPromocion cli1 = superAndes.adicionarPromocion(Timestamp.valueOf("2018-10-3 00:00:00"), Timestamp.valueOf("2018-10-4 00:00:00"), "20% de descuento", pro1.getCodigoBarras(), 20, 0, suc1.getDireccion(), suc1.getCiudad());
+			VOPromocion cli1 = superAndes.adicionarPromocion(Timestamp.valueOf("2018-10-3 00:00:00"), Timestamp.valueOf("2018-10-4 00:00:00"), "20% de descuento", pro1.getCodBarras(), 20, 0, suc1.getDireccionSucursal(), suc1.getCiudad());
 
 			List<VOPromocion> lista = superAndes.darVOPromociones();
 			
 			superAndes.finalizarPromocion(cli1.getIdPromocion());
 
 			long promoEliminada = superAndes.eliminarPromocion(cli1.getIdPromocion());
-			superAndes.eliminarProducto(pro1.getCodigoBarras());
-			superAndes.eliminarSucursal(suc1.getDireccion(), suc1.getCiudad());
+			superAndes.eliminarProducto(pro1.getCodBarras());
+			superAndes.eliminarSucursal(suc1.getDireccionSucursal(), suc1.getCiudad());
 
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de Promociones\n\n";
@@ -532,7 +532,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			VOProducto pro1 = superAndes.adicionarProducto("papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32");
 			VOBodega bog = superAndes.adicionarBodega("Tipo", 200, 300, "Calle 7 #5-74", "Calle 7 #5-74", "Bogotá");
 			VOProveedor prov1 = superAndes.adicionarProveedor(123546987, "Alpina");
-			VOOrdenPedido cli1 = superAndes.adicionarOrdenPedido(new Timestamp(System.currentTimeMillis()), prov1.getNitProveedor(), suc1.getCiudad(), suc1.getDireccion(), bog.darDireccion(), pro1.getCodigoBarras(), 10, 5000);
+			VOOrdenPedido cli1 = superAndes.adicionarOrdenPedido(new Timestamp(System.currentTimeMillis()), prov1.getNitProveedor(), suc1.getCiudad(), suc1.getDireccionSucursal(), bog.getDireccionBodega(), pro1.getCodBarras(), 10, 5000);
 
 			List<VOOrdenPedido> lista = superAndes.darVOPedidos();
 			
@@ -540,9 +540,9 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 
 			long promoEliminada = superAndes.eliminarPedido(cli1.getIdPedido());
 			superAndes.eliminarProveedorPorNit(prov1.getNitProveedor());
-			superAndes.eliminarBodega(bog.darDireccion(), suc1.getDireccion(), suc1.getCiudad());
-			superAndes.eliminarProducto(pro1.getCodigoBarras());
-			superAndes.eliminarSucursal(suc1.getDireccion(), suc1.getCiudad());
+			superAndes.eliminarBodega(bog.getDireccionBodega(), suc1.getDireccionSucursal(), suc1.getCiudad());
+			superAndes.eliminarProducto(pro1.getCodBarras());
+			superAndes.eliminarSucursal(suc1.getDireccionSucursal(), suc1.getCiudad());
 
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de Pedidos\n\n";

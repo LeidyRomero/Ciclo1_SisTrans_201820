@@ -16,10 +16,10 @@ public class PersonaNatural extends Cliente implements VOPersonaNatural{
 		documento = pDocumento;
 	}
 
-	public String darDocumento() {
+	public String getDocumento() {
 		return documento;
 	}
-	public void cambiarDocumento(String pDocumento)
+	public void setDocumento(String pDocumento)
 	{
 		this.documento = pDocumento;
 	}

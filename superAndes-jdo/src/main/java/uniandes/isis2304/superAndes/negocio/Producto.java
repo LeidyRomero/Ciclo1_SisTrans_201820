@@ -8,55 +8,54 @@ import java.util.Date;
  *
  */
 public class Producto implements VOProducto{
-	private String nombre;
+	private String nombreProducto;
 	private String marca;
 	private String presentacion;
 	private String unidadMedida;
-	private String peso;
-	private String volumen;
+	private String pesoProducto;
+	private String volumenProducto;
 	private String calidad;
 	private double precioUnitario;
 	private double precioUnidadMedida;
-	private int cantidadPresentacion;
-	private String codigoBarras;
+	private int cantPresentacion;
+	private String codBarras;
 	private Date fechaVencimiento;
 
 	public Producto()
 	{
-		nombre = "";
+		nombreProducto = "";
 		marca = "";
 		precioUnidadMedida = 0;
 		presentacion = "";
 		unidadMedida = "";
-		peso= "";
-		volumen ="";
+		pesoProducto= "";
+		volumenProducto ="";
 		calidad ="";
 		precioUnitario=0;
-		cantidadPresentacion = 0;
-		codigoBarras = "";
+		cantPresentacion = 0;
+		codBarras = "";
 		fechaVencimiento = null;
 	}
 	public Producto(String pNombre, String pMarca, String pUnidadMedida, String pPresentacion, String pCalidad, double pPrecioUnitario,double pPrecioUnidadMedida,int pCantidadPresentacion, String pCodigoBarras, Date pFechaVencimiento, String pPeso, String pVolumen)
 	{
-		nombre = pNombre;
+		nombreProducto = pNombre;
 		marca = pMarca;
 		precioUnidadMedida = pPrecioUnidadMedida;
 		presentacion = pPresentacion;
 		unidadMedida = pUnidadMedida;
-		peso= pPeso;
-		volumen =pVolumen;
+		pesoProducto= pPeso;
+		volumenProducto =pVolumen;
 		calidad =pCalidad;
 		precioUnitario=pPrecioUnitario;
-		cantidadPresentacion = pCantidadPresentacion;
-		codigoBarras = pCodigoBarras;
+		cantPresentacion = pCantidadPresentacion;
+		codBarras = pCodigoBarras;
 		fechaVencimiento = pFechaVencimiento;
 	}
-	//TODO SET
-	public String getNombre() {
-		return nombre;
+	public String getNombreProducto() {
+		return nombreProducto;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreProducto(String nombreProducto) {
+		this.nombreProducto = nombreProducto;
 	}
 	public String getMarca() {
 		return marca;
@@ -76,17 +75,17 @@ public class Producto implements VOProducto{
 	public void setUnidadMedida(String unidadMedida) {
 		this.unidadMedida = unidadMedida;
 	}
-	public String getPeso() {
-		return peso;
+	public String getPesoProducto() {
+		return pesoProducto;
 	}
-	public void setPeso(String peso) {
-		this.peso = peso;
+	public void setPesoProducto(String pesoProducto) {
+		this.pesoProducto = pesoProducto;
 	}
-	public String getVolumen() {
-		return volumen;
+	public String getVolumenProducto() {
+		return volumenProducto;
 	}
-	public void setVolumen(String volumen) {
-		this.volumen = volumen;
+	public void setVolumenProducto(String volumenProducto) {
+		this.volumenProducto = volumenProducto;
 	}
 	public String getCalidad() {
 		return calidad;
@@ -97,14 +96,6 @@ public class Producto implements VOProducto{
 	public double getPrecioUnitario() {
 		return precioUnitario;
 	}
-	@Override
-	public String toString() {
-		return "Producto [nombre=" + nombre + ", marca=" + marca + ", presentacion=" + presentacion + ", unidadMedida="
-				+ unidadMedida + ", peso=" + peso + ", volumen=" + volumen + ", calidad=" + calidad
-				+ ", precioUnitario=" + precioUnitario + ", precioUnidadMedida=" + precioUnidadMedida
-				+ ", cantidadPresentacion=" + cantidadPresentacion + ", codigoBarras=" + codigoBarras
-				+ ", fechaVencimiento=" + fechaVencimiento + "]";
-	}
 	public void setPrecioUnitario(double precioUnitario) {
 		this.precioUnitario = precioUnitario;
 	}
@@ -114,17 +105,17 @@ public class Producto implements VOProducto{
 	public void setPrecioUnidadMedida(double precioUnidadMedida) {
 		this.precioUnidadMedida = precioUnidadMedida;
 	}
-	public int getCantidadPresentacion() {
-		return cantidadPresentacion;
+	public int getCantPresentacion() {
+		return cantPresentacion;
 	}
-	public void setCantidadPresentacion(int cantidadPresentacion) {
-		this.cantidadPresentacion = cantidadPresentacion;
+	public void setCantPresentacion(int cantPresentacion) {
+		this.cantPresentacion = cantPresentacion;
 	}
-	public String getCodigoBarras() {
-		return codigoBarras;
+	public String getCodBarras() {
+		return codBarras;
 	}
-	public void setCodigoBarras(String codigoBarras) {
-		this.codigoBarras = codigoBarras;
+	public void setCodBarras(String codBarras) {
+		this.codBarras = codBarras;
 	}
 	public Date getFechaVencimiento() {
 		return fechaVencimiento;
@@ -132,4 +123,13 @@ public class Producto implements VOProducto{
 	public void setFechaVencimiento(Date fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
 	}
+	@Override
+	public String toString() {
+		return "Producto [nombreProducto=" + nombreProducto + ", marca=" + marca + ", presentacion=" + presentacion
+				+ ", unidadMedida=" + unidadMedida + ", pesoProducto=" + pesoProducto + ", volumenProducto="
+				+ volumenProducto + ", calidad=" + calidad + ", precioUnitario=" + precioUnitario
+				+ ", precioUnidadMedida=" + precioUnidadMedida + ", cantPresentacion=" + cantPresentacion
+				+ ", codBarras=" + codBarras + ", fechaVencimiento=" + fechaVencimiento + "]";
+	}
+	
 }

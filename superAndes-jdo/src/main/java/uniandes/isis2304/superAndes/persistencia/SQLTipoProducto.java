@@ -26,7 +26,7 @@ class SQLTipoProducto
 	//TODO RF2 - Registrar un producto
 	public long agregarTipoDeProducto(PersistenceManager manager, String pNombreTipo, String pNombreCategoria)
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlTipoProducto()+"(nombre_tipo, nombre_categoria) values (?,?)");
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlTipoProducto()+"(nombretipo, nombrecategoria) values (?,?)");
 		q.setParameters(pNombreTipo, pNombreCategoria);
 		return (long) q.executeUnique();
 	}
@@ -38,14 +38,14 @@ class SQLTipoProducto
 	}
 	public TipoProducto buscarNombre(PersistenceManager manager,String pNombre)
 	{
-		Query q = manager.newQuery(SQL, "SELECT nombre_tipo FROM "+persistencia.getSqlTipoProducto()+"WHERE nombre_tipo = ?");
+		Query q = manager.newQuery(SQL, "SELECT nombretipo FROM "+persistencia.getSqlTipoProducto()+"WHERE nombretipo = ?");
 		q.setResultClass(TipoProducto.class);
 		q.setParameters(pNombre);
 		return (TipoProducto) q.executeUnique();
 	}
 	public long eliminarTipo(PersistenceManager manager, String pTipo)
 	{
-		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlTipoProducto()+ " WHERE nombre_tipo = ?");
+		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlTipoProducto()+ " WHERE nombretipo = ?");
 		add.setParameters(pTipo);
 		return (long) add.executeUnique();
 	}

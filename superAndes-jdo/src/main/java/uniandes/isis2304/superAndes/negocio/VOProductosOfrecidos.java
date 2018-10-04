@@ -18,6 +18,11 @@ public interface VOProductosOfrecidos {
 	public String getCodigoBarras();
 
 	/**
+	 * @return 
+	 */
+	public int getNivelReorden();
+
+	/**
 	 * @return Una cadena con la información básica de los productos ofrecidos
 	 */
 	public String toString();

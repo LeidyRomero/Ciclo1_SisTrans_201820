@@ -22,7 +22,7 @@ public interface VOProveedor {
 	/**
 	 * @return La calificación del proveedor.
 	 */
-	public String getCalificacion();
+	public String getCalificacionProveedor();
 	
 	/**
 	 * @return Una cadena con la información básica del Proveedor

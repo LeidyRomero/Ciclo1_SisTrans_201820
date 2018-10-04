@@ -17,7 +17,7 @@ public class Promocion implements VOPromocion {
 	/**
 	 * Fecha en que inicia la promoción
 	 */
-	private Timestamp fechaInicial;
+	private Timestamp fechaIncial;
 	
 	/**
 	 * Fecha en que termina la promoción
@@ -49,6 +49,11 @@ public class Promocion implements VOPromocion {
 	 */
 	private int unidadesDisponibles;
 	
+	/**
+	 * Estado de la promoción
+	 */
+	private String estado;
+	
 	//-----------------------------------------------------
 	// CONSTRUCTORES
 	//-----------------------------------------------------
@@ -63,15 +68,16 @@ public class Promocion implements VOPromocion {
 	 * @param unidadesDisponibles Unidades disponibles. unidadesDisponibles > 0
 	 * @param unidadesVendidas Unidades vendidas. unidadesVendidas > 0
 	 */
-	public Promocion(Timestamp fechaInicial, Timestamp fechaFinal, String descripcion, long idPromocion, String codigoBarras, int unidadesVendidas, int unidadesDisponibles) 
+	public Promocion(Timestamp fechaInicial, Timestamp fechaFinal, String descripcion, long idPromocion, String codigoBarras, int unidadesVendidas, int unidadesDisponibles, String estado) 
 	{
-		this.fechaInicial = fechaInicial;
+		this.fechaIncial = fechaInicial;
 		this.fechaFinal = fechaFinal;
 		this.descripcion = descripcion;
 		this.idPromocion = idPromocion;
 		this.codigoBarras = codigoBarras;
 		this.unidadesDisponibles = unidadesDisponibles;
 		this.unidadesVendidas = unidadesVendidas;
+		this.estado = estado;
 	}
 	
 	/**
@@ -79,13 +85,14 @@ public class Promocion implements VOPromocion {
 	 */
 	public Promocion() 
 	{
-		this.fechaInicial = null;
+		this.fechaIncial = null;
 		this.fechaFinal = null;
 		this.descripcion = null;
 		this.idPromocion = 0;
 		this.codigoBarras = null;
 		this.unidadesDisponibles = 0;
 		this.unidadesVendidas = 0;
+		this.estado = null;
 	}
 	
 	//-----------------------------------------------------
@@ -96,15 +103,15 @@ public class Promocion implements VOPromocion {
 	 * Retorna la fecha inicial de la promoción.
 	 */
 	public Timestamp getFechaInicial() {
-		return fechaInicial;
+		return fechaIncial;
 	}
 
 	/**
 	 * Modifica la fecha inicial de la promoción. 
 	 * @param fechaInicial Nueva fecha inicial.
 	 */
-	public void setFechaInicial(Timestamp fechaInicial) {
-		this.fechaInicial = fechaInicial;
+	public void setFechaIncial(Timestamp fechaInicial) {
+		this.fechaIncial = fechaInicial;
 	}
 
 	/**
@@ -197,9 +204,24 @@ public class Promocion implements VOPromocion {
 		this.unidadesDisponibles = unidadesDisponibles;
 	}
 
+	/**
+	 * Retorna el estado de la promoción
+	 */
+	public String getEstado() {
+		return estado;
+	}
+
+	/**
+	 * Modifica del estado de la promoción
+	 * @param estado Nuevo estado
+	 */
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 	@Override
 	public String toString() {
-		return "Promocion [fechaInicial=" + fechaInicial + ", fechaFinal=" + fechaFinal + ", descripcion=" + descripcion
+		return "Promocion [fechaInicial=" + fechaIncial + ", fechaFinal=" + fechaFinal + ", descripcion=" + descripcion
 				+ ", idPromocion=" + idPromocion + "]";
 	}
 	

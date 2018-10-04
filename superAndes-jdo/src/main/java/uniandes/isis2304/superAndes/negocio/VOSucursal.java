@@ -17,7 +17,7 @@ public interface VOSucursal {
 	/**
 	 * @return Dirección de la sucursal.
 	 */
-	public String getDireccion();
+	public String getDireccionSucursal();
 
 	/**
 	 * @return Ciudad de la sucursal.
@@ -27,7 +27,7 @@ public interface VOSucursal {
 	/**
 	 * @return Nombre de la sucursal.
 	 */
-	public String getNombre();
+	public String getNombreSucursal();
 
 	/**
 	 * @return Una cadena con la información básica de una Sucursal.

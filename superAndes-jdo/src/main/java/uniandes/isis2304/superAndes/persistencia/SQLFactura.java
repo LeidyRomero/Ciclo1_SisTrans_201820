@@ -50,7 +50,7 @@ class SQLFactura
 	 */
 	public long adicionarFactura(PersistenceManager pm, long idFactura, double costoTotal, Timestamp fecha) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlFactura() + "(id_factura, costo_total, fecha) values (?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlFactura() + "(idfactura, costototal, fecha) values (?, ?, ?)");
         q.setParameters(idFactura, costoTotal, fecha);
         return (long) q.executeUnique();
 	}

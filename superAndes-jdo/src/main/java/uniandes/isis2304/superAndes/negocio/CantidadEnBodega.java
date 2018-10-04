@@ -39,60 +39,48 @@ public class CantidadEnBodega implements VOCantidadEnBodega{
 	//----------------------------------------------
 	//Metodos
 	//----------------------------------------------
-	public String darCodigoBarras() {
-		return codigoBarras;
-	}
-	public void cambiarCodigoBarras(String pCodigoBarras)
-	{
-		this.codigoBarras = pCodigoBarras;
-	}
-	public String darDireccionBodega() {
+	public String getDireccionBodega() {
 		return direccionBodega;
 	}
-	
-	public void cambiarDireccionBodega(String pDireccion)
-	{
-		this.direccionBodega = pDireccion;
+	public void setDireccionBodega(String direccionBodega) {
+		this.direccionBodega = direccionBodega;
 	}
-
-
-	public String darDireccionSucursal() {
+	public String getDireccionSucursal() {
 		return direccionSucursal;
 	}
-	public void cambiarDireccionSucursal(String pDireccion)
-	{
-		this.direccionSucursal = pDireccion;
+	public void setDireccionSucursal(String direccionSucursal) {
+		this.direccionSucursal = direccionSucursal;
 	}
-
-
-	public String darCiudad() {
+	public String getCiudad() {
 		return ciudad;
 	}
-	public void cambiarCiudad(String pCiudad)
-	{
-		this.ciudad = pCiudad;
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
 	}
-
-	public int darCantidadActual() {
+	public int getCantidadActual() {
 		return cantidadActual;
 	}
-	public void cambiarCantidadActual(int pCantidad)
-	{
-		this.cantidadActual = pCantidad;
+	public void setCantidadActual(int cantidadActual) {
+		this.cantidadActual = cantidadActual;
 	}
-
-	public int darCantidadMinima() {
+	public int getCantidadMinima() {
 		return cantidadMinima;
 	}
-	public void cambiarCantidadMinima(int pCantidad)
-	{
-		this.cantidadMinima = pCantidad;
+	public void setCantidadMinima(int cantidadMinima) {
+		this.cantidadMinima = cantidadMinima;
 	}
-
+	public String getCodigoBarras() {
+		return codigoBarras;
+	}
+	public void setCodigoBarras(String codigoBarras) {
+		this.codigoBarras = codigoBarras;
+	}
+	@Override
 	public String toString() {
 		return "CantidadEnBodega [direccionBodega=" + direccionBodega + ", direccionSucursal=" + direccionSucursal
 				+ ", ciudad=" + ciudad + ", cantidadActual=" + cantidadActual + ", cantidadMinima=" + cantidadMinima
 				+ ", codigoBarras=" + codigoBarras + "]";
 	}
+	
 
 }

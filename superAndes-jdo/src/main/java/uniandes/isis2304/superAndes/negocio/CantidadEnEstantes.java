@@ -27,7 +27,7 @@ public class CantidadEnEstantes implements VOCantidadEnEstantes {
 	/**
 	 * Código de barras del producto
 	 */
-	private String codigoBarrasProducto;
+	private String codigoBarras;
 	
 	/**
 	 * Id del estante
@@ -44,7 +44,7 @@ public class CantidadEnEstantes implements VOCantidadEnEstantes {
 	{
 		cantidadActual = 0;
 		cantidadMinima = 0;
-		codigoBarrasProducto = null;
+		codigoBarras = null;
 		idEstante = 0;
 	}
 	
@@ -59,7 +59,7 @@ public class CantidadEnEstantes implements VOCantidadEnEstantes {
 	{
 		cantidadActual = pCantidadActual;
 		cantidadMinima = pCantidadMinima;
-		codigoBarrasProducto = pCodigoBarras;
+		codigoBarras = pCodigoBarras;
 		idEstante = pIdEstante;
 	}
 	
@@ -100,16 +100,16 @@ public class CantidadEnEstantes implements VOCantidadEnEstantes {
 	/**
 	 * Retorna el código de barras del producto.
 	 */
-	public String getCodigoBarrasProducto() {
-		return codigoBarrasProducto;
+	public String getCodigoBarras() {
+		return codigoBarras;
 	}
 
 	/**
 	 * Modifica el código de barras del producto.
 	 * @param codigoBarrasProducto Nuevo código de barras.
 	 */
-	public void setCodigoBarrasProducto(String codigoBarrasProducto) {
-		this.codigoBarrasProducto = codigoBarrasProducto;
+	public void setCodigoBarras(String codigoBarrasProducto) {
+		this.codigoBarras = codigoBarrasProducto;
 	}
 
 	/**
@@ -130,8 +130,6 @@ public class CantidadEnEstantes implements VOCantidadEnEstantes {
 	@Override
 	public String toString() {
 		return "CantidadEnEstantes [cantidadActual=" + cantidadActual + ", cantidadMinima=" + cantidadMinima
-				+ ", codigoBarrasProducto=" + codigoBarrasProducto + ", idEstante=" + idEstante + "]";
+				+ ", codigoBarrasProducto=" + codigoBarras + ", idEstante=" + idEstante + "]";
 	}
-
-	
 }

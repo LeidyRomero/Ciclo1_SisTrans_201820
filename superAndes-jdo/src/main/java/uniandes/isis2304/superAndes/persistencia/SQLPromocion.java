@@ -56,7 +56,7 @@ class SQLPromocion
 	public long adicionarPromocion (PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin, String descripcion, String codBarras, long idPromocion, int uniVendidas, int uniDisponibles) 
 	{
 		System.out.println("Pre");
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlPromocion() + "(fecha_incial, fecha_final, descripcion, codigo_barras, id_promocion, unidades_vendidas, unidades_disponibles, estado) values (?, ?, ?, ?, ?, ?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlPromocion() + "(fechainicial, fechafinal, descripcion, codigobarras, idpromocion, unidadesvendidas, unidadesdisponibles, estado) values (?, ?, ?, ?, ?, ?, ?, ?)");
         q.setParameters(fechaInicio, fechaFin, descripcion, codBarras, idPromocion, uniVendidas, uniDisponibles, "VIGENTE");
         return (long) q.executeUnique();
 	}
@@ -70,7 +70,7 @@ class SQLPromocion
 	public long finalizarPromocion (PersistenceManager pm, long idPromocion) 
 	{
 		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-		 Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlPromocion()+ " SET estado = ?, fecha_final = ? WHERE id_promocion = ?");
+		 Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlPromocion()+ " SET estado = ?, fechafinal = ? WHERE idpromocion = ?");
 	     q.setParameters("FINALIZADA",fechaActual, idPromocion);
 	     return (long) q.executeUnique();            
 	}
@@ -83,7 +83,7 @@ class SQLPromocion
 	public List<Promocion> darPromocionesPorFinalizar (PersistenceManager pm) 
 	{
 		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlPromocion() + " WHERE estado = ? AND (unidades_disponibles = ? OR fecha_final <= ?)");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlPromocion() + " WHERE estado = ? AND (unidadesdisponibles = ? OR fechafinal <= ?)");
 		q.setParameters("VIGENTE", 0, fechaActual);
 		q.setResultClass(Promocion.class);
 		return (List<Promocion>) q.executeList();
@@ -97,7 +97,7 @@ class SQLPromocion
 	 */
 	public long registrarCompraPromocion (PersistenceManager pm, String codigoBarras) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlPromocion()+ " SET unidades_disponibles = unidades_disponibles-1, unidades_vendidad = unidades_vendidad+1 WHERE codigo_barras = ?");
+		 Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlPromocion()+ " SET unidadesdisponibles = unidadesdisponibles-1, unidadesvendidad = unidadesvendidad+1 WHERE codigobarras = ?");
 	     q.setParameters(codigoBarras);
 	     return (long) q.executeUnique();            
 	}
@@ -109,7 +109,7 @@ class SQLPromocion
 	 */
 	public List<Promocion> darPromocionesPorProducto (PersistenceManager pm, String codigoBarras) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlPromocion() + " WHERE codigo_barras = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlPromocion() + " WHERE codigobarras = ?");
 		q.setParameters(codigoBarras);
 		q.setResultClass(Promocion.class);
 		return (List<Promocion>) q.executeList();
@@ -122,10 +122,10 @@ class SQLPromocion
 	 */
 	public List<Promocion> darPromocionesMasPopulares (PersistenceManager pm) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT B.id_promocion, B.codigo_barras, B.fecha_incial, B.fecha_final, B.unidades_disponibles, B.unidades_vendidas, B.descripcion FROM (" 
-		+ "SELECT descripcion, id_promocion, codigo_barras, fecha_final - fecha_incial AS duracion, unidades_vendidas FROM "+persistencia.getSqlPromocion() + " WHERE estado = ?"
+		Query q = pm.newQuery(SQL, "SELECT B.idpromocion, B.codigobarras, B.fechainicial, B.fechafinal, B.unidadesdisponibles, B.unidadesvendidas, B.descripcion FROM (" 
+		+ "SELECT descripcion, idpromocion, codigobarras, fechafinal - fechainicial AS duracion, unidadesvendidas FROM "+persistencia.getSqlPromocion() + " WHERE estado = ?"
 		+ ") A, "+persistencia.getSqlPromocion() +" B"
-		+" WHERE rownum < 21 AND A.id_promocion = B.id_promocion ORDER BY unidades_vendidas/duracion DESC");
+		+" WHERE rownum < 21 AND A.idpromocion = B.idpromocion ORDER BY unidadesvendidas/duracion DESC");
 		q.setParameters("FINALIZADA");
 		q.setResultClass(Promocion.class);
 		return (List<Promocion>) q.executeList();
@@ -151,7 +151,7 @@ class SQLPromocion
 	 */
 	public long eliminarPromocionPorId(PersistenceManager pm, long idPromocion)
 	{
-		 Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlPromocion() + " WHERE id_promocion = ?");
+		 Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlPromocion() + " WHERE idpromocion = ?");
 	     q.setParameters(idPromocion);
 	     return (long) q.executeUnique();
 	}

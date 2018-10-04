@@ -6,42 +6,51 @@ package uniandes.isis2304.superAndes.negocio;
  */
 public class PedidoProducto implements VOPedidoProducto{
 	private String codigoBarras;
-	private long id;
+	private long idPedido;
 	private double cantidadProducto;
 	private double precioProducto;
 	public PedidoProducto()
 	{
 		codigoBarras = "";
-		id = 0;
+		idPedido = 0;
 		cantidadProducto=0;
 		precioProducto=0;
 	}
 	public PedidoProducto(String pCodigoBarras, long pId, double pCantidadProducto, double pPrecioProducto )
 	{
 		codigoBarras = pCodigoBarras;
-		id = pId;
+		idPedido = pId;
 		cantidadProducto=pCantidadProducto;
 		precioProducto=pPrecioProducto;
 	}
-	//TODO SET
-	public String darCodigoBarras() {
+	public String getCodigoBarras() {
 		return codigoBarras;
 	}
-
-	public long darIdPedido() {
-		return id;
+	public void setCodigoBarras(String codigoBarras) {
+		this.codigoBarras = codigoBarras;
 	}
-
-	public double darCantidadProducto() {
+	public long getIdPedido() {
+		return idPedido;
+	}
+	public void setIdPedido(long idPedido) {
+		this.idPedido = idPedido;
+	}
+	public double getCantidadProducto() {
 		return cantidadProducto;
 	}
-	public double darPrecioProducto() {
+	public void setCantidadProducto(double cantidadProducto) {
+		this.cantidadProducto = cantidadProducto;
+	}
+	public double getPrecioProducto() {
 		return precioProducto;
 	}
-
+	public void setPrecioProducto(double precioProducto) {
+		this.precioProducto = precioProducto;
+	}
+	@Override
 	public String toString() {
-		return "PedidoProducto [codigoBarras=" + codigoBarras + ", id=" + id + ", cantidadProducto=" + cantidadProducto
-				+ ", precioProducto=" + precioProducto + "]";
+		return "PedidoProducto [codigoBarras=" + codigoBarras + ", idPedido=" + idPedido + ", cantidadProducto="
+				+ cantidadProducto + ", precioProducto=" + precioProducto + "]";
 	}
 	
 }

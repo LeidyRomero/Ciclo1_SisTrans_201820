@@ -29,4 +29,14 @@ class SQLUtil
         long resp = (long) q.executeUnique();
         return resp;
 	}
+	
+	public long [] limpiarSuperAndes(PersistenceManager pm)
+	{
+        Query qTipoPro = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlTipoProducto());          
+        Query qHistorialCompras = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlHistorialCompras());
+        Query qCantidadEnBodega = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlCantidadEnBodega());
+        Query qCantidadEnEstantes = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlCantidadEnEstantes());
+
+        return null;
+	}
 }

@@ -15,7 +15,7 @@ public class Cliente implements VOCliente{
 	/**
 	 * Nombre del cliente
 	 */
-	protected String nombreCliente;
+	protected String nombreConsumidor;
 	
 	/**
 	 * Correo del cliente
@@ -35,7 +35,7 @@ public class Cliente implements VOCliente{
 	 */
 	public Cliente()
 	{
-		nombreCliente = null;
+		nombreConsumidor = null;
 		correo = null;
 		puntos = 0;
 	}
@@ -48,7 +48,7 @@ public class Cliente implements VOCliente{
 	 */
 	public Cliente(String pNombre, String pCorreo, int pPuntos)
 	{
-		nombreCliente = pNombre;
+		nombreConsumidor = pNombre;
 		correo = pCorreo;
 		puntos = pPuntos;
 	}
@@ -60,16 +60,16 @@ public class Cliente implements VOCliente{
 	/**
 	 * Retorna el nombre del cliente.
 	 */
-	public String getNombreCliente() {
-		return nombreCliente;
+	public String getNombreConsumidor() {
+		return nombreConsumidor;
 	}
 
 	/**
 	 * Modifica el nombre del cliente.
 	 * @param pNombreCliente Nuevo nombre
 	 */
-	public void setNombreCliente(String pNombreCliente) {
-		this.nombreCliente = pNombreCliente;
+	public void setNombreConsumidor(String pNombreCliente) {
+		this.nombreConsumidor = pNombreCliente;
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class Cliente implements VOCliente{
 
 	@Override
 	public String toString() {
-		return "Cliente [nombreCliente=" + nombreCliente + ", correo=" + correo + ", puntos=" + puntos + "]";
+		return "Cliente [nombreCliente=" + nombreConsumidor + ", correo=" + correo + ", puntos=" + puntos + "]";
 	}
 	
 	

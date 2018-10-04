@@ -26,6 +26,10 @@ public class ProductosOfrecidos implements VOProductosOfrecidos{
 	 */
 	private String codigoBarras;
 
+	/**
+	 * 
+	 */
+	private int nivelReorden;
 	//-----------------------------------------------------
 	// CONSTRUCTORES
 	//-----------------------------------------------------
@@ -36,10 +40,11 @@ public class ProductosOfrecidos implements VOProductosOfrecidos{
 	 * @param ciudad Ciudad de la sucursal
 	 * @param codigoBarras Código de barras del producto
 	 */
-	public ProductosOfrecidos(String direccionSucursal, String ciudad, String codigoBarras) {
+	public ProductosOfrecidos(String direccionSucursal, String ciudad, String codigoBarras,int pNivel) {
 		this.direccionSucursal = direccionSucursal;
 		this.ciudad = ciudad;
 		this.codigoBarras = codigoBarras;
+		this.nivelReorden = pNivel;
 	}
 	
 	/**
@@ -49,6 +54,7 @@ public class ProductosOfrecidos implements VOProductosOfrecidos{
 		this.direccionSucursal = null;
 		this.ciudad = null;
 		this.codigoBarras = null;
+		this.nivelReorden = 0;
 	}
 
 	//-----------------------------------------------------
@@ -100,10 +106,20 @@ public class ProductosOfrecidos implements VOProductosOfrecidos{
 		this.codigoBarras = codigoBarras;
 	}
 
+	public int getNivelReorden() {
+		return nivelReorden;
+	}
+
+	public void setNivelReorden(int nivelReorden) {
+		this.nivelReorden = nivelReorden;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductosOfrecidos [direccionSucursal=" + direccionSucursal + ", ciudad=" + ciudad + ", codigoBarras="
-				+ codigoBarras + "]";
-	}	
+				+ codigoBarras + ", nivelReorden=" + nivelReorden + "]";
+	}
+
+
 	
 }

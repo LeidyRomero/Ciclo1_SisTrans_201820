@@ -26,26 +26,26 @@ class SQLCantidadEnBodega
 
 	public long adicionarCantidadEnBodega(PersistenceManager manager, String pDireccionBodega, String pDireccionSucursal, String pCiudad, int pCantidadActual, int pCantidadMinima, String pCodigoBarras)
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlCantidadEnBodega()+" (direccion_bodega, direccion_sucursal, ciudad, cantidad_actual, cantidad_minima, codigo_barras) values (?,?,?,?,?,?)");
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlCantidadEnBodega()+" (direccionbodega, direccionsucursal, ciudad, cantidadactual, cantidadminima, codigobarras) values (?,?,?,?,?,?)");
 		q.setParameters(pDireccionBodega, pDireccionSucursal, pCiudad, pCantidadActual, pCantidadMinima, pCodigoBarras);
 		return (long) q.executeUnique();
 	}
 	public int buscarCantidadActual(PersistenceManager manager, String pDireccionBodega, String pDireccionSucursal, String pCiudad)
 	{
-		Query q = manager.newQuery(SQL, "SELECT cantidad_actual FROM " + persistencia.getSqlCantidadEnBodega()+" WHERE direccion_bodega = ? AND ciudad = ? AND direccion_sucursal = ?");
+		Query q = manager.newQuery(SQL, "SELECT cantidadactual FROM " + persistencia.getSqlCantidadEnBodega()+" WHERE direccionbodega = ? AND ciudad = ? AND direccionsucursal = ?");
 		q.setParameters(pDireccionBodega, pCiudad,pDireccionSucursal);
 		q.setResultClass(Integer.class);
 		return (Integer) q.executeUnique();
 	}
 	public long subirInventario(PersistenceManager manager, int pCantidad, String pCiudad, String pDireccionSucursal, String pDireccionBodega)
 	{
-		Query q = manager.newQuery(SQL, "UPDATE " + persistencia.getSqlCantidadEnBodega() + " SET cantidad_actual = cantidad_actual + ? WHERE direccion_bodega = ? AND direccion_sucursal = ? AND ciudad = ?");
+		Query q = manager.newQuery(SQL, "UPDATE " + persistencia.getSqlCantidadEnBodega() + " SET cantidadactual = cantidadactual + ? WHERE direccionbodega = ? AND direccionsucursal = ? AND ciudad = ?");
 		q.setParameters(pDireccionBodega, pDireccionSucursal, pCiudad);
 		return (long) q.executeUnique();    
 	}
 	public long disminuirInventario(PersistenceManager manager, int pCantidad, String pCiudad, String pDireccionSucursal, String pDireccionBodega)
 	{
-		Query q = manager.newQuery(SQL, "UPDATE " + persistencia.getSqlCantidadEnBodega() + " SET cantidad_actual = cantidad_actual - ? WHERE direccion_bodega = ? AND direccion_sucursal = ? AND ciudad = ?");
+		Query q = manager.newQuery(SQL, "UPDATE " + persistencia.getSqlCantidadEnBodega() + " SET cantidadactual = cantidadactual - ? WHERE direccionbodega = ? AND direccionsucursal = ? AND ciudad = ?");
 		q.setParameters(pDireccionBodega, pDireccionSucursal, pCiudad);
 		return (long) q.executeUnique(); 
 	}
@@ -57,7 +57,7 @@ class SQLCantidadEnBodega
 	}
 	public long eliminarCantidadEnBodega(PersistenceManager manager, String pCodigo, String pDireccionSucursal, String pDireccionBodega, String pCiudad)
 	{
-		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlCantidadEnBodega() + " WHERE direccion_bodega = ? AND direccion_sucursal = ? AND ciudad = ? AND codigo_barras = ?");
+		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlCantidadEnBodega() + " WHERE direccionbodega = ? AND direccionsucursal = ? AND ciudad = ? AND codigobarras = ?");
 		add.setParameters(pDireccionBodega,pDireccionSucursal, pCiudad, pCodigo);
 		return (long) add.executeUnique();
 	}

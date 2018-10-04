@@ -39,7 +39,7 @@ class SQLProveen
 	
 	public long adicionarProveen (PersistenceManager pm, int nitProveedor, String codigoBarras) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlProveen() + "(nit_proveedor, cod_barras) values (?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlProveen() + "(nitproveedor, codbarras) values (?, ?)");
         q.setParameters(nitProveedor, codigoBarras);
         return (long) q.executeUnique();
 	}

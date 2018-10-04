@@ -26,7 +26,7 @@ class SQLEstante
 	//TODO RF6 - Registrar un estante a una sucursal
 	public long agregarEstante(PersistenceManager manager, String pTipoEstante,double pVolumen, long pId, double pPeso, double pNivelAbastecimiento, String pDireccionSucursal, String pCiudad )
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlEstante()+"(tipo_estante,volumen_estante,id_estante,peso_estante,nivel_abastecimiento, direccion_sucursal, ciudad) values (?,?,?,?,?,?,?)");
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlEstante()+"(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento, direccionsucursal, ciudad) values (?,?,?,?,?,?,?)");
 		q.setParameters(pTipoEstante, pVolumen,pId,pPeso,pNivelAbastecimiento,pDireccionSucursal,pCiudad);
 		return (long) q.executeUnique();
 	} 
@@ -34,7 +34,7 @@ class SQLEstante
 	//TODO RFC3 - Mostrar el indice de ocupacion de cada estante
 	public List<Estante> buscarEstantesSucursal(PersistenceManager manager, String pDireccion, String pCiudad)
 	{
-		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlEstante()+ " WHERE ciudad = ? AND direccion_sucursal = ?");
+		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlEstante()+ " WHERE ciudad = ? AND direccionsucursal = ?");
 		q.setParameters(pCiudad, pDireccion);
 		q.setResultClass(Estante.class);
 		return (List<Estante>) q.executeList();
@@ -47,7 +47,7 @@ class SQLEstante
 	}
 	public long eliminarEstante(PersistenceManager manager, long id)
 	{
-		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlEstante() + " WHERE id_Estante = ? ");
+		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlEstante() + " WHERE idEstante = ? ");
 		add.setParameters(id);
 		return (long) add.executeUnique();
 	}

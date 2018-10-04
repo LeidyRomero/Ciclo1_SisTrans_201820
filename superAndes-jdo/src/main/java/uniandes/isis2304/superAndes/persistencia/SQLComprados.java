@@ -26,7 +26,7 @@ class SQLComprados
 	//TODO RF11 - Registrar venta TODO REAL: DISMINUIR INVENTARIO
 	public long agregarComprados(PersistenceManager manager, String pCodigoBarras,int pCantidad, double pPrecioTotal, long pIdFactura)
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlComprados()+" (codigo_barras, cantidad, precio_total, id_factura) values (?,?,?,?)");
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlComprados()+" (codigobarras, cantidad, preciototal, idfactura) values (?,?,?,?)");
 		q.setParameters(pCodigoBarras, pCantidad, pPrecioTotal,pIdFactura);
 		return (long) q.executeUnique();
 	}
@@ -38,7 +38,7 @@ class SQLComprados
 	}
 	public long eliminarComprados(PersistenceManager manager, String pCodigo, long idFactura)
 	{
-		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlComprados()+ " WHERE codigo_barras = ? AND id_factura = ?");
+		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlComprados()+ " WHERE codigobarras = ? AND idfactura = ?");
 		add.setParameters(pCodigo, idFactura);
 		return (long) add.executeUnique();
 	}

@@ -5,34 +5,34 @@ package uniandes.isis2304.superAndes.negocio;
  *
  */
 public class TipoProducto implements VOTipoProducto{
-	private String nombre;
-	private String categoria;
+	private String nombreTipo;
+	private String nombreCategoria;
 	public TipoProducto()
 	{
-		nombre = "";
-		categoria = "";
+		nombreTipo = "";
+		nombreCategoria = "";
 	}
 	public TipoProducto(String pNombre, String pCategoria)
 	{
-		nombre  = pNombre;
-		categoria = pCategoria;
+		nombreTipo  = pNombre;
+		nombreCategoria = pCategoria;
 	}
-	public String getCategoria() {
-		return categoria;
+	public String getNombreCategoria() {
+		return nombreCategoria;
 	}
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setNombreCategoria(String categoria) {
+		this.nombreCategoria = categoria;
 	}
-	public String getNombre() {
-		return nombre;
+	public String getNombreTipo() {
+		return nombreTipo;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreTipo(String nombre) {
+		this.nombreTipo = nombre;
 	}
 	@Override
 	public String toString() {
-		return "TipoProducto [nombre=" + nombre + ", categoria=" + categoria + "]";
+		return "TipoProducto [nombre=" + nombreTipo + ", categoria=" + nombreCategoria + "]";
 	}
 
 }

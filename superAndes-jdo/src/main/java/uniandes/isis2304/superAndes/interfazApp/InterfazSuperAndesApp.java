@@ -508,7 +508,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 				{
 					JOptionPane.showMessageDialog (this, "Producto registrado", "Agregar producto: exitoso", JOptionPane.INFORMATION_MESSAGE);
 					String resultado = "En adicionarProducto\n\n";
-					resultado += "Producto adicionado exitosamente: " + registrado.getCodigoBarras();
+					resultado += "Producto adicionado exitosamente: " + registrado.getCodBarras();
 					resultado += "\n Operación terminada";
 					panelDatos.actualizarInterfaz(resultado);
 				}
@@ -768,7 +768,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 				{
 					JOptionPane.showMessageDialog (this, "Bodega registrado", "Agregar bodega: exitoso", JOptionPane.INFORMATION_MESSAGE);
 					String resultado = "En adicionarBodega\n\n";
-					resultado += "Bodega adicionada exitosamente: " + registrado.darDireccion();
+					resultado += "Bodega adicionada exitosamente: " + registrado.getDireccionBodega();
 					resultado += "\n Operación terminada";
 					panelDatos.actualizarInterfaz(resultado);
 				}
@@ -823,7 +823,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 				{
 					JOptionPane.showMessageDialog (this, "Estante registrado", "Agregar estante: exitoso", JOptionPane.INFORMATION_MESSAGE);
 					String resultado = "En adicionarEstante\n\n";
-					resultado += "Estante adicionada exitosamente: " + registrado.darId();
+					resultado += "Estante adicionada exitosamente: " + registrado.getIdEstante();
 					resultado += "\n Operación terminada";
 					panelDatos.actualizarInterfaz(resultado);
 				}

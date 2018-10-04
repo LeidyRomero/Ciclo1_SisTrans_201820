@@ -17,7 +17,7 @@ public interface VOCliente {
 	/**
 	 * @return El nombre del cliente.
 	 */
-	public String getNombreCliente();
+	public String getNombreConsumidor();
 	
 	/**
 	 * @return Los puntos del cliente.

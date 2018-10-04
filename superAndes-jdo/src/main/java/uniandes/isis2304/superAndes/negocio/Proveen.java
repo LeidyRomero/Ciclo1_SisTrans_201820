@@ -20,7 +20,7 @@ public class Proveen implements VOProveen {
 	/**
 	 * Codigo de barras del producto
 	 */
-	private String codigoBarras;
+	private String codBarras;
 	
 	//-----------------------------------------------------
 	// CONSTRUCTORES
@@ -32,7 +32,7 @@ public class Proveen implements VOProveen {
 	public Proveen()
 	{
 		nitProveedor = 0;
-		codigoBarras = null;
+		codBarras = null;
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class Proveen implements VOProveen {
 	public Proveen(int nitProveedor, String codigoBarras) 
 	{
 		this.nitProveedor = nitProveedor;
-		this.codigoBarras = codigoBarras;
+		this.codBarras = codigoBarras;
 	}
 	
 	//-----------------------------------------------------
@@ -68,20 +68,20 @@ public class Proveen implements VOProveen {
 	/**
 	 * Retorna el código de barras del producto
 	 */
-	public String getCodigoBarras() {
-		return codigoBarras;
+	public String getCodBarras() {
+		return codBarras;
 	}
 
 	/**
 	 * Modifica el código de barras del producto
 	 * @param codigoBarras Nuevo código
 	 */
-	public void setCodigoBarras(String codigoBarras) {
-		this.codigoBarras = codigoBarras;
+	public void setCodBarras(String codigoBarras) {
+		this.codBarras = codigoBarras;
 	}
 
 	@Override
 	public String toString() {
-		return "Proveen [nitProveedor=" + nitProveedor + ", codigoBarras=" + codigoBarras + "]";
+		return "Proveen [nitProveedor=" + nitProveedor + ", codigoBarras=" + codBarras + "]";
 	}
 }

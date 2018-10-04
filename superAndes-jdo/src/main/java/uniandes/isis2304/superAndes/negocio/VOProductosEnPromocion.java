@@ -5,7 +5,7 @@ package uniandes.isis2304.superAndes.negocio;
  *
  */
 public interface VOProductosEnPromocion {
-	public long darId();
-	public int darUnidadesDisponibles();
-	public int darCodigoBarras();
+	public long getId();
+	public int getUnidadesDisponibles();
+	public int getCodigoBarras();
 }

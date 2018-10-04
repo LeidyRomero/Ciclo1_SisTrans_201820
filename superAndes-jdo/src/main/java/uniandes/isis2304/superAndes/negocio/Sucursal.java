@@ -21,7 +21,7 @@ public class Sucursal implements VOSucursal {
 	/**
 	 * Dirección de la sucursal.
 	 */
-	private String direccion;
+	private String direccionSucursal;
 	
 	/**
 	 * Ciudad de la sucursal.
@@ -31,7 +31,7 @@ public class Sucursal implements VOSucursal {
 	/**
 	 * Nombre de la sucursal.
 	 */
-	private String nombre;
+	private String nombreSucursal;
 	
 	//-----------------------------------------------------
 	// CONSTRUCTORES
@@ -44,8 +44,8 @@ public class Sucursal implements VOSucursal {
 	{
 		ciudad = null;
 		tamanio = null;
-		nombre = null;
-		direccion = null;
+		nombreSucursal = null;
+		direccionSucursal = null;
 	}
 
 	/**
@@ -58,9 +58,9 @@ public class Sucursal implements VOSucursal {
 	public Sucursal(String tamanio, String direccion, String ciudad, String nombre) 
 	{
 		this.tamanio = tamanio;
-		this.direccion = direccion;
+		this.direccionSucursal = direccion;
 		this.ciudad = ciudad;
-		this.nombre = nombre;
+		this.nombreSucursal = nombre;
 	}
 
 	//-----------------------------------------------------
@@ -85,16 +85,16 @@ public class Sucursal implements VOSucursal {
 	/**
 	 * Retorna la dirección de la sucursal.
 	 */
-	public String getDireccion() {
-		return direccion;
+	public String getDireccionSucursal() {
+		return direccionSucursal;
 	}
 
 	/**
 	 * Modifica la dirección de la sucursal.
 	 * @param direccion Nueva dirección
 	 */
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setDireccionSucursal(String direccion) {
+		this.direccionSucursal = direccion;
 	}
 
 	/**
@@ -115,16 +115,16 @@ public class Sucursal implements VOSucursal {
 	/**
 	 * Retorna el nombre de la sucursal.
 	 */
-	public String getNombre() {
-		return nombre;
+	public String getNombreSucursal() {
+		return nombreSucursal;
 	}
 
 	/**
 	 * Modifica el nombre de la sucursal.
 	 * @param nombre Nuevo nombre.
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreSucursal(String nombre) {
+		this.nombreSucursal = nombre;
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class Sucursal implements VOSucursal {
 
 	@Override
 	public String toString() {
-		return "Sucursal [tamanio=" + tamanio + ", direccion=" + direccion + ", ciudad=" + ciudad + ", nombre=" + nombre
+		return "Sucursal [tamanio=" + tamanio + ", direccion=" + direccionSucursal + ", ciudad=" + ciudad + ", nombre=" + nombreSucursal
 				+ "]";
 	}
 

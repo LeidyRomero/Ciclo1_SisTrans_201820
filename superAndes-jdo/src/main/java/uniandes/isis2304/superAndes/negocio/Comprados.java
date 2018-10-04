@@ -25,26 +25,34 @@ public class Comprados implements VOComprados{
 		precioTotal=pPrecioTotal;
 		idFactura = pIdFactura;
 	}
-	//TODO SET de esta clase
-	public String darCodigoBarras() {
+	public String getCodigoBarras() {
 		return codigoBarras;
 	}
-
-	public long darIdFactura() {
-		return idFactura;
+	public void setCodigoBarras(String codigoBarras) {
+		this.codigoBarras = codigoBarras;
 	}
-
-	public int darCantidad() {
+	public int getCantidad() {
 		return cantidad;
 	}
-
-	public double darPrecioTotal() {
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+	public double getPrecioTotal() {
 		return precioTotal;
 	}
-	//TODO completar
+	public void setPrecioTotal(double precioTotal) {
+		this.precioTotal = precioTotal;
+	}
+	public long getIdFactura() {
+		return idFactura;
+	}
+	public void setIdFactura(long idFactura) {
+		this.idFactura = idFactura;
+	}
 	@Override
 	public String toString() {
 		return "Comprados [codigoBarras=" + codigoBarras + ", cantidad=" + cantidad + ", precioTotal=" + precioTotal
 				+ ", idFactura=" + idFactura + "]";
 	}
+
 }

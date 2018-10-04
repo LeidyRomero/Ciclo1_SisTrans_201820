@@ -47,7 +47,7 @@ public class OrdenPedido implements VOOrdenPedido{
 	/**
 	 * Ciudad de la sucursal que hizo el pedido.
 	 */
-	private String ciudadSucursal;
+	private String ciudad;
 	
 	/**
 	 * Dirección de la sucursal que hizo el pedido.
@@ -69,7 +69,7 @@ public class OrdenPedido implements VOOrdenPedido{
 	public OrdenPedido()
 	{
 		calificacionPedido = null;
-		ciudadSucursal = null;
+		ciudad = null;
 		direccionSucursal = null;
 		estado = null;
 		fechaEntrega = null;
@@ -100,7 +100,7 @@ public class OrdenPedido implements VOOrdenPedido{
 		this.calificacionPedido = calificacionPedido;
 		this.nitProveedor = nitProveedor;
 		this.idPedido = idPedido;
-		this.ciudadSucursal = ciudadSucursal;
+		this.ciudad = ciudadSucursal;
 		this.direccionSucursal = direccionSucursal;
 		this.direcccionBodega = direccionBodega;
 	}
@@ -202,16 +202,16 @@ public class OrdenPedido implements VOOrdenPedido{
 	/**
 	 * Retorna la ciudad de la sucursal.
 	 */
-	public String getCiudadSucursal() {
-		return ciudadSucursal;
+	public String getCiudad() {
+		return ciudad;
 	}
 
 	/**
 	 * Modifica la ciudad de la sucursal.
 	 * @param ciudadSucursal Nueva ciudad.
 	 */
-	public void setCiudadSucursal(String ciudadSucursal) {
-		this.ciudadSucursal = ciudadSucursal;
+	public void setCiudad(String ciudadSucursal) {
+		this.ciudad = ciudadSucursal;
 	}
 
 	/**
@@ -250,7 +250,7 @@ public class OrdenPedido implements VOOrdenPedido{
 	public String toString() {
 		return "OrdenPedido [fechaEsperadaEntrega=" + fechaEsperadaEntrega + ", estado=" + estado + ", fechaEntrega="
 				+ fechaEntrega + ", calificacionPedido=" + calificacionPedido + ", nitProveedor=" + nitProveedor
-				+ ", idPedido=" + idPedido + ", ciudadSucursal=" + ciudadSucursal + ", direccionSucursal="
+				+ ", idPedido=" + idPedido + ", ciudadSucursal=" + ciudad + ", direccionSucursal="
 				+ direccionSucursal + ", direcccionBodega=" + direcccionBodega + "]";
 	}	
 }

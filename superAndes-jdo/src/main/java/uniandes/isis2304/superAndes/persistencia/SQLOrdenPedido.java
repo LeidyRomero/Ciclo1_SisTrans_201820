@@ -57,7 +57,7 @@ class SQLOrdenPedido
 	 */
 	public long adicionaroOrdenPedido (PersistenceManager pm, Timestamp fechaEsperada, int nitProveedor, String ciudad, String direccionSucursal, String direccionBodega, long idPedido) 
 	{
-		Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlOrdenPedido() + "(fecha_esperada_entrega, estado, fecha_entrega, calificacion_pedido, nit_proveedor, ciudad, direccion_sucursal, direccion_bodega, id_pedido) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlOrdenPedido() + "(fechaesperadaentrega, estado, fechaentrega, calificacionpedido, nitproveedor, ciudad, direccionsucursal, direccionbodega, idpedido) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		q.setParameters(fechaEsperada, "En espera", null, null, nitProveedor, ciudad, direccionSucursal, direccionBodega, idPedido);
 		return (long) q.executeUnique();
 	}
@@ -72,7 +72,7 @@ class SQLOrdenPedido
 	public long cambiarEstadoOrdenPedido (PersistenceManager pm, long idPedido, String calificacion) 
 	{
 		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-		Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlOrdenPedido() + " SET estado = ?, calificacion_pedido = ?, fecha_entrega = ?  WHERE id_pedido = ?");
+		Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlOrdenPedido() + " SET estado = ?, calificacionpedido = ?, fechaentrega = ?  WHERE idpedido = ?");
 		q.setParameters("Recibido",calificacion, fechaActual, idPedido);
 		return (long) q.executeUnique();            
 	}
@@ -85,7 +85,7 @@ class SQLOrdenPedido
 	 */
 	public OrdenPedido darPedidoPorId (PersistenceManager pm, long idPedido) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlOrdenPedido() + " WHERE id_pedido = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlOrdenPedido() + " WHERE idpedido = ?");
 		q.setParameters(idPedido);
 		q.setResultClass(OrdenPedido.class);
 		return (OrdenPedido) q.executeUnique();
@@ -99,7 +99,7 @@ class SQLOrdenPedido
 	 */
 	public long eliminarPedidoPorId(PersistenceManager pm, long idPedido)
 	{
-		 Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlOrdenPedido()+ " WHERE id_pedido = ?");
+		 Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlOrdenPedido()+ " WHERE idpedido = ?");
 	     q.setParameters(idPedido);
 	     return (long) q.executeUnique();
 	}

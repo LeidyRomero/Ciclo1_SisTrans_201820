@@ -44,7 +44,7 @@ public interface VOOrdenPedido {
 	/**
 	 * @return Ciudad de la sucursal.
 	 */
-	public String getCiudadSucursal();
+	public String getCiudad();
 
 	/**
 	 * @return Dirección de la sucursal.

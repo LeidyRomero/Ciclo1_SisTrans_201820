@@ -5,25 +5,25 @@ package uniandes.isis2304.superAndes.negocio;
  *
  */
 public class ProductoCategoria implements VOProductoCategoria{
-	private String nombreCategoria;
+	private String categoria;
 	private String codigoBarras;
 
 	public ProductoCategoria()
 	{
-		nombreCategoria = "";
+		categoria = "";
 		codigoBarras = "";
 	}
 	public ProductoCategoria(String pCategoria, String pCodigo)
 	{
-		nombreCategoria = pCategoria;
+		categoria = pCategoria;
 		codigoBarras = pCodigo;
 	}
-	public String getNombreCategoria() {
-		return nombreCategoria;
+	public String getCategoria() {
+		return categoria;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombreCategoria = nombre;
+	public void setCategoria(String nombre) {
+		this.categoria = nombre;
 	}
 
 	public String getCodigoBarras() {
@@ -36,7 +36,7 @@ public class ProductoCategoria implements VOProductoCategoria{
 
 	@Override
 	public String toString() {
-		return "ProductoCategoria [nombreCategoria=" + nombreCategoria + ", codigoBarras=" + codigoBarras + "]";
+		return "ProductoCategoria [nombreCategoria=" + categoria + ", codigoBarras=" + codigoBarras + "]";
 	}
 	
 }

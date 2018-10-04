@@ -49,7 +49,7 @@ class SQLCantidadEnEstantes
 	 */
 	public long adicionarCantidadEstantes (PersistenceManager pm, String codigoBarras, long idEstante, int cantidadActual, int cantidadMinima) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlCantidadEnEstantes() + "(cod_barras, id_estante, cantidad_actual, cantidad_minima) values (?, ?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlCantidadEnEstantes() + "(codbarras, idestante, cantidadactual, cantidadminima) values (?, ?, ?, ?)");
         q.setParameters(codigoBarras, idEstante, cantidadActual, cantidadMinima);
         return (long) q.executeUnique();
 	}
@@ -62,7 +62,7 @@ class SQLCantidadEnEstantes
 	 */
 	public int buscarCantidadActual(PersistenceManager manager, long idEstante)
 	{
-		Query q = manager.newQuery(SQL, "SELECT cantidad_actual FROM " + persistencia.getSqlCantidadEnEstantes()+" WHERE id_estante = ?");
+		Query q = manager.newQuery(SQL, "SELECT cantidadactual FROM " + persistencia.getSqlCantidadEnEstantes()+" WHERE idestante = ?");
 		q.setParameters(idEstante);
 		q.setResultClass(Integer.class);
 		return (Integer) q.executeUnique();
@@ -78,13 +78,13 @@ class SQLCantidadEnEstantes
 	 */
 	public int buscarCantidadActual(PersistenceManager manager, String ciudad, String direccion, String codigoBarras)
 	{
-		Query q = manager.newQuery(SQL, "SELECT SUM(cant.cantidad_actual) "
+		Query q = manager.newQuery(SQL, "SELECT SUM(cant.cantidadactual) "
 				+ "FROM " + persistencia.getSqlCantidadEnEstantes()+" cant, "
 				+ persistencia.getSqlEstante() + " est"
-				+" WHERE est.id_estante = cant.id_estante AND"
+				+" WHERE est.idestante = cant.idestante AND"
 				+ "est.ciudad = ? AND"
-				+ "est.direccion_sucursal = ? AND"
-				+ "cant.cod_barras = ?");
+				+ "est.direccionsucursal = ? AND"
+				+ "cant.codbarras = ?");
 		q.setParameters(ciudad, direccion, codigoBarras);
 		q.setResultClass(Integer.class);
 		return (Integer) q.executeUnique();

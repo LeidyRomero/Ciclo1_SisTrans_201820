@@ -52,7 +52,7 @@ class SQLProveedor
 	 */
 	public long adicionarProveedor (PersistenceManager pm, int nitProveedor, String nombreProveedor) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlProveedor() + "(nit_proveedor, nombre_proveedor, calificacion_proveedor) values (?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlProveedor() + "(nitproveedor, nombreproveedor, calificacionproveedor) values (?, ?, ?)");
         q.setParameters(nitProveedor, nombreProveedor, null);
         return (long) q.executeUnique();
 	}
@@ -65,7 +65,7 @@ class SQLProveedor
 	 */
 	public long eliminarProveedorPorNombre (PersistenceManager pm, String nombre)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlProveedor() + " WHERE nombre_proveedor = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlProveedor() + " WHERE nombreproveedor = ?");
         q.setParameters(nombre);
         return (long) q.executeUnique();            
 	}
@@ -78,7 +78,7 @@ class SQLProveedor
 	 */
 	public long eliminarProveedorPorNit (PersistenceManager pm, int nitProveedor)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlProveedor() + " WHERE nit_proveedor = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlProveedor() + " WHERE nitproveedor = ?");
         q.setParameters(nitProveedor);
         return (long) q.executeUnique();            
 	}
@@ -91,7 +91,7 @@ class SQLProveedor
 	 */
 	public Proveedor darProveedorPorNit (PersistenceManager pm, long nitProveedor) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlProveedor() + " WHERE nit_proveedor = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlProveedor() + " WHERE nitproveedor = ?");
 		q.setResultClass(Proveedor.class);
 		q.setParameters(nitProveedor);
 		return (Proveedor) q.executeUnique();
@@ -105,7 +105,7 @@ class SQLProveedor
 	 */
 	public List<Proveedor> darProveedoresPorNombre (PersistenceManager pm, String nombre) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlProveedor() + " WHERE nombre_proveedor = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlProveedor() + " WHERE nombreproveedor = ?");
 		q.setResultClass(Proveedor.class);
 		q.setParameters(nombre);
 		return (List<Proveedor>) q.executeList();
@@ -132,7 +132,7 @@ class SQLProveedor
 	 */
 	public long cambiarCalificacionProveedor (PersistenceManager pm, int nitProveedor, String calificacion) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlProveedor()+ " SET calificacion_proveedor = ? WHERE nit_proveedor = ?");
+		 Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlProveedor()+ " SET calificacionproveedor = ? WHERE nitproveedor = ?");
 	     q.setParameters(calificacion, nitProveedor);
 	     return (long) q.executeUnique();            
 	}

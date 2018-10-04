@@ -44,17 +44,17 @@ class SQLSucursalFactura
 	
 	public long adicionarSucursalFactura (PersistenceManager pm, long idFactura, String direccion, String ciudad) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlSucursalFactura() + "(id_factura, direccion_sucursal, ciudad) values (?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlSucursalFactura() + "(idfactura, direccionsucursal, ciudad) values (?, ?, ?)");
         q.setParameters(idFactura, direccion, ciudad);
         return (long) q.executeUnique();
 	}
 	
 	public List<String> dineroSucursalEnRango(PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin)
 	{
-		Query q = pm.newQuery(SQL, "SELECT SUM(fac.costo_total) AS dinero_recolectado, direccion_sucursal, ciudad "
+		Query q = pm.newQuery(SQL, "SELECT SUM(fac.costototal) AS dinerorecolectado, direccionsucursal, ciudad "
 				+ "FROM " + persistencia.getSqlFactura() + " fac, "+ persistencia.getSqlSucursalFactura()+" fa "
-				+ "WHERE fac.id_factura = fa.id_factura AND fac.fecha BETWEEN ? AND ? "
-				+ "GROUP BY direccion_sucursal, ciudad");
+				+ "WHERE fac.idfactura = fa.idfactura AND fac.fecha BETWEEN ? AND ? "
+				+ "GROUP BY direccionsucursal, ciudad");
 		q.setParameters(fechaInicio, fechaFin);
 		q.setResultClass(String.class);
 		return (List<String>) q.executeList();

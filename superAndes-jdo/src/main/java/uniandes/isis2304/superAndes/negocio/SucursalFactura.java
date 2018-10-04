@@ -20,7 +20,7 @@ public class SucursalFactura implements VOSucursalFactura {
 	/**
 	 * Ciudad de la sucursal
 	 */
-	private String ciudadSucursal;
+	private String ciudad;
 	
 	/**
 	 * Id de la factura asociadad a la sucursal
@@ -36,7 +36,7 @@ public class SucursalFactura implements VOSucursalFactura {
 	public SucursalFactura()
 	{
 		direccionSucursal = null;
-		ciudadSucursal = null;
+		ciudad = null;
 		idFactura = 0;
 	}
 
@@ -49,7 +49,7 @@ public class SucursalFactura implements VOSucursalFactura {
 	public SucursalFactura(String direccionSucursal, String ciudadSucursal, long idFactura) 
 	{
 		this.direccionSucursal = direccionSucursal;
-		this.ciudadSucursal = ciudadSucursal;
+		this.ciudad = ciudadSucursal;
 		this.idFactura = idFactura;
 	}
 	
@@ -75,16 +75,16 @@ public class SucursalFactura implements VOSucursalFactura {
 	/**
 	 * Retorna la ciudad de la sucursal
 	 */
-	public String getCiudadSucursal() {
-		return ciudadSucursal;
+	public String getCiudad() {
+		return ciudad;
 	}
 
 	/**
 	 * Modifica la ciudad de la sucursal 
 	 * @param ciudadSucursal Nueva ciudad
 	 */
-	public void setCiudadSucursal(String ciudadSucursal) {
-		this.ciudadSucursal = ciudadSucursal;
+	public void setCiudad(String ciudadSucursal) {
+		this.ciudad = ciudadSucursal;
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class SucursalFactura implements VOSucursalFactura {
 
 	@Override
 	public String toString() {
-		return "SucursalCliente [direccionSucursal=" + direccionSucursal + ", ciudadSucursal=" + ciudadSucursal
+		return "SucursalCliente [direccionSucursal=" + direccionSucursal + ", ciudadSucursal=" + ciudad
 				+ ", correoCliente=" + idFactura + "]";
 	}
 	

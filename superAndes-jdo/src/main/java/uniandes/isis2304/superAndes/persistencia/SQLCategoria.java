@@ -27,7 +27,7 @@ class SQLCategoria
 	//TODO RF2 - Registrar un producto
 	public long agregarCategoria(PersistenceManager manager, String pNombre)
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlCategoria()+" (nombre_categoria) values (?)");
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlCategoria()+" (nombrecategoria) values (?)");
 		q.setParameters(pNombre);
 		return (long) q.executeUnique();
 	}
@@ -39,14 +39,14 @@ class SQLCategoria
 	}
 	public Categoria buscarNombre(PersistenceManager manager,String pNombre)
 	{
-		Query q = manager.newQuery(SQL, "SELECT nombre_categoria FROM "+persistencia.getSqlCategoria()+"WHERE nombre_categoria = ?");
+		Query q = manager.newQuery(SQL, "SELECT nombrecategoria FROM "+persistencia.getSqlCategoria()+"WHERE nombrecategoria = ?");
 		q.setResultClass(Categoria.class);
 		q.setParameters(pNombre);
 		return (Categoria) q.executeUnique();
 	}
 	public long eliminarCategoria(PersistenceManager manager, String pCategoria)
 	{
-		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlCategoria()+ " WHERE nombre_categoria = ?");
+		Query add = manager.newQuery(SQL, "DELETE FROM " + persistencia.getSqlCategoria()+ " WHERE nombrecategoria = ?");
 		add.setParameters(pCategoria);
 		return (long) add.executeUnique();
 	}
