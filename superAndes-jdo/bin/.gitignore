@@ -1,7 +1,16 @@
 /ConexionTest.class
-/uniandes/
+/META-INF/
 /config/
+<<<<<<< HEAD
 /TipoBebidaTest.class
 /BodegaTest.class
 /CategoriaTest.class
 /EstanteTest.class
+=======
+/log4j.properties
+/uniandes/
+/InsercionSuperAndes.sql
+/ClienteTest.class
+/ProveedorTest.class
+/SucursalTest.class
+>>>>>>> a7c98c43ffaffcde7bb99c56f9bf1aa9154525e5
