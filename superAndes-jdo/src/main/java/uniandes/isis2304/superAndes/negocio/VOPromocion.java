@@ -14,7 +14,7 @@ public interface VOPromocion {
 	/**
 	 * @return Fecha de inicio de la promoción.
 	 */
-	public Timestamp getFechaIncial();
+	public Timestamp getFechaInicial();
 
 	/**
 	 * @return Fecha de terminación de la promoción.

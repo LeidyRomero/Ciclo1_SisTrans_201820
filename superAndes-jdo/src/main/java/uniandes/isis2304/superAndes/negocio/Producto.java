@@ -3,7 +3,7 @@ package uniandes.isis2304.superAndes.negocio;
 import java.util.Date;
 
 /**
- * 
+ * Clase para modelar el concepto PRODUCTO del negocio de los SuperAndes
  * @author lj.romero
  *
  */

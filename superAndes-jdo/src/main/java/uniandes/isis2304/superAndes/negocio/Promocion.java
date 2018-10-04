@@ -224,6 +224,4 @@ public class Promocion implements VOPromocion {
 		return "Promocion [fechaInicial=" + fechaIncial + ", fechaFinal=" + fechaFinal + ", descripcion=" + descripcion
 				+ ", idPromocion=" + idPromocion + "]";
 	}
-	
-	
 }
