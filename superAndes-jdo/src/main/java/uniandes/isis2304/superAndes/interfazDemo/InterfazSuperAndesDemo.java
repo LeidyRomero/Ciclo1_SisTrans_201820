@@ -295,49 +295,6 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		return resp;
 	}
 
-
-	//BORRADOR
-	//	public void demoX ( )
-	//	{
-	//		try 
-	//		{
-	//			// Ejecución de la demo y recolección de los resultados
-	//			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-	//			VOX x1 = superAndes.adicionarX();
-	//
-	//			List <VOX> lista = superAndes.darVOX ();
-	//
-	//			long xsEliminadas = superAndes.eliminarX();
-	//
-	//			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
-	//			String resultado = "Demo de creación y listado de \n\n";
-	//			resultado += "\n\n************ Generando datos de prueba ************ \n";
-	//			resultado += "Adicionado la : " + x1 + "\n";
-	//			resultado += "\n\n************ Ejecutando la demo ************ \n";
-	//			resultado += "\n" + listarYs (lista);
-	//			resultado += "\n\n************ Limpiando la base de datos ************ \n";
-	//			resultado += xsEliminadas + "  eliminados\n";
-	//			resultado += "\n Demo terminada";
-	//
-	//			panelDatos.actualizarInterfaz(resultado);
-	//		} 
-	//		catch (Exception e) 
-	//		{
-	//			String resultado = generarMensajeError(e);
-	//			panelDatos.actualizarInterfaz(resultado);
-	//		}
-	//	}
-	//	private String listarX (List<VOX> lista) 
-	//	{
-	//		String resp = "Las  existentes son:\n";
-	//		int i = 1;
-	//		for (VOX x : lista)
-	//		{
-	//			resp += i++ + ". " + x.toString() + "\n";
-	//		}
-	//		return resp;
-	//	}
-
 	//--------------------------------------------------------------------
 	// Demo PROVEEDOR
 	//--------------------------------------------------------------------
@@ -479,7 +436,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		{
 			//Ejecución de la demo y recolección de los resultados
 			VOSucursal suc1 = superAndes.adicionarSucursal("50 m^2", "Calle 7 #5-74", "Bogotá", "Candelaria");
-			VOProducto pro1 = superAndes.adicionarProducto("papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32");
+			VOProducto pro1 = superAndes.adicionarProducto(500,"papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32", "Perecedores");
 			VOPromocion cli1 = superAndes.adicionarPromocion(Timestamp.valueOf("2018-10-3 00:00:00"), Timestamp.valueOf("2018-10-4 00:00:00"), "20% de descuento", pro1.getCodBarras(), 20, 0, suc1.getDireccionSucursal(), suc1.getCiudad());
 
 			List<VOPromocion> lista = superAndes.darVOPromociones();
@@ -529,7 +486,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		{
 			//Ejecución de la demo y recolección de los resultados
 			VOSucursal suc1 = superAndes.adicionarSucursal("50 m^2", "Calle 7 #5-74", "Bogotá", "Candelaria");
-			VOProducto pro1 = superAndes.adicionarProducto("papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32");
+			VOProducto pro1 = superAndes.adicionarProducto(500,"papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32","Perecederos");
 			VOBodega bog = superAndes.adicionarBodega("Tipo", 200, 300, "Calle 7 #5-74", "Calle 7 #5-74", "Bogotá");
 			VOProveedor prov1 = superAndes.adicionarProveedor(123546987, "Alpina");
 			VOOrdenPedido cli1 = superAndes.adicionarOrdenPedido(new Timestamp(System.currentTimeMillis()), prov1.getNitProveedor(), suc1.getCiudad(), suc1.getDireccionSucursal(), bog.getDireccionBodega(), pro1.getCodBarras(), 10, 5000);
@@ -626,7 +583,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		{
 			// Ejecución de la demo y recolección de los resultados
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-			VOProducto producto1 = superAndes.adicionarProducto("papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32");
+			VOProducto producto1 = superAndes.adicionarProducto(500,"papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32","Perecederos");
 
 			List <VOProducto> lista = superAndes.darVOProducto();
 
@@ -744,49 +701,6 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		for (VOTipoProducto tipoProducto : lista)
 		{
 			resp += i++ + ". " + tipoProducto.toString() + "\n";
-		}
-		return resp;
-	}
-	//----------------------------------------------------------------------------------------------
-	// CATEGORIA PRODUCTOS
-	//----------------------------------------------------------------------------------------------
-	public void demoProductoCategoria ( )
-	{
-		try 
-		{
-			// Ejecución de la demo y recolección de los resultados
-			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-			VOProductoCategoria categoriaProductos1 = superAndes.adicionarProductoCategoria("Congelados", "FFFFFFF");
-
-			List <VOProductoCategoria> lista = superAndes.darVOProductoCategoria ();
-
-			long categoriaProductosEliminados = superAndes.eliminarProductoCategoria("FFFFFFF", "Congelados");
-
-			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
-			String resultado = "Demo de creación y listado de categorias productos\n\n";
-			resultado += "\n\n************ Generando datos de prueba ************ \n";
-			resultado += "Adicionado categoria producto: " + categoriaProductos1 + "\n";
-			resultado += "\n\n************ Ejecutando la demo ************ \n";
-			resultado += "\n" + listarProductoCategorias (lista);
-			resultado += "\n\n************ Limpiando la base de datos ************ \n";
-			resultado += categoriaProductosEliminados + " categorias productos eliminados\n";
-			resultado += "\n Demo terminada";
-
-			panelDatos.actualizarInterfaz(resultado);
-		} 
-		catch (Exception e) 
-		{
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-	}
-	private String listarProductoCategorias (List<VOProductoCategoria> lista) 
-	{
-		String resp = "Los productos categoria existentes son:\n";
-		int i = 1;
-		for (VOProductoCategoria productoCategoria : lista)
-		{
-			resp += i++ + ". " + productoCategoria.toString() + "\n";
 		}
 		return resp;
 	}

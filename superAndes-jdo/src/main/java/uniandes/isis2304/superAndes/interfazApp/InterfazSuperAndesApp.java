@@ -497,13 +497,13 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		DialogoRegistrarProducto registrar = new DialogoRegistrarProducto(this);
 		registrar.setVisible( true );
 	}
-	public void adicionarProducto2(String pNombre, String pMarca, double pPrecioUnitario, String pPresentacion, double pPrecioUnidadMedida, int pCantidadPresentacion, String pUnidadMedida, String pCodigoBarras, String pCalidad, Timestamp pFechaVencimiento, String pPeso, String pVolumen)
+	public void adicionarProducto2(int pCantidadMinima,String pNombre, String pMarca, double pPrecioUnitario, String pPresentacion, double pPrecioUnidadMedida, int pCantidadPresentacion, String pUnidadMedida, String pCodigoBarras, String pCalidad, Timestamp pFechaVencimiento, String pPeso, String pVolumen, String pCategoria)
 	{
 		try
 		{
-			if(!pNombre.equals("") && !pMarca.equals("") && !pPresentacion.equals("") && pPrecioUnitario>0 && !pPresentacion.equals("")&&pPrecioUnidadMedida>0 && pCantidadPresentacion>0 && !pUnidadMedida.equals("") && !pCodigoBarras.equals("") && !pPeso.equals("") && !pVolumen.equals(""))//TODO continuar validaciones
+			if(!pCategoria.equals("") && !pNombre.equals("") && !pMarca.equals("") && !pPresentacion.equals("") && pPrecioUnitario>0 && !pPresentacion.equals("")&&pPrecioUnidadMedida>0 && pCantidadPresentacion>0 && !pUnidadMedida.equals("") && !pCodigoBarras.equals("") && !pPeso.equals("") && !pVolumen.equals(""))//TODO continuar validaciones
 			{
-				Producto registrado = superAndes.adicionarProducto(pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida,pCantidadPresentacion, pCodigoBarras,pFechaVencimiento, pPeso, pVolumen);
+				Producto registrado = superAndes.adicionarProducto(pCantidadMinima,pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida,pCantidadPresentacion, pCodigoBarras,pFechaVencimiento, pPeso, pVolumen, pCategoria);
 				if(registrado!=null)
 				{
 					JOptionPane.showMessageDialog (this, "Producto registrado", "Agregar producto: exitoso", JOptionPane.INFORMATION_MESSAGE);
@@ -728,26 +728,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 		}
 	}
-	//-------------------------------------------------------------------------------
-	//  Metodos para manejar PRODUCTO CATEGORIA
-	//-------------------------------------------------------------------------------
-	public void adicionarProductoCategoria()
-	{
-		JTextField codigoField = new JTextField(15);
-		JTextField categoriaField = new JTextField(15);
-
-		JPanel aux = new JPanel();
-		aux.add(new JLabel("Código de barras:"));
-		aux.add(codigoField);
-		aux.add(Box.createHorizontalStrut(15)); // a spacer
-		aux.add(new JLabel("Categoria:"));
-		aux.add(categoriaField);
-
-		int result = JOptionPane.showConfirmDialog(null, aux,"Registrar producto a una categoria", JOptionPane.OK_CANCEL_OPTION);
-		if (result == JOptionPane.OK_OPTION) {
-			superAndes.adicionarProductoCategoria( categoriaField.getText(),codigoField.getText());
-		}
-	}
+	
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar BODEGA
 	//-------------------------------------------------------------------------------

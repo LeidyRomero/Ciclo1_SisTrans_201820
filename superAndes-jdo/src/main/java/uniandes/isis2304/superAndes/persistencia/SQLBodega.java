@@ -52,4 +52,10 @@ class SQLBodega
 		add.setParameters(direccionBodega,direccionSucursal,ciudad);
 		return (long) add.executeUnique();
 	}
+	public Bodega buscarBodegaTipo(PersistenceManager manager, String categoria)
+	{
+		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlBodega() + " WHERE tipoBodega = ?");
+		q.setParameters(categoria);
+		return (Bodega) q.executeUnique();
+	}
 }

@@ -57,7 +57,6 @@ public class PersistenciaSuperAndes {
 	private SQLPersonaNatural sqlPersonaNatural ;
 	private SQLProducto sqlProducto ;
 	private SQLProductosOfrecidos sqlProductosOfrecidos;
-	private SQLProductoCategoria sqlProductoCategoria ;
 	private SQLPromocion sqlPromocion;
 	private SQLProveedor sqlProveedor;
 	private SQLProveen sqlProveen;
@@ -182,7 +181,6 @@ public class PersistenciaSuperAndes {
 		sqlSucursal = new SQLSucursal(this);
 		sqlSucursalFactura = new SQLSucursalFactura(this);
 		sqlTipoProducto = new SQLTipoProducto(this);
-		sqlProductoCategoria = new SQLProductoCategoria(this);
 		sqlProductosOfrecidos = new SQLProductosOfrecidos(this);
 		sqlSucursalPromociones = new SQLSucursalPromociones(this);
 		sqlUtil = new SQLUtil(this);
@@ -270,10 +268,6 @@ public class PersistenciaSuperAndes {
 
 	public String getSqlTipoProducto() {
 		return tablas.get(20);
-	}
-
-	public String getSqlProductoCategoria() {
-		return tablas.get(21);
 	}
 
 	public String getSqlProductosOfrecidos() {
@@ -460,10 +454,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	//---------------------------------------------------------------------
-	// Métodos para manejar las SUCURSALES
-	//---------------------------------------------------------------------
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar los SUCURSALES
 	//---------------------------------------------------------------------
@@ -522,15 +513,11 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-
-	//---------------------------------------------------------------------
-	// Métodos para manejar las PROMOCIONES
-	//---------------------------------------------------------------------
 	public List<Sucursal> buscarSucursales()
 	{
 		return sqlSucursal.darSucursales(managerFactory.getPersistenceManager());
 	}
-	
+
 	public long eliminarSucursalPorDireccionYCiudad(String direccion, String ciudad)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -659,7 +646,7 @@ public class PersistenciaSuperAndes {
 	{
 		return sqlPromocion.darPromociones(managerFactory.getPersistenceManager());
 	}
-	
+
 	public long eliminarPromocionPorId(long idPromocion)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -690,7 +677,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las ORDENES DE PEDIDO
 	//---------------------------------------------------------------------
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar los ORDEN PEDIDO
 	//---------------------------------------------------------------------
@@ -723,7 +710,7 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
-	public OrdenPedido llegadaOrdenPedido(long idPedido, String calificacion)
+	public OrdenPedido llegadaOrdenPedido(long idPedido, String calificacion) throws Exception
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -758,7 +745,7 @@ public class PersistenciaSuperAndes {
 	{
 		return sqlOrdenPedido.darPedidos(managerFactory.getPersistenceManager());
 	}
-	
+
 	public long eliminarPedidoPorId(long idPedido)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -790,7 +777,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las FACTURAS
 	//---------------------------------------------------------------------
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar los FACTURA
 	//---------------------------------------------------------------------
@@ -826,7 +813,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las CANTIDADES EN ESTANTE
 	//---------------------------------------------------------------------
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar los CANTIDAD EN ESTANTES
 	//---------------------------------------------------------------------
@@ -887,7 +874,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las PRODUCTOS OFRECIDOS
 	//---------------------------------------------------------------------
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar los PRODUCTOS OFRECIDOS
 	//---------------------------------------------------------------------
@@ -922,7 +909,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar las SUCURSAL FACTURAS
 	//---------------------------------------------------------------------
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar los SUCURSAL FACTURA
 	//---------------------------------------------------------------------
@@ -985,7 +972,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar los HISTORIALES COMPRAS
 	//---------------------------------------------------------------------
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar los HISTORIAL COMPRAS
 	//---------------------------------------------------------------------
@@ -1020,7 +1007,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar PROVEEN
 	//---------------------------------------------------------------------
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar los PROVEEN
 	//---------------------------------------------------------------------
@@ -1055,7 +1042,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar SUCURSAL PROMOCIONES
 	//---------------------------------------------------------------------
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar los SUCURSAL PROMOCIONES
 	//---------------------------------------------------------------------
@@ -1087,21 +1074,19 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
-	//------------------------------------------------------------------
-	//  Metodos para manejar PRODUCTOS
-	//------------------------------------------------------------------
-	
 	//---------------------------------------------------------------------
 	// Métodos para manejar los PRODUCTO
 	//---------------------------------------------------------------------
-	public Producto adicionarProducto(String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, String pCodigoBarras, Date pFechaVencimiento, String pPeso, String pVolumen)
+	public Producto adicionarProducto(int pCantidadMinima, String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, String pCodigoBarras, Date pFechaVencimiento, String pPeso, String pVolumen, String pCategoria)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
 		Transaction t = manager.currentTransaction();
 		try 
 		{
 			t.begin();
-			long tuplasInsertadas = sqlProducto.agregarProducto(manager, pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento,pPeso, pVolumen);
+			Bodega bodega = buscarBodegaTipo(pCategoria);
+			adicionarCantidadEnBodega(bodega.getDireccionBodega(), bodega.getDireccionSucursal(), bodega.getCiudad(),0, pCantidadMinima, pCodigoBarras);
+			long tuplasInsertadas = sqlProducto.agregarProducto(manager, pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento,pPeso, pVolumen, pCategoria);
 			t.commit();
 			Log.trace("Inserccion producto: "+ pNombre+": "+tuplasInsertadas+ " tuplas insertadas");
 			return new Producto(pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento, pPeso, pVolumen);
@@ -1445,85 +1430,6 @@ public class PersistenciaSuperAndes {
 		{
 			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
 			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-	//------------------------------------------------------------------
-	//  Metodos para manejar PRODUCTO_CATEGORIA
-	//------------------------------------------------------------------
-	public ProductoCategoria adicionarProductoCategoria(String pNombreCategoria, String pCodigoBarras)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			long tuplasInsertadas = sqlProductoCategoria.agregarProductoCategoria(manager, pNombreCategoria, pCodigoBarras);
-			t.commit();
-			Log.trace("Inserccion producto categoria: "+ pCodigoBarras+": "+tuplasInsertadas+ " tuplas insertadas");
-			return new ProductoCategoria(pNombreCategoria,pCodigoBarras);
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-	public List<ProductoCategoria> buscarProductoCategoria()
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			List<ProductoCategoria> q = sqlProductoCategoria.buscarProductoCategoria(manager);
-			t.commit();
-			return q;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-	public long eliminarProductoCategoria(String pCodigo, String pCategoria)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			long q = sqlProductoCategoria.eliminarProductoCategoria(manager, pCodigo, pCategoria);
-			t.commit();
-			return q;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return 0;
 		}
 		finally
 		{
@@ -1919,6 +1825,31 @@ public class PersistenciaSuperAndes {
 			t.commit();
 			Log.trace("Inserccion X: "+ pDireccionBodega+", "+pDireccionSucursal+","+pCiudad+": "+tuplasInsertadas+ " tuplas insertadas");
 			return new Bodega(pDireccionBodega,pTipo,pPeso,pVolumen, pDireccionSucursal, pCiudad);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
+	public Bodega buscarBodegaTipo(String pCategoria)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			Bodega bodega = sqlBodega.buscarBodegaTipo(manager, pCategoria );
+			t.commit();
+			return bodega;
 		}
 		catch(Exception e)
 		{
@@ -2380,33 +2311,33 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	
+
 	public long [] limpiarSuperAndes()
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            long [] resp = sqlUtil.limpiarSuperAndes(pm);
-            tx.commit ();
-            Log.info ("Borrada la base de datos");
-            return resp;
-        }
-        catch (Exception e)
-        {
-//        	e.printStackTrace();
-        	Log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-        	return new long[] {-1, -1, -1, -1, -1, -1, -1};
-        }
-        finally
-        {
-            if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
-        }
-		
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long [] resp = sqlUtil.limpiarSuperAndes(pm);
+			tx.commit ();
+			Log.info ("Borrada la base de datos");
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			Log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return new long[] {-1, -1, -1, -1, -1, -1, -1};
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
 	}
 }

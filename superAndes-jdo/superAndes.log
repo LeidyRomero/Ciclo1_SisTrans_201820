@@ -18,3 +18,70 @@ ORA-00933: comando SQL no terminado correctamente
 ORA-00933: comando SQL no terminado correctamente
 
 17:59:41,486 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de calculo de indice de bodega 
+10:53:10,658 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 1, huevos
+10:53:10,740 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 1, huevos
+10:54:28,747 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el producto manzana
+10:54:28,768 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: SQL query tiene parametro "13" pero no existe en el query : INSERT INTO A_PRODUCTO(nombreproducto, marca,preciounitario, presentacion, preciounimedida,cantpresentacion,unidadmedida, codbarras, calidad, fechavencimiento, pesoproducto, volumenproducto) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+
+10:54:28,770 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el producto manzana
+10:55:56,907 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el producto manzana
+10:55:56,993 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el producto manzana
+10:57:07,872 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el tipo de producto frutas
+10:57:07,918 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_TIPO_PRODUCTO(nombretipo, nombrecategoria) values (?,?)".
+ORA-02291: restricción de integridad (ISIS2304A281820.FK_TP_CATEGORIA) violada - clave principal no encontrada
+
+10:57:07,922 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el producto frutas
+10:57:14,879 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la categoria frutas
+10:57:14,904 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la categoria frutas
+10:57:24,031 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el tipo de producto frutas
+10:57:24,052 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el producto frutas
+10:59:37,725 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando cliente globant@hotmail.com, Globant
+10:59:37,746 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente globant@hotmail.com, Globant
+10:59:37,747 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la empresa 123
+10:59:37,768 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la empresa 123
+11:00:39,389 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando cliente jp@uniandes.edu.co, Jesus Perez
+11:00:39,406 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar cliente jp@uniandes.edu.co, Jesus Perez
+11:00:39,407 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la persona 147852
+11:00:39,429 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la persona 147852
+11:01:12,957 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando sucursal 154269, Crr 2 2-2, Cartagena, SuperAndes20
+11:01:12,985 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar sucursal 154269, Crr 2 2-2, Cartagena, SuperAndes20
+11:01:14,557 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando sucursal 154269, Crr 2 2-2, Cartagena, SuperAndes20
+11:01:14,567 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_SUCURSAL(tamanio, direccionsucursal, ciudad, nombresucursal) values (?, ?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A281820.A_SUCURSAL_PK) violada
+
+11:01:14,572 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar sucursal 154269, Crr 2 2-2, Cartagena, SuperAndes20
+11:02:08,774 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la bodega Crr 3 3-3, Crr 2 2-2,Cartagena
+11:02:08,798 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la bodega Crr 3 3-3, Crr 2 2-2,Cartagena
+11:02:57,366 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el estante 5
+11:02:57,391 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el estante 5
+11:03:51,862 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Pague 6 lleve 7, ABCD, 10, 0
+11:03:51,900 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_FACTURAS(idpromocion, direccionsucursal, ciudad) values (?, ?, ?)".
+ORA-00904: "IDPROMOCION": identificador no válido
+
+11:03:51,905 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Pague 6 lleve 7, ABCD, 10, 0
+11:04:43,771 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando orden pedido 1, 2018-05-06 00:00:00.0, Cartagena, Crr 2 2-2, Crr 3 3-3
+11:04:43,823 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar orden pedido 1, 2018-05-06 00:00:00.0, Cartagena, Crr 2 2-2, Crr 3 3-3
+11:05:40,722 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Modificando orden pedido 42, Buena
+11:05:40,752 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : El Query tenia que devolver objetos de tipo "uniandes.isis2304.superAndes.negocio.OrdenPedido" pero era imposible poner el valor al campo "DIRECCIONBODEGA"  tipo "java.lang.String". El campo debe tener un metodo publico set/put o ser publico.
+
+11:05:40,757 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de modificar orden pedido 42, Buena
+11:06:19,195 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Registrando comprados ABCD, ABCD
+11:06:19,215 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: El Query de JDOQL ha vuelto más que una instancia pero "unica" esta "verdad" o hay solo aggregados asi que debe devolver una como maxima.
+
+11:07:22,818 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando el dinero recolectado por sucursales en periodo de tiempo: 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0
+11:07:22,839 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar el dinero recolectado por sucursales en periodo de tiempo: 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0
+11:07:36,504 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando promociones mas populares 
+11:07:36,519 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar promociones mas populares 
+11:07:39,384 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando promociones mas populares 
+11:07:39,396 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar promociones mas populares 
+11:07:40,592 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando promociones mas populares 
+11:07:40,604 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar promociones mas populares 
+11:07:41,736 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando promociones mas populares 
+11:07:41,750 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar promociones mas populares 
+11:10:23,789 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Iniciando calculo de indice de bodega 
+11:10:23,796 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "SELECT * FROM A_BODEGAWHERE ciudad = ? AND direccionsucursal = ?".
+ORA-00933: comando SQL no terminado correctamente
+
+11:10:23,800 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de calculo de indice de bodega 
+17:28:41,503 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 2, ssdfghnjm
+17:28:41,587 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 2, ssdfghnjm

@@ -41,10 +41,10 @@ public class SuperAndes {
 	//-----------------------------------------------------------------------------
 	//   Metodos para manejar los PRODUCTOS
 	//-----------------------------------------------------------------------------
-	public Producto adicionarProducto(String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, String pCodigoBarras, Timestamp pFechaVencimiento, String pPeso, String pVolumen)
+	public Producto adicionarProducto(int pCantidadMinima,String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, String pCodigoBarras, Timestamp pFechaVencimiento, String pPeso, String pVolumen, String pCategoria)
 	{
 		Log.info("Adicionando el producto "+pNombre);
-		Producto producto = pp.adicionarProducto(pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento, pPeso, pVolumen);
+		Producto producto = pp.adicionarProducto(pCantidadMinima,pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento, pPeso, pVolumen, pCategoria);
 		Log.info("Saliendo de adicionar el producto "+ pNombre);
 		return producto;
 	}
@@ -184,34 +184,6 @@ public class SuperAndes {
 		Log.info("Borrar el producto ");
 		long numero = pp.eliminarProducto(pCodigo);
 		Log.info("Saliendo de borrar el producto ");
-		return numero;
-	}
-	//------------------------------------------------------------------
-	//  Metodos para manejar PRODUCTO_CATEGORIA
-	//------------------------------------------------------------------
-	public ProductoCategoria adicionarProductoCategoria(String pNombreCategoria, String pCodigoBarras)
-	{
-		Log.info("Adicionando el producto categoria "+pCodigoBarras);
-		ProductoCategoria productoCategoria = pp.adicionarProductoCategoria(pNombreCategoria, pCodigoBarras);
-		Log.info("Saliendo de adicionar el producto "+ pCodigoBarras);
-		return productoCategoria;
-	}
-	public List<VOProductoCategoria> darVOProductoCategoria()
-	{
-		Log.info ("Generando los VO de Producto categoria");
-		List<VOProductoCategoria> voProductoCategoria = new LinkedList<VOProductoCategoria> ();
-		for (ProductoCategoria productoCategoria: pp.buscarProductoCategoria())
-		{
-			voProductoCategoria.add (productoCategoria);
-		}
-		Log.info ("Generando los VO de Producto categoria: " + voProductoCategoria.size () + " producto categoria existentes");
-		return voProductoCategoria;
-	}
-	public long eliminarProductoCategoria(String pCodigo, String pCategoria)
-	{
-		Log.info("Borrar al producto de la categoria ");
-		long numero = pp.eliminarProductoCategoria(pCodigo, pCategoria);
-		Log.info("Saliendo de borrar al producto de la categoria ");
 		return numero;
 	}
 	//------------------------------------------------------------------
@@ -628,7 +600,7 @@ public class SuperAndes {
 		return ordenPedido;
 	}
 
-	public OrdenPedido llegadaOrdenPedido(long idPedido, String calificacion)
+	public OrdenPedido llegadaOrdenPedido(long idPedido, String calificacion) throws Exception
 	{
 		Log.info("Modificando orden pedido "+ idPedido +", "+calificacion);
 		OrdenPedido ordenPedido = pp.llegadaOrdenPedido(idPedido, calificacion);

@@ -43,10 +43,10 @@ class SQLProducto
 	 * @return
 	 */
 	//TODO RF2 - Registrar productos
-	public long agregarProducto(PersistenceManager manager, String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, String pCodigoBarras, Date pFechaVencimiento, String pPeso, String pVolumen)
+	public long agregarProducto(PersistenceManager manager, String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, String pCodigoBarras, Date pFechaVencimiento, String pPeso, String pVolumen, String pCategoria)
 	{
-		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlProducto()+"(nombreproducto, marca,preciounitario, presentacion, preciounimedida,cantpresentacion,unidadmedida, codbarras, calidad, fechavencimiento, pesoproducto, volumenproducto) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
-		q.setParameters(pNombre, pMarca, pPrecioUnitario, pPresentacion, pPrecioUnidadMedida, pCantidadPresentacion, pUnidadMedida, pCodigoBarras, pCalidad, pFechaVencimiento, pPeso, pVolumen);
+		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlProducto()+"(nombreproducto, marca,preciounitario, presentacion, preciounimedida,cantpresentacion,unidadmedida, codbarras, calidad, fechavencimiento, pesoproducto, volumenproducto, nombrecategoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		q.setParameters(pCategoria,pNombre, pMarca, pPrecioUnitario, pPresentacion, pPrecioUnidadMedida, pCantidadPresentacion, pUnidadMedida, pCodigoBarras, pCalidad, pFechaVencimiento, pPeso, pVolumen);
 		return (long) q.executeUnique();
 	}
 
@@ -130,6 +130,7 @@ class SQLProducto
 		return (List<Producto>) q.executeList();
 	}
 	//Caracteristica 8:
+	//TODO REVISAR CATEGORIA
 	public List<Producto> darProductosTipo (PersistenceManager manager, String pTipo)
 	{
 		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlProducto()+","+persistencia.getSqlTipoProducto()+","+persistencia.getSqlProductoCategoria()+"WHERE nombretipo = ? AND A_TIPO_PRODUCTO.NOMBRECATEGORIA = A_PRODUCTO_CATEGORIA.CATEGORIA AND A_PRODUCTO_CATEGORIA.CODIGOBARRAS = A_PRODUCTO.CODBARRAS");
@@ -138,6 +139,7 @@ class SQLProducto
 		return (List<Producto>) q.executeList();
 	}
 	//Caracteristica 9:
+	//TODO REVISAR CATEGORIA
 	public List<Producto> darProductosCategoria (PersistenceManager manager, String pCategoria)
 	{
 		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlProducto()+","+persistencia.getSqlProductoCategoria()+"WHERE A_PRODUCTO_CATEGORIA.CATEGORIA = ? AND A_PRODUCTO_CATEGORIA.CODIGOBARRAS = A_PRODUCTO.CODBARRAS");

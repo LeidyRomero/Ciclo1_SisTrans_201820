@@ -131,6 +131,15 @@ public class DialogoRegistrarProducto extends JDialog implements ActionListener{
 	 * Campo de texto para mostrar el nombre
 	 */
 	private JTextField txtFechaVencimiento;
+	/**
+	 * Etiqueta cantidad minima
+	 */
+	private JLabel lbCantidadMinima;
+
+	/**
+	 * Campo de texto para cantidad minima
+	 */
+	private JTextField txtCantidadMinima;
 
 	// --------------------------------------------------------
 	// Constructores
@@ -143,7 +152,7 @@ public class DialogoRegistrarProducto extends JDialog implements ActionListener{
 	public DialogoRegistrarProducto( InterfazSuperAndesApp principalP )
 	{
 		principal = principalP;
-		setLayout( new GridLayout( 13, 2 ) );
+		setLayout( new GridLayout( 14, 2 ) );
 		this.setSize( 800, 450 );
 		setTitle( "Agregar producto" );
 
@@ -218,6 +227,12 @@ public class DialogoRegistrarProducto extends JDialog implements ActionListener{
 
 		add( lbCategoria );
 		add( txtCategoria );
+		
+		lbCantidadMinima = new JLabel( "Cantidad mínima:" );
+		txtCantidadMinima = new JTextField( );
+
+		add( lbCategoria );
+		add( txtCategoria );
 
 		btnRegistrar = new JButton( "Registrar" );
 		btnRegistrar.setActionCommand( REGISTRAR );
@@ -241,10 +256,11 @@ public class DialogoRegistrarProducto extends JDialog implements ActionListener{
 			{
 				double precioU = Double.parseDouble(txtPrecioUnitario.getText());
 				double precioUniMed = Double.parseDouble(txtPrecioUnidadMedida.getText());
+				int cantidadMinima = Integer.parseInt(txtCantidadMinima.getText());
 				int cantidadPrese = Integer.parseInt(txtCantidadPresentacion.getText());
 				String [] especificaciones = txtEspecificacion.getText().split(",");
 				Timestamp fecha = Timestamp.valueOf(txtFechaVencimiento.getText()+" 00:00:00");
-				principal.adicionarProducto2(txtNombre.getText(), txtMarca.getText(),precioU,txtPresentacion.getText(),precioUniMed,cantidadPrese,txtUnidadMedida.getText(),txtCodigoBarras.getText(),txtCalidad.getText(),fecha, especificaciones[1], especificaciones[0]);
+				principal.adicionarProducto2(cantidadMinima,txtNombre.getText(), txtMarca.getText(),precioU,txtPresentacion.getText(),precioUniMed,cantidadPrese,txtUnidadMedida.getText(),txtCodigoBarras.getText(),txtCalidad.getText(),fecha, especificaciones[1], especificaciones[0], txtCategoria.getText());
 				this.dispose();
 			}
 			catch(Exception ex)
