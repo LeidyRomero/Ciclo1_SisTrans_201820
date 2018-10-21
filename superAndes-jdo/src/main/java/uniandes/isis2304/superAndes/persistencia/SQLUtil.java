@@ -22,9 +22,9 @@ class SQLUtil
 	 * @param pm - El manejador de persistencia
 	 * @return El número de secuencia generado
 	 */
-	public long nextval (PersistenceManager pm)
+	public long nextvalPedidos (PersistenceManager pm)
 	{
-        Query q = pm.newQuery(SQL, "SELECT "+ pp.darSecuenciaSuperAndes () + ".nextval FROM DUAL");
+        Query q = pm.newQuery(SQL, "SELECT "+ pp.darSecuenciaPedidos() + ".nextval FROM DUAL");
         q.setResultClass(Long.class);
         long resp = (long) q.executeUnique();
         return resp;

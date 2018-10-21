@@ -64,7 +64,10 @@ public class PersistenciaSuperAndes {
 	private SQLSucursalFactura sqlSucursalFactura;
 	private SQLTipoProducto sqlTipoProducto;
 	private SQLSucursalPromociones sqlSucursalPromociones;
-
+	private SQLPromoCantidades sqlPromoCantidades;
+	private SQLPromoUnidadDescuento sqlPromoUnidadDescuento;
+	private SQLPromoUnidades sqlPromoUnidades;
+	private SQLPromoDescuento sqlPromoDescuento;
 
 
 	/**
@@ -75,30 +78,38 @@ public class PersistenciaSuperAndes {
 		managerFactory = JDOHelper.getPersistenceManagerFactory("SuperAndes");
 		crearClasesSQL();
 		tablas = new LinkedList<String>();
-		tablas.add("SuperAndes_sequence");
-		tablas.add("BODEGA");
-		tablas.add("CANTIDAD_EN_BODEGA");
-		tablas.add("CANTIDAD_EN_ESTANTES");
-		tablas.add("CATEGORIA");
-		tablas.add("CLIENTE");
-		tablas.add("COMPRADOS");
-		tablas.add("EMPRESA");
-		tablas.add("ESTANTE");
-		tablas.add("FACTURA");
-		tablas.add("HISTORIAL_COMPRAS");
-		tablas.add("ORDEN_PEDIDO");
-		tablas.add("PEDIDO_PRODUCTO");
-		tablas.add("PERSONA_NATURAL");
-		tablas.add("PRODUCTO");
-		tablas.add("PROMOCION");
-		tablas.add("PROVEEDOR");
-		tablas.add("PROVEEN");
-		tablas.add("SUCURSAL");
-		tablas.add("FACTURAS");
-		tablas.add("TIPO_PRODUCTO");
-		tablas.add("PRODUCTO_CATEGORIA");
-		tablas.add("PRODUCTOS_OFRECIDOS");
-		tablas.add("PROMOCIONES");
+		tablas.add("pedidos_sequence");
+		tablas.add("A_BODEGA");
+		tablas.add("A_CANTIDAD_EN_BODEGA");
+		tablas.add("A_CANTIDAD_EN_ESTANTES");
+		tablas.add("A_CATEGORIA");
+		tablas.add("A_CLIENTE");
+		tablas.add("A_COMPRADOS");
+		tablas.add("A_EMPRESA");
+		tablas.add("A_ESTANTE");
+		tablas.add("A_FACTURA");
+		tablas.add("A_HISTORIAL_COMPRAS");
+		tablas.add("A_ORDEN_PEDIDO");
+		tablas.add("A_PEDIDO_PRODUCTO");
+		tablas.add("A_PERSONA_NATURAL");
+		tablas.add("A_PRODUCTO");
+		tablas.add("A_PROMOCION");
+		tablas.add("A_PROVEEDOR");
+		tablas.add("A_PROVEEN");
+		tablas.add("A_SUCURSAL");
+		tablas.add("A_FACTURAS");
+		tablas.add("A_TIPO_PRODUCTO");
+		tablas.add("A_PRODUCTO_CATEGORIA");
+		tablas.add("A_PRODUCTOS_OFRECIDOS");
+		tablas.add("A_PROMOCIONES");
+		tablas.add("A_CARRITO");
+		tablas.add("A_PROMO_CANTIDADES");
+		tablas.add("A_PROMO_UNIDADES");
+		tablas.add("A_PROMO_DESCUENTO");
+		tablas.add("A_PROMO_UNIDADES_DESCUENTO");
+		tablas.add("carrito_sequence");
+		tablas.add("promocion_sequence");
+		
 	}
 
 	private PersistenciaSuperAndes(JsonObject tableConfig)
@@ -183,9 +194,14 @@ public class PersistenciaSuperAndes {
 		sqlTipoProducto = new SQLTipoProducto(this);
 		sqlProductosOfrecidos = new SQLProductosOfrecidos(this);
 		sqlSucursalPromociones = new SQLSucursalPromociones(this);
+		sqlPromoCantidades = new SQLPromoCantidades(this);
+		sqlPromoUnidades = new SQLPromoUnidades(this);
+		sqlPromoUnidadDescuento = new SQLPromoUnidadDescuento(this);
+		sqlPromoDescuento = new SQLPromoDescuento(this);
+		
 		sqlUtil = new SQLUtil(this);
 	}
-	public String darSecuenciaSuperAndes()
+	public String darSecuenciaPedidos()
 	{
 		return tablas.get(0);
 	}
@@ -278,15 +294,45 @@ public class PersistenciaSuperAndes {
 	{
 		return tablas.get(23);
 	}
-
+	
+	public String getSqlPromoCantidades()
+	{
+		return tablas.get(24);
+	}
+	
+	public String getSqlPromoUnidades()
+	{
+		return tablas.get(25);
+	}
+	
+	public String getSqlPromoDescuento()
+	{
+		return tablas.get(26);
+	}
+	
+	public String getSqlPromoUnidadDescuento()
+	{
+		return tablas.get(27);
+	}
+	
+	public String getSecuenciaCarritos()
+	{
+		return tablas.get(28);
+	}
+	
+	public String getSecuenciaPromociones()
+	{
+		return tablas.get(29);
+	}
+	
 	/**
 	 * Transacción para el generador de secuencia de SuperAndes
 	 * Adiciona entradas al log de la aplicación
 	 * @return El siguiente número del secuenciador de SuperAndes
 	 */
-	private long nextval ()
+	private long nextvalPedidos ()
 	{
-		long resp = sqlUtil.nextval (managerFactory.getPersistenceManager());
+		long resp = sqlUtil.nextvalPedidos (managerFactory.getPersistenceManager());
 		Log.trace ("Generando secuencia: " + resp);
 		return resp;
 	}
@@ -555,7 +601,7 @@ public class PersistenciaSuperAndes {
 		try
 		{
 			tx.begin();
-			long idPromocion = nextval();
+			long idPromocion = nextvalPedidos();
 			long tuplasInsertadas = sqlPromocion.adicionarPromocion(pm, fechaInicio, fechaFin, descripcion, codBarras, idPromocion, uniVendidas, uniDisponibles);
 			tx.commit();
 
@@ -688,7 +734,7 @@ public class PersistenciaSuperAndes {
 		try
 		{
 			tx.begin();
-			long idPedido = nextval();
+			long idPedido = nextvalPedidos();
 			long tuplasInsertadas = sqlOrdenPedido.adicionaroOrdenPedido(pm, fechaEsperada, nitProveedor, ciudad, direccionSucursal, direccionBodega, idPedido);
 			tx.commit();
 
@@ -788,7 +834,7 @@ public class PersistenciaSuperAndes {
 		try
 		{
 			tx.begin();
-			long idFactura = nextval();
+			long idFactura = nextvalPedidos();
 			long tuplasInsertadas = sqlFactura.adicionarFactura(pm, idFactura, costoTotal, fecha);
 			tx.commit();
 
@@ -1180,266 +1226,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	public List<Producto> buscarProductosPrecioEnRango(double pPrecioMinimo, double pPrecioMaximo)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			List<Producto> productos = sqlProducto.darProductosPrecioEnRango(manager, pPrecioMinimo, pPrecioMaximo);
-			t.commit();
-			Log.trace("Saliendo de buscar los productos rango precio");
-			return productos;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-	public List<Producto> buscarProductosFechaVencimiento(Date pFecha)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			List<Producto> productos = sqlProducto.darProductosFechaVencimiento(manager, pFecha);
-			t.commit();
-			Log.trace("Saliendo de buscar los productos fecha vecimiento: ");
-			return productos;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-	public List<Producto> buscarProductosPesoEnRango(double pPesoMinimo, double pPesoMaximo)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			List<Producto> productos = sqlProducto.darProductosPesoEnRango(manager, pPesoMinimo, pPesoMaximo);
-			t.commit();
-			Log.trace("Saliendo de buscar productos rango de peso: ");
-			return productos;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-	public List<Producto> buscarProductosVolumenEnRango(double pVolumenMinimo, double pVolumenMaximo)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			List<Producto> productos = sqlProducto.darProductosVolumenEnRango(manager,pVolumenMinimo,pVolumenMaximo);
-			t.commit();
-			Log.trace("Saliendo de buscar productos rango de volumen: ");
-			return productos;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-	public List<Producto> buscarProductosVendidosPorProveedor(int nit)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			List<Producto> productos = sqlProducto.darProductosVendidosPorProveedor(manager, nit);
-			t.commit();
-			Log.trace("Saliendo de buscar productos vendidos por proveedor: ");
-			return productos;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-	public List<Producto> buscarProductosDisponiblesCiudad(String ciudad)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			List<Producto> productos = sqlProducto.darProductosDisponiblesCiudad(manager, ciudad);
-			t.commit();
-			Log.trace("Saliendo de buscar productos disponibles en ciudad: ");
-			return productos;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-	public List<Producto> buscarProductosDisponiblesSucursal(String pCiudad, String pDireccion)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			List<Producto> productos = sqlProducto.darProductosDisponiblesSucursal(manager, pCiudad, pDireccion);
-			t.commit();
-			Log.trace("Saliendo de buscar productos disponibles en sucursal: ");
-			return productos;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-	public List<Producto> buscarProductosTipo(String pTipo)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			List<Producto> productos = sqlProducto.darProductosTipo(manager, pTipo);
-			t.commit();
-			Log.trace("Saliendo de buscar productos de un tipo: ");
-			return productos;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-	public List<Producto> buscarProductosCategoria(String pCategoria)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			List<Producto> productos = sqlProducto.darProductosCategoria(manager, pCategoria);
-			t.commit();
-			Log.trace("Saliendo de buscar productos de una categoria: ");
-			return productos;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-	public List<Producto> buscarProductosVentasSuperiores(double pVentasMinimas, Date pFechaInicial, Date pFechaFinal)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			List<Producto> productos = sqlProducto.darProductosVentasSuperioresAXEnRangoFechas(manager, pVentasMinimas, pFechaInicial, pFechaFinal);
-			t.commit();
-			Log.trace("Saliendo de buscar productos ventas superiores: ");
-			return productos;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
+	
 	//------------------------------------------------------------------
 	//  Metodos para manejar CATEGORIA
 	//------------------------------------------------------------------
