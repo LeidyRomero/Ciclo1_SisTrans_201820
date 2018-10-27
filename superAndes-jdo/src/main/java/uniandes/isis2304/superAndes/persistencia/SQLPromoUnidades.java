@@ -1,16 +1,12 @@
 package uniandes.isis2304.superAndes.persistencia;
 
-import java.sql.Timestamp;
 import java.util.List;
-
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.superAndes.negocio.Promocion;
-import uniandes.isis2304.superAndes.negocio.Proveedor;
-
+import uniandes.isis2304.superAndes.negocio.PromoUnidades;
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto PROMOCION de SuperAndes
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto PROMO UNIDADES de SuperAndes
  * 
  * @author María Ocampo - mj.ocampov
  */
@@ -45,7 +41,7 @@ class SQLPromoUnidades
 	}
 	
 	/**
-	 * Crea y ejecuta una sentencia sql que adicionar una PROMOCION a la base de datos de SuperAndes
+	 * Crea y ejecuta una sentencia sql que adicionar una PROMO UNIDADES a la base de datos de SuperAndes
 	 * @param pm - El manejador de persistencia
 	 * @param fechaInicio - Fecha de inicio de la promoción
 	 * @param fechaFin - Fecha de terminación de la promoción
@@ -53,24 +49,22 @@ class SQLPromoUnidades
 	 * @param codBarras - Código de barras del producto en promoción
 	 * @return El número de tuplas insertadas
 	 */
-	public long adicionarPromocion (PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin, String descripcion, String codBarras, long idPromocion, int uniVendidas, int uniDisponibles) 
+	public long adicionarPromocion (PersistenceManager pm, long idPromocion, int unidadesPagar, int unidadesLlevar ) 
 	{
-		System.out.println("Pre");
-		//TODO Hacer bien la sentencia de INSERt de PromoUnidades
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlPromoUnidades() + "(fechainicial, fechafinal, descripcion, codigobarras, idpromocion, unidadesvendidas, unidadesdisponibles, estado) values (?, ?, ?, ?, ?, ?, ?, ?)");
-        q.setParameters(fechaInicio, fechaFin, descripcion, codBarras, idPromocion, uniVendidas, uniDisponibles, "VIGENTE");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlPromoUnidades() + "(idpromocion, unidadespagar, unidadesllevar ) values (?, ?, ?)");
+        q.setParameters(idPromocion, unidadesPagar, unidadesLlevar);
         return (long) q.executeUnique();
 	}
 	
 	/**
-	 * 
-	 * @param pm
-	 * @return
+	 * Crea y ejecuta una sentencia sql que busca todas las PROMO UNIDADES de la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Una lsita con todas las promociones de este tipo
 	 */
-	public List<Promocion> darPromociones (PersistenceManager pm) 
+	public List<PromoUnidades> darPromociones (PersistenceManager pm) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlPromoUnidades());
-		q.setResultClass(Promocion.class);
-		return (List<Promocion>) q.executeList();
+		q.setResultClass(PromoUnidades.class);
+		return (List<PromoUnidades>) q.executeList();
 	}
 }

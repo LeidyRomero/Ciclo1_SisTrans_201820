@@ -55,7 +55,7 @@ class SQLPromocion
 	 */
 	public long adicionarPromocion (PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin, String descripcion, String codBarras, long idPromocion, int uniVendidas, int uniDisponibles) 
 	{
-		System.out.println("Pre");
+		System.out.println(idPromocion);
         Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlPromocion() + "(fechainicial, fechafinal, descripcion, codigobarras, idpromocion, unidadesvendidas, unidadesdisponibles, estado) values (?, ?, ?, ?, ?, ?, ?, ?)");
         q.setParameters(fechaInicio, fechaFin, descripcion, codBarras, idPromocion, uniVendidas, uniDisponibles, "VIGENTE");
         return (long) q.executeUnique();

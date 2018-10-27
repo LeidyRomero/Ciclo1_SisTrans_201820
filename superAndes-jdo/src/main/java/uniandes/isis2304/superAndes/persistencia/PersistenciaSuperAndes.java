@@ -286,36 +286,36 @@ public class PersistenciaSuperAndes {
 	}
 
 	public String getSqlProductosOfrecidos() {
-		return tablas.get(22);
+		return tablas.get(21);
 	}
 
 	public String getSqlSucursalPromociones()
 	{
-		return tablas.get(23);
+		return tablas.get(22);
 	}
 
 	public String getSqlPromoCantidades()
 	{
-		return tablas.get(24);
+		return tablas.get(23);
 	}
 
 	public String getSqlPromoUnidades()
 	{
-		return tablas.get(25);
+		return tablas.get(24);
 	}
 
 	public String getSqlPromoDescuento()
 	{
-		return tablas.get(26);
+		return tablas.get(25);
 	}
 
 	public String getSqlPromoUnidadDescuento()
 	{
-		return tablas.get(27);
+		return tablas.get(26);
 	}
 	public String getSecuenciaPromociones()
 	{
-		return tablas.get(28);
+		return tablas.get(27);
 	}
 
 	/**
@@ -329,13 +329,11 @@ public class PersistenciaSuperAndes {
 		Log.trace ("Generando secuencia: " + resp);
 		return resp;
 	}
-
 	/**
 	 * Extrae el mensaje de la exception JDODataStoreException embebido en la Exception e, que da el detalle específico del problema encontrado
 	 * @param e - La excepción que ocurrio
 	 * @return El mensaje de la excepción JDO
 	 */
-
 	private String darDetalleException(Exception e) 
 	{
 		String resp = "";
@@ -350,7 +348,6 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar los PROVEEDORES
 	//---------------------------------------------------------------------
-
 	/**
 	 * Método que inserta, de manera transaccional, una tupla en la tabla Proveedor
 	 * Adiciona entradas al log de la aplicación
@@ -385,12 +382,10 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-
 	public List<Proveedor> buscarProveedores()
 	{
 		return sqlProveedor.darProveedores(managerFactory.getPersistenceManager());
 	}
-
 	public long eliminarProveedorPorNit(int nitProveedor)
 
 	{
@@ -419,6 +414,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+	
 	//---------------------------------------------------------------------
 	// Métodos para manejar los CLIENTES
 	//---------------------------------------------------------------------
@@ -456,13 +452,11 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-
 	public List<Cliente> buscarClientes()
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		return sqlCliente.darClientes(pm);
 	}
-
 	public long eliminarClientePorCorreo(String correo)
 
 	{
@@ -522,7 +516,6 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-
 	public Sucursal buscarSucursal(String direccion, String ciudad)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -554,7 +547,6 @@ public class PersistenciaSuperAndes {
 	{
 		return sqlSucursal.darSucursales(managerFactory.getPersistenceManager());
 	}
-
 	public long eliminarSucursalPorDireccionYCiudad(String direccion, String ciudad)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -582,6 +574,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+	
 	//---------------------------------------------------------------------
 	// Métodos para manejar los PROMOCIÓN
 	//---------------------------------------------------------------------
@@ -592,11 +585,39 @@ public class PersistenciaSuperAndes {
 		try
 		{
 			tx.begin();
+			//TODO Pedir la secuencia de Promociones
 			long idPromocion = nextvalPedidos();
-			long tuplasInsertadas = sqlPromocion.adicionarPromocion(pm, fechaInicio, fechaFin, descripcion, codBarras, idPromocion, uniVendidas, uniDisponibles);
+			//long tuplasInsertadas = sqlPromocion.adicionarPromocion(pm, fechaInicio, fechaFin, descripcion, codBarras, 24, uniVendidas, uniDisponibles);
+			System.out.println("PROMO");
+			
+			if(descripcion.contains("cantidad, lleve"))
+			{
+				System.out.println(descripcion.substring(23, 24));
+				System.out.println(descripcion.substring(6, 7));
+				//sqlPromoCantidades.adicionarPromocion(pm, idPromocion, Integer.parseInt(descripcion.substring(23, 24)), Integer.parseInt(descripcion.substring(6, 7)));
+			}
+			else if(descripcion.startsWith("Descuento del"))
+			{
+				System.out.println(Double.parseDouble(descripcion.replace("%", "").substring(14)));
+				//sqlPromoDescuento.adicionarPromocion(pm, idPromocion, Double.parseDouble(descripcion.substring(14, 15)));
+			}
+			else if(descripcion.contains("y lleve el siguiente con"))
+			{
+				System.out.println(descripcion.substring(6, 7));
+				System.out.println(descripcion.substring(33, 34));
+				//sqlPromoUnidadDescuento.adicionarPromocion(pm, idPromocion, Integer.parseInt(descripcion.substring(6, 7)), Double.parseDouble(descripcion.substring(33, 34)));
+			}
+			else if(descripcion.contains("unidades, lleve"))
+			{
+				System.out.println(descripcion.substring(6, 7));
+				System.out.println(descripcion.substring(23, 24));
+				
+				//sqlPromoUnidades.adicionarPromocion(pm, idPromocion, Integer.parseInt(descripcion.substring(6, 7)), Integer.parseInt(descripcion.substring(23, 24)));
+			}
+			
 			tx.commit();
 
-			Log.trace("Insercción promocion: " + idPromocion +": "+tuplasInsertadas);
+			Log.trace("Insercción promocion: " + idPromocion +": "/*+tuplasInsertadas*/);
 			return new Promocion(fechaInicio, fechaFin, descripcion, idPromocion, codBarras, uniVendidas, uniDisponibles, "VIGENTE");
 		}
 		catch(Exception e)
@@ -613,7 +634,6 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-
 	public void finalizarPromocion(long idPromocion)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -639,7 +659,6 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-
 	public void finalizarPromocionesPendientes()
 	{
 		// Cada vez que inicia el sistema debe verificar si hay promociones por finalizar
@@ -650,7 +669,6 @@ public class PersistenciaSuperAndes {
 			sqlPromocion.finalizarPromocion(pm, actual.getIdPromocion());
 		}
 	}
-
 	public List<Promocion> darPromocionesMasPopulares()
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -678,12 +696,10 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-
 	public List<Promocion> darPromociones()
 	{
 		return sqlPromocion.darPromociones(managerFactory.getPersistenceManager());
 	}
-
 	public long eliminarPromocionPorId(long idPromocion)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -711,6 +727,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+	
 	//---------------------------------------------------------------------
 	// Métodos para manejar las ORDENES DE PEDIDO
 	//---------------------------------------------------------------------
@@ -746,7 +763,6 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-
 	public OrdenPedido llegadaOrdenPedido(long idPedido, String calificacion) throws Exception
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -777,12 +793,10 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-
 	public List<OrdenPedido> darPedidos()
 	{
 		return sqlOrdenPedido.darPedidos(managerFactory.getPersistenceManager());
 	}
-
 	public long eliminarPedidoPorId(long idPedido)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -881,7 +895,6 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-
 	public int buscarCantidadActualEstante(long idEstante)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -907,7 +920,6 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
 	public void disminuirCantidadEnEstantes(int pCantidad, Producto producto)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -1025,7 +1037,6 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-
 	public List<String> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -1303,6 +1314,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar CATEGORIA
 	//------------------------------------------------------------------
@@ -1409,10 +1421,10 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	
 	//------------------------------------------------------------------
 	//  Metodos para manejar TIPO_PRODUCTO
 	//------------------------------------------------------------------
-
 	public TipoProducto adicionarTipoProducto(String pNombreTipo, String pNombreCategoria)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
@@ -1516,6 +1528,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	
 	//------------------------------------------------------------------
 	//  Metodos para manejar EMPRESA
 	//------------------------------------------------------------------
@@ -1595,6 +1608,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	
 	//------------------------------------------------------------------
 	//  Metodos para manejar PERSONA_NATURAL
 	//------------------------------------------------------------------
@@ -1674,6 +1688,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	
 	//------------------------------------------------------------------
 	//  Metodos para manejar BODEGA
 	//------------------------------------------------------------------
@@ -1803,6 +1818,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar las CANTIDADES EN BODEGA
 	//---------------------------------------------------------------------
@@ -1906,10 +1922,10 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar ESTANTE
 	//------------------------------------------------------------------
-
 	public Estante adicionarEstante(String pTipoEstante,double pVolumen, long pId, double pPeso, double pNivelAbastecimiento, String pDireccionSucursal, String pCiudad)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
@@ -2011,6 +2027,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar PEDIDO PRODUCTO
 	//------------------------------------------------------------------
@@ -2090,6 +2107,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar COMPRADOS
 	//------------------------------------------------------------------
@@ -2169,6 +2187,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar CANTIDAD EN BODEGA
 	//------------------------------------------------------------------
@@ -2197,7 +2216,6 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-
 	public long [] limpiarSuperAndes()
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();

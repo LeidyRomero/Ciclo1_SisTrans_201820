@@ -11,7 +11,7 @@ public class PromoUnidades extends Promocion implements VOPromoUnidades
 	/**
 	 * Constante que representa la descripción de la promoción
 	 */
-	public final static String DESCIRPCION = "Pague N unidades, lleve M.";
+	public final static String DESCIRPCION = "Pague N unidades, lleve M";
 
 	//-----------------------------------------------------
 	// ATRIBUTOS

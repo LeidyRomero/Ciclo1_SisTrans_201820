@@ -240,16 +240,19 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent pEvento)
 	{
-		String evento = pEvento.getActionCommand( );		
-		try 
+		String evento = pEvento.getActionCommand( );
+		if(!evento.equals("comboBoxChanged"))
 		{
-			Method req = InterfazSuperAndesApp.class.getMethod ( evento );			
-			req.invoke ( this );
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		} 
+			try 
+			{
+				Method req = InterfazSuperAndesApp.class.getMethod ( evento );			
+				req.invoke ( this );
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			} 
+		}
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -525,7 +528,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		SimpleDateFormat formato1 = new SimpleDateFormat( "yyyy-MM-dd HH:mm");
 		return formato1.parse( cadena );
 	}
-	
+
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar CATEGORIA
 	//-------------------------------------------------------------------------------
@@ -748,8 +751,20 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	//-------------------------------------------------------------------------------
 	public void adicionarPromocion()
 	{
-		DialogoRegistrarPromocion registrar = new DialogoRegistrarPromocion(this);
-		registrar.setVisible( true );
+		String[] opciones = {"Pague X cantidad, lleve Y", "Descuento del P%", "Pague N y lleve el siguiente con D% de descuento", "Pague N unidades, lleve M"};
+		JComboBox opcionesPromo = new JComboBox<>(opciones);
+		opcionesPromo.addActionListener(this);
+
+		JPanel aux = new JPanel();
+		aux.add(new JLabel("Descripción:"));
+		aux.add(opcionesPromo);
+
+		int result = JOptionPane.showConfirmDialog(null, aux,"Promocion", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) 
+		{
+			DialogoRegistrarPromocion registrar = new DialogoRegistrarPromocion(this, opcionesPromo.getSelectedItem().toString(), opciones);
+			registrar.setVisible( true );
+		}
 	}
 	public void adicionarPromocion2(Timestamp fechaInicio, Timestamp fechaFin, String descripcion, String codBarras, int uniDisponibles, int uniVendidas, String direccionSucursal, String ciudad)
 	{
@@ -1119,26 +1134,26 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog (this, "Carrito registrado", "Agregar carrito: exitoso", JOptionPane.INFORMATION_MESSAGE);
 				panelDatos.actualizar(productos);
 			}
-				else
+			else
 				JOptionPane.showMessageDialog (this, "Carrito no registrado", "Agregar carrito: no exitoso", JOptionPane.ERROR_MESSAGE);
 
 		}
 	}
 	public void abandonarCarrito()
 	{
-		
+
 	}
 	public void agregarProductoAlCarrito(int pCantidad,Producto pProducto)
 	{
 		panelDatos.agregarProducto(pCantidad, pProducto);
 		superAndes.disminuirProductosEnEstante(pCantidad, pProducto);
-		
+
 	}
 	public void devolverProductoAlEstante(int pCantidad,Producto pProducto)
 	{
 		panelDatos.quitarProducto(pCantidad, pProducto);
 		superAndes.aumentarProductosEnEstante(pCantidad, pProducto);
-		
+
 	}
 	// -----------------------------------------------------------------
 	// Programa principal

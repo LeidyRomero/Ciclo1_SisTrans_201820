@@ -11,7 +11,7 @@ public class PromoDescuento extends Promocion implements VOPromoDescuento
 	/**
 	 * Constante que representa la descripción de la promoción
 	 */
-	public final static String DESCIRPCION = "Descuento del D%.";
+	public final static String DESCIRPCION = "Descuento del D%";
 
 	//-----------------------------------------------------
 	// ATRIBUTOS

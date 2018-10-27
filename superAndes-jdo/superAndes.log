@@ -86,3 +86,57 @@ ORA-00933: comando SQL no terminado correctamente
 17:28:41,503 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 2, ssdfghnjm
 17:28:41,587 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 2, ssdfghnjm
 11:57:02,019 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscando productos en sucursala, a
+15:05:40,974 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando promociones mas populares 
+15:05:41,052 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar promociones mas populares 
+15:06:08,672 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando el dinero recolectado por sucursales en periodo de tiempo: 2018-05-11 00:00:00.0, 2018-05-14 00:00:00.0
+15:06:08,688 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar el dinero recolectado por sucursales en periodo de tiempo: 2018-05-11 00:00:00.0, 2018-05-14 00:00:00.0
+16:21:20,378 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del D%, AAAA, 30, 0
+16:21:20,478 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROMOCION(fechainicial, fechafinal, descripcion, codigobarras, idpromocion, unidadesvendidas, unidadesdisponibles, estado) values (?, ?, ?, ?, ?, ?, ?, ?)".
+ORA-02291: restricción de integridad (ISIS2304A281820.FK_CD_PROMOCION) violada - clave principal no encontrada
+
+16:32:28,359 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del D%, AAAA, 30, 0
+16:32:28,450 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROMOCION(fechainicial, fechafinal, descripcion, codigobarras, idpromocion, unidadesvendidas, unidadesdisponibles, estado) values (?, ?, ?, ?, ?, ?, ?, ?)".
+ORA-02291: restricción de integridad (ISIS2304A281820.FK_CD_PROMOCION) violada - clave principal no encontrada
+
+16:33:57,445 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, 20escuento del 20%, AAAA, 30, 0
+16:33:57,539 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROMOCION(fechainicial, fechafinal, descripcion, codigobarras, idpromocion, unidadesvendidas, unidadesdisponibles, estado) values (?, ?, ?, ?, ?, ?, ?, ?)".
+ORA-02291: restricción de integridad (ISIS2304A281820.FK_CD_PROMOCION) violada - clave principal no encontrada
+
+16:35:37,014 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del 20%, AAAA, 30, 0
+16:35:37,099 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROMOCION(fechainicial, fechafinal, descripcion, codigobarras, idpromocion, unidadesvendidas, unidadesdisponibles, estado) values (?, ?, ?, ?, ?, ?, ?, ?)".
+ORA-02291: restricción de integridad (ISIS2304A281820.FK_CD_PROMOCION) violada - clave principal no encontrada
+
+16:37:17,386 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del 20%, AAAA, 30, 0
+16:37:17,468 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROMOCION(fechainicial, fechafinal, descripcion, codigobarras, idpromocion, unidadesvendidas, unidadesdisponibles, estado) values (?, ?, ?, ?, ?, ?, ?, ?)".
+ORA-02291: restricción de integridad (ISIS2304A281820.FK_CD_PROMOCION) violada - clave principal no encontrada
+
+16:40:25,540 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del 20%, AAAA, 30, 0
+16:40:25,614 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROMOCION(fechainicial, fechafinal, descripcion, codigobarras, idpromocion, unidadesvendidas, unidadesdisponibles, estado) values (?, ?, ?, ?, ?, ?, ?, ?)".
+ORA-02291: restricción de integridad (ISIS2304A281820.FK_CD_PROMOCION) violada - clave principal no encontrada
+
+16:45:37,229 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del 20%, AAAA, 30, 0
+16:45:37,250 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROMO_UNIDADES_DESCUENTO(idpromocion, descuento) values (?, ?)".
+ORA-01400: no se puede realizar una inserción NULL en ("ISIS2304A281820"."A_PROMO_UNIDADES_DESCUENTO"."UNIDADES")
+
+16:51:26,971 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del 20%, AAAA, 30, 0
+16:51:27,058 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROMOCION(fechainicial, fechafinal, descripcion, codigobarras, idpromocion, unidadesvendidas, unidadesdisponibles, estado) values (?, ?, ?, ?, ?, ?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A281820.A_PROMOCION_PK) violada
+
+16:52:15,587 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del 20%, AAAA, 30, 0
+16:53:27,555 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del 20%, AAAA, 30, 0
+16:53:27,663 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_FACTURAS(idpromocion, direccionsucursal, ciudad) values (?, ?, ?)".
+ORA-00904: "IDPROMOCION": identificador no válido
+
+16:53:27,663 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del 20%, AAAA, 30, 0
+16:57:13,557 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del 20%, AAAA, 30, 0
+16:57:13,649 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_FACTURAS(idpromocion, direccionsucursal, ciudad) values (?, ?, ?)".
+ORA-00904: "IDPROMOCION": identificador no válido
+
+16:57:13,664 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del 20%, AAAA, 30, 0
+17:05:01,498 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando promociones mas populares 
+17:05:01,599 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar promociones mas populares 
+17:06:31,480 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del 20%, AAAA, 30, 0
+17:06:31,561 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_FACTURAS(idpromocion, direccionsucursal, ciudad) values (?, ?, ?)".
+ORA-00904: "IDPROMOCION": identificador no válido
+
+17:06:31,577 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del 20%, AAAA, 30, 0
