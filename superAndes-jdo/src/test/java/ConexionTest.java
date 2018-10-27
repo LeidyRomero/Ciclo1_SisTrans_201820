@@ -57,7 +57,6 @@ public class ConexionTest {
 			log.info ("Conexión realizada correstamente");
 			log.info ("Cerrando la conexión");
 			
-			//TODO Cerrar conexión
 			log.info ("Conexión cerrada");
 		}
 		catch (Exception e)

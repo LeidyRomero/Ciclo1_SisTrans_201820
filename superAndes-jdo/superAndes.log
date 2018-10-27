@@ -85,3 +85,4 @@ ORA-00933: comando SQL no terminado correctamente
 11:10:23,800 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de calculo de indice de bodega 
 17:28:41,503 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 2, ssdfghnjm
 17:28:41,587 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 2, ssdfghnjm
+11:57:02,019 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscando productos en sucursala, a

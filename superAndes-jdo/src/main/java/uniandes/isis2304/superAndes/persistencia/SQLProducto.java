@@ -42,7 +42,6 @@ class SQLProducto
 	 * @param pFechaVencimiento parametro no obligatorio
 	 * @return
 	 */
-	//TODO RF2 - Registrar productos
 	public long agregarProducto(PersistenceManager manager, String pNombre, String pMarca, String pPresentacion, String pUnidadMedida, String pCalidad, double pPrecioUnitario, double pPrecioUnidadMedida, int pCantidadPresentacion, String pCodigoBarras, Date pFechaVencimiento, String pPeso, String pVolumen, String pCategoria)
 	{
 		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlProducto()+"(nombreproducto, marca,preciounitario, presentacion, preciounimedida,cantpresentacion,unidadmedida, codbarras, calidad, fechavencimiento, pesoproducto, volumenproducto, nombrecategoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -69,9 +68,6 @@ class SQLProducto
 		add.setParameters();
 		return (long) add.executeUnique();
 	}
-	//------------------------------------------------------------------------
-	//TODO RFC4 - Mostrar los productos que cumplen con cierta caracteristica
-	//------------------------------------------------------------------------
 //
 //	//Caracteristica 1:
 //	public List<Producto> darProductosPrecioEnRango (PersistenceManager manager, double precioMenor, double precioMayor)

@@ -23,7 +23,6 @@ class SQLEstante
 	{
 		this.persistencia = pPersistencia;
 	}
-	//TODO RF6 - Registrar un estante a una sucursal
 	public long agregarEstante(PersistenceManager manager, String pTipoEstante,double pVolumen, long pId, double pPeso, double pNivelAbastecimiento, String pDireccionSucursal, String pCiudad )
 	{
 		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlEstante()+"(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento, direccionsucursal, ciudad) values (?,?,?,?,?,?,?)");

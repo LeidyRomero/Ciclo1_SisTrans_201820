@@ -24,7 +24,6 @@ class SQLPersonaNatural
 	{
 		this.persistencia = pPersistencia;
 	}
-	//TODO RF3 - Registrar cliente
 	public long agregarPersonaNatural(PersistenceManager manager, String pDocumento, String pCorreo)
 	{
 		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlPersonaNatural()+"(documento, correo) values (?,?)");

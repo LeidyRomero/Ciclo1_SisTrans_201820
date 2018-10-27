@@ -23,7 +23,6 @@ class SQLPedidoProducto
 	{
 		this.persistencia = pPersistencia;
 	}
-	//TODO RF9 - Registrar un producto a un pedido
 	public long agregarPedidoProducto(PersistenceManager manager, String pCodigoBarras, long pIdPedido, double pCantidadProducto, double pPrecioProducto)
 	{
 		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlPedidoProducto()+"(codigobarras, idpedido,cantidadproducto, precioproducto) values (?,?,?,?)");

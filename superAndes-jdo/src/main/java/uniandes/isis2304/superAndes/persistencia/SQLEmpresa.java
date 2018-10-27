@@ -23,7 +23,6 @@ class SQLEmpresa
 	{
 		this.persistencia = pPersistencia;
 	}
-	// TODO RF3 - Registrar clientes
 	public long agregarEmpresa(PersistenceManager manager, String pDireccionEmpres,int pNitEmpresa, String pCorreo )
 	{
 		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlEmpresa()+"(nitempresa, direccion, correo) values (?,?,?)");

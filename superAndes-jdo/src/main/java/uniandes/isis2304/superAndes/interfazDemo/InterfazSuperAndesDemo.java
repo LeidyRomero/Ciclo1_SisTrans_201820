@@ -206,8 +206,6 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		}        
 		setJMenuBar ( menuSA );	
 	}
-
-	//TODO all CRUD 
 	//----------------------------------------------------------------------------------------------
 	// BODEGA
 	//----------------------------------------------------------------------------------------------
@@ -941,7 +939,6 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		try 
 		{
 			// Ejecución de la demo y recolección de los resultados
-			//TODO Terminar SuperAndes
 			//			long eliminados [] = superAndes.limpiarParranderos();
 			//			
 			//			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
@@ -970,7 +967,6 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 	 */
 	public void mostrarModeloConceptual ()
 	{
-		//TODO Poner el modelo conceptual 
 		mostrarArchivo ("data/Modelo Conceptual Parranderos.pdf");
 	}
 
@@ -979,7 +975,6 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 	 */
 	public void mostrarEsquemaBD ()
 	{
-		//TODO Esquema BD Parranderos
 		mostrarArchivo ("data/Esquema BD Parranderos.pdf");
 	}
 
@@ -988,7 +983,6 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 	 */
 	public void mostrarScriptBD ()
 	{
-		//TODO Script de BD
 		mostrarArchivo ("data/EsquemaParranderos.sql");
 	}
 
@@ -997,7 +991,6 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 	 */
 	public void mostrarArqRef ()
 	{
-		//TODO Arquitectura Referencia
 		mostrarArchivo ("data/ArquitecturaReferencia.pdf");
 	}
 
@@ -1006,7 +999,6 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 	 */
 	public void mostrarJavadoc ()
 	{
-		//TODO Javadoc ¿?
 		mostrarArchivo ("doc/index.html");
 	}
 
@@ -1100,7 +1092,6 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

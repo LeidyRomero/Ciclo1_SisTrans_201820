@@ -25,7 +25,6 @@ class SQLBodega
 	{
 		this.persistencia = pPersistencia;
 	}
-	//TODO RF5 - Registrar una bodega a una sucursal
 	public long agregarBodega(PersistenceManager manager, String pTipo, double pVolumen, double pPeso, String pDireccionBodega, String pDireccionSucursal, String pCiudad)
 	{
 		Query add = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlBodega()+" (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) values (?,?,?,?,?,?)");

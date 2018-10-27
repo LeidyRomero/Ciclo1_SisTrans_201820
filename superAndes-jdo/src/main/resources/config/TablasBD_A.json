@@ -26,12 +26,10 @@
 		"A_TIPO_PRODUCTO",
 		"A_PRODUCTOS_OFRECIDOS",
 		"A_PROMOCIONES",
-		"A_CARRITO",
 		"A_PROMO_CANTIDADES",
 		"A_PROMO_UNIDADES",
 		"A_PROMO_DESCUENTO",
 		"A_PROMO_UNIDADES_DESCUENTO",
-		"carrito_sequence",
 		"promocion_sequence"
 	]
 }

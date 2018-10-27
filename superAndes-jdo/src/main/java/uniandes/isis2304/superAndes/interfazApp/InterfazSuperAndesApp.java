@@ -19,6 +19,7 @@ import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -313,7 +314,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		try 
 		{
 			// Ejecución de la demo y recolección de los resultados
-			//TODO Terminar SuperAndes
 			//			long eliminados [] = superAndes.limpiarParranderos();
 			//			
 			//			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
@@ -342,7 +342,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	 */
 	public void mostrarModeloConceptual ()
 	{
-		//TODO Poner el modelo conceptual 
 		mostrarArchivo ("data/Modelo Conceptual Parranderos.pdf");
 	}
 
@@ -351,7 +350,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	 */
 	public void mostrarEsquemaBD ()
 	{
-		//TODO Esquema BD Parranderos
 		mostrarArchivo ("data/Esquema BD Parranderos.pdf");
 	}
 
@@ -360,7 +358,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	 */
 	public void mostrarScriptBD ()
 	{
-		//TODO Script de BD
 		mostrarArchivo ("data/EsquemaParranderos.sql");
 	}
 
@@ -369,7 +366,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	 */
 	public void mostrarArqRef ()
 	{
-		//TODO Arquitectura Referencia
 		mostrarArchivo ("data/ArquitecturaReferencia.pdf");
 	}
 
@@ -378,7 +374,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	 */
 	public void mostrarJavadoc ()
 	{
-		//TODO Javadoc ¿?
 		mostrarArchivo ("doc/index.html");
 	}
 
@@ -472,23 +467,9 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	//
-	//        METODOS
-	//
-
-	//TODO CRUD Productos
-	//TODO CRUD Clientes
-	//TODO CRUD Sucursal
-	//TODO CRUD Bodega
-	//TODO CRUD Estante
-	//TODO CRUD Promoción
-	//TODO CRUD Pedidos
-	//TODO CRUD Ventas
-
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTOS
 	//-------------------------------------------------------------------------------
@@ -501,7 +482,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	{
 		try
 		{
-			if(!pCategoria.equals("") && !pNombre.equals("") && !pMarca.equals("") && !pPresentacion.equals("") && pPrecioUnitario>0 && !pPresentacion.equals("")&&pPrecioUnidadMedida>0 && pCantidadPresentacion>0 && !pUnidadMedida.equals("") && !pCodigoBarras.equals("") && !pPeso.equals("") && !pVolumen.equals(""))//TODO continuar validaciones
+			if(pCantidadMinima>=0 && !pCategoria.equals("") && !pNombre.equals("") && !pMarca.equals("") && !pPresentacion.equals("") && pPrecioUnitario>0 && !pPresentacion.equals("")&&pPrecioUnidadMedida>0 && pCantidadPresentacion>0 && !pUnidadMedida.equals("") && !pCodigoBarras.equals("") && !pPeso.equals("") && !pVolumen.equals(""))
 			{
 				Producto registrado = superAndes.adicionarProducto(pCantidadMinima,pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida,pCantidadPresentacion, pCodigoBarras,pFechaVencimiento, pPeso, pVolumen, pCategoria);
 				if(registrado!=null)
@@ -544,6 +525,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		SimpleDateFormat formato1 = new SimpleDateFormat( "yyyy-MM-dd HH:mm");
 		return formato1.parse( cadena );
 	}
+	
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar CATEGORIA
 	//-------------------------------------------------------------------------------
@@ -581,7 +563,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 		}
 	}
-	
+
 	//-------------------------------------------------------------------------------
 	//  Metodos para manejar BODEGA
 	//-------------------------------------------------------------------------------
@@ -595,7 +577,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	{
 		try
 		{
-			if(!pTipo.equals("") && !pDireccionBodega.equals("") && !pDireccionSucursal.equals("") && !pCiudad.equals("") && pVolumen>0 && pPeso >0)//TODO continuar validaciones
+			if(!pTipo.equals("") && !pDireccionBodega.equals("") && !pDireccionSucursal.equals("") && !pCiudad.equals("") && pVolumen>0 && pPeso >0)
 			{
 				Bodega registrado = superAndes.adicionarBodega(pTipo,pVolumen,pPeso, pDireccionBodega, pDireccionSucursal, pCiudad);
 				if(registrado!=null)
@@ -650,7 +632,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	{
 		try
 		{
-			if(!pTipoEstante.equals("") && !pDireccionSucursal.equals("")&& !pCiudad.equals("")&& pVolumen>0 && pPeso>0 && pId>=0 && pNivelAbastecimiento>0)//TODO continuar validaciones
+			if(!pTipoEstante.equals("") && !pDireccionSucursal.equals("")&& !pCiudad.equals("")&& pVolumen>0 && pPeso>0 && pId>=0 && pNivelAbastecimiento>0)
 			{
 				Estante registrado = superAndes.adicionarEstante(pTipoEstante,pVolumen, pId,pPeso, pNivelAbastecimiento, pDireccionSucursal, pCiudad);
 				if(registrado!=null)
@@ -1053,6 +1035,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 					resultado += "Venta registrada exitosamente: " + venta;
 					resultado += "\n Operación terminada";
 					panelDatos.actualizarInterfaz(resultado);
+					panelDatos.devolverCarrito();
 				}
 				else
 					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
@@ -1112,7 +1095,51 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			}
 		}
 	}
+	// -----------------------------------------------------------------
+	// Carrito ITERACION 2
+	// -----------------------------------------------------------------
+	public void adicionarCarrito()
+	{
+		JTextField direccionField = new JTextField(15);
+		JTextField ciudadField = new JTextField(15);
 
+		JPanel aux = new JPanel();
+		aux.add(new JLabel("Dirección sucursal:"));
+		aux.add(direccionField);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Ciudad:"));
+		aux.add(ciudadField);
+
+		int result = JOptionPane.showConfirmDialog(null, aux,"Registrar carrito", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) {
+
+			ArrayList<Producto> productos = superAndes.buscarProductosSucursal(direccionField.getText(), ciudadField.getText());
+			if(productos!=null)
+			{
+				JOptionPane.showMessageDialog (this, "Carrito registrado", "Agregar carrito: exitoso", JOptionPane.INFORMATION_MESSAGE);
+				panelDatos.actualizar(productos);
+			}
+				else
+				JOptionPane.showMessageDialog (this, "Carrito no registrado", "Agregar carrito: no exitoso", JOptionPane.ERROR_MESSAGE);
+
+		}
+	}
+	public void abandonarCarrito()
+	{
+		
+	}
+	public void agregarProductoAlCarrito(int pCantidad,Producto pProducto)
+	{
+		panelDatos.agregarProducto(pCantidad, pProducto);
+		superAndes.disminuirProductosEnEstante(pCantidad, pProducto);
+		
+	}
+	public void devolverProductoAlEstante(int pCantidad,Producto pProducto)
+	{
+		panelDatos.quitarProducto(pCantidad, pProducto);
+		superAndes.aumentarProductosEnEstante(pCantidad, pProducto);
+		
+	}
 	// -----------------------------------------------------------------
 	// Programa principal
 	// -----------------------------------------------------------------

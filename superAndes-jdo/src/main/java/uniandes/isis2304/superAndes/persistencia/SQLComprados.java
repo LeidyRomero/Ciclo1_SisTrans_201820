@@ -23,7 +23,6 @@ class SQLComprados
 	{
 		this.persistencia = pPersistencia;
 	}
-	//TODO RF11 - Registrar venta TODO REAL: DISMINUIR INVENTARIO
 	public long agregarComprados(PersistenceManager manager, String pCodigoBarras,int pCantidad, double pPrecioTotal, long pIdFactura)
 	{
 		Query q = manager.newQuery(SQL, "INSERT INTO "+persistencia.getSqlComprados()+" (codigobarras, cantidad, preciototal, idfactura) values (?,?,?,?)");

@@ -126,19 +126,15 @@
 		  "options":
 			[
 				{
-					"label": "Adicionar carrito",
+					"label": "Solicitar carrito",
 					"event": "adicionarCarrito"
 				},
 				{
-					"label": "Adicionar producto a carrito",
-					"event": "adicionarProductoCarrito"
-				},
-				{
-					"label": "Adicionar carrito",
-					"event": "adicionarCarrito"
+					"label": "Abandonar carrito",
+					"event": "abandonarCarrito"
 				}
 			]
-		}
+		},
 		{ "menuTitle": "Mantenimiento",
 		  "options":
 			[

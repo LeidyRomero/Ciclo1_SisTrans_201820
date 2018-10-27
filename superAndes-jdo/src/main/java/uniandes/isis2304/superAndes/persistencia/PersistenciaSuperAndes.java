@@ -1,6 +1,7 @@
 package uniandes.isis2304.superAndes.persistencia;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -102,14 +103,12 @@ public class PersistenciaSuperAndes {
 		tablas.add("A_PRODUCTO_CATEGORIA");
 		tablas.add("A_PRODUCTOS_OFRECIDOS");
 		tablas.add("A_PROMOCIONES");
-		tablas.add("A_CARRITO");
 		tablas.add("A_PROMO_CANTIDADES");
 		tablas.add("A_PROMO_UNIDADES");
 		tablas.add("A_PROMO_DESCUENTO");
 		tablas.add("A_PROMO_UNIDADES_DESCUENTO");
-		tablas.add("carrito_sequence");
 		tablas.add("promocion_sequence");
-		
+
 	}
 
 	private PersistenciaSuperAndes(JsonObject tableConfig)
@@ -198,7 +197,7 @@ public class PersistenciaSuperAndes {
 		sqlPromoUnidades = new SQLPromoUnidades(this);
 		sqlPromoUnidadDescuento = new SQLPromoUnidadDescuento(this);
 		sqlPromoDescuento = new SQLPromoDescuento(this);
-		
+
 		sqlUtil = new SQLUtil(this);
 	}
 	public String darSecuenciaPedidos()
@@ -294,37 +293,31 @@ public class PersistenciaSuperAndes {
 	{
 		return tablas.get(23);
 	}
-	
+
 	public String getSqlPromoCantidades()
 	{
 		return tablas.get(24);
 	}
-	
+
 	public String getSqlPromoUnidades()
 	{
 		return tablas.get(25);
 	}
-	
+
 	public String getSqlPromoDescuento()
 	{
 		return tablas.get(26);
 	}
-	
+
 	public String getSqlPromoUnidadDescuento()
 	{
 		return tablas.get(27);
 	}
-	
-	public String getSecuenciaCarritos()
+	public String getSecuenciaPromociones()
 	{
 		return tablas.get(28);
 	}
-	
-	public String getSecuenciaPromociones()
-	{
-		return tablas.get(29);
-	}
-	
+
 	/**
 	 * Transacción para el generador de secuencia de SuperAndes
 	 * Adiciona entradas al log de la aplicación
@@ -353,8 +346,6 @@ public class PersistenciaSuperAndes {
 		}
 		return resp;
 	}
-
-	//TODO Metodos por cada tabla:
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar los PROVEEDORES
@@ -916,7 +907,55 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-
+	
+	public void disminuirCantidadEnEstantes(int pCantidad, Producto producto)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction t = pm.currentTransaction();
+		try 
+		{
+			t.begin();
+			//TODO Maria cambiar autocommit a 0
+			sqlCantidadEnEstantes.disminuirCantidadEnEstantes(pm, pCantidad, producto.getCodBarras());
+			//TODO Maria poner save point en la sentencia
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			pm.close();
+		}
+	}
+	public void aumentarCantidadEnEstantes(int pCantidad, Producto producto)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction t = pm.currentTransaction();
+		try 
+		{
+			t.begin();
+			//TODO Maria cambiar autocommit a 0
+			sqlCantidadEnEstantes.aumentarCantidadEnEstantes(pm, pCantidad, producto.getCodBarras());
+			//TODO Maria poner save point en la sentencia
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			pm.close();
+		}
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar las PRODUCTOS OFRECIDOS
 	//---------------------------------------------------------------------
@@ -1226,7 +1265,44 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	
+	public ArrayList<Producto> buscarProductosSucursal(String pDireccion, String pCiudad)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		Transaction t = manager.currentTransaction();
+		try 
+		{
+			t.begin();
+			ArrayList<Producto> productos = null;
+			List<Estante> estantes = sqlEstante.buscarEstantesSucursal(manager, pDireccion, pCiudad);
+			for(Estante actual : estantes)
+			{
+				//TODO Maria
+				List<String> codigos = sqlCantidadEnEstantes.buscarCodigosDeBarrasProductos();
+				for(String codigoActual: codigos)
+				{
+					productos.add(sqlProducto.buscarProductoPorCodigo(manager, codigoActual));
+				}
+			}
+
+
+			t.commit();
+			Log.trace("Buscar productos de la sucursal");
+			return productos;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			manager.close();
+		}
+	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar CATEGORIA
 	//------------------------------------------------------------------
@@ -1805,6 +1881,29 @@ public class PersistenciaSuperAndes {
 				t.rollback();
 			}
 			manager.close();
+		}
+	}
+	public void disminuirCantidadEnBodega(int pCantidad, Producto producto, String pDireccionSucursal, String pCiudad, String pDireccionBodega)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction t = pm.currentTransaction();
+		try 
+		{
+			t.begin();
+			sqlCantidadEnBodega.disminuirInventario(pm, pCantidad, pCiudad, pDireccionSucursal, pDireccionBodega);
+			t.commit();
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			pm.close();
 		}
 	}
 	//------------------------------------------------------------------

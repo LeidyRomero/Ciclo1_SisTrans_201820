@@ -1,6 +1,7 @@
 package uniandes.isis2304.superAndes.negocio;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -361,6 +362,11 @@ public class SuperAndes {
 		Factura factura = pp.adicionarFactura(pCantidad*producto.getPrecioUnitario(), new Timestamp(System.currentTimeMillis()));
 		HistorialCompras hc = pp.adicionarHistorialCompra(correo, factura.getIdFactura());
 		Comprados comprado = pp.adicionarComprados(pCodigoBarras, pCantidad, pCantidad*producto.getPrecioUnitario(), factura.getIdFactura());
+		
+		//TODO Maria  actualizar inventario
+		pp.disminuirCantidadEnEstantes(pCantidad, producto);
+		//pp.disminuirCantidadEnBodega();
+		
 		Log.info("Saliendo de registrar comprados "+ pCodigoBarras+", "+pCodigoBarras);
 		return comprado;
 	}
@@ -404,7 +410,7 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar sucursal "+ tamanio+", "+direccion+", "+ciudad+", "+nombre);
 		return sucursal;
 	}
-	
+
 	public List<VOSucursal> darVOSucursales ()
 	{
 		Log.info ("Generando los VO de Sucursal");
@@ -609,5 +615,28 @@ public class SuperAndes {
 		Proveen proveen = pp.adicionarProveen(nitProveedor, codigoBarras);
 		Log.info("Saliendo de adicionar proveen "+ nitProveedor+", "+codigoBarras);
 		return proveen;
+	}
+
+	//---------------------------------------------------------------------
+	// Métodos para manejar CARRITO
+	//---------------------------------------------------------------------
+	public ArrayList<Producto> buscarProductosSucursal(String pDireccion, String pCiudad)
+	{
+		Log.info("Buscando productos en sucursal"+ pDireccion+", "+pCiudad);
+		ArrayList<Producto> productos = pp.buscarProductosSucursal(pDireccion, pCiudad);
+		Log.info("Saliendo de buscar productos en sucursal "+ pDireccion+", "+pCiudad);
+		return productos;
+	}
+	public void disminuirProductosEnEstante(int pCantidad, Producto pProducto)
+	{
+		Log.info("Actualizando inventario"+ pCantidad+","+pProducto);
+		pp.disminuirCantidadEnEstantes(pCantidad, pProducto);
+		Log.info("Saliendo de actualizar inventario"+ pCantidad+", "+pProducto);
+	}
+	public void aumentarProductosEnEstante(int pCantidad, Producto pProducto)
+	{
+		Log.info("Actualizando inventario"+ pCantidad+","+pProducto);
+		pp.aumentarCantidadEnEstantes(pCantidad, pProducto);
+		Log.info("Saliendo de actualizar inventario"+ pCantidad+", "+pProducto);
 	}
 }
