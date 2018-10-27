@@ -7,7 +7,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.GridLayout;
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -36,20 +35,27 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-
-import org.datanucleus.store.types.wrappers.Date;
+import javax.swing.Timer;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
-import uniandes.isis2304.superAndes.interfazApp.PanelDatos;
-import uniandes.isis2304.superAndes.negocio.*;
+
+import uniandes.isis2304.superAndes.negocio.Bodega;
+import uniandes.isis2304.superAndes.negocio.Categoria;
+import uniandes.isis2304.superAndes.negocio.Estante;
+import uniandes.isis2304.superAndes.negocio.Producto;
+import uniandes.isis2304.superAndes.negocio.Promocion;
 import uniandes.isis2304.superAndes.negocio.SuperAndes;
+import uniandes.isis2304.superAndes.negocio.TipoProducto;
 import uniandes.isis2304.superAndes.negocio.VOCliente;
+import uniandes.isis2304.superAndes.negocio.VOComprados;
 import uniandes.isis2304.superAndes.negocio.VOEmpresa;
+import uniandes.isis2304.superAndes.negocio.VOOrdenPedido;
 import uniandes.isis2304.superAndes.negocio.VOPersonaNatural;
+import uniandes.isis2304.superAndes.negocio.VOPromocion;
 import uniandes.isis2304.superAndes.negocio.VOProveedor;
 import uniandes.isis2304.superAndes.negocio.VOSucursal;
 
@@ -82,6 +88,11 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	 * Asociación a la clase principal del negocio.
 	 */
 	private SuperAndes superAndes;
+	/**
+	 * Segundos 
+	 */
+	private static double tiempoUltimaOperacion;
+	
 	// -----------------------------------------------------------------
 	// Atributos de la interfaz
 	// -----------------------------------------------------------------
@@ -92,7 +103,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	/**
 	 * Panel de despliegue de interacción para los requerimientos
 	 */
-	private PanelDatos panelDatos;
+	private static PanelDatos panelDatos;
 	/**
 	 * Menú de la aplicación
 	 */
@@ -1035,7 +1046,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 					resultado += "Venta registrada exitosamente: " + venta;
 					resultado += "\n Operación terminada";
 					panelDatos.actualizarInterfaz(resultado);
-					panelDatos.devolverCarrito();
+					panelDatos.devolverAbandonarCarrito();
 				}
 				else
 					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
@@ -1118,6 +1129,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			{
 				JOptionPane.showMessageDialog (this, "Carrito registrado", "Agregar carrito: exitoso", JOptionPane.INFORMATION_MESSAGE);
 				panelDatos.actualizar(productos);
+				tiempoUltimaOperacion = System.currentTimeMillis();
 			}
 				else
 				JOptionPane.showMessageDialog (this, "Carrito no registrado", "Agregar carrito: no exitoso", JOptionPane.ERROR_MESSAGE);
@@ -1132,13 +1144,21 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	{
 		panelDatos.agregarProducto(pCantidad, pProducto);
 		superAndes.disminuirProductosEnEstante(pCantidad, pProducto);
-		
+		tiempoUltimaOperacion = System.currentTimeMillis();
 	}
 	public void devolverProductoAlEstante(int pCantidad,Producto pProducto)
 	{
 		panelDatos.quitarProducto(pCantidad, pProducto);
 		superAndes.aumentarProductosEnEstante(pCantidad, pProducto);
-		
+		tiempoUltimaOperacion = System.currentTimeMillis();
+	}
+	public static void verificarTiempoInactividad()
+	{
+		double actual = System.currentTimeMillis();
+		if((actual-tiempoUltimaOperacion)>=30)
+		{
+			panelDatos.devolverAbandonarCarrito();
+		}
 	}
 	// -----------------------------------------------------------------
 	// Programa principal
@@ -1154,6 +1174,13 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			// Unifica la interfaz para Mac y para Windows.
 			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
 			InterfazSuperAndesApp interfaz = new InterfazSuperAndesApp( );
+			
+			Timer timer = new Timer(60000,new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					verificarTiempoInactividad();
+				}
+			});
+			
 			interfaz.setVisible( true );
 		}
 		catch( Exception e )
