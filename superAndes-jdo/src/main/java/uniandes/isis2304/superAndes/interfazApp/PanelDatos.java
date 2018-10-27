@@ -109,8 +109,6 @@ public class PanelDatos extends JPanel{
 		textArea.setEditable(false);
 		add (new JScrollPane(textArea), BorderLayout.CENTER);
 		
-		
-		
 		listaProductosCarrito.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
 		scrollCarrito.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
 		scrollCarrito.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
@@ -129,7 +127,7 @@ public class PanelDatos extends JPanel{
 		//quita el producto del carrito y aumenta la cantidad de la otra lista (BD)
 		listaProductosCarrito.remove();
 	}
-	public void devolverCarrito()
+	public void devolverAbandonarCarrito()
 	{
 		//vaciar la lista
 		//actualizar la interfaz para que las listas no se vean
