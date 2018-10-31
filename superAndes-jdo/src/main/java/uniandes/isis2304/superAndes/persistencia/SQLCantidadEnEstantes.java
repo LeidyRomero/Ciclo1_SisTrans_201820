@@ -1,7 +1,11 @@
 package uniandes.isis2304.superAndes.persistencia;
 
+import java.util.List;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
+import uniandes.isis2304.superAndes.negocio.Proveedor;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto CANTIDAD EN ESTANTES de SuperAndes
@@ -88,5 +92,30 @@ class SQLCantidadEnEstantes
 		q.setParameters(ciudad, direccion, codigoBarras);
 		q.setResultClass(Integer.class);
 		return (Integer) q.executeUnique();
+	}
+	
+	/**
+	 * Crea y ejecuta una sentencia sql que busca todos los códigos de barras del estante dado
+	 * @param pm
+	 * @return
+	 */
+	public List<String> buscarCodigosDeBarrasProductos(PersistenceManager pm, long idEstante)
+	{
+		Query q = pm.newQuery(SQL, "SELECT codbarras FROM " + persistencia.getSqlCantidadEnEstantes() + " WHERE idestante = ?");
+		q.setParameters(idEstante);
+		q.setResultClass(String.class);
+		return (List<String>) q.executeList();
+	}
+	
+	public void aumentarCantidadEnEstantes(PersistenceManager pm, int pCantidad, String pCodBarras, long idEstante)
+	{
+		Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlCantidadEnEstantes() +" SET cantidadactual = cantidadactual + ? WHERE codbarras = ? AND idestante = ?");
+		q.setParameters(pCantidad, pCodBarras, idEstante);
+	}
+	
+	public void disminuirCantidadEnEstantes(PersistenceManager pm, int pCantidad, String pCodBarras, long idEstante)
+	{
+		Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlCantidadEnEstantes() +" SET cantidadactual = cantidadactual - ? WHERE codbarras = ? AND idestante = ?");
+		q.setParameters(pCantidad, pCodBarras, idEstante);
 	}
 }

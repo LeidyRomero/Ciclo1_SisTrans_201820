@@ -928,8 +928,10 @@ public class PersistenciaSuperAndes {
 		{
 			t.begin();
 			//TODO Maria cambiar autocommit a 0
-			sqlCantidadEnEstantes.disminuirCantidadEnEstantes(pm, pCantidad, producto.getCodBarras());
-			//TODO Maria poner save point en la sentencia
+			//TODO Manejar el idEstante
+			sqlCantidadEnEstantes.disminuirCantidadEnEstantes(pm, pCantidad, producto.getCodBarras(), 0);
+			//TODO Guardar los cambios en caso de que toque devolver las cosas
+			t.commit();
 		}
 		catch(Exception e)
 		{
@@ -952,8 +954,9 @@ public class PersistenciaSuperAndes {
 		{
 			t.begin();
 			//TODO Maria cambiar autocommit a 0
-			sqlCantidadEnEstantes.aumentarCantidadEnEstantes(pm, pCantidad, producto.getCodBarras());
-			//TODO Maria poner save point en la sentencia
+			//TODO Manejo del idEstante
+			sqlCantidadEnEstantes.aumentarCantidadEnEstantes(pm, pCantidad, producto.getCodBarras(), 0);
+			t.commit();
 		}
 		catch(Exception e)
 		{
@@ -1283,12 +1286,11 @@ public class PersistenciaSuperAndes {
 		try 
 		{
 			t.begin();
-			ArrayList<Producto> productos = null;
+			ArrayList<Producto> productos = new ArrayList<Producto>();
 			List<Estante> estantes = sqlEstante.buscarEstantesSucursal(manager, pDireccion, pCiudad);
 			for(Estante actual : estantes)
 			{
-				//TODO Maria
-				List<String> codigos = sqlCantidadEnEstantes.buscarCodigosDeBarrasProductos();
+				List<String> codigos = sqlCantidadEnEstantes.buscarCodigosDeBarrasProductos(manager, actual.getIdEstante());
 				for(String codigoActual: codigos)
 				{
 					productos.add(sqlProducto.buscarProductoPorCodigo(manager, codigoActual));
