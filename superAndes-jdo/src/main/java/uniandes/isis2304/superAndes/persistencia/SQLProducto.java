@@ -1,5 +1,6 @@
 package uniandes.isis2304.superAndes.persistencia;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -78,9 +79,11 @@ class SQLProducto
 		{
 			if(caracteristicas.get(0) == 1)
 				productos = darProductosPrecioEnRango(pm, Double.parseDouble(data[0]), Double.parseDouble(data[1]));
-			//TODO Parsear la fecha de forma adecuada
-//			else if(caracteristicas.get(0) == 2)
-//				productos = darProductosFechaVencimiento(pm, data[3]);
+			else if(caracteristicas.get(0) == 2)
+			{
+				Timestamp fecha = Timestamp.valueOf(data[3]+" 00:00:00");
+				productos = darProductosFechaVencimiento(pm, fecha);
+			}
 			else if(caracteristicas.get(0) == 3)
 				productos = darProductosPesoEnRango(pm, Double.parseDouble(data[4]), Double.parseDouble(data[5]));
 			else if(caracteristicas.get(0) == 4)
@@ -95,9 +98,13 @@ class SQLProducto
 //				productos = darProductosTipo(pm, data[12]);
 //			else if(caracteristicas.get(0) == 9)
 //				productos = darProductosCategoria(pm, data[13]);
-			//TODO Parsear la fecha de forma adecuada
-//			else if(caracteristicas.get(0) == 10)
-//				productos = darProductosVentasSuperioresAXEnRangoFechas(pm, Double.parseDouble(data[14]), data[15], data[16]);
+
+			else if(caracteristicas.get(0) == 10)
+			{
+				Timestamp fecha1 = Timestamp.valueOf(data[15]+" 00:00:00");
+				Timestamp fecha2 = Timestamp.valueOf(data[16]+" 00:00:00");
+				productos = darProductosVentasSuperioresAXEnRangoFechas(pm, Double.parseDouble(data[14]), fecha1, fecha2);
+			}
 		}
 		else
 		{
@@ -109,7 +116,7 @@ class SQLProducto
 			if(caracteristicas.contains(3))
 				sql += "(pesoproducto BETWEEN ? AND ?) AND ";
 			if(caracteristicas.contains(4))
-				sql += "(pesoproducto BETWEEN ? AND ?) AND ";
+				sql += "(volumenproducto BETWEEN ? AND ?) AND ";
 			if(caracteristicas.contains(5))
 				sql += "(pesoproducto BETWEEN ? AND ?) AND ";
 			if(caracteristicas.contains(6))
@@ -135,7 +142,7 @@ class SQLProducto
 		return (List<Producto>) q.executeList();
 	}
 	//Caracteristica 2:
-	public List<Producto> darProductosFechaVencimiento (PersistenceManager manager, Date pFecha)
+	public List<Producto> darProductosFechaVencimiento (PersistenceManager manager, Timestamp pFecha)
 	{
 		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlProducto()+" WHERE fechavencimiento IS NOT NULL AND fechavencimiento >= '?'");
 		q.setParameters(pFecha);
@@ -201,7 +208,7 @@ class SQLProducto
 //		return (List<Producto>) q.executeList();
 //	}
 	//Caracteristica 10:
-	public List<Producto> darProductosVentasSuperioresAXEnRangoFechas (PersistenceManager manager, double pVentas, Date fechaInicial, Date fechaFinal)
+	public List<Producto> darProductosVentasSuperioresAXEnRangoFechas (PersistenceManager manager, double pVentas, Timestamp fechaInicial, Timestamp fechaFinal)
 	{
 		Query q = manager.newQuery(SQL, "SELECT * FROM (SELECT COUNT(cantidad) numeroUnidades, codigobarras FROM " +"(SELECT * FROM "+persistencia.getSqlComprados()+","+persistencia.getSqlFactura()+" WHERE A_FACTURA.IDFACTURA = A_COMPRADOS.IDFACTURA AND A_FACTURA.FECHA BETWEEN ? AND ?)"+" GROUP BY CODIGOBARRAS HAVING COUNT(cantidad) > ? ) comprados , "+persistencia.getSqlProducto()+" WHERE A_PRODUCTO.CODBARRAS = comprados.codigobarras");
 		q.setParameters(fechaInicial, fechaFinal, pVentas);

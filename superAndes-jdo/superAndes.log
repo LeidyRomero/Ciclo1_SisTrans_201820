@@ -140,3 +140,97 @@ ORA-00904: "IDPROMOCION": identificador no válido
 ORA-00904: "IDPROMOCION": identificador no válido
 
 17:06:31,577 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar promocion 2018-05-06 00:00:00.0, 2018-05-06 00:00:00.0, Descuento del 20%, AAAA, 30, 0
+11:34:06,762 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+11:34:06,860 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123546987, Alpina
+11:34:06,861 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor
+11:34:06,963 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 11 proveedores existentes
+11:34:06,964 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminando proveedor 123546987
+11:34:06,986 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar proveedor 123546987
+11:58:11,626 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+11:58:11,703 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_SUCURSAL(tamanio, direccionsucursal, ciudad, nombresucursal) values (?, ?, ?, ?)".
+ORA-01722: número no válido
+
+11:58:11,712 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+11:58:11,712 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el producto papas de pollo
+11:58:11,734 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: [Ljava.lang.Object; cannot be cast to uniandes.isis2304.superAndes.negocio.Bodega
+
+11:58:11,740 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: null
+
+11:58:11,742 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el producto papas de pollo
+11:58:11,743 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la bodega Calle 7 #5-74, Calle 7 #5-74,Bogotá
+11:58:11,755 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_BODEGA (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) values (?,?,?,?,?,?)".
+ORA-02291: restricción de integridad (ISIS2304A281820.FK_DS_BODEGA) violada - clave principal no encontrada
+
+11:58:11,760 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la bodega Calle 7 #5-74, Calle 7 #5-74,Bogotá
+11:58:11,761 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+11:58:11,784 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123546987, Alpina
+11:58:19,411 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la empresa 11111111
+11:58:19,430 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_EMPRESA(nitempresa, direccion, correo) values (?,?,?)".
+ORA-02291: restricción de integridad (ISIS2304A281820.FK_EM_CLIENTE) violada - clave principal no encontrada
+
+11:58:19,435 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la empresa 11111111
+11:58:19,436 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Empresa
+11:58:19,461 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Empresa: 0 Empresa existentes
+11:58:19,461 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Borrar la empresa
+11:58:19,468 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "DELETE FROM A_EMPRESA WHERE pCorreo = ?".
+ORA-00904: "PCORREO": identificador no válido
+
+11:58:19,472 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de borrar la empresa 
+11:58:30,490 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+11:58:30,497 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_SUCURSAL(tamanio, direccionsucursal, ciudad, nombresucursal) values (?, ?, ?, ?)".
+ORA-01722: número no válido
+
+11:58:30,506 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+11:58:30,506 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el producto papas de pollo
+11:58:30,521 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: null
+
+11:58:30,523 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el producto papas de pollo
+17:28:22,981 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+17:28:23,057 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_SUCURSAL(tamanio, direccionsucursal, ciudad, nombresucursal) values (?, ?, ?, ?)".
+ORA-01722: número no válido
+
+17:28:23,067 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+17:28:23,068 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el producto papas de pollo
+17:28:23,079 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: [Ljava.lang.Object; cannot be cast to uniandes.isis2304.superAndes.negocio.Bodega
+
+17:28:23,085 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: null
+
+17:28:23,088 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el producto papas de pollo
+17:28:23,088 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la bodega Calle 7 #5-74, Calle 7 #5-74,Bogotá
+17:28:23,097 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_BODEGA (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) values (?,?,?,?,?,?)".
+ORA-02291: restricción de integridad (ISIS2304A281820.FK_DS_BODEGA) violada - clave principal no encontrada
+
+17:28:23,104 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la bodega Calle 7 #5-74, Calle 7 #5-74,Bogotá
+17:28:23,104 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+17:28:23,114 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_PROVEEDOR(nitproveedor, nombreproveedor, calificacionproveedor) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A281820.A_PROVEEDOR_PK) violada
+
+17:28:23,119 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123546987, Alpina
+17:31:23,486 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Modificando orden pedido 1, Buena
+17:31:23,562 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : null
+
+17:31:23,571 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de modificar orden pedido 1, Buena
+17:33:45,861 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Modificando orden pedido 1, Buena
+17:33:45,942 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de modificar orden pedido 1, Buena
+17:41:56,207 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123, Hola
+17:41:56,244 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123, Hola
+17:42:59,425 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando orden pedido 123, 2018-11-01 00:00:00.0, Bucaramanga, CR 139 139-99, CL 26 #68-10
+17:42:59,524 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar orden pedido 123, 2018-11-01 00:00:00.0, Bucaramanga, CR 139 139-99, CL 26 #68-10
+17:43:46,659 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Modificando orden pedido 21, tfhjmk
+17:43:46,738 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : El Query tenia que devolver objetos de tipo "uniandes.isis2304.superAndes.negocio.OrdenPedido" pero era imposible poner el valor al campo "DIRECCIONBODEGA"  tipo "java.lang.String". El campo debe tener un metodo publico set/put o ser publico.
+
+17:43:46,750 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de modificar orden pedido 21, tfhjmk
+17:52:13,227 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Modificando orden pedido 21, strfryguhi
+17:52:13,323 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : El Query tenia que devolver objetos de tipo "uniandes.isis2304.superAndes.negocio.OrdenPedido" pero era imposible poner el valor al campo "DIRECCIONBODEGA"  tipo "java.lang.String". El campo debe tener un metodo publico set/put o ser publico.
+
+17:52:13,333 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de modificar orden pedido 21, strfryguhi
+17:53:46,785 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Modificando orden pedido 21, seyuui
+17:53:46,873 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : El Query tenia que devolver objetos de tipo "uniandes.isis2304.superAndes.negocio.OrdenPedido" pero era imposible poner el valor al campo "DIRECCIONBODEGA"  tipo "java.lang.String". El campo debe tener un metodo publico set/put o ser publico.
+
+17:53:46,887 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de modificar orden pedido 21, seyuui
+17:55:21,235 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Modificando orden pedido 21, ftugyihujopk
+17:55:21,327 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : El Query tenia que devolver objetos de tipo "uniandes.isis2304.superAndes.negocio.OrdenPedido" pero era imposible poner el valor al campo "DIRECCIONBODEGA"  tipo "java.lang.String". El campo debe tener un metodo publico set/put o ser publico.
+
+17:55:21,338 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de modificar orden pedido 21, ftugyihujopk
+17:55:47,442 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Modificando orden pedido 21, sdfgh
+17:55:47,534 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de modificar orden pedido 21, sdfgh

@@ -86,8 +86,8 @@ class SQLOrdenPedido
 	public OrdenPedido darPedidoPorId (PersistenceManager pm, long idPedido) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlOrdenPedido() + " WHERE idpedido = ?");
-		q.setParameters(idPedido);
 		q.setResultClass(OrdenPedido.class);
+		q.setParameters(idPedido);
 		return (OrdenPedido) q.executeUnique();
 	}
 	

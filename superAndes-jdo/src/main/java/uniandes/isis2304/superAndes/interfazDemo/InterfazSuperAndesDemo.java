@@ -12,7 +12,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.sql.Timestamp;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.jdo.JDODataStoreException;
@@ -31,7 +30,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
-import uniandes.isis2304.superAndes.interfazApp.InterfazSuperAndesApp;
 import uniandes.isis2304.superAndes.interfazApp.PanelDatos;
 import uniandes.isis2304.superAndes.negocio.SuperAndes;
 import uniandes.isis2304.superAndes.negocio.*;

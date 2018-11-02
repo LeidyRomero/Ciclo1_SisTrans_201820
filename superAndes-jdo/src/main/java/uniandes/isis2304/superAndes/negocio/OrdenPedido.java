@@ -57,7 +57,7 @@ public class OrdenPedido implements VOOrdenPedido{
 	/**
 	 * Dirección de la bodega que va a recibir el pedido.
 	 */
-	private String direcccionBodega;
+	private String direccionBodega;
 	
 	//-----------------------------------------------------
 	// CONSTRUCTORES
@@ -76,7 +76,7 @@ public class OrdenPedido implements VOOrdenPedido{
 		fechaEsperadaEntrega = null;
 		idPedido = 0;
 		nitProveedor = 0;
-		direcccionBodega = null;
+		direccionBodega = null;
 	}
 	
 	/**
@@ -102,7 +102,7 @@ public class OrdenPedido implements VOOrdenPedido{
 		this.idPedido = idPedido;
 		this.ciudad = ciudadSucursal;
 		this.direccionSucursal = direccionSucursal;
-		this.direcccionBodega = direccionBodega;
+		this.direccionBodega = direccionBodega;
 	}
 
 	//-----------------------------------------------------
@@ -227,14 +227,13 @@ public class OrdenPedido implements VOOrdenPedido{
 	 */
 	public void setDireccionSucursal(String direccionSucursal) {
 		this.direccionSucursal = direccionSucursal;
-	}
-	
+	}	
 
 	/**
 	 * Retorna la dirección de la bodega.
 	 */
 	public String getDireccionBodega() {
-		return this.direcccionBodega;
+		return this.direccionBodega;
 	}
 	
 	/**
@@ -243,7 +242,7 @@ public class OrdenPedido implements VOOrdenPedido{
 	 */
 	public void setDireccionBodega(String direccionBodega)
 	{
-		this.direcccionBodega = direccionBodega;
+		this.direccionBodega = direccionBodega;
 	}
 
 	@Override
@@ -251,6 +250,6 @@ public class OrdenPedido implements VOOrdenPedido{
 		return "OrdenPedido [fechaEsperadaEntrega=" + fechaEsperadaEntrega + ", estado=" + estado + ", fechaEntrega="
 				+ fechaEntrega + ", calificacionPedido=" + calificacionPedido + ", nitProveedor=" + nitProveedor
 				+ ", idPedido=" + idPedido + ", ciudadSucursal=" + ciudad + ", direccionSucursal="
-				+ direccionSucursal + ", direcccionBodega=" + direcccionBodega + "]";
+				+ direccionSucursal + ", direcccionBodega=" + direccionBodega + "]";
 	}	
 }

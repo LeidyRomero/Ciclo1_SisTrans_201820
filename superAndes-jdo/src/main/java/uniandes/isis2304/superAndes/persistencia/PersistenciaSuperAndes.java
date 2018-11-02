@@ -772,6 +772,8 @@ public class PersistenciaSuperAndes {
 			tx.begin();
 			long tuplasInsertadas = sqlOrdenPedido.cambiarEstadoOrdenPedido(pm, idPedido, calificacion);
 			OrdenPedido op = sqlOrdenPedido.darPedidoPorId(pm, idPedido);
+			System.out.println(idPedido);
+			System.out.println(op);
 			int numProductos = sqlPedidoProducto.darNumeroProductosPedido(pm, idPedido);
 			sqlCantidadEnBodega.subirInventario(pm, numProductos, op.getCiudad(), op.getDireccionSucursal(), op.getDireccionBodega());
 			tx.commit();
