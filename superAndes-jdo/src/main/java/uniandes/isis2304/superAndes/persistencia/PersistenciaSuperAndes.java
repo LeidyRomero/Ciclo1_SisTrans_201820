@@ -194,7 +194,7 @@ public class PersistenciaSuperAndes {
 
 		sqlUtil = new SQLUtil(this);
 	}
-	public String darSecuenciaPedidos()
+	public String getSecuenciaPedidos()
 	{
 		return tablas.get(0);
 	}
@@ -299,9 +299,15 @@ public class PersistenciaSuperAndes {
 	{
 		return tablas.get(23);
 	}
+	
 	public String getSecuenciaPromociones()
 	{
 		return tablas.get(24);
+	}
+
+	public String getSecuenciaFacturas()
+	{
+		return tablas.get(25);
 	}
 
 	/**
@@ -312,6 +318,17 @@ public class PersistenciaSuperAndes {
 	private long nextvalPedidos ()
 	{
 		long resp = sqlUtil.nextvalPedidos (managerFactory.getPersistenceManager());
+		Log.trace ("Generando secuencia: " + resp);
+		return resp;
+	}
+	/**
+	 * Transacción para el generador de secuencia de SuperAndes
+	 * Adiciona entradas al log de la aplicación
+	 * @return El siguiente número del secuenciador de SuperAndes
+	 */
+	private long nextvalPromociones()
+	{
+		long resp = sqlUtil.nextvalPromociones(managerFactory.getPersistenceManager());
 		Log.trace ("Generando secuencia: " + resp);
 		return resp;
 	}
@@ -572,9 +589,8 @@ public class PersistenciaSuperAndes {
 		{
 			tx.begin();
 			//TODO Pedir la secuencia de Promociones
-			long idPromocion = nextvalPedidos();
+			long idPromocion = nextvalPromociones();
 			//long tuplasInsertadas = sqlPromocion.adicionarPromocion(pm, fechaInicio, fechaFin, descripcion, codBarras, 24, uniVendidas, uniDisponibles);
-			System.out.println("PROMO");
 			
 			if(descripcion.contains("cantidad, lleve"))
 			{
@@ -827,7 +843,7 @@ public class PersistenciaSuperAndes {
 		try
 		{
 			tx.begin();
-			long idFactura = nextvalPedidos();
+			long idFactura = nextvalFacturas();
 			long tuplasInsertadas = sqlFactura.adicionarFactura(pm, idFactura, costoTotal, fecha, correoCliente, ciudad, direccion);
 			tx.commit();
 

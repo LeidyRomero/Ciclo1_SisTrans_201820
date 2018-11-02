@@ -28,6 +28,7 @@
 		"A_PROMO_UNIDADES",
 		"A_PROMO_DESCUENTO",
 		"A_PROMO_UNIDADES_DESCUENTO",
-		"promocion_sequence"
+		"promocion_sequence",
+		"factura_sequence"
 	]
 }
