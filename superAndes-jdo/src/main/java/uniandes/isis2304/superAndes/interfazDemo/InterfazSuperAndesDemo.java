@@ -656,19 +656,33 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		{
 			//Ejecución de la demo y recolección de los resultados
 			VOProveedor pro1 = superAndes.adicionarProveedor(123546987, "Alpina");
+			VOProveedor pro2 = superAndes.adicionarProveedor(123456788, "Alquería");
+			VOProveedor pro3 = superAndes.adicionarProveedor(123456799, "Kelogs");
 
 			List<VOProveedor> lista = superAndes.darVOProveedores();
-
-			long proveedoresEliminados = superAndes.eliminarProveedorPorNit(123546987);
-
+			VOProveedor pro5 = superAndes.darProveedorPorNit(pro1.getNitProveedor());
+			VOProveedor pro6 = superAndes.darProveedorPorNit(0);
+			
+			long prov1 = superAndes.eliminarProveedorPorNit(123546987);
+			long prov2 = superAndes.eliminarProveedorPorNit(123456788);
+			long prov3 = superAndes.eliminarProveedorPorNit(123456799);
+			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de Proveedores\n\n";
 			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "\n" + listarProveedores(lista);
 			resultado += "Adicionado el proveedor: " + pro1 + "\n";
+			resultado += "Adicionado el proveedor: " + pro2 + "\n";
+			resultado += "Adicionado el proveedor: " + pro3 + "\n";
+			
 			resultado += "\n\n************ Ejecutando la demo ************ \n";
-			resultado += "\n" + listarProveedores (lista);
+			resultado += "\nBuscando el proveedor con nit " + pro1 + ":\n";
+			resultado += pro5 != null ? "El proveedor es: " + pro5 + "\n" : "Ese proveedor no existe\n";
+			resultado += "\nBuscando el proveedor con nit " + 0 + ":\n";
+			resultado += pro6 != null ? "El proveedor es: " + pro6 + "\n" : "Ese proveedor no existe\n";			
+			
 			resultado += "\n\n************ Limpiando la base de datos ************ \n";
-			resultado += proveedoresEliminados + " Proveedores eliminados\n";
+			resultado += (prov1+prov2+prov3) + " Proveedores eliminados\n";
 			resultado += "\n Demo terminada";
 
 			panelDatos.actualizarInterfaz(resultado);	

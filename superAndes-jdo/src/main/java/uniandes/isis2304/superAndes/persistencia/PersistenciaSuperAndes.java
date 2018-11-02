@@ -299,7 +299,7 @@ public class PersistenciaSuperAndes {
 	{
 		return tablas.get(23);
 	}
-	
+
 	public String getSecuenciaPromociones()
 	{
 		return tablas.get(24);
@@ -318,7 +318,7 @@ public class PersistenciaSuperAndes {
 	private long nextvalPedidos ()
 	{
 		long resp = sqlUtil.nextvalPedidos (managerFactory.getPersistenceManager());
-		Log.trace ("Generando secuencia: " + resp);
+		Log.trace ("Generando secuencia pedidos: " + resp);
 		return resp;
 	}
 	/**
@@ -329,7 +329,18 @@ public class PersistenciaSuperAndes {
 	private long nextvalPromociones()
 	{
 		long resp = sqlUtil.nextvalPromociones(managerFactory.getPersistenceManager());
-		Log.trace ("Generando secuencia: " + resp);
+		Log.trace ("Generando secuencia promociones: " + resp);
+		return resp;
+	}
+	/**
+	 * Transacción para el generador de secuencia de SuperAndes
+	 * Adiciona entradas al log de la aplicación
+	 * @return El siguiente número del secuenciador de SuperAndes
+	 */
+	private long nextvalFacturas()
+	{
+		long resp = sqlUtil.nextvalFacturas(managerFactory.getPersistenceManager());
+		Log.trace ("Generando secuencia facturas: " + resp);
 		return resp;
 	}
 	/**
@@ -385,12 +396,20 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+	/**
+	 * Método que consulta todas las tuplas en la tabla Proveedores
+	 * @return La lista de objetos Proveedor, construidos con base a las tuplas de la tabla PROVEEDOR
+	 */
 	public List<Proveedor> buscarProveedores()
 	{
 		return sqlProveedor.darProveedores(managerFactory.getPersistenceManager());
 	}
+	/**
+	 * Método que elimina, de manera transaccional, una tupla de la tabla Proveedor, dado el nit del proveedor
+	 * @param nitProveedor - El nit del proveedor
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
 	public long eliminarProveedorPorNit(int nitProveedor)
-
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -417,7 +436,18 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+	/**
+	 * Método que consulta la tupla de la tabla Proveedor que tienen el nit dado
+	 * @param nitProveedor - Nit del proveedor 
+	 * @return La lista de objetos Proveedor, construidos con base en las tuplas de la tabla PROVEEDOR
+	 */
+	public Proveedor darProveedorPorNit(int nitProveedor)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Proveedor tuplaEncontra = sqlProveedor.darProveedorPorNit(pm, nitProveedor);
+		return tuplaEncontra;
+	}
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar los CLIENTES
 	//---------------------------------------------------------------------
@@ -577,7 +607,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar los PROMOCIÓN
 	//---------------------------------------------------------------------
@@ -591,7 +621,7 @@ public class PersistenciaSuperAndes {
 			//TODO Pedir la secuencia de Promociones
 			long idPromocion = nextvalPromociones();
 			//long tuplasInsertadas = sqlPromocion.adicionarPromocion(pm, fechaInicio, fechaFin, descripcion, codBarras, 24, uniVendidas, uniDisponibles);
-			
+
 			if(descripcion.contains("cantidad, lleve"))
 			{
 				System.out.println(descripcion.substring(23, 24));
@@ -613,10 +643,10 @@ public class PersistenciaSuperAndes {
 			{
 				System.out.println(descripcion.substring(6, 7));
 				System.out.println(descripcion.substring(23, 24));
-				
+
 				//sqlPromoUnidades.adicionarPromocion(pm, idPromocion, Integer.parseInt(descripcion.substring(6, 7)), Integer.parseInt(descripcion.substring(23, 24)));
 			}
-			
+
 			tx.commit();
 
 			Log.trace("Insercción promocion: " + idPromocion +": "/*+tuplasInsertadas*/);
@@ -729,7 +759,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar las ORDENES DE PEDIDO
 	//---------------------------------------------------------------------
@@ -1340,7 +1370,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar TIPO_PRODUCTO
 	//------------------------------------------------------------------
@@ -1447,7 +1477,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar EMPRESA
 	//------------------------------------------------------------------
@@ -1527,7 +1557,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar PERSONA_NATURAL
 	//------------------------------------------------------------------
@@ -1607,7 +1637,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar BODEGA
 	//------------------------------------------------------------------

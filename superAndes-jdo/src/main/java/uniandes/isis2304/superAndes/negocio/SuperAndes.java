@@ -554,6 +554,14 @@ public class SuperAndes {
 		Log.info("Saliendo de eliminar proveedor "+ nitProveedor);
 		return proveedor;
 	}
+	
+	public Proveedor darProveedorPorNit(int nitProveedor)
+	{
+		Log.info("Dar información de un proveedor por nit: "+nitProveedor);
+		Proveedor proveedor = pp.darProveedorPorNit(nitProveedor);
+		Log.info("Buscando proveedor por nit: " + proveedor != null ? proveedor : "NO EXISTE");
+		return proveedor;
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar CANTIDAD EN ESTANTES
 	//---------------------------------------------------------------------
