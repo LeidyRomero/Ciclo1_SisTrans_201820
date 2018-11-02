@@ -5,7 +5,6 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.superAndes.negocio.Proveedor;
 import uniandes.isis2304.superAndes.negocio.Sucursal;
 
 /**
@@ -33,7 +32,7 @@ class SQLSucursal
 	private PersistenciaSuperAndes persistencia;
 
 	//------------------------------------------------------------------
-	// MÉTODOS
+	// CONSTRUCTOR
 	//------------------------------------------------------------------
 	/**
 	 * Constructor
@@ -44,6 +43,9 @@ class SQLSucursal
 		this.persistencia = persistencia;
 	}
 	
+	//------------------------------------------------------------------
+	// CRD
+	//------------------------------------------------------------------
 	/**
 	 * Crea y ejecuta una sentencia SQL para adicionar una SUCURSAL a la base de datos de SuperAndes
 	 * @param pm - El manejador de persistencia
@@ -98,6 +100,20 @@ class SQLSucursal
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlSucursal() );
 		q.setResultClass(Sucursal.class);
+		return (List<Sucursal>) q.executeList();
+	}
+	
+	/**
+	 * Crea y ejecuta una sentencia para encontrar la información de LAS SUCURSALES de la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param ciudad - Ciudad de la sucursal
+	 * @return Una lista de objetos SUCURSAL que tienen la ciudad dada
+	 */
+	public List<Sucursal> darSucursalesPorCiudad (PersistenceManager pm, String ciudad)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlSucursal() + " WHERE ciudad = ?" );
+		q.setResultClass(Sucursal.class);
+		q.setParameters(ciudad);
 		return (List<Sucursal>) q.executeList();
 	}
 }

@@ -1,12 +1,10 @@
 package uniandes.isis2304.superAndes.persistencia;
 
 import java.util.List;
-
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.isis2304.superAndes.negocio.Cliente;
-import uniandes.isis2304.superAndes.negocio.Proveedor;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto CLIENTE de SuperAndes
@@ -43,6 +41,9 @@ class SQLCliente
 		this.persistencia = persistencia;
 	}
 	
+	//------------------------------------------------------------------
+	// CRD
+	//------------------------------------------------------------------	
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un CLIENTE a la base de datos de SuperAndes
 	 * @param pm - El manejador de persistencia
@@ -69,6 +70,20 @@ class SQLCliente
         Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlCliente() + " WHERE correo = ?");
         q.setParameters(correo);
         return (long) q.executeUnique();            
+	}
+	
+	/**
+	 * Crea y ejecuta una sentencia sql para encontrar la información de UN CLIENTE en la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param correo - El correo del cliente
+	 * @return El objeto CLIENTE que tiene el correo dado
+	 */
+	public Cliente darClientePorCorreo(PersistenceManager pm, String correo)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlCliente() + " WHERE correo = ?");
+		q.setResultClass(Cliente.class);
+		q.setParameters(correo);
+		return (Cliente) q.executeUnique();
 	}
 	
 	/**

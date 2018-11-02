@@ -7,7 +7,6 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.isis2304.superAndes.negocio.OrdenPedido;
-import uniandes.isis2304.superAndes.negocio.Promocion;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto ORDEN PEDIDO de SuperAndes
@@ -33,7 +32,7 @@ class SQLOrdenPedido
 	private PersistenciaSuperAndes persistencia;
 
 	//------------------------------------------------------------------
-	// MÉTODOS
+	// CONSTRUCTOR
 	//------------------------------------------------------------------
 	/**
 	 * Constructor
@@ -43,6 +42,10 @@ class SQLOrdenPedido
 	{
 		this.persistencia = persistencia;
 	}
+	
+	//------------------------------------------------------------------
+	// CRD
+	//------------------------------------------------------------------
 
 	/**
 	 * Crea y ejecuta una sentencia sql que adiciona una ORDEN DE PEDIDO a la base de datos de SuperAndes
@@ -63,11 +66,11 @@ class SQLOrdenPedido
 	}
 
 	/**
-	 * 
-	 * @param pm
-	 * @param idPedido
-	 * @param calificacion
-	 * @return
+	 * Crea y ejecuta una sentencia sql para cambiar el estado de una orden de pedido en la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idPedido - El identificador del pedido
+	 * @param calificacion - Calificacion del pedido
+	 * @return El número de tuplas modificadas
 	 */
 	public long cambiarEstadoOrdenPedido (PersistenceManager pm, long idPedido, String calificacion) 
 	{
@@ -78,10 +81,10 @@ class SQLOrdenPedido
 	}
 	
 	/**
-	 * 
-	 * @param pm
-	 * @param idPedido
-	 * @return
+	 * Crea y ejecuta una sentencia sql para encontrar la información de UNA ORDEN DE PEDIDO en la base de datos de SuperAndes 
+	 * @param pm - El manejador de persistencia
+	 * @param idPedido - El identificador del pedido
+	 * @return Un objeto ORDEN PEDIDO que tiene el identificador dado
 	 */
 	public OrdenPedido darPedidoPorId (PersistenceManager pm, long idPedido) 
 	{
@@ -92,10 +95,10 @@ class SQLOrdenPedido
 	}
 	
 	/**
-	 * 
-	 * @param pm
-	 * @param idPedido
-	 * @return
+	 * Crea y ejecuta una sentencia sql para eliminar UNA ORDEN DE PEDIDO en la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idPedido - El identificador de la orden
+	 * @return El número de tuplas eliminadas
 	 */
 	public long eliminarPedidoPorId(PersistenceManager pm, long idPedido)
 	{
@@ -105,9 +108,9 @@ class SQLOrdenPedido
 	}
 	
 	/**
-	 * 
-	 * @param pm
-	 * @return
+	 * Crea y ejecuta una sentencia para encontrar la información de LAS ORDENES DE PEDIDO de la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Una lista de objetos ORDEN PEDIDO
 	 */
 	public List<OrdenPedido> darPedidos (PersistenceManager pm) 
 	{
@@ -115,4 +118,6 @@ class SQLOrdenPedido
 		q.setResultClass(OrdenPedido.class);
 		return (List<OrdenPedido>) q.executeList();
 	}
+	
+	
 }

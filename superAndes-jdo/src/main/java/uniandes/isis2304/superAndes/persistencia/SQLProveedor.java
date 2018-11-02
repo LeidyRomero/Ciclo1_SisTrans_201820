@@ -6,7 +6,6 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.isis2304.superAndes.negocio.Proveedor;
-import uniandes.isis2304.superAndes.negocio.VOProveedor;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto PROVEEDOR de SuperAndes
@@ -32,7 +31,7 @@ class SQLProveedor
 	private PersistenciaSuperAndes persistencia;
 
 	//------------------------------------------------------------------
-	// MÉTODOS
+	// CONSTRUCTOR
 	//------------------------------------------------------------------
 	/**
 	 * Constructor
@@ -43,6 +42,9 @@ class SQLProveedor
 		this.persistencia = persistencia;
 	}
 	
+	//------------------------------------------------------------------
+	// CRD
+	//------------------------------------------------------------------
 	/**
 	 * Crea y ejecuta la sentencia que adiciona un PROVEEDOR a la basa de datos de SuperAndes
 	 * @param pm - El manejador de persistencia
@@ -74,7 +76,7 @@ class SQLProveedor
 	 * Crea y ejecuta una sentencia para eliminar un PROVEEDOR en la base de datos de SuperAndes
 	 * @param pm - El manejador de persistencia
 	 * @param nitProveedor - Nit del proveedor a eliminar
-	 * @return Número de tuplas eliminadas
+	 * @return El número de tuplas eliminadas
 	 */
 	public long eliminarProveedorPorNit (PersistenceManager pm, int nitProveedor)
 	{
@@ -87,7 +89,7 @@ class SQLProveedor
 	 * Crea y ejecuta una sentencia para consultar un PROVEEDOR en la base de datos de SuperAndes
 	 * @param pm - El manejador de persistencia
 	 * @param nitProveedor - Nit del proveedor a consultar
-	 * @return El proveedor con el nit dado
+	 * @return El objeto PROVEEDOR que tiene el nit dado
 	 */
 	public Proveedor darProveedorPorNit (PersistenceManager pm, long nitProveedor) 
 	{
@@ -98,23 +100,9 @@ class SQLProveedor
 	}
 	
 	/**
-	 * Crea y ejecuta una sentencia sql para consultar PROVEEDORES en la base de datos de SuperAndes
-	 * @param pm - El manejador de persistencia
-	 * @param nombre - Nombre del proveedor a consultar
-	 * @return Lista de tuplas con el nombre dado
-	 */
-	public List<Proveedor> darProveedoresPorNombre (PersistenceManager pm, String nombre) 
-	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlProveedor() + " WHERE nombreproveedor = ?");
-		q.setResultClass(Proveedor.class);
-		q.setParameters(nombre);
-		return (List<Proveedor>) q.executeList();
-	}
-	
-	/**
 	 * Crea y ejecuta una sentencia para consultar todos los PROVEEDORES de la base de datos de SuperAndes
 	 * @param pm - El manejador de persistencia
-	 * @return Lista de todas las tuplas de la tabla PROVEEDOR
+	 * @return Una lista de objetos PROVEEDOR
 	 */
 	public List<Proveedor> darProveedores (PersistenceManager pm) 
 	{
@@ -128,7 +116,7 @@ class SQLProveedor
 	 * @param pm - El manejador de persistencia
 	 * @param nitProveedor - Nit del proveedor a modificar
 	 * @param calificacion - Nueva calificación
-	 * @return Número de tuplas modificadas
+	 * @return El número de tuplas modificadas
 	 */
 	public long cambiarCalificacionProveedor (PersistenceManager pm, int nitProveedor, String calificacion) 
 	{

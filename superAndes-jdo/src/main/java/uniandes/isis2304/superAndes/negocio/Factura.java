@@ -29,6 +29,11 @@ public class Factura implements VOFactura{
 	 */
 	private double costoTotal;
 	
+	/**
+	 * Correo del cliente
+	 */
+	private String correoCliente;
+	
 	//-----------------------------------------------------
 	// CONSTRUCTORES
 	//-----------------------------------------------------
@@ -40,6 +45,7 @@ public class Factura implements VOFactura{
 		idFactura = 0;
 		fecha = null;
 		costoTotal = 0.0;
+		correoCliente = null;
 	}
 	
 	/**
@@ -48,11 +54,12 @@ public class Factura implements VOFactura{
 	 * @param pFecha Fecha de generación de la factura. pFecha != null
 	 * @param pCosto Costo total. pCosto >= 0.0
 	 */
-	public Factura(long pId, Timestamp pFecha, double pCosto)
+	public Factura(long pId, Timestamp pFecha, double pCosto, String pCorreoCliente)
 	{
 		idFactura = pId;
 		fecha = pFecha;
 		costoTotal = pCosto;
+		correoCliente = pCorreoCliente;
 	}
 
 	//-----------------------------------------------------
@@ -104,9 +111,27 @@ public class Factura implements VOFactura{
 		this.costoTotal = costoTotal;
 	}
 
+	/**
+	 * Retorna el correo del cliente
+	 */
+	public String getCorreoCliente() {
+		return correoCliente;
+	}
+
+	/**
+	 * Modifica el correo del cliente
+	 * @param correoCliente Nuevo correo.
+	 */
+	public void setCorreoCliente(String correoCliente) {
+		this.correoCliente = correoCliente;
+	}
+
 	@Override
 	public String toString() {
-		return "Factura [idFactura=" + idFactura + ", fecha=" + fecha + ", costoTotal=" + costoTotal + "]";
+		return "Factura [idFactura=" + idFactura + ", fecha=" + fecha + ", costoTotal=" + costoTotal
+				+ ", correoCliente=" + correoCliente + "]";
 	}
+	
+	
 		
 }

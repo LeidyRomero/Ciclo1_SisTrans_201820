@@ -267,6 +267,7 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar el estante "+ pId);
 		return estante;
 	}
+	//TODO Hacer la consulta a punta de SQL
 	public String buscarIndiceEstante(String pDireccion, String pCiudad)
 	{
 		String mensaje = "El indice de ocupación ";
@@ -355,12 +356,11 @@ public class SuperAndes {
 		return numero;
 	}
 
-	public Comprados registrarCompra(String pCodigoBarras,int pCantidad, String correo)
+	public Comprados registrarCompra(String pCodigoBarras,int pCantidad, String correo, String ciudad, String direccion)
 	{
 		Log.info("Registrando comprados "+ pCodigoBarras+", "+pCodigoBarras);
 		Producto producto = pp.buscarProductoCodigoBarras(pCodigoBarras);
-		Factura factura = pp.adicionarFactura(pCantidad*producto.getPrecioUnitario(), new Timestamp(System.currentTimeMillis()));
-		HistorialCompras hc = pp.adicionarHistorialCompra(correo, factura.getIdFactura());
+		Factura factura = pp.adicionarFactura(pCantidad*producto.getPrecioUnitario(), new Timestamp(System.currentTimeMillis()), correo, ciudad, direccion);
 		Comprados comprado = pp.adicionarComprados(pCodigoBarras, pCantidad, pCantidad*producto.getPrecioUnitario(), factura.getIdFactura());
 		
 		//TODO Maria  actualizar inventario
@@ -513,10 +513,10 @@ public class SuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar FACTURA
 	//---------------------------------------------------------------------
-	public Factura adicionarFactura(double costoTotal, Timestamp fecha)
+	public Factura adicionarFactura(double costoTotal, Timestamp fecha, String correo, String ciudad, String direccion)
 	{
 		Log.info("Adicionando factura "+ costoTotal+", "+fecha);
-		Factura factura = pp.adicionarFactura(costoTotal, fecha);
+		Factura factura = pp.adicionarFactura(costoTotal, fecha, correo, ciudad, direccion);
 		Log.info("Saliendo de adicionar factura "+ costoTotal+", "+fecha);
 		return factura;
 	}
@@ -579,31 +579,12 @@ public class SuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar SUCURSAL FACTURAS
 	//---------------------------------------------------------------------
-	public SucursalFactura adicionarSucursalFacturas(long idFactura, String direccion, String ciudad)
-	{
-		Log.info("Adicionando sucursal facturas"+ idFactura+", "+direccion+", "+ciudad);
-		SucursalFactura sucursalFactura = pp.adicionarSucursalFactura(idFactura, direccion, ciudad);
-		Log.info("Saliendo de adicionar sucursal facturas "+ idFactura+", "+direccion+", "+ciudad);
-		return sucursalFactura;
-	}
-
-	public List<String> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
+	public List<Object> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
 	{
 		Log.info("Consultando el dinero recolectado por sucursales en periodo de tiempo: " + fechaInicio + ", "+fechaFin);
-		List<String> list = pp.dineroSucursalEnRango(fechaInicio, fechaFin);
+		List<Object> list = pp.dineroSucursalEnRango(fechaInicio, fechaFin);
 		Log.info("Saliendo de consultar el dinero recolectado por sucursales en periodo de tiempo: " + fechaInicio + ", "+fechaFin);
 		return list;
-	}
-
-	//---------------------------------------------------------------------
-	// Métodos para manejar HISTORIAL COMPRA
-	//---------------------------------------------------------------------
-	public HistorialCompras adicionarHistorialCompra(String correo, long idFactura)
-	{
-		Log.info("Adicionando historial compra "+ correo+", "+idFactura);
-		HistorialCompras historialCompra = pp.adicionarHistorialCompra(correo, idFactura);
-		Log.info("Saliendo de adicionar historial compra "+ correo+", "+idFactura);
-		return historialCompra;
 	}
 
 	//---------------------------------------------------------------------

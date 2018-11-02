@@ -1,8 +1,11 @@
 package uniandes.isis2304.superAndes.persistencia;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
+import uniandes.isis2304.superAndes.negocio.Factura;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto FACTURA de SuperAndes
@@ -29,7 +32,7 @@ class SQLFactura
 	private PersistenciaSuperAndes persistencia;
 
 	//------------------------------------------------------------------
-	// MÉTODOS
+	// CONSTRUCTOR
 	//------------------------------------------------------------------
 	/**
 	 * Constructor
@@ -40,18 +43,130 @@ class SQLFactura
 		this.persistencia = persistencia;
 	}
 	
+	//------------------------------------------------------------------
+	// CRD
+	//------------------------------------------------------------------	
 	/**
 	 * Crea y ejecuta una sentencia sql que adiciona una FACTURA a la base de datos de SuperAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idFactura - El id de la factura
+	 * @param idFactura - El identificador de la factura
 	 * @param costoTotal - El costo total de la factura
 	 * @param fecha - Fecha de generación de la factura
 	 * @return El número de tuplas insertadas
 	 */
-	public long adicionarFactura(PersistenceManager pm, long idFactura, double costoTotal, Timestamp fecha) 
+	public long adicionarFactura(PersistenceManager pm, long idFactura, double costoTotal, Timestamp fecha, String correoCliente, String ciudad, String direccionSucursal) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlFactura() + "(idfactura, costototal, fecha) values (?, ?, ?)");
-        q.setParameters(idFactura, costoTotal, fecha);
+		if(correoCliente.equals(""))
+			correoCliente = "default@default.com";
+        Query q = pm.newQuery(SQL, "INSERT INTO " + persistencia.getSqlFactura() + "(idfactura, costototal, fecha, correocliente, ciudad, direccionsucursal) values (?, ?, ?, ?, ?, ?)");
+        q.setParameters(idFactura, costoTotal, fecha, correoCliente, ciudad, direccionSucursal);
         return (long) q.executeUnique();
 	}
+	
+	/**
+	 * Crea y ejecuta una sentencia sql para eliminar FACTURAS de la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idFactura - El identificador de la factura
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarFacturaPorId(PersistenceManager pm, String idFactura)
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlFactura() + " WHERE idfactura = ?");
+        q.setParameters(idFactura);
+        return (long) q.executeUnique(); 
+	}
+	
+	/**
+	 * Crea y ejecuta la sentencia sql para encontrar la información de UNA FACTURA en la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idFactura - El identificador de la factura
+	 * @return El objeto FACTURA con el identificador dado
+	 */
+	public Factura darFacturaPorId(PersistenceManager pm, String idFactura)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlFactura() + " WHERE idfactura = ?");
+		q.setResultClass(Factura.class);
+		q.setParameters(idFactura);
+		return (Factura) q.executeUnique();
+	}
+	
+	/**
+	 * Crea y ejecuta la sentencia para encontrar la información de LAS FACTURAS en la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Una lista de objetos FACTURA
+	 */
+	public List<Factura> darFacturas(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlFactura());
+		q.setResultClass(Factura.class);
+		return (List<Factura>) q.executeList();
+	}
+	
+	/**
+	 * Crea y ejecuta una sentencia sql para encontrar la información de LAS FACTURAS en la base de datos de SuperAndes 
+	 * @param pm - El manejador de persistencia
+	 * @param correoCliente - El correo del cliente
+	 * @return Una lista de objetos FACTURA que tienen el correo del cliente dado
+	 */
+	public List<Factura> darFacturasPorCliente(PersistenceManager pm, String correoCliente)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlFactura() + " WHERE correocliente = ?");
+		q.setResultClass(Factura.class);
+		q.setParameters(correoCliente);
+		return (List<Factura>) q.executeList();
+	}
+		
+	/**
+	 * Crea y ejecuta una sentencia para encontrar la información de LAS FACTURAS de la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param ciudad - Ciudad de la sucursal
+	 * @param direccionSucursal - Dirección de la sucursal
+	 * @return Una lista de objetos FACTURA de la sucursal dada
+	 */
+	public List<Factura> darFacturasSucursal(PersistenceManager pm, String ciudad, String direccionSucursal)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlFactura() + " WHERE ciudad = ? AND direccionsucursal = ?");
+		q.setResultClass(Factura.class);
+		q.setParameters(ciudad, direccionSucursal);
+		return (List<Factura>) q.executeList();
+	}
+	//------------------------------------------------------------------
+	// MÉTODOS
+	//------------------------------------------------------------------
+	
+	/**
+	 * Crea y ejecuta una sentencia sql para aumentar el costo de una factura en la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param costoAdicional - El costo que se desea aumentar
+	 * @param idFactura - El identificador de la factura
+	 * @return El número de tuplas modificadas
+	 */
+	public long aumentarCostoFactura(PersistenceManager pm, double costoAdicional, long idFactura)
+	{
+		 Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlFactura() + " SET costototal = costototal + ? WHERE idfactura = ?");
+	     q.setParameters(costoAdicional, idFactura);
+	     return (long) q.executeUnique(); 
+	}
+	
+	//------------------------------------------------------------------
+	// CONSULTAS
+	//------------------------------------------------------------------
+	/**
+	 * Crea y ejecuta una sentencia para consultar el dinero ganado por una sucursal en un rango de tiempo de la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param fechaInicio - Fecha de inicio de la consulta
+	 * @param fechaFin - Fecha de fin de consulta
+	 * @return Una lista de objetos, de tamñano 3.
+	 */
+	public List<Object> dineroSucursalEnRango(PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin)
+	{
+		Query q = pm.newQuery(SQL, "SELECT SUM(fac.costototal) AS dinerorecolectado, direccionsucursal, ciudad "
+				+ "FROM " + persistencia.getSqlFactura() + " fac"
+				+ "WHERE fac.fecha BETWEEN ? AND ? "
+				+ "GROUP BY direccionsucursal, ciudad");
+		q.setResultClass(Object.class);
+		q.setParameters(fechaInicio, fechaFin);
+		return (List<Object>) q.executeList();
+	}
+	
 }

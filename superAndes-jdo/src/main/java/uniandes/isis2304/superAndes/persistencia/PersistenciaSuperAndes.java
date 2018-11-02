@@ -52,7 +52,6 @@ public class PersistenciaSuperAndes {
 	private SQLEmpresa sqlEmpresa;
 	private SQLEstante sqlEstante;
 	private SQLFactura sqlFactura ;
-	private SQLHistorialCompras sqlHistorialCompras ;
 	private SQLOrdenPedido sqlOrdenPedido ;
 	private SQLPedidoProducto sqlPedidoProducto;
 	private SQLPersonaNatural sqlPersonaNatural ;
@@ -62,7 +61,6 @@ public class PersistenciaSuperAndes {
 	private SQLProveedor sqlProveedor;
 	private SQLProveen sqlProveen;
 	private SQLSucursal sqlSucursal;
-	private SQLSucursalFactura sqlSucursalFactura;
 	private SQLTipoProducto sqlTipoProducto;
 	private SQLSucursalPromociones sqlSucursalPromociones;
 	private SQLPromoCantidades sqlPromoCantidades;
@@ -89,7 +87,6 @@ public class PersistenciaSuperAndes {
 		tablas.add("A_EMPRESA");
 		tablas.add("A_ESTANTE");
 		tablas.add("A_FACTURA");
-		tablas.add("A_HISTORIAL_COMPRAS");
 		tablas.add("A_ORDEN_PEDIDO");
 		tablas.add("A_PEDIDO_PRODUCTO");
 		tablas.add("A_PERSONA_NATURAL");
@@ -98,7 +95,6 @@ public class PersistenciaSuperAndes {
 		tablas.add("A_PROVEEDOR");
 		tablas.add("A_PROVEEN");
 		tablas.add("A_SUCURSAL");
-		tablas.add("A_FACTURAS");
 		tablas.add("A_TIPO_PRODUCTO");
 		tablas.add("A_PRODUCTO_CATEGORIA");
 		tablas.add("A_PRODUCTOS_OFRECIDOS");
@@ -180,7 +176,6 @@ public class PersistenciaSuperAndes {
 		sqlEmpresa = new SQLEmpresa(this);
 		sqlEstante = new SQLEstante(this);
 		sqlFactura = new SQLFactura(this);
-		sqlHistorialCompras = new SQLHistorialCompras(this);
 		sqlOrdenPedido = new SQLOrdenPedido(this);
 		sqlPedidoProducto = new SQLPedidoProducto(this);
 		sqlPersonaNatural = new SQLPersonaNatural(this);
@@ -189,7 +184,6 @@ public class PersistenciaSuperAndes {
 		sqlProveedor = new SQLProveedor(this);
 		sqlProveen = new SQLProveen(this);
 		sqlSucursal = new SQLSucursal(this);
-		sqlSucursalFactura = new SQLSucursalFactura(this);
 		sqlTipoProducto = new SQLTipoProducto(this);
 		sqlProductosOfrecidos = new SQLProductosOfrecidos(this);
 		sqlSucursalPromociones = new SQLSucursalPromociones(this);
@@ -241,81 +235,73 @@ public class PersistenciaSuperAndes {
 		return tablas.get(9);
 	}
 
-	public String getSqlHistorialCompras() {
+	public String getSqlOrdenPedido() {
 		return tablas.get(10);
 	}
 
-	public String getSqlOrdenPedido() {
+	public String getSqlPedidoProducto() {
 		return tablas.get(11);
 	}
 
-	public String getSqlPedidoProducto() {
+	public String getSqlPersonaNatural() {
 		return tablas.get(12);
 	}
 
-	public String getSqlPersonaNatural() {
+	public String getSqlProducto() {
 		return tablas.get(13);
 	}
 
-	public String getSqlProducto() {
+	public String getSqlPromocion() {
 		return tablas.get(14);
 	}
 
-	public String getSqlPromocion() {
+	public String getSqlProveedor() {
 		return tablas.get(15);
 	}
 
-	public String getSqlProveedor() {
+	public String getSqlProveen() {
 		return tablas.get(16);
 	}
 
-	public String getSqlProveen() {
+	public String getSqlSucursal() {
 		return tablas.get(17);
 	}
 
-	public String getSqlSucursal() {
+	public String getSqlTipoProducto() {
 		return tablas.get(18);
 	}
 
-	public String getSqlSucursalFactura() {
-		return tablas.get(19);
-	}
-
-	public String getSqlTipoProducto() {
-		return tablas.get(20);
-	}
-
 	public String getSqlProductosOfrecidos() {
-		return tablas.get(21);
+		return tablas.get(19);
 	}
 
 	public String getSqlSucursalPromociones()
 	{
-		return tablas.get(22);
+		return tablas.get(20);
 	}
 
 	public String getSqlPromoCantidades()
 	{
-		return tablas.get(23);
+		return tablas.get(21);
 	}
 
 	public String getSqlPromoUnidades()
 	{
-		return tablas.get(24);
+		return tablas.get(21);
 	}
 
 	public String getSqlPromoDescuento()
 	{
-		return tablas.get(25);
+		return tablas.get(22);
 	}
 
 	public String getSqlPromoUnidadDescuento()
 	{
-		return tablas.get(26);
+		return tablas.get(23);
 	}
 	public String getSecuenciaPromociones()
 	{
-		return tablas.get(27);
+		return tablas.get(24);
 	}
 
 	/**
@@ -834,7 +820,7 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar los FACTURA
 	//---------------------------------------------------------------------
-	public Factura adicionarFactura(double costoTotal, Timestamp fecha)
+	public Factura adicionarFactura(double costoTotal, Timestamp fecha, String correoCliente, String ciudad, String direccion)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -842,11 +828,11 @@ public class PersistenciaSuperAndes {
 		{
 			tx.begin();
 			long idFactura = nextvalPedidos();
-			long tuplasInsertadas = sqlFactura.adicionarFactura(pm, idFactura, costoTotal, fecha);
+			long tuplasInsertadas = sqlFactura.adicionarFactura(pm, idFactura, costoTotal, fecha, correoCliente, ciudad, direccion);
 			tx.commit();
 
 			Log.trace("Insercción factura: " + idFactura+": "+tuplasInsertadas);
-			return new Factura(idFactura, fecha, costoTotal);
+			return new Factura(idFactura, fecha, costoTotal, correoCliente);
 		}
 		catch(Exception e)
 		{
@@ -893,31 +879,6 @@ public class PersistenciaSuperAndes {
 			if (tx.isActive())
 			{
 				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-	public int buscarCantidadActualEstante(long idEstante)
-	{
-		PersistenceManager pm = managerFactory.getPersistenceManager();
-		Transaction t = pm.currentTransaction();
-		try 
-		{
-			t.begin();
-			int q = sqlCantidadEnEstantes.buscarCantidadActual(pm, idEstante);
-			t.commit();
-			return q;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return 0;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
 			}
 			pm.close();
 		}
@@ -1015,80 +976,18 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar los SUCURSAL FACTURA
 	//---------------------------------------------------------------------
-	public SucursalFactura adicionarSucursalFactura(long idFactura, String direccion, String ciudad)
+	public List<Object> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long tuplasInsertadas = sqlSucursalFactura.adicionarSucursalFactura(pm, idFactura, direccion, ciudad);
-			tx.commit();
-
-			Log.trace("Insercción facturas sucursal: " + direccion + ", "+ ciudad +", "+ idFactura +": "+tuplasInsertadas);
-			return new SucursalFactura(direccion, ciudad, idFactura);
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-	public List<String> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
-	{
-		PersistenceManager pm = managerFactory.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			List<String> sucursales = sqlSucursalFactura.dineroSucursalEnRango(pm, fechaInicio, fechaFin);
+			List<Object> sucursales = sqlFactura.dineroSucursalEnRango(pm, fechaInicio, fechaFin);
 			tx.commit();
 
 			Log.trace("Consulta dinero recolectado por sucursales en periodo de tiempo: " + fechaInicio + ", "+fechaFin);
 			return sucursales;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	//---------------------------------------------------------------------
-	// Métodos para manejar los HISTORIALES COMPRAS
-	//---------------------------------------------------------------------
-
-	//---------------------------------------------------------------------
-	// Métodos para manejar los HISTORIAL COMPRAS
-	//---------------------------------------------------------------------
-	public HistorialCompras adicionarHistorialCompra(String correo, long idFactura)
-	{
-		PersistenceManager pm = managerFactory.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long tuplasInsertadas = sqlHistorialCompras.adicionarHistorialCompras(pm, correo, idFactura);
-			tx.commit();
-
-			Log.trace("Insercción historial compra: " + correo +", "+ idFactura +": "+tuplasInsertadas);
-			return new HistorialCompras(correo, idFactura);
 		}
 		catch(Exception e)
 		{

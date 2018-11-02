@@ -27,6 +27,11 @@ public interface VOFactura {
 	public double getCostoTotal();
 	
 	/**
+	 * @return Correo del cliente
+	 */
+	public String getCorreoCliente();
+	
+	/**
 	 * @return Una cadena con la información básica de la factura.
 	 */
 	public String toString();
