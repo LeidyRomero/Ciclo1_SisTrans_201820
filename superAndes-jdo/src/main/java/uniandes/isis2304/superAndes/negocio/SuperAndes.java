@@ -190,13 +190,13 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar la bodega "+ pDireccionBodega+", "+pDireccionSucursal+","+pCiudad);
 		return bodega;
 	}
-	
+
 	public String buscarIndiceBodega(String pDireccionSucursal, String pCiudadSucursal)
 	{
 		String mensaje = "";
 		Log.info("Iniciando calculo de indice de bodega ");
 		List<Object[]> indicesBodegas = pp.calcularIndicesOcupacionBodegas(pCiudadSucursal,pDireccionSucursal);
-		
+
 		//TODO como manejar objects
 		for(int i = 0;i<indicesBodegas.size();i++)
 		{
@@ -268,7 +268,7 @@ public class SuperAndes {
 		Log.info("Iniciando calculo de indice de los estantes ");
 		List<Object> indicesEstantes = pp.calcularIndicesOcupacionEstantes(pCiudad,pDireccion);
 		Log.info("Saliendo de calculo de indice de los estantes");
-		
+
 		//TODO como manejar objects
 		for(int i = 0;i<indicesEstantes.size();i++)
 		{
@@ -358,11 +358,11 @@ public class SuperAndes {
 		Producto producto = pp.buscarProductoCodigoBarras(pCodigoBarras);
 		Factura factura = pp.adicionarFactura(pCantidad*producto.getPrecioUnitario(), new Timestamp(System.currentTimeMillis()), correo, ciudad, direccion);
 		Comprados comprado = pp.adicionarComprados(pCodigoBarras, pCantidad, pCantidad*producto.getPrecioUnitario(), factura.getIdFactura());
-		
+
 		//TODO Maria  actualizar inventario
 		pp.disminuirCantidadEnEstantes(pCantidad, producto);
 		//pp.disminuirCantidadEnBodega();
-		
+
 		Log.info("Saliendo de registrar comprados "+ pCodigoBarras+", "+pCodigoBarras);
 		return comprado;
 	}
@@ -550,7 +550,7 @@ public class SuperAndes {
 		Log.info("Saliendo de eliminar proveedor "+ nitProveedor);
 		return proveedor;
 	}
-	
+
 	public Proveedor darProveedorPorNit(int nitProveedor)
 	{
 		Log.info("Dar información de un proveedor por nit: "+nitProveedor);
@@ -623,5 +623,36 @@ public class SuperAndes {
 		Log.info("Actualizando inventario"+ pCantidad+","+pProducto);
 		pp.aumentarCantidadEnEstantes(pCantidad, pProducto);
 		Log.info("Saliendo de actualizar inventario"+ pCantidad+", "+pProducto);
+	}
+	//---------------------------------------------------------------------
+	// Métodos para manejar PRODUCTOS EN CARRITO
+	//---------------------------------------------------------------------
+	public long adicionarProductoAlCarrito(String pCodigo, long idCarrito, int pCantidad)
+	{
+		Log.info("Agregar productos al carrito "+pCodigo+", "+ idCarrito+", "+ pCantidad);
+		long numero = pp.adicionarProductoAlCarrito(pCodigo, idCarrito, pCantidad);
+		Log.info("Saliendo de agregar productos al carrito "+pCodigo+", "+ idCarrito+", "+ pCantidad);
+		return numero;
+	}
+	public long eliminarProductoDelCarrito(String pCodigo, long idCarrito)
+	{
+		Log.info("Eliminar productos al carrito "+pCodigo+", "+ idCarrito);
+		long numero = pp.eliminarProductoDelCarrito(pCodigo, idCarrito);
+		Log.info("Saliendo de eliminar productos al carrito "+pCodigo+", "+ idCarrito);
+		return numero;
+	}
+	public long eliminarCantidadProductoDelCarrito(String pCodigo, long idCarrito, int pCantidad)
+	{
+		Log.info("Eliminar cantidad productos al carrito "+pCodigo+", "+ idCarrito);
+		long numero = pp.eliminarCantidadProductoDelCarrito(pCodigo, idCarrito, pCantidad);
+		Log.info("Saliendo de eliminar cantidad productos al carrito "+pCodigo+", "+ idCarrito);
+		return numero;
+	}
+	public List<ProductosCarrito> buscarProductosCarritoPorId( long idCarrito)
+	{
+		Log.info("Buscar productos de un carrito "+ idCarrito);
+		List<ProductosCarrito> productos = pp.buscarProductosCarrito(idCarrito);
+		Log.info("Saliendo de buscar productos de un carrito "+ idCarrito);
+		return productos;
 	}
 }
