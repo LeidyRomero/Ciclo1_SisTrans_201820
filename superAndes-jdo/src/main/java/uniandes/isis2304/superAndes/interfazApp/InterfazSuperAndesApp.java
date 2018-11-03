@@ -1095,14 +1095,14 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			{
 				if(!minField.getText().equals("") && !maxField.getText().equals(""))
 				{
-					List<String> list = superAndes.dineroSucursalEnRango(Timestamp.valueOf(minField.getText()+" 00:00:00"), Timestamp.valueOf(maxField.getText()+" 00:00:00"));
+					List<Object> list = superAndes.dineroSucursalEnRango(Timestamp.valueOf(minField.getText()+" 00:00:00"), Timestamp.valueOf(maxField.getText()+" 00:00:00"));
 					if(list == null)
 					{
 						throw new Exception("No se pudo consultar el dinero de las sucursales en el periodo: " + minField.getText() + ", "+maxField.getText());
 					}
 
 					String resultado = "En consultaDinero \n\n";
-					for(String actual: list)
+					for(Object actual: list)
 					{
 						resultado+= actual+"\n";
 					}
@@ -1128,6 +1128,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	{
 		JTextField direccionField = new JTextField(15);
 		JTextField ciudadField = new JTextField(15);
+		JTextField correoField = new JTextField(15);
 
 		JPanel aux = new JPanel();
 		aux.add(new JLabel("Dirección sucursal:"));
@@ -1135,9 +1136,13 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		aux.add(Box.createHorizontalStrut(15)); // a spacer
 		aux.add(new JLabel("Ciudad:"));
 		aux.add(ciudadField);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Correo electrónico:"));
+		aux.add(correoField);
 
 		int result = JOptionPane.showConfirmDialog(null, aux,"Registrar carrito", JOptionPane.OK_CANCEL_OPTION);
-		if (result == JOptionPane.OK_OPTION) {
+		if (result == JOptionPane.OK_OPTION) 
+		{
 
 			ArrayList<Producto> productos = superAndes.buscarProductosSucursal(direccionField.getText(), ciudadField.getText());
 			if(productos!=null)
@@ -1154,19 +1159,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	public void abandonarCarrito()
 	{
 
-	}
-	public void agregarProductoAlCarrito(int pCantidad,Producto pProducto)
-	{
-		panelDatos.agregarProducto(pCantidad, pProducto);
-		superAndes.disminuirProductosEnEstante(pCantidad, pProducto);
-
-		tiempoUltimaOperacion = System.currentTimeMillis();
-	}
-	public void devolverProductoAlEstante(int pCantidad,Producto pProducto)
-	{
-		panelDatos.quitarProducto(pCantidad, pProducto);
-		superAndes.aumentarProductosEnEstante(pCantidad, pProducto);
-		tiempoUltimaOperacion = System.currentTimeMillis();
 	}
 	public static void verificarTiempoInactividad()
 	{

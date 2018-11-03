@@ -263,10 +263,10 @@ INSERT INTO A_TIPO_PRODUCTO(nombretipo,nombrecategoria) VALUES('J','Lacteos');
 --INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('',,,);
 ------------------------------------------------------------------------------------
 --CANTIDAD EN ESTANTES
---INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantiadactual, cantidadminima) VALUES ('',0,0,0);
---INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantiadactual, cantidadminima) VALUES ('',0,0,0);
---INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantiadactual, cantidadminima) VALUES ('',0,0,0);
---INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantiadactual, cantidadminima) VALUES ('',0,0,0);
+INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantidadactual, cantidadminima) VALUES ('AAAA',2,10,1);
+INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantidadactual, cantidadminima) VALUES ('BBBB',3,10,1);
+INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantidadactual, cantidadminima) VALUES ('0000',2,10,1);
+INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantidadactual, cantidadminima) VALUES ('GGGG',3,10,1);
 --INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantiadactual, cantidadminima) VALUES ('',0,0,0);
 --INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantiadactual, cantidadminima) VALUES ('',0,0,0);
 --INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantiadactual, cantidadminima) VALUES ('',0,0,0);
@@ -463,3 +463,41 @@ INSERT INTO A_PROMOCIONES (idpromocion, direccionsucursal, ciudad) VALUES (21, '
 INSERT INTO A_PROMOCIONES (idpromocion, direccionsucursal, ciudad) VALUES (22, 'CLL 34 43-65', 'Medellín');
 INSERT INTO A_PROMOCIONES (idpromocion, direccionsucursal, ciudad) VALUES (23, 'CR 8 13-68', 'Cali');
 INSERT INTO A_PROMOCIONES (idpromocion, direccionsucursal, ciudad) VALUES (24, 'CL 50 26A-8 SUR', 'Cartagena');
+
+------------------------------------------------------------------------------------
+--CARRITO
+INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (1, 'CR 139 139-99', 'Bucaramanga','empresa1@hotmail.com');
+INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (7, 'CR 139 139-99', 'Bucaramanga','empresa4@hotmail.com');
+INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (4, 'CLL 34 43-65', 'Medellín','lromero@gmail.com');
+INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (10, 'CLL 34 43-65', 'Medellín','socampo@gmail.com');
+INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (5, 'CL 7 5-74', 'Bogotá','empresa3@hotmail.com');
+INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (9, 'CL 7 5-74', 'Bogotá','empresa5@hotmail.com');
+INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (6, 'CR 13 13-9', 'Arauca','amalvarez@gmail.com');
+INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (8, 'CR 13 13-9', 'Arauca','nvargas@gmail.com');
+INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (2, 'CR 8 13-68', 'Cali', 'mocampo@gmail.com');
+INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (3, 'CL 50 26A-8 SUR', 'Cartagena','empresa2@hotmail.com');
+
+------------------------------------------------------------------------------------
+--PRODUCTOS CARRITO
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (1,'AAAA',2);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (1,'BBBB',3);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (2,'CCCC',2);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (2,'DDDD',3);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (3,'EEEE',2);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (3,'FFFF',3);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (4,'0000',2);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (4,'GGGG',3);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (5,'0ABC',2);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (5,'EEEC',3);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (6,'EEEC',2);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (6,'0ABC',3);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (7,'GGGG',2);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (7,'0000',3);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (8,'FFFF',2);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (8,'EEEE',3);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (9,'DDDD',2);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (9,'CCCC',3);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (10,'BBBB',2);
+INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (10,'AAAA',3);
+
+COMMIT;
