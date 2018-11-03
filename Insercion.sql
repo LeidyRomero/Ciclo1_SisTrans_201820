@@ -55,14 +55,14 @@ INSERT INTO A_PROVEEDOR (nitproveedor, nombreproveedor, calificacionproveedor) V
 --'CL 50 26A-8 SUR', 'Cartagena'
 INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Perecederos', 4000, 2600, 'CL 26 #68-10', 'CR 139 139-99', 'Bucaramanga');
 INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Congelados', 3500, 3000, 'DIAG 73 48-22', 'CR 139 139-99', 'Bucaramanga');
-INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('No perecederos', 10, 15, 'TRANS. 95C 21-03', 'CL 50 26A-8 SUR', 'Cartagena');
-INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Aseo', 10000, 6578, 'CR 65 6-07', 'CR 139 139-99', 'Bucaramanga');
-INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Frutas', 40000, 2000000, 'CL 260 #67-15', 'CR 139 139-99', 'Bucaramanga');
-INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Verduras', 18700, 605000, 'DIAG 7 8-2', 'CR 139 139-99', 'Bucaramanga');
+INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('No perecederos', 10, 15, 'TRANS. 95C 21-03', 'CR 13 13-9', 'Arauca');
+INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Aseo', 10000, 6578, 'CR 65 6-07', 'CL 7 5-74', 'Bogotá');
+INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Frutas', 40000, 2000000, 'CL 260 #67-15', 'CLL 34 43-65', 'Medellín');
+INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Verduras', 18700, 605000, 'DIAG 7 8-2', 'CR 8 13-68', 'Cali');
 INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Lacteos', 84526, 987654, 'TRANS. 9A 1-4', 'CL 50 26A-8 SUR', 'Cartagena');
-INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Dulces', 50000, 8987878, 'CR 87 41-66', 'CR 139 139-99', 'Bucaramanga');
+INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Dulces', 50000, 8987878, 'CR 87 41-66', 'CR 13 13-9', 'Arauca');
 INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Cuidado personal', 3567000, 8999900, 'CL 35 #94-73', 'CR 13 13-9', 'Arauca');
-INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Carnes', 258, 300, 'DIAG 91 4-54', 'CR 13 13-9','Arauca');
+INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Carnes', 258, 300, 'DIAG 91 4-54', 'CL 7 5-74', 'Bogotá');
 ------------------------------------------------------------------------------------
 --CATEGORIA
 INSERT INTO A_CATEGORIA(nombrecategoria) VALUES ('Congelados');
@@ -173,14 +173,14 @@ INSERT INTO A_PRODUCTOS_OFRECIDOS (direccionsucursal, ciudad, codigobarras, nive
 --'CL 50 26A-8 SUR', 'Cartagena'
 INSERT INTO a_cantidad_en_bodega (codigobarras, direccionbodega, direccionsucursal, ciudad, cantidadactual, cantidadminima) VALUES ('FFFF', 'CL 26 #68-10', 'CR 139 139-99', 'Bucaramanga', 2000, 100);
 INSERT INTO a_cantidad_en_bodega (codigobarras, direccionbodega, direccionsucursal, ciudad, cantidadactual, cantidadminima) VALUES ('AAAA', 'CL 26 #68-10', 'CR 139 139-99', 'Bucaramanga', 3000, 250);
-INSERT INTO a_cantidad_en_bodega (codigobarras, direccionbodega, direccionsucursal, ciudad, cantidadactual, cantidadminima) VALUES ('0000', 'CR 65 6-07', 'CR 139 139-99', 'Bucaramanga', 8500, 30);
+INSERT INTO a_cantidad_en_bodega (codigobarras, direccionbodega, direccionsucursal, ciudad, cantidadactual, cantidadminima) VALUES ('EEEC', 'CR 65 6-07', 'CR 139 139-99', 'Bucaramanga', 8500, 30);
 INSERT INTO a_cantidad_en_bodega (codigobarras, direccionbodega, direccionsucursal, ciudad, cantidadactual, cantidadminima) VALUES ('0ABC', 'TRANS. 95C 21-03', 'CL 50 26A-8 SUR', 'Cartagena', 4600, 1000);
-INSERT INTO a_cantidad_en_bodega (codigobarras, direccionbodega, direccionsucursal, ciudad, cantidadactual, cantidadminima) VALUES ('EEEC', 'DIAG 73 48-22', 'CR 139 139-99', 'Bucaramanga', 2000, 100);
+INSERT INTO a_cantidad_en_bodega (codigobarras, direccionbodega, direccionsucursal, ciudad, cantidadactual, cantidadminima) VALUES ('0000', 'DIAG 73 48-22', 'CR 139 139-99', 'Bucaramanga', 2000, 100);
 INSERT INTO a_cantidad_en_bodega (codigobarras, direccionbodega, direccionsucursal, ciudad, cantidadactual, cantidadminima) VALUES ('GGGG', 'CL 26 #68-10', 'CR 139 139-99', 'Bucaramanga', 2000, 100);
---INSERT INTO a_cantidad_en_bodega (codigobarras,direccionbodega,direccionsucursal,ciudad,cantidadactual,cantidadminima) VALUES ('','','','',,);
---INSERT INTO a_cantidad_en_bodega (codigobarras,direccionbodega,direccionsucursal,ciudad,cantidadactual,cantidadminima) VALUES ('','','','',,);
---INSERT INTO a_cantidad_en_bodega (codigobarras,direccionbodega,direccionsucursal,ciudad,cantidadactual,cantidadminima) VALUES ('','','','',,);
---INSERT INTO a_cantidad_en_bodega (codigobarras,direccionbodega,direccionsucursal,ciudad,cantidadactual,cantidadminima) VALUES ('','','','',,);
+INSERT INTO a_cantidad_en_bodega (codigobarras,direccionbodega,direccionsucursal,ciudad,cantidadactual,cantidadminima) VALUES ('BBBB','TRANS. 9A 1-4','CL 50 26A-8 SUR','Cartagena',5000,50);
+INSERT INTO a_cantidad_en_bodega (codigobarras,direccionbodega,direccionsucursal,ciudad,cantidadactual,cantidadminima) VALUES ('CCCC','CL 35 #94-73','CR 13 13-9','Arauca',9875,365);
+INSERT INTO a_cantidad_en_bodega (codigobarras,direccionbodega,direccionsucursal,ciudad,cantidadactual,cantidadminima) VALUES ('DDDD','DIAG 7 8-2','CR 139 139-99','Bucaramanga',10000,5471);
+INSERT INTO a_cantidad_en_bodega (codigobarras,direccionbodega,direccionsucursal,ciudad,cantidadactual,cantidadminima) VALUES ('EEEE','CR 87 41-66','CR 139 139-99','Bucaramanga',3950,395);
 ------------------------------------------------------------------------------------
 --ESTANTE
 -- Estas son las sucursales que ofrecen productos, todas ofrecen todos los productos
@@ -190,41 +190,40 @@ INSERT INTO a_cantidad_en_bodega (codigobarras, direccionbodega, direccionsucurs
 --'CLL 34 43-65', 'Medellín'
 --'CR 8 13-68', 'Cali'
 --'CL 50 26A-8 SUR', 'Cartagena'
-INSERT INTO a_estante (tipoestante, volumenestante, idestante, pesoestante, nivelabastecimiento, direccionsucursal, ciudad) VALUES ('Congelados', 100, 2, 50, 10, 'CR 139 139-99', 'Bucaramanga');
-INSERT INTO a_estante (tipoestante, volumenestante, idestante, pesoestante, nivelabastecimiento, direccionsucursal, ciudad) VALUES ('No perecederos', 200, 3, 78, 90, 'CR 139 139-99', 'Bucaramanga');
---INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('',,,,,'','');
---INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('',,,,,'','');
---INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('',,,,,'','');
---INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('',,,,,'','');
---INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('',,,,,'','');
---INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('',,,,,'','');
---INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('',,,,,'','');
---INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('',,,,,'','');
+INSERT INTO a_estante (tipoestante, volumenestante, idestante, pesoestante, nivelabastecimiento, direccionsucursal, ciudad) VALUES ('Congelados', 100, 1, 50, 10, 'CR 139 139-99', 'Bucaramanga');
+INSERT INTO a_estante (tipoestante, volumenestante, idestante, pesoestante, nivelabastecimiento, direccionsucursal, ciudad) VALUES ('No perecederos', 200, 2, 78, 90, 'CR 139 139-99', 'Bucaramanga');
+INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('Congelados',300,3,20,'CR 13 13-9','Arauca');
+INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('Aseo',400,4,700,30,'CL 50 26A-8 SUR','Cartagena');
+INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('Frutas',500,5,600,40,'CL 7 5-74','Bogotá');
+INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('Verduras',600,6,500,50,'CLL 34 43-65','Medellín');
+INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('Lacteos',700,7,400,60,'CL 50 49-33','Medellín');
+INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('Dulces',800,8,300,70,'CR 8 13-68','Cali');
+INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('Cuidado personal',900,9,200,80,'AV 6A NORTE 35-47','Cali');
+INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('Carnes',1000,10,100,90,'AV 6A NORTE 35-47','Cali');
 ------------------------------------------------------------------------------------
 --PERSONA_NATURAL
---INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('',);
---INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('',);
---INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('',);
---INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('',);
---INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('',);
---INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('',);
---INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('',);
---INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('',);
---INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('',);
---INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('',);
---INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('',);
+INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('ahernandez@gmail.com',100524874);
+INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('amalvarez@gmail.com',97464321654);
+INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('drivera@gmail.com',544554);
+INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('dsavedra@gmail.com',64654321);
+INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('fmaya@gmail.com',65465445);
+INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('jlrosales@gmail.com',9787887978);
+INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('lromero@gmail.com',3654044);
+INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('mocampo@gmail.com',45634210);
+INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('nvargas@gmail.com',88456556);
+INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('socampo@gmail.com',7774123122);
 ------------------------------------------------------------------------------------
 --EMPRESA
---INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('',,'');
---INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('',,'');
---INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('',,'');
---INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('',,'');
---INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('',,'');
---INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('',,'');
---INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('',,'');
---INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('',,'');
---INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('',,'');
---INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('',,'');
+INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa10@hotmail.com',111111111,'CLL 1 1-1');
+INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa1@hotmail.com',222222222,'CLL 1 1-2');
+INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa2@hotmail.com',333333333,'CLL 1 1-3');
+INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa3@hotmail.com',444444444,'CLL 1 1-4');
+INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa4@hotmail.com',555555555,'CLL 1 1-5');
+INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa5@hotmail.com',66666666,'CLL 1 1-6');
+INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa6@hotmail.com',77777777,'CLL 1 1-7');
+INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa7@hotmail.com',8888888888,'CLL 1 1-8');
+INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa8@hotmail.com',9999999999,'CLL 1 1-9');
+INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa9@hotmail.com',654654645454,'CLL 1 1-10');
 ------------------------------------------------------------------------------------
 --TIPO_PRODUCTO
 INSERT INTO A_TIPO_PRODUCTO(nombretipo,nombrecategoria) VALUES('A','Aseo');
@@ -251,16 +250,46 @@ INSERT INTO A_TIPO_PRODUCTO(nombretipo,nombrecategoria) VALUES('J','Lacteos');
 --INSERT INTO A_PEDIDO_PRODUCTO(codigobarras,idpedido,cantidadproducto,precioproducto) VALUES('',,,);
 ------------------------------------------------------------------------------------
 --COMPRADOS
---INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('',,,);
---INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('',,,);
---INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('',,,);
---INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('',,,);
---INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('',,,);
---INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('',,,);
---INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('',,,);
---INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('',,,);
---INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('',,,);
---INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('',,,);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('AAAA',1,10,10*800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('BBBB',2,5,5*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('CCCC',3,4,4*1800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('DDDD',4,3,3*5000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEC',5,2,2*2900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEE',6,1,1*2000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('FFFF',7,9,9*1500);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('GGGG',8,8,8*900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0ABC',9,7,7*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0000',10,6,6*2700);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('AAAA',11,11,11*800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('BBBB',12,20,20*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('CCCC',13,19,19*1800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('DDDD',14,18,18*5000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEC',15,17,17*2900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEE',16,16,16*2000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('FFFF',17,15,15*1500);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('GGGG',18,14,14*900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0ABC',19,13,13*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0000',20,12,12*2700);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('AAAA',21,30,30*800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('BBBB',22,31,31*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('CCCC',23,3,3*1800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('DDDD',24,2,2*5000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEC',25,1,1*2900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEE',26,10,10*2000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('FFFF',27,9,9*1500);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('GGGG',28,8,8*900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0ABC',29,7,7*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0000',30,6,6*2700);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('AAAA',31,5,5*800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('BBBB',32,4,4*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('CCCC',33,3,3*1800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('DDDD',34,2,2*5000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEC',35,1,1*2900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEE',36,11,11*2000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('FFFF',37,12,12*1500);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('GGGG',38,13,13*900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0ABC',39,14,14*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0000',40,15,15*2700);
 ------------------------------------------------------------------------------------
 --CANTIDAD EN ESTANTES
 INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantidadactual, cantidadminima) VALUES ('AAAA',2,10,1);
