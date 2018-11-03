@@ -149,10 +149,11 @@ class SQLCantidadEnEstantes
 	 * @param pCodBarras - Código de barras del producto
 	 * @param idEstante - Id del estante del producto
 	 */
-	public void aumentarCantidadEnEstantes(PersistenceManager pm, int pCantidad, String pCodBarras, long idEstante)
+	public long aumentarCantidadEnEstantes(PersistenceManager pm, int pCantidad, String pCodBarras, long idEstante)
 	{
 		Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlCantidadEnEstantes() +" SET cantidadactual = cantidadactual + ? WHERE codbarras = ? AND idestante = ?");
 		q.setParameters(pCantidad, pCodBarras, idEstante);
+		return (long) q.executeUnique();
 	}
 	
 	/**
@@ -162,10 +163,11 @@ class SQLCantidadEnEstantes
 	 * @param pCodBarras - Código de barras del producto
 	 * @param idEstante - Id del estante del producto
 	 */
-	public void disminuirCantidadEnEstantes(PersistenceManager pm, int pCantidad, String pCodBarras, long idEstante)
+	public long disminuirCantidadEnEstantes(PersistenceManager pm, int pCantidad, String pCodBarras, long idEstante)
 	{
 		Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlCantidadEnEstantes() +" SET cantidadactual = cantidadactual - ? WHERE codbarras = ? AND idestante = ?");
 		q.setParameters(pCantidad, pCodBarras, idEstante);
+		return (long) q.executeUnique();
 	}
 	
 	

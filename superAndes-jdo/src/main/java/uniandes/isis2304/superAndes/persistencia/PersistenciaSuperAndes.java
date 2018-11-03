@@ -21,21 +21,35 @@ import uniandes.isis2304.superAndes.negocio.*;
 
 public class PersistenciaSuperAndes {
 
-	private static Logger Log = Logger.getLogger(PersistenciaSuperAndes.class.getName());
+	//---------------------------------------------------
+	// CONSTANTES
+	//---------------------------------------------------
 	/**
-	 * Atributo privado que es el único objeto de la clase - Patrón SINGLETON
+	 * Logger para escribir la traza de la ejecución
 	 */
-	private static PersistenciaSuperAndes instance;
+	private static Logger Log = Logger.getLogger(PersistenciaSuperAndes.class.getName());
+
 	/**
 	 * Cadena para indicar el tipo de sentencias que se va a utilizar en una consulta
 	 */
 	public final static String SQL = "javax.jdo.query.SQL";
 
+	//---------------------------------------------------
+	// CONSTANTES
+	//---------------------------------------------------
 	/**
-	 * 
+	 * Atributo privado que es el único objeto de la clase - Patrón SINGLETON
+	 */
+	private static PersistenciaSuperAndes instance;
+
+	/**
+	 * Fábrica de Manejadores de persistencia, para el manejo correcto de las transacciones
 	 */
 	private PersistenceManagerFactory managerFactory;
 
+	/**
+	 * Arreglo de cadenas con los nombres de las tablas de la base de datos
+	 */
 	private List <String> tablas;
 
 	/**
@@ -68,7 +82,9 @@ public class PersistenciaSuperAndes {
 	private SQLPromoUnidades sqlPromoUnidades;
 	private SQLPromoDescuento sqlPromoDescuento;
 
-
+	//---------------------------------------------------
+	// Métodos del MANEJADOR DE PERSISTENCIA
+	//---------------------------------------------------
 	/**
 	 * Constructor privado con valores por defecto - Patron SINGLETON
 	 */
@@ -107,16 +123,23 @@ public class PersistenciaSuperAndes {
 
 	}
 
+	/**
+	 * Constructor privado, que recibe los nombres de las tablas en un objeto Json - Patrón SINGLETON
+	 * @param tableConfig - Objeto Json que contiene los nombres de las tablas y de la unidad de persistencia a manejar
+	 */
 	private PersistenciaSuperAndes(JsonObject tableConfig)
 	{
 		crearClasesSQL();
 		tablas = leerNombresTablas(tableConfig);
+
 		String unidadPersistencia = tableConfig.get("unidadPersistencia").getAsString();
 		Log.trace("Accediendo a la unidad de persistencia: "+ unidadPersistencia);
 		managerFactory = JDOHelper.getPersistenceManagerFactory(unidadPersistencia);
 	}
 
-
+	/**
+	 * @return Retorna el único objeto PersistenciaSuperAndes existente - Patrón SINGLETON
+	 */
 	public static PersistenciaSuperAndes getInstance ()
 	{
 		if (instance == null)
@@ -139,6 +162,9 @@ public class PersistenciaSuperAndes {
 		return instance;
 	}
 
+	/**
+	 * Cierra la conexión con la base de datos
+	 */
 	public void cerrarUnidadPersistencia()
 	{
 		managerFactory.close();
@@ -485,11 +511,23 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Cliente
+	 * @return La lista de objetos Cliente, construidos con base a las tuplas de la tabla CLIENTE
+	 */
 	public List<Cliente> buscarClientes()
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		return sqlCliente.darClientes(pm);
 	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Cliente
+	 * Adiciona entradas al log de la aplicación
+	 * @param correo . El correo del cliente
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna excepción.
+	 */
 	public long eliminarClientePorCorreo(String correo)
 
 	{
@@ -519,9 +557,29 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
+	/**
+	 * Método que consulta todas las tuplas en la tabla Cliente con un correo dado
+	 * @param correo - El correo del cliente
+	 * @return El objeto Cliente, construido con base en las tuplas de la tabla CLIENTE con el correo dado
+	 */
+	public Cliente darClientePorCorreo(String correo)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		return sqlCliente.darClientePorCorreo(pm, correo);
+	}
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar los SUCURSALES
 	//---------------------------------------------------------------------
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Sucursal
+	 * Adiciona entradas al log de la aplicación
+	 * @param tamanio - El tamaño de la sucursal
+	 * @param direccion - La dirección de la sucursal
+	 * @param ciudad - La ciudad de la sucursal
+	 * @param nombre - El nombre de la sucursal
+	 * @return El objeto Sucursal adicionado. null si ocurre alguna excepcion
+	 */
 	public Sucursal adicionarSucursal(String tamanio, String direccion, String ciudad, String nombre)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -549,37 +607,35 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Sucursal con una direccion y ciudad dadas
+	 * @param direccion - La dirección de la sucursal
+	 * @param ciudad - La ciudad de la sucursal
+	 * @return El objeto Sucursal, construido con base en las tuplas de la tabla SUCURSAL con la direccion y ciudad dada
+	 */
 	public Sucursal buscarSucursal(String direccion, String ciudad)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			Sucursal buscada = sqlSucursal.darSucursalPorDireccionYCiudad(pm, direccion, ciudad);
-			tx.commit();
-
-			Log.trace("Consulta sucursal: " + buscada.toString());
-			return buscada;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
+		return sqlSucursal.darSucursalPorDireccionYCiudad(pm, direccion, ciudad);
 	}
+
+	/**
+	 *Método que consulta todas las tuplas en la tabla Sucursal 
+	 * @return La lista de objetos Sucursal, construidos con base a las tuplas de la tabla SUCURSAL
+	 */
 	public List<Sucursal> buscarSucursales()
 	{
 		return sqlSucursal.darSucursales(managerFactory.getPersistenceManager());
 	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla de la tabla Sucursal
+	 * Adiciona entradas al log de la aplicación
+	 * @param direccion - La dirección de la sucursal
+	 * @param ciudad - La ciudad de la sucursal
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna excepción.
+	 */
 	public long eliminarSucursalPorDireccionYCiudad(String direccion, String ciudad)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -611,6 +667,17 @@ public class PersistenciaSuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar los PROMOCIÓN
 	//---------------------------------------------------------------------
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Promocion
+	 * Adiciona entradas al log de la aplicación
+	 * @param fechaInicio - Fecha de inicio de la promoción
+	 * @param fechaFin - Fecha de fin de la promoción
+	 * @param descripcion - Descripción de la promoción
+	 * @param codBarras - Código de barras de producto
+	 * @param uniDisponibles - Unidades disponibles para la promoción
+	 * @param uniVendidas - Unidades vendidas de la promoción
+	 * @return El objeto Promocion adicionada. null si ocurre alguna Excepción
+	 */
 	public Promocion adicionarPromocion(Timestamp fechaInicio, Timestamp fechaFin, String descripcion, String codBarras, int uniDisponibles, int uniVendidas)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -618,10 +685,10 @@ public class PersistenciaSuperAndes {
 		try
 		{
 			tx.begin();
-			//TODO Pedir la secuencia de Promociones
 			long idPromocion = nextvalPromociones();
 			//long tuplasInsertadas = sqlPromocion.adicionarPromocion(pm, fechaInicio, fechaFin, descripcion, codBarras, 24, uniVendidas, uniDisponibles);
 
+			//TODO Terminar de verificar los datos que llegan
 			if(descripcion.contains("cantidad, lleve"))
 			{
 				System.out.println(descripcion.substring(23, 24));
@@ -666,6 +733,12 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+
+	/**
+	 * Método que cambia, de manera transaccional, el estado de una tupla en la tabla Promoción con el identificador válido
+	 * Adiciona entradas al log de la aplicación
+	 * @param idPromocion - El identificador de la promoción
+	 */
 	public void finalizarPromocion(long idPromocion)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -673,10 +746,10 @@ public class PersistenciaSuperAndes {
 		try
 		{
 			tx.begin();
-			long tuplasInsertadas = sqlPromocion.finalizarPromocion(pm, idPromocion);
+			long tuplasModificadas = sqlPromocion.finalizarPromocion(pm, idPromocion);
 			tx.commit();
 
-			Log.trace("Insercción promocion: " + idPromocion +": "+tuplasInsertadas);
+			Log.trace("Modificación promocion: " + idPromocion +": "+tuplasModificadas);
 		}
 		catch(Exception e)
 		{
@@ -691,6 +764,10 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+
+	/**
+	 * Método que finaliza todas las promociones que deben ser finalizadas
+	 */
 	public void finalizarPromocionesPendientes()
 	{
 		// Cada vez que inicia el sistema debe verificar si hay promociones por finalizar
@@ -701,37 +778,41 @@ public class PersistenciaSuperAndes {
 			sqlPromocion.finalizarPromocion(pm, actual.getIdPromocion());
 		}
 	}
+
+	/**
+	 * Método que consulta las 20 promociones más populares de todo SuperAndes
+	 * @return La lista de objetos Promocion
+	 */
 	public List<Promocion> darPromocionesMasPopulares()
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			List<Promocion> proms = sqlPromocion.darPromocionesMasPopulares(pm);
-			tx.commit();
-
-			Log.trace("Consulta 20 promociones más populares: " + proms.size());
-			return proms;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
+		return sqlPromocion.darPromocionesMasPopulares(pm);
 	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla PROMOCION
+	 * @return La lista de objetos Promocion, construidos con base en las tuplas de la tabla PROMOCION
+	 */
 	public List<Promocion> darPromociones()
 	{
 		return sqlPromocion.darPromociones(managerFactory.getPersistenceManager());
 	}
+
+	/**
+	 * Método que consulta todas las tuplas de la tabla Promocion con un identificador dado
+	 * @param idPromocion - El identificador de la promocion
+	 * @return El objeto Promocion, construido con base a las tuplas de la tabla PROMOCION con el identificador dado
+	 */
+	public Promocion darPromocionPorId(String idPromocion)
+	{
+		return sqlPromocion.darPromocionPorId(managerFactory.getPersistenceManager(), idPromocion);
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Promocion con el identificador dado
+	 * @param idPromocion - El identificador de la promoción
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
 	public long eliminarPromocionPorId(long idPromocion)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -761,12 +842,17 @@ public class PersistenciaSuperAndes {
 	}
 
 	//---------------------------------------------------------------------
-	// Métodos para manejar las ORDENES DE PEDIDO
-	//---------------------------------------------------------------------
-
-	//---------------------------------------------------------------------
 	// Métodos para manejar los ORDEN PEDIDO
 	//---------------------------------------------------------------------
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Orden Pedido
+	 * @param fechaEsperada - Fecha esperada de entrega del pedido
+	 * @param nitProveedor - Nit del proveedor del pedido
+	 * @param ciudad - Ciudad de la sucursal que hace el pedido
+	 * @param direccionSucursal - Dirección de la sucursal que hace el pedido
+	 * @param direccionBodega - Dirección de la bodega a la que debe llegar el pedido
+	 * @return El objeto Orden Pedido adicionado. null si ocurre alguna Excepción.
+	 */
 	public OrdenPedido adicionarOrdenPedido(Timestamp fechaEsperada, int nitProveedor, String ciudad, String direccionSucursal, String direccionBodega)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -795,22 +881,30 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	public OrdenPedido llegadaOrdenPedido(long idPedido, String calificacion) throws Exception
+
+	/**
+	 * Método que cambia, de manera transaccional, el estado de una tupla en la tabla OrdenPedido
+	 * Adiciona entradas al log de la aplicación
+	 * @param idPedido - El identificador del pedido
+	 * @param calificacion - La califiación de la orde de pedido
+	 * @return El número de tuplas modificadas
+	 */
+	public OrdenPedido llegadaOrdenPedido(long idPedido, String calificacion)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long tuplasInsertadas = sqlOrdenPedido.cambiarEstadoOrdenPedido(pm, idPedido, calificacion);
+			long tuplasModificadas = sqlOrdenPedido.cambiarEstadoOrdenPedido(pm, idPedido, calificacion);
+			Log.trace("Modificación estado orden pedido: " + idPedido +": "+tuplasModificadas);
+
 			OrdenPedido op = sqlOrdenPedido.darPedidoPorId(pm, idPedido);
-			System.out.println(idPedido);
-			System.out.println(op);
 			int numProductos = sqlPedidoProducto.darNumeroProductosPedido(pm, idPedido);
-			sqlCantidadEnBodega.subirInventario(pm, numProductos, op.getCiudad(), op.getDireccionSucursal(), op.getDireccionBodega());
+			long tuplasBodega = sqlCantidadEnBodega.subirInventario(pm, numProductos, op.getCiudad(), op.getDireccionSucursal(), op.getDireccionBodega());
 			tx.commit();
 
-			Log.trace("Insercción promocion: " + idPedido +": "+tuplasInsertadas);
+			Log.trace("Modificación de cantidad en bodega: " + op.getDireccionBodega() + ", "+ op.getDireccionSucursal()  + ", "+ op.getCiudad()+": "+tuplasBodega);
 			return op;
 		}
 		catch(Exception e)
@@ -827,10 +921,32 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Orden Pedido
+	 * @return La lista de objetos OrdenPedido, construidos con base a las tuplas de la tablas ORDEN PEDIDO
+	 */
 	public List<OrdenPedido> darPedidos()
 	{
 		return sqlOrdenPedido.darPedidos(managerFactory.getPersistenceManager());
 	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla OrdenPedido con un identificador dado
+	 * @param idPedido - El identificador del pedido
+	 * @return El objeto OrdenPedido, construido con base en las tuplas de la tabla ORDENPEDIDO
+	 */
+	public OrdenPedido darPedidoPorId(long idPedido)
+	{
+		return sqlOrdenPedido.darPedidoPorId(managerFactory.getPersistenceManager(), idPedido);
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla OrdenPedido
+	 * Adiciona entradas al log de la aplicación
+	 * @param idPedido - El identificador del pedido
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
 	public long eliminarPedidoPorId(long idPedido)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -860,12 +976,18 @@ public class PersistenciaSuperAndes {
 	}
 
 	//---------------------------------------------------------------------
-	// Métodos para manejar las FACTURAS
-	//---------------------------------------------------------------------
-
-	//---------------------------------------------------------------------
 	// Métodos para manejar los FACTURA
 	//---------------------------------------------------------------------
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Factura
+	 * Adiciona entradas al log de la aplicación
+	 * @param costoTotal - El costo total de la factura
+	 * @param fecha - La fecha en que se genera la factura
+	 * @param correoCliente - El correo del clente que compra
+	 * @param ciudad - La ciudad de la sucursal
+	 * @param direccion - La dirección de la sucursal
+	 * @return El número de tuplas insertadas. -1 si ocurre una Excepción
+	 */
 	public Factura adicionarFactura(double costoTotal, Timestamp fecha, String correoCliente, String ciudad, String direccion)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -895,13 +1017,118 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
-	//---------------------------------------------------------------------
-	// Métodos para manejar las CANTIDADES EN ESTANTE
-	//---------------------------------------------------------------------
+	/**
+	 * Método que eliminada, de manera transaccional, una tupla en la tabla Factura
+	 * Adiciona entradas al log de la aplicación
+	 * @param idFactura - El identificador de la factura
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarFacturaPorId(long idFactura)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasEliminadas = sqlFactura.eliminarFacturaPorId(pm, idFactura);
+			tx.commit();
+
+			Log.trace("Eliminación factura: " + idFactura +": "+tuplasEliminadas);
+			return tuplasEliminadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Factura que tienen el identificador dado
+	 * @param idFactura - El identificador de la factura
+	 * @return El objeto Factura, cosntruido con base a las tuplas de la tabla Factura con el identificador dado
+	 */
+	public Factura darFacturaPorId(long idFactura)
+	{
+		return sqlFactura.darFacturaPorId(managerFactory.getPersistenceManager(), idFactura);
+	}
+
+	/**
+	 * Método que consulta todas la tuplas en la tabla Factura
+	 * @return La lista de objetos Factura, cosntruidos con base en las tuplas de la tabla Factura
+	 */
+	public List<Factura> darFacturas()
+	{
+		return sqlFactura.darFacturas(managerFactory.getPersistenceManager());
+	}
+
+	/**
+	 * Método que modifica, de manera transaccional, el costo total de una tupla de la tabla Factura
+	 * Adiciona entradas al log de la aplicación
+	 * @param costoAdicional - El valor en que se desea aumentar el costo
+	 * @param idFactura - El identificador de la factura
+	 * @return El número de tuplas modificadas. -1 en caso de que ocurra una Excepción
+	 */
+	public long aumentarCostoFactura(double costoAdicional, long idFactura)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasModificadas = sqlFactura.aumentarCostoFactura(pm, costoAdicional, idFactura);
+			tx.commit();
+
+			Log.trace("Modificación del costo de una factura: " + idFactura +": "+tuplasModificadas);
+			return tuplasModificadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que consulta el dinero ganado por una sucursal en un periodo de tiempo
+	 * @param fechaInicio - La fecha de inicio de la consulta
+	 * @param fechaFin - La fecha de fin de la consulta
+	 * @return Una lista de objetos de tamaño 3
+	 */
+	public List<Object> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		return sqlFactura.dineroSucursalEnRango(pm, fechaInicio, fechaFin);
+	}
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar los CANTIDAD EN ESTANTES
 	//---------------------------------------------------------------------
+	/**
+	 * Método que inseta, de manera transaccional, una tupla en la tabla CantidadEnEstantes
+	 * Adiciona entradas al log de la aplicación
+	 * @param codigoBarras - El código de barras del producto
+	 * @param idEstante - El identificador del estante
+	 * @param cantidadActual - La cantidad actual del producto
+	 * @param cantidadMinima - La cantidad mínima del producto
+	 * @return El númer de tuplas insertadas. -1 en caso de que ocurra una Excepción
+	 */
 	public CantidadEnEstantes adicionarCantidadEnEstante(String codigoBarras, long idEstante, int cantidadActual, int cantidadMinima)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -929,22 +1156,30 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	public void disminuirCantidadEnEstantes(int pCantidad, Producto producto)
+	
+	/**
+	 * Método que modifica, de manera transaccional, la cantidad de un producto en estante
+	 * Adiciona entradas al log de la aplicación
+	 * @param pCantidad - La cantidad a disminuir
+	 * @param producto - El producto del que se quiere disminuir la cantidad
+	 * @param idEstante - El identificador del estante donde está el producto
+	 */
+	public long disminuirCantidadEnEstantes(int pCantidad, Producto producto, long idEstante)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction t = pm.currentTransaction();
 		try 
 		{
 			t.begin();
-			//TODO Maria cambiar autocommit a 0
-			//TODO Manejar el idEstante
-			sqlCantidadEnEstantes.disminuirCantidadEnEstantes(pm, pCantidad, producto.getCodBarras(), 0);
-			//TODO Guardar los cambios en caso de que toque devolver las cosas
+			long tuplasModificadas = sqlCantidadEnEstantes.disminuirCantidadEnEstantes(pm, pCantidad, producto.getCodBarras(), idEstante);
 			t.commit();
+			
+			return tuplasModificadas;
 		}
 		catch(Exception e)
 		{
 			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return -1;
 		}
 		finally
 		{
@@ -1014,45 +1249,6 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-
-	//---------------------------------------------------------------------
-	// Métodos para manejar las SUCURSAL FACTURAS
-	//---------------------------------------------------------------------
-
-	//---------------------------------------------------------------------
-	// Métodos para manejar los SUCURSAL FACTURA
-	//---------------------------------------------------------------------
-	public List<Object> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
-	{
-		PersistenceManager pm = managerFactory.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			List<Object> sucursales = sqlFactura.dineroSucursalEnRango(pm, fechaInicio, fechaFin);
-			tx.commit();
-
-			Log.trace("Consulta dinero recolectado por sucursales en periodo de tiempo: " + fechaInicio + ", "+fechaFin);
-			return sucursales;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	//---------------------------------------------------------------------
-	// Métodos para manejar PROVEEN
-	//---------------------------------------------------------------------
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar los PROVEEN

@@ -7,6 +7,7 @@
 -- Creación del secuenciador
 CREATE sequence pedidos_sequence;
 CREATE sequence promocion_sequence;
+CREATE sequence factura_sequence;
 
   -- Creación de la tabla CATEGORIA y especificación de sus restricciones
  CREATE

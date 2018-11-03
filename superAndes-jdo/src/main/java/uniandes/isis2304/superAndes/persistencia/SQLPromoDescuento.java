@@ -1,14 +1,11 @@
 package uniandes.isis2304.superAndes.persistencia;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.isis2304.superAndes.negocio.PromoDescuento;
-import uniandes.isis2304.superAndes.negocio.Promocion;
-import uniandes.isis2304.superAndes.negocio.Proveedor;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto PROMO DESCUENTO de SuperAndes

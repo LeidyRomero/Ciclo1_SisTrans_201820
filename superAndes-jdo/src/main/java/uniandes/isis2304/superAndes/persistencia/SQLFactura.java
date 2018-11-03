@@ -69,7 +69,7 @@ class SQLFactura
 	 * @param idFactura - El identificador de la factura
 	 * @return El número de tuplas eliminadas
 	 */
-	public long eliminarFacturaPorId(PersistenceManager pm, String idFactura)
+	public long eliminarFacturaPorId(PersistenceManager pm, long idFactura)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlFactura() + " WHERE idfactura = ?");
         q.setParameters(idFactura);
@@ -82,7 +82,7 @@ class SQLFactura
 	 * @param idFactura - El identificador de la factura
 	 * @return El objeto FACTURA con el identificador dado
 	 */
-	public Factura darFacturaPorId(PersistenceManager pm, String idFactura)
+	public Factura darFacturaPorId(PersistenceManager pm, long idFactura)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlFactura() + " WHERE idfactura = ?");
 		q.setResultClass(Factura.class);

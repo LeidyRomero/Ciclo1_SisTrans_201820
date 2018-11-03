@@ -1,13 +1,13 @@
 package uniandes.isis2304.superAndes.persistencia;
 
 import java.sql.Timestamp;
+
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.isis2304.superAndes.negocio.Promocion;
-import uniandes.isis2304.superAndes.negocio.Proveedor;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto PROMOCION de SuperAndes
@@ -103,7 +103,7 @@ class SQLPromocion
 	}
 	
 	/**
-	 * Crea y ejecuta una sentencia sql que consultas las PROMOCIONES de la base de datos de SuperAndes
+	 * Crea y ejecuta una sentencia sql que consulta las PROMOCIONES de la base de datos de SuperAndes
 	 * @param pm - El manejador de persistencia
 	 * @return Lista de tuplas que cumplen con las condiciones
 	 */
@@ -116,9 +116,9 @@ class SQLPromocion
 	}
 	
 	/**
-	 * 
-	 * @param pm
-	 * @return
+	 * Crea y ejecuta una sentencia sql que consulta las 20 mejores PROMOCIONES de la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Lista de tuplas que cumplen con las condiciones
 	 */
 	public List<Promocion> darPromocionesMasPopulares (PersistenceManager pm) 
 	{
@@ -132,9 +132,9 @@ class SQLPromocion
 	}
 	
 	/**
-	 * 
-	 * @param pm
-	 * @return
+	 * Crea y ejecuta una sentencia para consultar todos las PROMOCIONES de la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Lista de todos las promociones
 	 */
 	public List<Promocion> darPromociones (PersistenceManager pm) 
 	{
@@ -142,17 +142,30 @@ class SQLPromocion
 		q.setResultClass(Promocion.class);
 		return (List<Promocion>) q.executeList();
 	}
-	
 	/**
-	 * 
-	 * @param pm
-	 * @param idPromocion
-	 * @return
+	 * Crea y ejecuta la sentencia que elimina una PROMOCION de la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idPromocion - El identificador de la promoción
+	 * @return El número de tuplas eliminadas
 	 */
 	public long eliminarPromocionPorId(PersistenceManager pm, long idPromocion)
 	{
 		 Query q = pm.newQuery(SQL, "DELETE FROM " + persistencia.getSqlPromocion() + " WHERE idpromocion = ?");
 	     q.setParameters(idPromocion);
 	     return (long) q.executeUnique();
+	}
+	
+	/**
+	 * Crea y ejecuta una sentencia sql para encontrar la información de UNA PROMOCIÓN en la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idPromocion - El identificador de la promoción
+	 * @return El objeto PROMOCION que tiene el identificador dado
+	 */
+	public Promocion darPromocionPorId(PersistenceManager pm, String idPromocion)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlPromocion() + " WHERE idpromocion = ?");
+		q.setResultClass(Promocion.class);
+		q.setParameters(idPromocion);
+		return (Promocion) q.executeUnique();
 	}
 }
