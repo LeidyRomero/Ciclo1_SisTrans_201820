@@ -343,17 +343,17 @@ public class PersistenciaSuperAndes {
 	{
 		return tablas.get(25);
 	}
-	
+
 	public String getSqlCarrito()
 	{
 		return tablas.get(26);
 	}
-	
+
 	public String getSqlProductosCarrito()
 	{
 		return tablas.get(27);
 	}
-	
+
 	public String getSecuenciaCarrito()
 	{
 		return tablas.get(28);
@@ -1190,7 +1190,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	/**
 	 * Método que modifica, de manera transaccional, la cantidad de un producto en estante
 	 * Adiciona entradas al log de la aplicación
@@ -1208,7 +1208,7 @@ public class PersistenciaSuperAndes {
 			t.begin();
 			long tuplasModificadas = sqlCantidadEnEstantes.disminuirCantidadEnEstantes(pm, pCantidad, producto.getCodBarras(), idEstante);
 			t.commit();
-			
+
 			Log.trace("Disminuyendo cantidad en estantes: " + idEstante + ", " + producto.getCodBarras() + ", " + pCantidad +": " + tuplasModificadas  );
 			return tuplasModificadas;
 		}
@@ -1226,7 +1226,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	/**
 	 * Método que modifica, de manera transaccional, la cantidad de un producto en estante
 	 * Adiciona entradas al log de la aplicación
@@ -1244,7 +1244,7 @@ public class PersistenciaSuperAndes {
 			t.begin();
 			long tuplasModificadas = sqlCantidadEnEstantes.aumentarCantidadEnEstantes(pm, pCantidad, producto.getCodBarras(), idEstante);
 			t.commit();
-			
+
 			Log.trace("Aumentando cantidad en estantes: " + idEstante + ", " + producto.getCodBarras() + ", " + pCantidad +": " + tuplasModificadas  );
 			return tuplasModificadas;
 		}
@@ -1877,7 +1877,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-
+	
 	//------------------------------------------------------------------
 	//  Metodos para manejar BODEGA
 	//------------------------------------------------------------------
@@ -2416,7 +2416,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar CARRITO
 	//------------------------------------------------------------------
@@ -2437,7 +2437,7 @@ public class PersistenciaSuperAndes {
 			long idCarrito =  nextvalCarritos();
 			long tuplasInsertadas = sqlCarrito.adicionarCarrito(pm, idCarrito, direccionSucursal, ciudad, correoCliente);
 			t.commit();
-			
+
 			Log.trace("Inserción carrito : " + idCarrito + ": "+ tuplasInsertadas);
 			return new Carrito(direccionSucursal, ciudad, idCarrito, correoCliente);
 		}
@@ -2454,6 +2454,35 @@ public class PersistenciaSuperAndes {
 			}
 			pm.close();
 		}
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Carrito> darCarritos()
+	{
+		return sqlCarrito.darCarritos(managerFactory.getPersistenceManager());
+	}
+	
+	/**
+	 * 
+	 * @param idCarrito
+	 * @return
+	 */
+	public Carrito darCarritoPorId(long idCarrito)
+	{
+		return sqlCarrito.darCarritoPorId(managerFactory.getPersistenceManager(), idCarrito);
+	}
+	
+	/**
+	 * 
+	 * @param correoCliente
+	 * @return
+	 */
+	public Carrito darCarritoPorCorreoCliente(String correoCliente)
+	{
+		return sqlCarrito.darCarritoPorCorreoCliente(managerFactory.getPersistenceManager(), correoCliente);
 	}
 	
 	/**
@@ -2489,41 +2518,109 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public List<Carrito> darCarritos()
-	{
-		return sqlCarrito.darCarritos(managerFactory.getPersistenceManager());
-	}
-	
-	/**
-	 * 
-	 * @param idCarrito
-	 * @return
-	 */
-	public Carrito darCarritoPorId(long idCarrito)
-	{
-		return sqlCarrito.darCarritoPorId(managerFactory.getPersistenceManager(), idCarrito);
-	}
-	
-	/**
-	 * 
-	 * @param correoCliente
-	 * @return
-	 */
-	public Carrito darCarritoPorCorreoCliente(String correoCliente)
-	{
-		return sqlCarrito.darCarritoPorCorreoCliente(managerFactory.getPersistenceManager(), correoCliente);
-	}
-	
-	
-	
-	
+
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTOS CARRITO
+	//------------------------------------------------------------------
+
+
+	public long adicionarProductoAlCarrito(String pCodigo, long idCarrito, int pCantidad)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction t = pm.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlProductosCarrito.adicionarProductoCarrito(pm, pCodigo, idCarrito, pCantidad);
+			t.commit();
+
+			Log.trace("Inserción producto al carrito : " + idCarrito + ": "+ tuplasInsertadas);
+			return tuplasInsertadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	public long eliminarProductoDelCarrito(String pCodigo, long idCarrito)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction t = pm.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlProductosCarrito.eliminarProductoCarrito(pm, pCodigo, idCarrito);
+			t.commit();
+
+			Log.trace("Eliminar producto del carrito : " + idCarrito + ": "+ tuplasInsertadas);
+			return tuplasInsertadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public long eliminarCantidadProductoDelCarrito(String pCodigo, long idCarrito, int pCantidad)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction t = pm.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlProductosCarrito.eliminarCantidadProductoCarrito(pm, pCodigo, idCarrito, pCantidad);
+			t.commit();
+
+			Log.trace("Eliminar cantidad de un producto del carrito : " + idCarrito + ": "+ tuplasInsertadas);
+			return tuplasInsertadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public List<ProductosCarrito> buscarProductosCarrito(long idCarrito)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+
+		List<ProductosCarrito> productos = sqlProductosCarrito.darProductosCarritoPorId(pm,  idCarrito);
+
+		Log.trace("Buscar productos del carrito : " + idCarrito);
+		return productos;
+
+	}
+	//------------------------------------------------------------------
+	//  Metodos de ADMINISTRACION
 	//------------------------------------------------------------------
 	/**
 	 * 
@@ -2538,7 +2635,7 @@ public class PersistenciaSuperAndes {
 			tx.begin();
 			long [] resp = sqlUtil.limpiarSuperAndes(pm);
 			tx.commit ();
-			
+
 			Log.info ("Borrada la base de datos");
 			return resp;
 		}

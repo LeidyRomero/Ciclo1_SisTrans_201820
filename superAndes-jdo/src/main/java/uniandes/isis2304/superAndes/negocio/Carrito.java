@@ -126,10 +126,4 @@ public class Carrito implements VOCarrito{
 		return "Carrito [direccionSucursal=" + direccionSucursal + ", ciudad=" + ciudad + ", idCarrito=" + idCarrito
 				+ ", correoCliente=" + correoCliente + "]";
 	}
-	
-	
-	
-	
-	
-
 }
