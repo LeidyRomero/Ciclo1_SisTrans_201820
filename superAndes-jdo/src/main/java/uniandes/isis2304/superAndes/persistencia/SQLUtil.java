@@ -45,7 +45,6 @@ class SQLUtil
 	 * @param pm - El manejador de persistencia
 	 * @return El número de secuencia generado
 	 */
-	@SuppressWarnings("rawtypes")
 	public long nextvalPedidos (PersistenceManager pm)
 	{
         Query q = pm.newQuery(SQL, "SELECT "+ pp.getSecuenciaPedidos() + ".nextval FROM DUAL");
@@ -59,7 +58,6 @@ class SQLUtil
 	 * @param pm - El manejador de persistencia
 	 * @return El número de secuencia generado
 	 */
-	@SuppressWarnings("rawtypes")
 	public long nextvalPromociones (PersistenceManager pm)
 	{
         Query q = pm.newQuery(SQL, "SELECT "+ pp.getSecuenciaPromociones() + ".nextval FROM DUAL");
@@ -73,7 +71,6 @@ class SQLUtil
 	 * @param pm - El manejador de persistencia
 	 * @return El número de secuencia generado
 	 */
-	@SuppressWarnings("rawtypes")
 	public long nextvalFacturas(PersistenceManager pm)
 	{
         Query q = pm.newQuery(SQL, "SELECT "+ pp.getSecuenciaFacturas() + ".nextval FROM DUAL");
@@ -83,13 +80,27 @@ class SQLUtil
 	}
 	
 	/**
+	 * Crea y ejecuta la sentencia SQL para obtener un nuevo número de secuencia
+	 * @param pm - El manejador de persistencia
+	 * @return El número de secuencia generado
+	 */
+	public long nextvalCarritos(PersistenceManager pm)
+	{
+        Query q = pm.newQuery(SQL, "SELECT "+ pp.getSecuenciaCarrito() + ".nextval FROM DUAL");
+        q.setResultClass(Long.class);
+        long resp = (long) q.executeUnique();
+        return resp;
+	}
+	
+	/**
 	 * Crea y ejecuta una sentencia SQL para cada tabla de la base de datos - 
 	 * @param pm - El manejador de persistencia
-	 * @return Un arreglo con 24 números que indican el número de tuplas borrasdas en las tablas de la base de datos de SuperAndes
+	 * @return Un arreglo con 26 números que indican el número de tuplas borrasdas en las tablas de la base de datos de SuperAndes
 	 */
-	@SuppressWarnings("rawtypes")
 	public long [] limpiarSuperAndes(PersistenceManager pm)
 	{
+		Query qProductosCarrito = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlProductosCarrito());
+		Query qCarrito = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlCarrito());
         Query qProductosOfrecidos = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlProductosOfrecidos());
         Query qCantidadEstantes = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlCantidadEnEstantes());
         Query qCantidadBodega = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlCantidadEnBodega());
@@ -115,6 +126,8 @@ class SQLUtil
         Query qProducto = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlProducto());
         Query qCategoria = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlCategoria());
 
+        long prodcarriEliminados = (long) qProductosCarrito.executeUnique();
+        long carriEliminados = (long) qCarrito.executeUnique();
         long poEliminados = (long) qProductosOfrecidos.executeUnique();
         long ceEliminados = (long) qCantidadEstantes.executeUnique();
         long cbEliminados = (long) qCantidadBodega.executeUnique();
@@ -139,6 +152,6 @@ class SQLUtil
         long sEliminados = (long) qSucursal.executeUnique();
         long prodEliminados = (long) qProducto.executeUnique();
         long catEliminados = (long) qCategoria.executeUnique();
-        return new long[] {poEliminados, ceEliminados, cbEliminados,cEliminados,ppElimiandos, opEliminados, bEliminados, puEliminados, pcEliminados, pudEliminados, pdEliminados, psEliminados, pEliminados, eEliminados, pvEliminados,fEliminados, tpEliminados, prEliminados, emEliminados, pnEliminados, clEliminados, sEliminados, prodEliminados, catEliminados};
+        return new long[] {prodcarriEliminados, carriEliminados, poEliminados, ceEliminados, cbEliminados,cEliminados,ppElimiandos, opEliminados, bEliminados, puEliminados, pcEliminados, pudEliminados, pdEliminados, psEliminados, pEliminados, eEliminados, pvEliminados,fEliminados, tpEliminados, prEliminados, emEliminados, pnEliminados, clEliminados, sEliminados, prodEliminados, catEliminados};
 	}
 }

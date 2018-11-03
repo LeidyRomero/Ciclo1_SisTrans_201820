@@ -29,6 +29,9 @@
 		"A_PROMO_DESCUENTO",
 		"A_PROMO_UNIDADES_DESCUENTO",
 		"promocion_sequence",
-		"factura_sequence"
+		"factura_sequence",
+		"A_CARRITO",
+		"A_PRODUCTOS_CARRITO",
+		"carrito_sequence"
 	]
 }

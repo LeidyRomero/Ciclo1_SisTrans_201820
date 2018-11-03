@@ -1,8 +1,7 @@
 package uniandes.isis2304.superAndes.negocio;
 
 /**
- * Clase para modelar el concepto CLIENTE del negocio de los SuperAndes
- * 
+ * Clase para modelar el concepto CLIENTE del negocio de los SuperAndes 
  * @author María Ocampo - mj.ocampov
  *
  */

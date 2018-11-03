@@ -81,6 +81,8 @@ public class PersistenciaSuperAndes {
 	private SQLPromoUnidadDescuento sqlPromoUnidadDescuento;
 	private SQLPromoUnidades sqlPromoUnidades;
 	private SQLPromoDescuento sqlPromoDescuento;
+	private SQLCarrito sqlCarrito;
+	private SQLProductosCarrito sqlProductosCarrito;
 
 	//---------------------------------------------------
 	// Métodos del MANEJADOR DE PERSISTENCIA
@@ -120,6 +122,10 @@ public class PersistenciaSuperAndes {
 		tablas.add("A_PROMO_DESCUENTO");
 		tablas.add("A_PROMO_UNIDADES_DESCUENTO");
 		tablas.add("promocion_sequence");
+		tablas.add("factura_sequence");
+		tablas.add("A_CARRITO");
+		tablas.add("A_PRODUCTOS_CARRITO");
+		tablas.add("carrito_sequence");
 
 	}
 
@@ -217,6 +223,8 @@ public class PersistenciaSuperAndes {
 		sqlPromoUnidades = new SQLPromoUnidades(this);
 		sqlPromoUnidadDescuento = new SQLPromoUnidadDescuento(this);
 		sqlPromoDescuento = new SQLPromoDescuento(this);
+		sqlCarrito = new SQLCarrito(this);
+		sqlProductosCarrito = new SQLProductosCarrito(this);
 
 		sqlUtil = new SQLUtil(this);
 	}
@@ -335,6 +343,21 @@ public class PersistenciaSuperAndes {
 	{
 		return tablas.get(25);
 	}
+	
+	public String getSqlCarrito()
+	{
+		return tablas.get(26);
+	}
+	
+	public String getSqlProductosCarrito()
+	{
+		return tablas.get(27);
+	}
+	
+	public String getSecuenciaCarrito()
+	{
+		return tablas.get(28);
+	}
 
 	/**
 	 * Transacción para el generador de secuencia de SuperAndes
@@ -367,6 +390,17 @@ public class PersistenciaSuperAndes {
 	{
 		long resp = sqlUtil.nextvalFacturas(managerFactory.getPersistenceManager());
 		Log.trace ("Generando secuencia facturas: " + resp);
+		return resp;
+	}
+	/**
+	 * Transacción para el generador de secuencia de SuperAndes
+	 * Adiciona entradas al log de la aplicación
+	 * @return El siguiente número del secuenciador de SuperAndes
+	 */
+	private long nextvalCarritos()
+	{
+		long resp = sqlUtil.nextvalCarritos(managerFactory.getPersistenceManager());
+		Log.trace ("Generando secuencia carrito: " + resp);
 		return resp;
 	}
 	/**
@@ -1163,6 +1197,7 @@ public class PersistenciaSuperAndes {
 	 * @param pCantidad - La cantidad a disminuir
 	 * @param producto - El producto del que se quiere disminuir la cantidad
 	 * @param idEstante - El identificador del estante donde está el producto
+	 * @return El número de tuplas modificadas. -1 en caso de que ocurra una Excepción
 	 */
 	public long disminuirCantidadEnEstantes(int pCantidad, Producto producto, long idEstante)
 	{
@@ -1174,6 +1209,7 @@ public class PersistenciaSuperAndes {
 			long tuplasModificadas = sqlCantidadEnEstantes.disminuirCantidadEnEstantes(pm, pCantidad, producto.getCodBarras(), idEstante);
 			t.commit();
 			
+			Log.trace("Disminuyendo cantidad en estantes: " + idEstante + ", " + producto.getCodBarras() + ", " + pCantidad +": " + tuplasModificadas  );
 			return tuplasModificadas;
 		}
 		catch(Exception e)
@@ -1190,21 +1226,32 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	public void aumentarCantidadEnEstantes(int pCantidad, Producto producto)
+	
+	/**
+	 * Método que modifica, de manera transaccional, la cantidad de un producto en estante
+	 * Adiciona entradas al log de la aplicación
+	 * @param pCantidad - La cantidad a aumentar
+	 * @param producto - El producto del que se quiere aumentar la cantidad
+	 * @param idEstante - El identificador del estante donde está el producto
+	 * @return El número de tuplas modificadas. -1 en caso de que ocurra una Excepción
+	 */
+	public long aumentarCantidadEnEstantes(int pCantidad, Producto producto, long idEstante)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction t = pm.currentTransaction();
 		try 
 		{
 			t.begin();
-			//TODO Maria cambiar autocommit a 0
-			//TODO Manejo del idEstante
-			sqlCantidadEnEstantes.aumentarCantidadEnEstantes(pm, pCantidad, producto.getCodBarras(), 0);
+			long tuplasModificadas = sqlCantidadEnEstantes.aumentarCantidadEnEstantes(pm, pCantidad, producto.getCodBarras(), idEstante);
 			t.commit();
+			
+			Log.trace("Aumentando cantidad en estantes: " + idEstante + ", " + producto.getCodBarras() + ", " + pCantidad +": " + tuplasModificadas  );
+			return tuplasModificadas;
 		}
 		catch(Exception e)
 		{
 			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return -1;
 		}
 		finally
 		{
@@ -1215,9 +1262,6 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	//---------------------------------------------------------------------
-	// Métodos para manejar las PRODUCTOS OFRECIDOS
-	//---------------------------------------------------------------------
 
 	//---------------------------------------------------------------------
 	// Métodos para manejar los PRODUCTOS OFRECIDOS
@@ -2361,6 +2405,48 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	
+	//------------------------------------------------------------------
+	//  Metodos para manejar CARRITO
+	//------------------------------------------------------------------
+	public long adicionarCarrito(String direccionSucursal, String ciudad, String correoCliente)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction t = pm.currentTransaction();
+		try 
+		{
+			t.begin();
+			long idCarrito =  nextvalCarritos();
+			long tuplasInsertadas = sqlCarrito.adicionarCarrito(pm, idCarrito, direccionSucursal, ciudad, correoCliente);
+			t.commit();
+			
+			Log.trace("Inserción carrito : " + idCarrito + ": "+ tuplasInsertadas);
+			return tuplasInsertadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	
+	
+	//------------------------------------------------------------------
+	//  Metodos para manejar PRODUCTOS CARRITO
+	//------------------------------------------------------------------
+	/**
+	 * 
+	 * @return
+	 */
 	public long [] limpiarSuperAndes()
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -2370,14 +2456,14 @@ public class PersistenciaSuperAndes {
 			tx.begin();
 			long [] resp = sqlUtil.limpiarSuperAndes(pm);
 			tx.commit ();
+			
 			Log.info ("Borrada la base de datos");
 			return resp;
 		}
 		catch (Exception e)
 		{
-			//        	e.printStackTrace();
 			Log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return new long[] {-1, -1, -1, -1, -1, -1, -1};
+			return new long[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 		}
 		finally
 		{

@@ -28,6 +28,9 @@ class SQLCantidadEnEstantes
 	// ATRIBUTOS
 	//------------------------------------------------------------------
 	
+	/**
+	 * 
+	 */
 	private PersistenciaSuperAndes persistencia;
 
 	//------------------------------------------------------------------
