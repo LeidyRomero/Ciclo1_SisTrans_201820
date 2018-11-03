@@ -57,4 +57,10 @@ class SQLBodega
 		q.setParameters(categoria);
 		return (Bodega) q.executeUnique();
 	}
+	public List<Object []> calcularIndices(PersistenceManager manager, String pCiudad, String pDireccionSucursal)
+	{
+		Query q = manager.newQuery(SQL, "SELECT direccionbodega, ((cantidadactual/volumenbodega)*100) FROM (SELECT direccionbodega as direccion, sum(cantidadactual) AS cantidadActual FROM " + persistencia.getSqlCantidadEnBodega() + " WHERE direccionsucursal = ? AND ciudad = ? GROUP BY direccionBodega),"+ persistencia.getSqlBodega()+" WHERE direccion=direccionBodega");
+		q.setParameters(pDireccionSucursal,pCiudad);
+		return (List<Object []>) q.executeList();
+	}
 }

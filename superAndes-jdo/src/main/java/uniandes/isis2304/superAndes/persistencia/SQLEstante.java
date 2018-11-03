@@ -50,4 +50,11 @@ class SQLEstante
 		add.setParameters(id);
 		return (long) add.executeUnique();
 	}
+	
+	public List<Object> calcularIndices(PersistenceManager manager, String pCiudad, String pDireccionSucursal)
+	{
+		Query q = manager.newQuery(SQL, "SELECT idestante, ((cantidadactual/volumenestante)*100) FROM (SELECT idestante as id, sum(cantidadactual) AS cantidadActual FROM " + persistencia.getSqlCantidadEnEstantes() + " GROUP BY idestante),"+ persistencia.getSqlEstante()+" WHERE id=idestante");
+		q.setParameters(pDireccionSucursal,pCiudad);
+		return (List<Object>) q.executeList();
+	}
 }
