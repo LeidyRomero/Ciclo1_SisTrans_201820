@@ -1863,6 +1863,12 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
+	public List<Object[]> calcularIndicesOcupacionBodegas(String pCiudad, String pDireccionSucursal)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		List<Object[]> indices = sqlBodega.calcularIndices(manager, pCiudad, pDireccionSucursal);
+		return indices;
+	}
 	public Bodega buscarBodegaTipo(String pCategoria)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
@@ -2172,7 +2178,12 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-
+	public List<Object> calcularIndicesOcupacionEstantes(String pCiudad, String pDireccionSucursal)
+	{
+		PersistenceManager manager = managerFactory.getPersistenceManager();
+		List<Object> indices = sqlEstante.calcularIndices(manager, pCiudad, pDireccionSucursal);
+		return indices;
+	}
 	//------------------------------------------------------------------
 	//  Metodos para manejar PEDIDO PRODUCTO
 	//------------------------------------------------------------------

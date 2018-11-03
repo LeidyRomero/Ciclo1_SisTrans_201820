@@ -190,25 +190,19 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar la bodega "+ pDireccionBodega+", "+pDireccionSucursal+","+pCiudad);
 		return bodega;
 	}
-	public String buscarIndiceBodega(String pDireccion, String pCiudad)
+	
+	public String buscarIndiceBodega(String pDireccionSucursal, String pCiudadSucursal)
 	{
-		String mensaje = "El indice de ocupación ";
+		String mensaje = "";
 		Log.info("Iniciando calculo de indice de bodega ");
-		List<Bodega> bodegas = pp.buscarBodegasSucursal(pDireccion, pCiudad);
+		List<Object[]> indicesBodegas = pp.calcularIndicesOcupacionBodegas(pCiudadSucursal,pDireccionSucursal);
+		
+		//TODO como manejar objects
+		for(int i = 0;i<indicesBodegas.size();i++)
+		{
+			mensaje+="El indice de ocupaciónde la bodega con dirección"+indicesBodegas.get(i)+", de la ciudad"+pCiudadSucursal+"es: "+indicesBodegas+"\n";
+		}
 		Log.info("Saliendo de calculo de indice de bodega ");
-		double capActual = 0;
-		double capTotal = 0;
-
-		for(int i = 0;i<bodegas.size();i++)
-		{
-			capActual += (double)(pp.buscarCantidadActualBodega(bodegas.get(i).getDireccionBodega(),bodegas.get(i).getDireccionSucursal(),bodegas.get(i).getCiudad()));
-			capTotal += bodegas.get(i).getVolumenBodega();
-		}
-		for(int i = 0;i<bodegas.size();i++)
-		{
-			double indice = (double)(capActual/capTotal)*100;
-			mensaje+="de la bodega con dirección"+bodegas.get(i).getDireccionBodega()+", de la ciudad"+bodegas.get(i).getCiudad()+"es: "+indice+"\n";
-		}
 		return mensaje;
 	}
 	public List<VOBodega> darVOBodegas ()
@@ -270,15 +264,17 @@ public class SuperAndes {
 	//TODO Hacer la consulta a punta de SQL
 	public String buscarIndiceEstante(String pDireccion, String pCiudad)
 	{
-		String mensaje = "El indice de ocupación ";
-		Log.info("Iniciando calculo de indice de estante ");
-		List<Estante> estantes = pp.buscarEstantesSucursal(pDireccion, pCiudad);
-		Log.info("Saliendo de calculo de indice de estante ");
-		for(int i = 0;i<estantes.size();i++)
+		String mensaje = "Para la sucursal con dirección: "+pDireccion+" de la ciudad: "+pCiudad;
+		Log.info("Iniciando calculo de indice de los estantes ");
+		List<Object> indicesEstantes = pp.calcularIndicesOcupacionEstantes(pCiudad,pDireccion);
+		Log.info("Saliendo de calculo de indice de los estantes");
+		
+		//TODO como manejar objects
+		for(int i = 0;i<indicesEstantes.size();i++)
 		{
-			double indice = (double)(pp.buscarCantidadActualEstante(estantes.get(i).getIdEstante())*100);
-			mensaje+="del estante con id: "+estantes.get(i).getIdEstante()+"es: "+indice+"\n";
+			mensaje+="El indice de ocupación del estante de id: "+indicesEstantes.get(i)+"es: "+indicesEstantes+"\n";
 		}
+
 		return mensaje;
 	}
 	public List<VOEstante> darVOEstante()
