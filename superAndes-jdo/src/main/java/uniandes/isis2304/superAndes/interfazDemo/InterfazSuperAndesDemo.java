@@ -662,11 +662,11 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			List<VOProveedor> lista = superAndes.darVOProveedores();
 			VOProveedor pro5 = superAndes.darProveedorPorNit(pro1.getNitProveedor());
 			VOProveedor pro6 = superAndes.darProveedorPorNit(0);
-			
+
 			long prov1 = superAndes.eliminarProveedorPorNit(123546987);
 			long prov2 = superAndes.eliminarProveedorPorNit(123456788);
 			long prov3 = superAndes.eliminarProveedorPorNit(123456799);
-			
+
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de Proveedores\n\n";
 			resultado += "\n\n************ Generando datos de prueba ************ \n";
@@ -674,13 +674,13 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			resultado += "Adicionado el proveedor: " + pro1 + "\n";
 			resultado += "Adicionado el proveedor: " + pro2 + "\n";
 			resultado += "Adicionado el proveedor: " + pro3 + "\n";
-			
+
 			resultado += "\n\n************ Ejecutando la demo ************ \n";
 			resultado += "\nBuscando el proveedor con nit " + pro1 + ":\n";
 			resultado += pro5 != null ? "El proveedor es: " + pro5 + "\n" : "Ese proveedor no existe\n";
 			resultado += "\nBuscando el proveedor con nit " + 0 + ":\n";
 			resultado += pro6 != null ? "El proveedor es: " + pro6 + "\n" : "Ese proveedor no existe\n";			
-			
+
 			resultado += "\n\n************ Limpiando la base de datos ************ \n";
 			resultado += (prov1+prov2+prov3) + " Proveedores eliminados\n";
 			resultado += "\n Demo terminada";
@@ -763,10 +763,10 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 	//--------------------------------------------------------------------
 	/**
 	 * Demostración de creación, consulta y borrado de sucursales
-     * Muestra la traza de la ejecución en el panelDatos
-     * 
-     * Pre: La base de datos está vacía
-     * Post: La base de datos está vacía
+	 * Muestra la traza de la ejecución en el panelDatos
+	 * 
+	 * Pre: La base de datos está vacía
+	 * Post: La base de datos está vacía
 	 */
 	public void demoSucursales()
 	{
@@ -808,19 +808,19 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		}
 		return resp;
 	}
-	
+
 	//--------------------------------------------------------------------
 	// Demo PROMOCION
 	//--------------------------------------------------------------------
-    /**
-     * Demostración de creación, consulta y borrado de Promoción
-     * Incluye el manejo de Sucursales
-     * Incluye el manejo de Productos
-     * Muestra la traza de la ejecución en el panelDatos
-     * 
-     * Pre: La base de datos está vacía
-     * Post: La base de datos está vacía
-     */
+	/**
+	 * Demostración de creación, consulta y borrado de Promoción
+	 * Incluye el manejo de Sucursales
+	 * Incluye el manejo de Productos
+	 * Muestra la traza de la ejecución en el panelDatos
+	 * 
+	 * Pre: La base de datos está vacía
+	 * Post: La base de datos está vacía
+	 */
 	public void demoPromocion()
 	{
 		try
@@ -831,7 +831,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			VOPromocion cli1 = superAndes.adicionarPromocion(Timestamp.valueOf("2018-10-3 00:00:00"), Timestamp.valueOf("2018-10-4 00:00:00"), "20% de descuento", pro1.getCodBarras(), 20, 0, suc1.getDireccionSucursal(), suc1.getCiudad());
 
 			List<VOPromocion> lista = superAndes.darVOPromociones();
-			
+
 			superAndes.finalizarPromocion(cli1.getIdPromocion());
 
 			long promoEliminada = superAndes.eliminarPromocion(cli1.getIdPromocion());
@@ -867,21 +867,21 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		}
 		return resp;
 	}
-	
+
 	//--------------------------------------------------------------------
 	// Demo PROMOCION
 	//--------------------------------------------------------------------
-    /**
-     * Demostración de creación, consulta y borrado de Orden Pedido
-     * Incluye el manejo de Sucursales
-     * Incluye el manejo de Productos
-     * Incluye el manejo de Bodegas
-     * Incluye el manejo de Proveedores
-     * Muestra la traza de la ejecución en el panelDatos
-     * 
-     * Pre: La base de datos está vacía
-     * Post: La base de datos está vacía
-     */
+	/**
+	 * Demostración de creación, consulta y borrado de Orden Pedido
+	 * Incluye el manejo de Sucursales
+	 * Incluye el manejo de Productos
+	 * Incluye el manejo de Bodegas
+	 * Incluye el manejo de Proveedores
+	 * Muestra la traza de la ejecución en el panelDatos
+	 * 
+	 * Pre: La base de datos está vacía
+	 * Post: La base de datos está vacía
+	 */
 	public void demoPedidos()
 	{
 		try
@@ -894,7 +894,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			VOOrdenPedido cli1 = superAndes.adicionarOrdenPedido(new Timestamp(System.currentTimeMillis()), prov1.getNitProveedor(), suc1.getCiudad(), suc1.getDireccionSucursal(), bog.getDireccionBodega(), pro1.getCodBarras(), 10, 5000);
 
 			List<VOOrdenPedido> lista = superAndes.darVOPedidos();
-			
+
 			superAndes.llegadaOrdenPedido(cli1.getIdPedido(), "Bueno");
 
 			long promoEliminada = superAndes.eliminarPedido(cli1.getIdPedido());
@@ -932,8 +932,52 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		}
 		return resp;
 	}
+	//----------------------------------------------------------------------------------------------
+	// PRODUCTOS CARRITO
+	//----------------------------------------------------------------------------------------------
+	public void demoProductosCarrito()
+	{
+		try
+		{
+			superAndes.adicionarSucursal("10", "CRR 1 1-1", "Bogotá", "ABCD");
+			superAndes.adicionarCliente("mj.ocampov@uniandes.edu.co", "Maria Ocampo");
+			VOCarrito carrito = superAndes.adicionarCarrito("CRR 1 1-1", "Bogotá", "mj.ocampov@uniandes.edu.co");
+			superAndes.adicionarProducto(500,"papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32","Perecederos");
+			
+			superAndes.adicionarProductoAlCarrito("FFFF", carrito.getIdCarrito(), 10);
 
+			List <VOProductosCarrito> lista = superAndes.darVOProductosCarrito(carrito.getIdCarrito());
 
+			long productosEliminados = superAndes.eliminarProductoCarrito("FFFF",carrito.getIdCarrito());
+			
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de productos al carrito\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "Adicionado el producto: " + "FFFF" + "\n";
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\n" + listarProductosCarrito(lista);
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += productosEliminados + " Productos eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);
+		}
+		catch(Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private String listarProductosCarrito(List<VOProductosCarrito> lista) 
+	{
+		String resp = "Los productos en el carrito son:\n";
+		int i = 1;
+		for (VOProductosCarrito cliente : lista)
+		{
+			resp += i++ + ". " + cliente.toString() + "\n";
+		}
+		return resp;
+	}
 	//-------------------------------------------------------------------------------------
 	//* 			Métodos administrativos
 	//--------------------------------------------------------------------------------------

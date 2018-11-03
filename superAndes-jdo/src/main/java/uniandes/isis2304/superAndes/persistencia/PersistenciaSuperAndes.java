@@ -1150,7 +1150,19 @@ public class PersistenciaSuperAndes {
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		return sqlFactura.dineroSucursalEnRango(pm, fechaInicio, fechaFin);
 	}
-
+	
+	
+	/**
+	 * Retorna los clientes frecuentes de superAndes
+	 * @param pDireccion
+	 * @param pCiudad
+	 * @return
+	 */
+	public List<String> darClientesFrecuentes(String pDireccion, String pCiudad)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		return sqlFactura.darClientesFrecuentes(pm, pDireccion, pCiudad);
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar los CANTIDAD EN ESTANTES
 	//---------------------------------------------------------------------
@@ -1907,10 +1919,10 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	public List<Object[]> calcularIndicesOcupacionBodegas(String pCiudad, String pDireccionSucursal)
+	public List<Indice> calcularIndicesOcupacionBodegas(String pCiudad, String pDireccionSucursal)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
-		List<Object[]> indices = sqlBodega.calcularIndices(manager, pCiudad, pDireccionSucursal);
+		List<Indice> indices = sqlBodega.calcularIndices(manager, pCiudad, pDireccionSucursal);
 		return indices;
 	}
 	public Bodega buscarBodegaTipo(String pCategoria)
@@ -2222,10 +2234,10 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	public List<Object> calcularIndicesOcupacionEstantes(String pCiudad, String pDireccionSucursal)
+	public List<Indice> calcularIndicesOcupacionEstantes(String pCiudad, String pDireccionSucursal)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
-		List<Object> indices = sqlEstante.calcularIndices(manager, pCiudad, pDireccionSucursal);
+		List<Indice> indices = sqlEstante.calcularIndices(manager, pCiudad, pDireccionSucursal);
 		return indices;
 	}
 	//------------------------------------------------------------------

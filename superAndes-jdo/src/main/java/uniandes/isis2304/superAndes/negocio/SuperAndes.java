@@ -193,7 +193,7 @@ public class SuperAndes {
 	{
 		String mensaje = "";
 		Log.info("Iniciando calculo de indice de bodega ");
-		List<Object[]> indicesBodegas = pp.calcularIndicesOcupacionBodegas(pCiudadSucursal,pDireccionSucursal);
+		List<Indice> indicesBodegas = pp.calcularIndicesOcupacionBodegas(pCiudadSucursal,pDireccionSucursal);
 
 		//TODO como manejar objects
 		for(int i = 0;i<indicesBodegas.size();i++)
@@ -264,7 +264,7 @@ public class SuperAndes {
 	{
 		String mensaje = "Para la sucursal con dirección: "+pDireccion+" de la ciudad: "+pCiudad;
 		Log.info("Iniciando calculo de indice de los estantes ");
-		List<Object> indicesEstantes = pp.calcularIndicesOcupacionEstantes(pCiudad,pDireccion);
+		List<Indice> indicesEstantes = pp.calcularIndicesOcupacionEstantes(pCiudad,pDireccion);
 		Log.info("Saliendo de calculo de indice de los estantes");
 
 		//TODO como manejar objects
@@ -513,7 +513,10 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar factura "+ costoTotal+", "+fecha);
 		return factura;
 	}
-
+	public List<String> darClientesFrecuentes(String ciudad, String direccion)
+	{
+		return pp.darClientesFrecuentes(direccion, ciudad);
+	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar PROVEEDOR
 	//---------------------------------------------------------------------
@@ -698,5 +701,23 @@ public class SuperAndes {
 		List<ProductosCarrito> productos = pp.buscarProductosCarrito(idCarrito);
 		Log.info("Saliendo de buscar productos de un carrito "+ idCarrito);
 		return productos;
+	}
+	public List<VOProductosCarrito> darVOProductosCarrito(long id)
+	{
+		Log.info ("Generando los VO de Productos en el carrito");
+		List<VOProductosCarrito> voProductos = new LinkedList<VOProductosCarrito> ();
+		for (ProductosCarrito producto: pp.buscarProductosCarrito(id))
+		{
+			voProductos.add (producto);
+		}
+		Log.info ("Generando los VO de Productos en el carrito: " + voProductos.size () + " productos existentes");
+		return voProductos;
+	}
+	public long eliminarProductoCarrito(String pCodigo, long idCarrito)
+	{
+		Log.info("Borrar el producto del carrito");
+		long numero = pp.eliminarProductoDelCarrito(pCodigo, idCarrito);
+		Log.info("Saliendo de borrar el producto del carrito");
+		return numero;
 	}
 }

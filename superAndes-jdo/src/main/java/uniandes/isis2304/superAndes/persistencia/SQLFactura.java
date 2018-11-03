@@ -169,4 +169,11 @@ class SQLFactura
 		return (List<Object>) q.executeList();
 	}
 	
+	public List<String> darClientesFrecuentes(PersistenceManager pm, String pDireccionSucursal, String pCiudad)
+	{
+		Query q = pm.newQuery(SQL, "SELECT correocliente from (SELECT COUNT(*), correocliente FROM(SELECT COUNT(EXTRACT(MONTH FROM fecha)) AS numerofacturas,EXTRACT(MONTH FROM fecha),correocliente FROM a_factura WHERE direccionsucursal = ? AND ciudad = ? GROUP BY EXTRACT(MONTH FROM fecha), correocliente HAVING COUNT(EXTRACT(MONTH FROM fecha))>=2) GROUP BY correocliente HAVING COUNT(*)=(select EXTRACT(MONTH FROM(SELECT SYSDATE FROM DUAL)) - EXTRACT(MONTH FROM(SELECT MIN(FECHA) FROM A_FACTURA)) as dateDiff from dual))");
+		q.setParameters(pDireccionSucursal,pCiudad);
+		return (List<String>) q.executeList();
+	}
+	
 }

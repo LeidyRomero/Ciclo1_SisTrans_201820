@@ -5,6 +5,7 @@ import java.util.List;
 import javax.jdo.*;
 
 import uniandes.isis2304.superAndes.negocio.Bodega;
+import uniandes.isis2304.superAndes.negocio.Indice;
 
 /**
  * 
@@ -57,10 +58,10 @@ class SQLBodega
 		q.setParameters(categoria);
 		return (Bodega) q.executeUnique();
 	}
-	public List<Object []> calcularIndices(PersistenceManager manager, String pCiudad, String pDireccionSucursal)
+	public List<Indice> calcularIndices(PersistenceManager manager, String pCiudad, String pDireccionSucursal)
 	{
-		Query q = manager.newQuery(SQL, "SELECT direccionbodega, ((cantidadactual/volumenbodega)*100) FROM (SELECT direccionbodega as direccion, sum(cantidadactual) AS cantidadActual FROM " + persistencia.getSqlCantidadEnBodega() + " WHERE direccionsucursal = ? AND ciudad = ? GROUP BY direccionBodega),"+ persistencia.getSqlBodega()+" WHERE direccion=direccionBodega");
+		Query q = manager.newQuery(SQL, "SELECT direccionbodega AS identificador, ((cantidadactual/volumenbodega)*100) AS indice FROM (SELECT direccionbodega as direccion, sum(cantidadactual) AS cantidadActual FROM " + persistencia.getSqlCantidadEnBodega() + " WHERE direccionsucursal = ? AND ciudad = ? GROUP BY direccionBodega),"+ persistencia.getSqlBodega()+" WHERE direccion=direccionBodega");
 		q.setParameters(pDireccionSucursal,pCiudad);
-		return (List<Object []>) q.executeList();
+		return (List<Indice>) q.executeList();
 	}
 }
