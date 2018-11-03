@@ -2,7 +2,6 @@ package uniandes.isis2304.superAndes.negocio;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.JsonObject;
 
-import oracle.net.aso.p;
 import uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes;
 
 public class SuperAndes {
@@ -360,7 +358,6 @@ public class SuperAndes {
 		Comprados comprado = pp.adicionarComprados(pCodigoBarras, pCantidad, pCantidad*producto.getPrecioUnitario(), factura.getIdFactura());
 
 		//TODO Maria  actualizar inventario
-		pp.disminuirCantidadEnEstantes(pCantidad, producto);
 		//pp.disminuirCantidadEnBodega();
 
 		Log.info("Saliendo de registrar comprados "+ pCodigoBarras+", "+pCodigoBarras);
@@ -612,17 +609,64 @@ public class SuperAndes {
 		Log.info("Saliendo de buscar productos en sucursal "+ pDireccion+", "+pCiudad);
 		return productos;
 	}
-	public void disminuirProductosEnEstante(int pCantidad, Producto pProducto)
+	public void disminuirProductosEnEstante(int pCantidad, Producto pProducto, long idEstante)
 	{
 		Log.info("Actualizando inventario"+ pCantidad+","+pProducto);
-		pp.disminuirCantidadEnEstantes(pCantidad, pProducto);
+		pp.disminuirCantidadEnEstantes(pCantidad, pProducto, idEstante);
 		Log.info("Saliendo de actualizar inventario"+ pCantidad+", "+pProducto);
 	}
-	public void aumentarProductosEnEstante(int pCantidad, Producto pProducto)
+	public void aumentarProductosEnEstante(int pCantidad, Producto pProducto, long idEstante)
 	{
 		Log.info("Actualizando inventario"+ pCantidad+","+pProducto);
-		pp.aumentarCantidadEnEstantes(pCantidad, pProducto);
+		pp.aumentarCantidadEnEstantes(pCantidad, pProducto, idEstante);
 		Log.info("Saliendo de actualizar inventario"+ pCantidad+", "+pProducto);
+	}
+	
+	public Carrito adicionarCarrito(String direccionSucursal, String ciudad, String correoCliente)
+	{
+		Log.info("Adicionando carrito: " + direccionSucursal +", "+ ciudad + ", "+ correoCliente);
+		Carrito carrito  = pp.adicionarCarrito(direccionSucursal, ciudad, correoCliente);
+		Log.info("Saliendo de adicionar carrito: " + direccionSucursal +", "+ ciudad + ", "+ correoCliente);
+		return carrito;
+	}
+	
+	public long eliminarCarritoPorId(long idCarrito)
+	{
+		Log.info("Eliminando un carrito: " + idCarrito);
+		long tuplasEliminadas = pp.eliminarCarritoPorId(idCarrito);
+		Log.info("Saliendo de eliminar un carrito: " + idCarrito);
+		return tuplasEliminadas;
+	}
+	
+	public Carrito darCarritoPorId(long idCarrito)
+	{
+		Log.info("Consultando carrito por identificador: " + idCarrito);
+		Carrito carrito  = pp.darCarritoPorId(idCarrito);
+		Log.info("Saliendo de consultar carrito por identificador: " + idCarrito);
+		return carrito;
+	}
+	
+	public Carrito darCarritoPorCorreoCliente(String correoCliente)
+	{
+		Log.info("Consultando carrito por correo: " + correoCliente);
+		Carrito carrito  = pp.darCarritoPorCorreoCliente(correoCliente);
+		Log.info("Saliendo de consultar carrito por correo: " + correoCliente);
+		return carrito;
+	}
+	
+	public List<VOCarrito> darVOCarrito ()
+	{
+		Log.info ("Generando los VO de Carrito");
+		List<VOCarrito> voCarrito = new LinkedList<VOCarrito> ();
+		if(pp.darCarritos().size() > 0)
+		{
+			for (Carrito carrito: pp.darCarritos())
+			{
+				voCarrito.add(carrito);
+			}
+		}
+		Log.info ("Generando los VO de Carrito: " + voCarrito.size () + " carritos existentes");
+		return voCarrito;
 	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar PRODUCTOS EN CARRITO

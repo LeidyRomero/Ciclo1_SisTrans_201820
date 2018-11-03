@@ -1877,7 +1877,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-
+	
 	//------------------------------------------------------------------
 	//  Metodos para manejar BODEGA
 	//------------------------------------------------------------------
@@ -2420,7 +2420,14 @@ public class PersistenciaSuperAndes {
 	//------------------------------------------------------------------
 	//  Metodos para manejar CARRITO
 	//------------------------------------------------------------------
-	public long adicionarCarrito(String direccionSucursal, String ciudad, String correoCliente)
+	/**
+	 * 
+	 * @param direccionSucursal
+	 * @param ciudad
+	 * @param correoCliente
+	 * @return
+	 */
+	public Carrito adicionarCarrito(String direccionSucursal, String ciudad, String correoCliente)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction t = pm.currentTransaction();
@@ -2432,12 +2439,12 @@ public class PersistenciaSuperAndes {
 			t.commit();
 
 			Log.trace("Inserción carrito : " + idCarrito + ": "+ tuplasInsertadas);
-			return tuplasInsertadas;
+			return new Carrito(direccionSucursal, ciudad, idCarrito, correoCliente);
 		}
 		catch(Exception e)
 		{
 			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return 0;
+			return null;
 		}
 		finally
 		{
@@ -2449,6 +2456,68 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Carrito> darCarritos()
+	{
+		return sqlCarrito.darCarritos(managerFactory.getPersistenceManager());
+	}
+	
+	/**
+	 * 
+	 * @param idCarrito
+	 * @return
+	 */
+	public Carrito darCarritoPorId(long idCarrito)
+	{
+		return sqlCarrito.darCarritoPorId(managerFactory.getPersistenceManager(), idCarrito);
+	}
+	
+	/**
+	 * 
+	 * @param correoCliente
+	 * @return
+	 */
+	public Carrito darCarritoPorCorreoCliente(String correoCliente)
+	{
+		return sqlCarrito.darCarritoPorCorreoCliente(managerFactory.getPersistenceManager(), correoCliente);
+	}
+	
+	/**
+	 * 
+	 * @param pm
+	 * @param idCarrito
+	 * @return
+	 */
+	public long eliminarCarritoPorId(long idCarrito)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction t = pm.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasEliminadas = sqlCarrito.eliminarCarritoPorId(pm, idCarrito);
+			t.commit();
+			
+			Log.trace("Eliminación carrito : " + idCarrito + ": "+ tuplasEliminadas);
+			return tuplasEliminadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			pm.close();
+		}
+	}
 
 
 	//------------------------------------------------------------------
@@ -2528,7 +2597,7 @@ public class PersistenciaSuperAndes {
 		catch(Exception e)
 		{
 			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return 0;
+			return -1;
 		}
 		finally
 		{

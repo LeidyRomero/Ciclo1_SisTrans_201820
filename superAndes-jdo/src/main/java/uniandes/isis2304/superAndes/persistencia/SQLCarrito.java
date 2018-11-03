@@ -103,4 +103,17 @@ public class SQLCarrito {
 		return (Carrito) q.executeUnique();
 	}
 
+	/**
+	 * Crea y ejecuta una sentencia sql para encontrar la información de UN CARRITO en la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param correoCliente - El correo del cliente
+	 * @return El objeto CARRITO con el correo dado
+	 */
+	public Carrito darCarritoPorCorreoCliente(PersistenceManager pm, String correoCliente)
+	{
+		Query q = pm.newQuery(SQL, "SELECR * FROM " + pp.getSqlCarrito() + " WHERE correoCliente = ?");
+		q.setResultClass(Carrito.class);
+		q.setParameters(correoCliente);
+		return (Carrito) q.executeUnique();
+	}
 }
