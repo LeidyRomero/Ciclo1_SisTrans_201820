@@ -249,48 +249,6 @@ INSERT INTO A_TIPO_PRODUCTO(nombretipo,nombrecategoria) VALUES('J','Lacteos');
 --INSERT INTO A_PEDIDO_PRODUCTO(codigobarras,idpedido,cantidadproducto,precioproducto) VALUES('',,,);
 --INSERT INTO A_PEDIDO_PRODUCTO(codigobarras,idpedido,cantidadproducto,precioproducto) VALUES('',,,);
 ------------------------------------------------------------------------------------
---COMPRADOS
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('AAAA',1,10,10*800);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('BBBB',2,5,5*3000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('CCCC',3,4,4*1800);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('DDDD',4,3,3*5000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEC',5,2,2*2900);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEE',6,1,1*2000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('FFFF',7,9,9*1500);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('GGGG',8,8,8*900);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0ABC',9,7,7*3000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0000',10,6,6*2700);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('AAAA',11,11,11*800);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('BBBB',12,20,20*3000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('CCCC',13,19,19*1800);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('DDDD',14,18,18*5000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEC',15,17,17*2900);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEE',16,16,16*2000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('FFFF',17,15,15*1500);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('GGGG',18,14,14*900);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0ABC',19,13,13*3000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0000',20,12,12*2700);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('AAAA',21,30,30*800);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('BBBB',22,31,31*3000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('CCCC',23,3,3*1800);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('DDDD',24,2,2*5000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEC',25,1,1*2900);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEE',26,10,10*2000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('FFFF',27,9,9*1500);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('GGGG',28,8,8*900);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0ABC',29,7,7*3000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0000',30,6,6*2700);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('AAAA',31,5,5*800);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('BBBB',32,4,4*3000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('CCCC',33,3,3*1800);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('DDDD',34,2,2*5000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEC',35,1,1*2900);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEE',36,11,11*2000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('FFFF',37,12,12*1500);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('GGGG',38,13,13*900);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0ABC',39,14,14*3000);
-INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0000',40,15,15*2700);
-------------------------------------------------------------------------------------
 --CANTIDAD EN ESTANTES
 INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantidadactual, cantidadminima) VALUES ('AAAA',2,10,1);
 INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantidadactual, cantidadminima) VALUES ('BBBB',3,10,1);
@@ -395,6 +353,48 @@ INSERT INTO A_FACTURA (idfactura, fecha, costototal, correocliente, ciudad, dire
 INSERT INTO A_FACTURA (idfactura, fecha, costototal, correocliente, ciudad, direccionsucursal) VALUES (38,TO_DATE('2018-07-16','yyyy-MM-dd'),110000,'ahernandez@gmail.com','Arauca','CR 13 13-9');
 INSERT INTO A_FACTURA (idfactura, fecha, costototal, correocliente, ciudad, direccionsucursal) VALUES (39,TO_DATE('2018-08-16','yyyy-MM-dd'),105000,'fmaya@gmail.com','Bogotá','CL 7 5-74');
 INSERT INTO A_FACTURA (idfactura, fecha, costototal, correocliente, ciudad, direccionsucursal) VALUES (40,TO_DATE('2018-09-16','yyyy-MM-dd'),105000,'socampo@gmail.com','Medellín','CLL 34 43-65');
+------------------------------------------------------------------------------------
+--COMPRADOS
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('AAAA',1,10,10*800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('BBBB',2,5,5*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('CCCC',3,4,4*1800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('DDDD',4,3,3*5000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEC',5,2,2*2900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEE',6,1,1*2000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('FFFF',7,9,9*1500);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('GGGG',8,8,8*900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0ABC',9,7,7*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0000',10,6,6*2700);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('AAAA',11,11,11*800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('BBBB',12,20,20*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('CCCC',13,19,19*1800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('DDDD',14,18,18*5000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEC',15,17,17*2900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEE',16,16,16*2000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('FFFF',17,15,15*1500);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('GGGG',18,14,14*900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0ABC',19,13,13*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0000',20,12,12*2700);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('AAAA',21,30,30*800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('BBBB',22,31,31*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('CCCC',23,3,3*1800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('DDDD',24,2,2*5000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEC',25,1,1*2900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEE',26,10,10*2000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('FFFF',27,9,9*1500);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('GGGG',28,8,8*900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0ABC',29,7,7*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0000',30,6,6*2700);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('AAAA',31,5,5*800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('BBBB',32,4,4*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('CCCC',33,3,3*1800);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('DDDD',34,2,2*5000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEC',35,1,1*2900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('EEEE',36,11,11*2000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('FFFF',37,12,12*1500);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('GGGG',38,13,13*900);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0ABC',39,14,14*3000);
+INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0000',40,15,15*2700);
 ------------------------------------------------------------------------------------
 --ORDEN PEDIDO
 --INSERT INTO A_ORDEN_PEDIDO (fechaespereadaentrega, estado, fechaentrega, calificacionpedido, nitproveedor, idpedido, ciudad, direccionsucursal, direccionbodega) VALUES (TO_DATE('','yyyy-MM-dd'), '', TO_DATE('','yyyy-MM-dd'), '', 0, 0, '', '', '');

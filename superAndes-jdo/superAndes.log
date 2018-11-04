@@ -681,3 +681,58 @@ ORA-01722: número no válido
 13:20:22,020 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar clientes frecuentes: Bucaramanga, CR 139 139-99
 13:25:39,347 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando clientes frecuentes: Bucaramanga, CR 139 139-99
 13:25:39,473 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar clientes frecuentes: Bucaramanga, CR 139 139-99
+14:49:16,329 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando el dinero recolectado por sucursales en periodo de tiempo: 2018-05-06 00:00:00.0, 2018-06-05 00:00:00.0
+14:50:24,086 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando el dinero recolectado por sucursales en periodo de tiempo: 2018-05-06 00:00:00.0, 2018-06-06 00:00:00.0
+16:23:50,638 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+16:24:55,172 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones mensuales para el tipo de producto: Dulces
+16:28:34,053 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulce
+16:36:23,757 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones mensuales para el tipo de producto: Dulce
+16:44:06,701 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulce
+17:06:18,780 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulce
+17:06:18,781 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulce
+17:07:38,269 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulce
+17:09:26,698 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulce
+17:12:45,709 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulce
+17:12:46,231 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulce
+17:37:07,803 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones mensuales para el tipo de producto: Dulces
+17:39:11,922 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones mensuales para el tipo de producto: Dulces
+17:39:12,460 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones mensuales para el tipo de producto: Dulces
+17:40:26,676 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+17:40:27,190 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+17:50:29,978 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+17:50:33,163 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+17:51:24,360 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+17:51:27,672 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+17:53:08,817 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+17:53:10,356 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+17:54:42,567 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+17:54:43,387 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+17:56:13,595 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+17:56:14,325 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+17:57:01,899 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+17:57:02,424 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+18:00:22,129 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+18:03:43,022 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+18:04:39,514 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+18:10:27,836 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+18:10:28,335 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+18:11:46,816 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+18:11:47,553 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+18:13:26,387 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+18:13:27,157 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+18:14:41,647 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+18:14:46,508 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+18:17:32,514 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+18:17:33,059 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+18:18:05,132 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+18:18:05,891 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+18:27:01,916 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones anuales para el tipo de producto: Dulces
+18:27:02,461 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones anuales para el tipo de producto: Dulces
+18:29:51,027 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones mensuales para el tipo de producto: Dulces
+18:30:40,789 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones mensuales para el tipo de producto: Dulces
+18:30:41,287 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones mensuales para el tipo de producto: Dulces
+18:35:27,930 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones mensuales para el tipo de producto: Dulces
+18:35:29,590 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones mensuales para el tipo de producto: Dulces
+18:56:36,913 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones diarias para el tipo de producto: Dulces
+18:57:20,493 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando operaciones diarias para el tipo de producto: Dulces
+18:57:21,023 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar las operaciones diarias para el tipo de producto: Dulces

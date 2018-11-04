@@ -796,6 +796,41 @@ public class SuperAndes extends SwingWorker<Boolean, List<Object[]>[]>{
 		termino = true;
 		return nueva;
 	}
+	
+	//-------------------------------------------------------
+	// CONSULTA
+	//-------------------------------------------------------
+	public List<Object[]>[] operacionesAnuales(String tipo)
+	{
+		Log.info("Consultando operaciones anuales para el tipo de producto: "+tipo);
+		List<Object[]>[] retorno = pp.operacionesAnuales(tipo);
+		Log.info("Saliendo de consultar las operaciones anuales para el tipo de producto: "+tipo);
+		return retorno;
+	}
+	
+	public List<Object[]>[] operacionesMensuales(String tipo)
+	{
+		Log.info("Consultando operaciones mensuales para el tipo de producto: "+tipo);
+		List<Object[]>[] retorno = pp.operacionesMensuales(tipo);
+		Log.info("Saliendo de consultar las operaciones mensuales para el tipo de producto: "+tipo);
+		return retorno;
+	}
+	
+	public List<Object[]>[] operacionesSemanales(String tipo)
+	{
+		Log.info("Consultando operaciones semanales para el tipo de producto: "+tipo);
+		List<Object[]>[] retorno = pp.operacionesSemanales(tipo);
+		Log.info("Saliendo de consultar las operaciones semanales para el tipo de producto: "+tipo);
+		return retorno;
+	}
+	
+	public List<Object[]>[] operacionesDiarias(String tipo)
+	{
+		Log.info("Consultando operaciones diarias para el tipo de producto: "+tipo);
+		List<Object[]>[] retorno = pp.operacionesDiarias(tipo);
+		Log.info("Saliendo de consultar las operaciones diarias para el tipo de producto: "+tipo);
+		return retorno;
+	}
 
 	//--------------------------------------------------------
 	// Actualización constante

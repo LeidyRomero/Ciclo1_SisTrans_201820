@@ -257,6 +257,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent pEvento)
 	{
 		String evento = pEvento.getActionCommand( );
+		System.out.println(evento);
 		if(!evento.equals("comboBoxChanged"))
 		{
 			try 
@@ -1304,11 +1305,11 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 	public void operacionesSuperAndes()
 	{
-		String[] opciones = {"año, mes, semana, día"};
+		String[] opciones = {"año", "mes", "semana", "día"};
 		JComboBox opcionesUnidad = new JComboBox<>(opciones);
 		opcionesUnidad.addActionListener(this);
-		
-		JTextField txtTipo = new JTextField();
+
+		JTextField txtTipo = new JTextField(15);
 
 		JPanel aux = new JPanel();
 		aux.add(new JLabel("Unidad de tiempo:"));
@@ -1322,21 +1323,157 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		{
 			if(opcionesUnidad.getSelectedItem().toString().equals("año"))
 			{
-				
+				try
+				{
+					List<Object[]>[] retorno = superAndes.operacionesAnuales(txtTipo.getText());
+					if(retorno.length == 0)
+					{
+						throw new Exception("No se obtuvieron listas");
+					}
+
+					String resultado = "En operacionesAnuales \n\n";
+					int i = 0;
+					for(List<Object[]> actual: retorno)
+					{
+						if(i==0)
+							resultado+= "Mayores Ingresos \n";
+						else if(i ==1)
+							resultado+= "Mayor Demanda \n";
+						else if(i ==2)
+							resultado+= "Menores Ingresos \n";
+						else if(i ==3)
+							resultado+= "Menor Demanda \n";
+						for(Object[] info: actual)
+						{
+							if(i==0)
+								resultado+= "Ingresos: ";
+							else if(i ==1)
+								resultado+= "Cantidad: ";
+							else if(i ==2)
+								resultado+= "Ingresos: ";
+							else if(i ==3)
+								resultado+= "Cantidad: ";
+							resultado += info[0]+", Ciudad: "+info[1]+", Dirección: "+info[2]+", Año: "+info[3]+"\n";
+						}
+						i++;
+					}
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+
+				}
+				catch (Exception e) 
+				{
+					String resultado = "En operacionesMensuales \n\n";
+					resultado += e.getMessage();
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+
 			}
 			else if(opcionesUnidad.getSelectedItem().toString().equals("mes"))
 			{
-				
+				try
+				{
+					List<Object[]>[] retorno = superAndes.operacionesMensuales(txtTipo.getText());
+					if(retorno.length == 0)
+					{
+						throw new Exception("No se obtuvieron listas");
+					}
+
+					String resultado = "En operacionesMensuales \n\n";
+					int i = 0;
+					for(List<Object[]> actual: retorno)
+					{
+						if(i==0)
+							resultado+= "Mayores Ingresos \n";
+						else if(i ==1)
+							resultado+= "Mayor Demanda \n";
+						else if(i ==2)
+							resultado+= "Menores Ingresos \n";
+						else if(i ==3)
+							resultado+= "Menor Demanda \n";
+						for(Object[] info: actual)
+						{
+							if(i==0)
+								resultado+= "Ingresos: ";
+							else if(i ==1)
+								resultado+= "Cantidad: ";
+							else if(i ==2)
+								resultado+= "Ingresos: ";
+							else if(i ==3)
+								resultado+= "Cantidad: ";
+							resultado += info[0]+", Ciudad: "+info[1]+", Dirección: "+info[2]+", Mes/Año: "+info[3]+"\n";
+						}
+						i++;
+					}
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+
+				}
+				catch (Exception e) 
+				{
+					String resultado = "En clientesFrecuente \n\n";
+					resultado += e.getMessage();
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
 			}
 			else if(opcionesUnidad.getSelectedItem().toString().equals("semana"))
 			{
-				
+				superAndes.operacionesSemanales(txtTipo.getText());
 			}
 			else if(opcionesUnidad.getSelectedItem().toString().equals("día"))
 			{
-				
-			}
-		
+				try
+				{
+					List<Object[]>[] retorno = superAndes.operacionesDiarias(txtTipo.getText());
+					if(retorno.length == 0)
+					{
+						throw new Exception("No se obtuvieron listas");
+					}
+
+					String resultado = "En operacionesDiarias \n\n";
+					int i = 0;
+					for(List<Object[]> actual: retorno)
+					{
+						if(i==0)
+							resultado+= "Mayores Ingresos \n";
+						else if(i ==1)
+							resultado+= "Mayor Demanda \n";
+						else if(i ==2)
+							resultado+= "Menores Ingresos \n";
+						else if(i ==3)
+							resultado+= "Menor Demanda \n";
+						for(Object[] info: actual)
+						{
+							if(i==0)
+								resultado+= "Ingresos: ";
+							else if(i ==1)
+								resultado+= "Cantidad: ";
+							else if(i ==2)
+								resultado+= "Ingresos: ";
+							else if(i ==3)
+								resultado+= "Cantidad: ";
+							resultado += info[0]+", Ciudad: "+info[1]+", Dirección: "+info[2]+", Fecha: "+info[3]+"\n";
+						}
+						i++;
+					}
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+
+				}
+				catch (Exception e) 
+				{
+					String resultado = "En operacionesDiarias \n\n";
+					resultado += e.getMessage();
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+			}		
+		}
+		else
+		{
+
 		}
 	}
 	// -----------------------------------------------------------------

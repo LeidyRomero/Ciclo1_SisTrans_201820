@@ -2691,30 +2691,24 @@ public class PersistenciaSuperAndes {
 
 			List<ProductosCarrito> productos = sqlProductosCarrito.buscarProductosCarritoPorId(pm, idCarrito);
 			long productosCarritoEliminados = 0;
-			System.out.println("Recorrido productos");
 			for(ProductosCarrito actual: productos)
 			{
 				String codBarras = actual.getCodBarras();
 				int cantidad = actual.getCantidad();
 				double pPrecioTotal = actual.getCantidad()*sqlProducto.buscarProductoPorCodigo(pm, codBarras).getPrecioUnitario();
-				System.out.println("Precio a pagar por producto: "+pPrecioTotal);
 
 				Log.trace("Agregar producto a comprados: "+codBarras+", "+cantidad+", "+idFactura );
 				sqlComprados.agregarComprados(pm, codBarras, cantidad, pPrecioTotal, idFactura);
-				System.out.println("Agrega a comprados");
 
 				Log.trace("Aumentar costo de la factura: " +pPrecioTotal+", "+idFactura);
 				sqlFactura.aumentarCostoFactura(pm, pPrecioTotal, idFactura);
-				System.out.println("Aumenta el costo de la factura");
 
 				long idEstante = sqlProducto.darEstanteProducto(pm, codBarras, direccionSucursal, ciudad);
 				Log.trace("Disminuir cantidad en estantes: "+cantidad+", "+codBarras+", "+idCarrito);
 				sqlCantidadEnEstantes.disminuirCantidadEnEstantes(pm, cantidad, codBarras, idEstante);
-				System.out.println("Disminuye la cantidad en estantes");
 
 				Log.trace("Eliminar producto del carrito: "+codBarras+", "+idCarrito);
 				sqlProductosCarrito.eliminarProductoCarrito(pm, actual.getCodBarras(), idCarrito);
-				System.out.println("Elimina el producto del carrito");
 
 				productosCarritoEliminados++;
 			}
@@ -2736,6 +2730,114 @@ public class PersistenciaSuperAndes {
 			}
 			pm.close();
 		}
+	}
+
+	/**
+	 * 
+	 * @param tipo
+	 * @return
+	 */
+	public List<Object[]>[] operacionesAnuales(String tipo)
+	{
+		List<Object[]>[] respuesta = new LinkedList[4];
+		List<List<Object>> listas = sqlFactura.operacionesAnuales(managerFactory.getPersistenceManager(), tipo);
+		int i = 0;
+		for(List<Object> lista: listas)
+		{
+			respuesta[i] = new LinkedList<>();	
+			for(Object tupla: lista)
+			{
+				Object[] datos = (Object[]) tupla;
+				double max = ((BigDecimal) datos [0]).doubleValue();
+				String ciudad = (String) datos[1];
+				String direccionSucursal = (String) datos[2];
+				int anio = ((BigDecimal) datos [3]).intValue();
+
+				Object[] resp = new Object[4];
+				resp[0] = max;
+				resp[1] = ciudad;
+				resp[2] = direccionSucursal;
+				resp[3] = anio;		
+				
+				
+				respuesta[i].add(resp);
+			}
+			i++;
+		}
+
+		return respuesta;
+	}
+
+	/**
+	 * 
+	 * @param tipo
+	 * @return
+	 */
+	public List<Object[]>[] operacionesMensuales(String tipo)
+	{
+		List<Object[]>[] respuesta = new LinkedList[4];
+		List<List<Object>> listas = sqlFactura.operacionesMensuales(managerFactory.getPersistenceManager(), tipo);
+		int i = 0;
+		for(List<Object> lista: listas)
+		{
+			respuesta[i] = new LinkedList<>();	
+			for(Object tupla: lista)
+			{
+				Object[] datos = (Object[]) tupla;
+				double max = ((BigDecimal) datos [0]).doubleValue();
+				String ciudad = (String) datos[1];
+				String direccionSucursal = (String) datos[2];
+				String mes = (String) datos [3];
+
+				Object[] resp = new Object[4];
+				resp[0] = max;
+				resp[1] = ciudad;
+				resp[2] = direccionSucursal;
+				resp[3] = mes;		
+				
+				
+				respuesta[i].add(resp);
+			}
+			i++;
+		}
+
+		return respuesta;
+	}
+
+	public List<Object[]>[] operacionesSemanales(String tipo)
+	{
+		return null;
+	}
+
+	public List<Object[]>[] operacionesDiarias(String tipo)
+	{
+		List<Object[]>[] respuesta = new LinkedList[4];
+		List<List<Object>> listas = sqlFactura.operacionesDiarias(managerFactory.getPersistenceManager(), tipo);
+		int i = 0;
+		for(List<Object> lista: listas)
+		{
+			respuesta[i] = new LinkedList<>();	
+			for(Object tupla: lista)
+			{
+				Object[] datos = (Object[]) tupla;
+				double max = ((BigDecimal) datos [0]).doubleValue();
+				String ciudad = (String) datos[1];
+				String direccionSucursal = (String) datos[2];
+				Timestamp fecha = (Timestamp) datos [3];
+
+				Object[] resp = new Object[4];
+				resp[0] = max;
+				resp[1] = ciudad;
+				resp[2] = direccionSucursal;
+				resp[3] = fecha;		
+				
+				
+				respuesta[i].add(resp);
+			}
+			i++;
+		}
+
+		return respuesta;
 	}
 	//------------------------------------------------------------------
 	//  Metodos de ADMINISTRACION
