@@ -1145,23 +1145,56 @@ public class PersistenciaSuperAndes {
 	 * @param fechaFin - La fecha de fin de la consulta
 	 * @return Una lista de objetos de tamaño 3
 	 */
-	public List<Object> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
+	public List<Object[]> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
-		return sqlFactura.dineroSucursalEnRango(pm, fechaInicio, fechaFin);
+
+		List<Object[]> respuesta = new LinkedList<Object[]>();
+		List<Object> tuplas = sqlFactura.dineroSucursalEnRango(pm, fechaInicio, fechaFin);
+		for(Object tupla: tuplas)
+		{
+			Object[] datos = (Object[]) tupla;
+			String direccionSucursal = (String) datos[1];
+			String ciudad = (String) datos[2];
+			double dineroRecolectado = ((BigDecimal) datos [0]).doubleValue ();
+
+			Object[] resp = new Object[3];
+			resp[0] = dineroRecolectado;
+			resp[1] = direccionSucursal;
+			resp[2] = ciudad;
+
+			respuesta.add(resp);
+		}
+		return respuesta;
 	}
-	
-	
+
+
 	/**
 	 * Retorna los clientes frecuentes de superAndes
 	 * @param pDireccion
 	 * @param pCiudad
 	 * @return
 	 */
-	public List<String> darClientesFrecuentes(String pDireccion, String pCiudad)
+	public List<Object[]> darClientesFrecuentes(String pDireccion, String pCiudad)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
-		return sqlFactura.darClientesFrecuentes(pm, pDireccion, pCiudad);
+
+		List<Object[]> respuesta = new LinkedList<Object[]>();
+		List<Object> tuplas = sqlFactura.darClientesFrecuentes(pm, pDireccion, pCiudad);
+		for(Object tupla: tuplas)
+		{
+			Object[] datos = (Object[]) tupla;
+			if(datos != null)
+			{
+				String correoCliente = (String) datos[0];
+
+				Object[] resp = new Object[1];
+				resp[0] = correoCliente;
+
+				respuesta.add(resp);
+			}
+		}
+		return respuesta;
 	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar los CANTIDAD EN ESTANTES
@@ -1274,7 +1307,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	/**
 	 * Método que consulta la cantidad en estantes real
 	 * @param ciudad - La ciudad de la sucursal
@@ -1295,11 +1328,11 @@ public class PersistenciaSuperAndes {
 			int cantidadMinima = ((BigDecimal) datos [2]).intValue ();
 			long idEstante = ((BigDecimal) datos [3]).longValue ();
 			int cantidadActual = ((BigDecimal) datos [4]).intValue ();
-			
+
 			Object[] resp = new Object[2];
 			resp[0] = new CantidadEnEstantes(cantidadActual, cantidadMinima, codigoBarras, idEstante);
 			resp[1] = nombreProducto;
-			
+
 			respuesta.add(resp);
 		}
 		return respuesta;
@@ -1508,7 +1541,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar CATEGORIA
 	//------------------------------------------------------------------
@@ -1882,7 +1915,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar BODEGA
 	//------------------------------------------------------------------
@@ -2444,7 +2477,7 @@ public class PersistenciaSuperAndes {
 	{
 		return sqlCarrito.darCarritos(managerFactory.getPersistenceManager());
 	}
-	
+
 	/**
 	 * 
 	 * @param idCarrito
@@ -2454,7 +2487,7 @@ public class PersistenciaSuperAndes {
 	{
 		return sqlCarrito.darCarritoPorId(managerFactory.getPersistenceManager(), idCarrito);
 	}
-	
+
 	/**
 	 * 
 	 * @param correoCliente
@@ -2464,7 +2497,7 @@ public class PersistenciaSuperAndes {
 	{
 		return sqlCarrito.darCarritoPorCorreoCliente(managerFactory.getPersistenceManager(), correoCliente);
 	}
-	
+
 	/**
 	 * 
 	 * @param pm
@@ -2480,7 +2513,7 @@ public class PersistenciaSuperAndes {
 			t.begin();
 			long[] tuplasEliminadas = sqlCarrito.eliminarCarritoPorId(pm, idCarrito);
 			t.commit();
-			
+
 			Log.trace("Eliminación carrito : " + idCarrito + ": "+ tuplasEliminadas);
 			return tuplasEliminadas;
 		}
@@ -2499,7 +2532,7 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
-	
+
 	//------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTOS CARRITO
 	//------------------------------------------------------------------
@@ -2561,7 +2594,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	public long eliminarProductoDelCarrito(long idCarrito)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -2589,7 +2622,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	public long eliminarCantidadProductoDelCarrito(String pCodigo, long idCarrito, int pCantidad)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -2617,7 +2650,7 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-	
+
 	public List<Object[]> buscarProductosCarrito(long idCarrito)
 	{
 		List<Object[]> respuesta = new LinkedList<Object[]>();
@@ -2627,21 +2660,21 @@ public class PersistenciaSuperAndes {
 			Object[] datos = (Object[]) tupla;
 			int cantidad = ((BigDecimal) datos [0]).intValue ();
 			String codBarras = (String) datos [1];
-			
+
 			Object[] resp = new Object[1];
 			resp[0] = new ProductosCarrito(idCarrito, codBarras, cantidad);
-			
+
 			respuesta.add(resp);
 		}
-		
+
 		return respuesta;
 	}
-	
+
 	public List<ProductosCarrito> darProductosCarrito(long idCarrito)
 	{
 		return sqlProductosCarrito.buscarProductosCarritoPorId(managerFactory.getPersistenceManager(), idCarrito);
 	}
-	
+
 	public Factura registrarVenta(String direccionSucursal, String ciudad, long idCarrito, String correoCliente)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
@@ -2655,7 +2688,7 @@ public class PersistenciaSuperAndes {
 			Log.trace("Adicionar factura: "+idFactura+", "+0+", "+fecha+", "+correoCliente+", "+ciudad+", "+direccionSucursal);
 			long facturasInsertadas = sqlFactura.adicionarFactura(pm, idFactura, 0, fecha, correoCliente, ciudad, direccionSucursal);
 			System.out.println("Inserta factura");
-			
+
 			List<ProductosCarrito> productos = sqlProductosCarrito.buscarProductosCarritoPorId(pm, idCarrito);
 			long productosCarritoEliminados = 0;
 			System.out.println("Recorrido productos");
@@ -2665,24 +2698,24 @@ public class PersistenciaSuperAndes {
 				int cantidad = actual.getCantidad();
 				double pPrecioTotal = actual.getCantidad()*sqlProducto.buscarProductoPorCodigo(pm, codBarras).getPrecioUnitario();
 				System.out.println("Precio a pagar por producto: "+pPrecioTotal);
-				
+
 				Log.trace("Agregar producto a comprados: "+codBarras+", "+cantidad+", "+idFactura );
 				sqlComprados.agregarComprados(pm, codBarras, cantidad, pPrecioTotal, idFactura);
 				System.out.println("Agrega a comprados");
-				
+
 				Log.trace("Aumentar costo de la factura: " +pPrecioTotal+", "+idFactura);
 				sqlFactura.aumentarCostoFactura(pm, pPrecioTotal, idFactura);
 				System.out.println("Aumenta el costo de la factura");
-				
+
 				long idEstante = sqlProducto.darEstanteProducto(pm, codBarras, direccionSucursal, ciudad);
 				Log.trace("Disminuir cantidad en estantes: "+cantidad+", "+codBarras+", "+idCarrito);
 				sqlCantidadEnEstantes.disminuirCantidadEnEstantes(pm, cantidad, codBarras, idEstante);
 				System.out.println("Disminuye la cantidad en estantes");
-				
+
 				Log.trace("Eliminar producto del carrito: "+codBarras+", "+idCarrito);
 				sqlProductosCarrito.eliminarProductoCarrito(pm, actual.getCodBarras(), idCarrito);
 				System.out.println("Elimina el producto del carrito");
-				
+
 				productosCarritoEliminados++;
 			}
 			t.commit();

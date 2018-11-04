@@ -45,6 +45,14 @@
 				{
 					"label": "Consultar dinero",
 					"event": "dineroSucursalEnRango"
+				},
+				{
+					"label": "Consultar clientes frecuentes",
+					"event": "clientesFrecuentes"
+				},
+				{
+					"label": "Analizar operaciones SuperAndes",
+					"event": "operacionesSuperAndes"
 				}
 			]
 		},

@@ -537,9 +537,12 @@ public class SuperAndes extends SwingWorker<Boolean, List<Object[]>[]>{
 		Log.info("Saliendo de adicionar factura "+ costoTotal+", "+fecha);
 		return factura;
 	}
-	public List<String> darClientesFrecuentes(String ciudad, String direccion)
+	public List<Object[]> darClientesFrecuentes(String ciudad, String direccion)
 	{
-		return pp.darClientesFrecuentes(direccion, ciudad);
+		Log.info("Consultando clientes frecuentes: "+ciudad+", "+direccion);
+		List<Object[]> clientes = pp.darClientesFrecuentes(direccion, ciudad);
+		Log.info("Saliendo de consultar clientes frecuentes: "+ciudad+", "+direccion);
+		return clientes;
 	}
 	//---------------------------------------------------------------------
 	// Métodos para manejar PROVEEDOR
@@ -615,10 +618,10 @@ public class SuperAndes extends SwingWorker<Boolean, List<Object[]>[]>{
 	//---------------------------------------------------------------------
 	// Métodos para manejar SUCURSAL FACTURAS
 	//---------------------------------------------------------------------
-	public List<Object> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
+	public List<Object[]> dineroSucursalEnRango(Timestamp fechaInicio, Timestamp fechaFin)
 	{
 		Log.info("Consultando el dinero recolectado por sucursales en periodo de tiempo: " + fechaInicio + ", "+fechaFin);
-		List<Object> list = pp.dineroSucursalEnRango(fechaInicio, fechaFin);
+		List<Object[]> list = pp.dineroSucursalEnRango(fechaInicio, fechaFin);
 		Log.info("Saliendo de consultar el dinero recolectado por sucursales en periodo de tiempo: " + fechaInicio + ", "+fechaFin);
 		return list;
 	}

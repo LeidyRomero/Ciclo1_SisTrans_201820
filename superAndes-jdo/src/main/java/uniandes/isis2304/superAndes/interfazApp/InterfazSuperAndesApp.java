@@ -1099,16 +1099,16 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			{
 				if(!minField.getText().equals("") && !maxField.getText().equals(""))
 				{
-					List<Object> list = superAndes.dineroSucursalEnRango(Timestamp.valueOf(minField.getText()+" 00:00:00"), Timestamp.valueOf(maxField.getText()+" 00:00:00"));
+					List<Object[]> list = superAndes.dineroSucursalEnRango(Timestamp.valueOf(minField.getText()+" 00:00:00"), Timestamp.valueOf(maxField.getText()+" 00:00:00"));
 					if(list == null)
 					{
 						throw new Exception("No se pudo consultar el dinero de las sucursales en el periodo: " + minField.getText() + ", "+maxField.getText());
 					}
 
 					String resultado = "En consultaDinero \n\n";
-					for(Object actual: list)
+					for(Object[] actual: list)
 					{
-						resultado+= actual+"\n";
+						resultado+= "Dinero recolectado: " +actual[0]+ "- Ciudad: "+actual[1]+ "- Dirección sucursal: "+actual[2]+"\n";
 					}
 					resultado += "\n Operación terminada";
 					panelDatos.actualizarInterfaz(resultado);
@@ -1198,7 +1198,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void devolverProductoDelCarrito(String codBarras, int cantidad)
 	{
 		try{				
@@ -1232,13 +1232,13 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 
 		repaint();
 	}
-	
+
 	public void abandonarCarrito()
 	{
 		remove(panelCarrito);
 		repaint();
 	}
-	
+
 	public void registrarVenta()
 	{
 		try{				
@@ -1262,6 +1262,83 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		}
 	}
 
+	public void clientesFrecuentes()
+	{
+		JTextField direccionField = new JTextField(15);
+		JTextField ciudadField = new JTextField(15);
+
+		JPanel aux = new JPanel();
+		aux.add(new JLabel("Dirección sucursal:"));
+		aux.add(direccionField);
+		aux.add(Box.createHorizontalStrut(15)); // a spacer
+		aux.add(new JLabel("Ciudad:"));
+		aux.add(ciudadField);
+
+		int result = JOptionPane.showConfirmDialog(null, aux,"Clientes frecuentes", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) 
+		{
+			try{				
+				List<Object[]> nuevo = superAndes.darClientesFrecuentes(ciudadField.getText(), direccionField.getText());
+				if(nuevo.size() == 0)
+				{
+					throw new Exception("No se encontraron clientes frecuentes");
+				}
+
+				String resultado = "En clientesFrecuente \n\n";
+				for(Object[] actual: nuevo)
+				{
+					resultado+= "Correo cliente: " +actual[0]+"\n";
+				}
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+				abandonarCarrito();
+			}
+			catch (Exception e) {
+				String resultado = "En clientesFrecuente \n\n";
+				resultado += e.getMessage();
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+		}
+	}
+
+	public void operacionesSuperAndes()
+	{
+		String[] opciones = {"año, mes, semana, día"};
+		JComboBox opcionesUnidad = new JComboBox<>(opciones);
+		opcionesUnidad.addActionListener(this);
+		
+		JTextField txtTipo = new JTextField();
+
+		JPanel aux = new JPanel();
+		aux.add(new JLabel("Unidad de tiempo:"));
+		aux.add(opcionesUnidad);
+		aux.add(Box.createHorizontalStrut(15));
+		aux.add(new JLabel("Tipo producto:"));
+		aux.add(txtTipo);
+
+		int result = JOptionPane.showConfirmDialog(null, aux,"Operaciones SuperAndes", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) 
+		{
+			if(opcionesUnidad.getSelectedItem().toString().equals("año"))
+			{
+				
+			}
+			else if(opcionesUnidad.getSelectedItem().toString().equals("mes"))
+			{
+				
+			}
+			else if(opcionesUnidad.getSelectedItem().toString().equals("semana"))
+			{
+				
+			}
+			else if(opcionesUnidad.getSelectedItem().toString().equals("día"))
+			{
+				
+			}
+		
+		}
+	}
 	// -----------------------------------------------------------------
 	// Programa principal
 	// -----------------------------------------------------------------

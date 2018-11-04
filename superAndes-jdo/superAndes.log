@@ -673,3 +673,11 @@ ORA-01722: número no válido
 11:09:44,039 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: null
 
 11:09:44,040 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el producto papas de pollo
+13:08:29,332 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando clientes frecuentes: Bucaramanga, CR 139 139-99
+13:08:29,455 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar clientes frecuentes: Bucaramanga, CR 139 139-99
+13:16:35,638 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando clientes frecuentes: Bucaramanga, CR 139 139-99
+13:16:36,051 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar clientes frecuentes: Bucaramanga, CR 139 139-99
+13:20:21,900 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando clientes frecuentes: Bucaramanga, CR 139 139-99
+13:20:22,020 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar clientes frecuentes: Bucaramanga, CR 139 139-99
+13:25:39,347 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando clientes frecuentes: Bucaramanga, CR 139 139-99
+13:25:39,473 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar clientes frecuentes: Bucaramanga, CR 139 139-99
