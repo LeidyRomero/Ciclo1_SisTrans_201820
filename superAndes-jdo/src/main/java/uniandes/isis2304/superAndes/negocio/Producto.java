@@ -16,16 +16,17 @@ public class Producto implements VOProducto{
 	private String volumenProducto;
 	private String calidad;
 	private double precioUnitario;
-	private double precioUnidadMedida;
+	private double precioUniMedida;
 	private int cantPresentacion;
 	private String codBarras;
 	private Date fechaVencimiento;
+	private String nombreCategoria;
 
 	public Producto()
 	{
 		nombreProducto = "";
 		marca = "";
-		precioUnidadMedida = 0;
+		precioUniMedida = 0;
 		presentacion = "";
 		unidadMedida = "";
 		pesoProducto= "";
@@ -35,12 +36,13 @@ public class Producto implements VOProducto{
 		cantPresentacion = 0;
 		codBarras = "";
 		fechaVencimiento = null;
+		nombreCategoria = "";
 	}
-	public Producto(String pNombre, String pMarca, String pUnidadMedida, String pPresentacion, String pCalidad, double pPrecioUnitario,double pPrecioUnidadMedida,int pCantidadPresentacion, String pCodigoBarras, Date pFechaVencimiento, String pPeso, String pVolumen)
+	public Producto(String pNombre, String pMarca, String pUnidadMedida, String pPresentacion, String pCalidad, double pPrecioUnitario,double pPrecioUnidadMedida,int pCantidadPresentacion, String pCodigoBarras, Date pFechaVencimiento, String pPeso, String pVolumen,String pNombreCategoria)
 	{
 		nombreProducto = pNombre;
 		marca = pMarca;
-		precioUnidadMedida = pPrecioUnidadMedida;
+		precioUniMedida = pPrecioUnidadMedida;
 		presentacion = pPresentacion;
 		unidadMedida = pUnidadMedida;
 		pesoProducto= pPeso;
@@ -50,6 +52,13 @@ public class Producto implements VOProducto{
 		cantPresentacion = pCantidadPresentacion;
 		codBarras = pCodigoBarras;
 		fechaVencimiento = pFechaVencimiento;
+		nombreCategoria = pNombreCategoria;
+	}
+	public String getNombreCategoria() {
+		return nombreCategoria;
+	}
+	public void setNombreCategoria(String nombreCategoria) {
+		this.nombreCategoria = nombreCategoria;
 	}
 	public String getNombreProducto() {
 		return nombreProducto;
@@ -99,11 +108,11 @@ public class Producto implements VOProducto{
 	public void setPrecioUnitario(double precioUnitario) {
 		this.precioUnitario = precioUnitario;
 	}
-	public double getPrecioUnidadMedida() {
-		return precioUnidadMedida;
+	public double getPrecioUniMedida() {
+		return precioUniMedida;
 	}
-	public void setPrecioUnidadMedida(double precioUnidadMedida) {
-		this.precioUnidadMedida = precioUnidadMedida;
+	public void setPrecioUniMedida(double precioUnidadMedida) {
+		this.precioUniMedida = precioUnidadMedida;
 	}
 	public int getCantPresentacion() {
 		return cantPresentacion;
@@ -128,7 +137,7 @@ public class Producto implements VOProducto{
 		return "Producto [nombreProducto=" + nombreProducto + ", marca=" + marca + ", presentacion=" + presentacion
 				+ ", unidadMedida=" + unidadMedida + ", pesoProducto=" + pesoProducto + ", volumenProducto="
 				+ volumenProducto + ", calidad=" + calidad + ", precioUnitario=" + precioUnitario
-				+ ", precioUnidadMedida=" + precioUnidadMedida + ", cantPresentacion=" + cantPresentacion
+				+ ", precioUnidadMedida=" + precioUniMedida + ", cantPresentacion=" + cantPresentacion
 				+ ", codBarras=" + codBarras + ", fechaVencimiento=" + fechaVencimiento + "]";
 	}
 	

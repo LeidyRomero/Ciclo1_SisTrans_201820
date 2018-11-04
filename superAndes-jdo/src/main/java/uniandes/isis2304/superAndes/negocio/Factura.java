@@ -34,6 +34,16 @@ public class Factura implements VOFactura{
 	 */
 	private String correoCliente;
 	
+	/**
+	 * Dirección de la sucursal
+	 */
+	private String direccionSucursal;
+	
+	/**
+	 * Ciudad de la sucursal
+	 */
+	private String ciudad;
+	
 	//-----------------------------------------------------
 	// CONSTRUCTORES
 	//-----------------------------------------------------
@@ -46,6 +56,8 @@ public class Factura implements VOFactura{
 		fecha = null;
 		costoTotal = 0.0;
 		correoCliente = null;
+		direccionSucursal = null;
+		ciudad = null;
 	}
 	
 	/**
@@ -54,12 +66,14 @@ public class Factura implements VOFactura{
 	 * @param pFecha Fecha de generación de la factura. pFecha != null
 	 * @param pCosto Costo total. pCosto >= 0.0
 	 */
-	public Factura(long pId, Timestamp pFecha, double pCosto, String pCorreoCliente)
+	public Factura(long pId, Timestamp pFecha, double pCosto, String pCorreoCliente, String pDireccion, String pCiudad)
 	{
 		idFactura = pId;
 		fecha = pFecha;
 		costoTotal = pCosto;
 		correoCliente = pCorreoCliente;
+		direccionSucursal = pDireccion;
+		ciudad = pCiudad;
 	}
 
 	//-----------------------------------------------------
@@ -126,11 +140,30 @@ public class Factura implements VOFactura{
 		this.correoCliente = correoCliente;
 	}
 
+	public String getDireccionSucursal() {
+		return direccionSucursal;
+	}
+
+	public void setDireccionSucursal(String direccionSucursal) {
+		this.direccionSucursal = direccionSucursal;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+
 	@Override
 	public String toString() {
 		return "Factura [idFactura=" + idFactura + ", fecha=" + fecha + ", costoTotal=" + costoTotal
-				+ ", correoCliente=" + correoCliente + "]";
+				+ ", correoCliente=" + correoCliente + ", direccionSucursal=" + direccionSucursal + ", ciudad=" + ciudad
+				+ "]";
 	}
+	
+	
 	
 	
 		

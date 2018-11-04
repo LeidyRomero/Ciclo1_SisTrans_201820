@@ -115,4 +115,18 @@ public class SQLProductosCarrito {
 		return (List<Object>) q.executeList();
 	}
 	
+	/**
+	 * Crea y ejecuta una sentencia sql para encontrar la información de LOS PRODUCTOS CARRITO con el identificador dado
+	 * @param pm - El manejador de persistencia
+	 * @param idCarrito - El identificador del carrito
+	 * @return Una lista de objetos PRODUCTOS CARRITO que tienen el identificador dado
+	 */
+	public List<ProductosCarrito> buscarProductosCarritoPorId(PersistenceManager pm, long idCarrito)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.getSqlProductosCarrito() + " WHERE idcarrito = ?");
+		q.setResultClass(ProductosCarrito.class);
+		q.setParameters(idCarrito);
+		return (List<ProductosCarrito>) q.executeList();
+	}
+	
 }

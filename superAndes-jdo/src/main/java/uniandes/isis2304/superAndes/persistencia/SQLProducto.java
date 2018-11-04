@@ -1,5 +1,6 @@
 package uniandes.isis2304.superAndes.persistencia;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -211,5 +212,18 @@ class SQLProducto
 		q.setParameters(fechaInicial, fechaFinal, pVentas);
 		q.setResultClass(Producto.class);
 		return (List<Producto>) q.executeList();
+	}
+	
+	public long darEstanteProducto(PersistenceManager manager, String codBarras, String direccionSucursal, String ciudad)
+	{
+		String sql = "SELECT e.idestante "
+				+ "FROM A_ESTANTE e, A_CANTIDAD_EN_ESTANTES ce "
+				+ "WHERE e.idestante = ce.idestante AND "
+				+ "ce.codigobarras = ? AND "
+				+ "e.ciudad = ? AND "
+				+ "e.direccionsucursal = ?";
+		Query q = manager.newQuery(SQL, sql);
+		q.setParameters(codBarras, ciudad, direccionSucursal);
+		return ((BigDecimal)q.executeUnique()).longValue();
 	}
 }

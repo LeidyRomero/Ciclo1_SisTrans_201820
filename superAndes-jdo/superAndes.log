@@ -328,3 +328,348 @@ ORA-02291: restricción de integridad (ISIS2304A231820.FK_CA_CLIENTE) violada - c
 00:23:41,355 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
 00:23:41,356 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 11
 00:23:41,464 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 11
+06:47:23,702 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, lromero@gmail.com
+06:47:30,449 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, lromero@gmail.com
+06:47:30,449 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+06:47:30,694 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+06:47:30,694 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 21
+06:47:30,818 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 21
+06:47:55,802 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito GGGG, 2
+06:47:55,926 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito GGGG, 2
+06:47:55,927 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+06:47:56,064 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+06:47:56,065 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 21
+06:47:56,177 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 21
+06:48:05,171 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminar cantidad productos al carrito GGGG, 21
+06:48:05,271 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "UPDATE A_PRODUCTOS_CARRITO SET cantidad = cantidad-? WHERE idcarrito = ? AND codbarras = ?".
+ORA-02290: restricción de control (ISIS2304A231820.CK_P_CA_CANTIDAD) violada
+
+06:48:05,343 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar cantidad productos al carrito GGGG, 21
+06:48:05,343 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminar productos al carrito 21
+06:48:05,453 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar productos al carrito 21
+06:48:05,453 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+06:48:05,581 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+06:48:05,581 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 21
+06:48:05,698 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 21
+06:49:01,932 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminar cantidad productos al carrito GGGG, 21
+06:49:02,601 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar cantidad productos al carrito GGGG, 21
+06:49:02,601 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminar productos al carrito 21
+06:49:02,712 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar productos al carrito 21
+06:49:02,712 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+06:49:02,848 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+06:49:02,848 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 21
+06:49:02,963 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 21
+06:51:47,110 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, nvargas@gmail.com
+06:51:47,973 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, nvargas@gmail.com
+06:51:47,973 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+06:51:48,099 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+06:51:48,100 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 22
+06:51:48,213 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 22
+06:53:31,825 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, amalvarez@gmail.com
+06:53:32,693 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, amalvarez@gmail.com
+06:53:32,694 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+06:53:32,819 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+06:53:32,820 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 23
+06:53:32,933 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 23
+06:54:47,137 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito GGGG, 3
+06:54:47,522 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito GGGG, 3
+06:54:47,522 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+06:54:47,908 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+06:54:47,908 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 23
+06:54:48,264 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 23
+06:55:45,551 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminar cantidad productos al carrito GGGG, 23
+06:55:45,669 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar cantidad productos al carrito GGGG, 23
+06:55:45,669 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminar productos al carrito 23
+06:55:45,780 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar productos al carrito 23
+06:55:45,780 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+06:55:45,901 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+06:55:45,902 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 23
+06:55:46,016 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 23
+06:58:55,135 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, amalvarez@gmail.com
+06:58:56,020 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, amalvarez@gmail.com
+06:58:56,020 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+06:58:56,148 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+06:58:56,148 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 24
+06:58:56,260 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 24
+07:00:34,696 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, amalvarez@gmail.com
+07:00:35,584 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, amalvarez@gmail.com
+07:00:35,584 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+07:00:35,709 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+07:00:35,709 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 25
+07:00:35,822 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 25
+07:02:11,451 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, lromero@gmail.com
+07:02:12,360 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, lromero@gmail.com
+07:02:12,361 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+07:02:12,490 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+07:02:12,490 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 26
+07:02:12,610 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 26
+07:04:05,343 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, lromero@gmail.com
+07:04:06,337 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, lromero@gmail.com
+07:04:06,338 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+07:04:06,498 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+07:04:06,498 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 27
+07:04:06,639 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 27
+07:04:36,649 (SwingWorker-pool-1-thread-1) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminando un carrito: 27
+07:04:36,806 (SwingWorker-pool-1-thread-1) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar un carrito: 27
+07:23:07,699 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, nvargas@gmail.com
+07:23:08,618 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, nvargas@gmail.com
+07:23:08,618 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+07:23:08,746 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+07:23:08,747 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 28
+07:23:08,858 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 28
+07:23:38,860 (SwingWorker-pool-1-thread-1) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminando un carrito: 28
+07:23:39,013 (SwingWorker-pool-1-thread-1) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar un carrito: 28
+07:23:39,013 (SwingWorker-pool-1-thread-1) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 28
+07:23:39,125 (SwingWorker-pool-1-thread-1) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 28
+07:25:02,879 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, nvargas@gmail.com
+07:25:03,731 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, nvargas@gmail.com
+07:25:03,731 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+07:25:03,859 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+07:25:03,859 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 29
+07:25:03,971 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 29
+07:25:18,170 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito GGGG, 2
+07:25:18,290 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito GGGG, 2
+07:25:18,290 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+07:25:18,411 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+07:25:18,412 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 29
+07:25:18,524 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 29
+07:25:48,525 (SwingWorker-pool-1-thread-1) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminando un carrito: 29
+07:25:48,680 (SwingWorker-pool-1-thread-1) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar un carrito: 29
+07:25:48,680 (SwingWorker-pool-1-thread-1) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 29
+07:25:48,792 (SwingWorker-pool-1-thread-1) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 29
+10:06:46,951 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, mocampov@gmail.com
+10:06:47,861 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (?, ?, ?, ?)".
+ORA-02291: restricción de integridad (ISIS2304A231820.FK_CA_CLIENTE) violada - clave principal no encontrada
+
+10:06:47,939 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, mocampov@gmail.com
+10:06:47,940 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:06:48,072 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:07:19,036 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, socampo@gmail.com
+10:07:19,274 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, socampo@gmail.com
+10:07:19,275 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:07:19,410 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:07:19,411 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 31
+10:07:19,530 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 31
+10:07:27,479 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito AAAA, 1
+10:07:27,597 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito AAAA, 1
+10:07:27,597 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:07:27,715 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:07:27,715 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 31
+10:07:27,826 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 31
+10:07:30,029 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Registrando venta del carrito
+10:07:30,228 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_FACTURA(idfactura, costototal, fecha, correocliente, ciudad, direccionsucursal) values (?, ?, ?, ?, ?, ?)".
+ORA-02290: restricción de control (ISIS2304A231820.CK_A_FACTURA) violada
+
+10:07:30,301 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de registra venta: null
+10:10:03,209 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, socampo@gmail.com
+10:10:04,162 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, socampo@gmail.com
+10:10:04,162 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:10:04,293 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:10:04,294 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 32
+10:10:04,402 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 32
+10:10:14,695 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito 0000, 2
+10:10:14,817 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito 0000, 2
+10:10:14,817 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:10:14,943 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:10:14,944 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 32
+10:10:15,057 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 32
+10:10:17,237 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Registrando venta del carrito
+10:10:17,452 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_FACTURA(idfactura, costototal, fecha, correocliente, ciudad, direccionsucursal) values (?, ?, ?, ?, ?, ?)".
+ORA-02290: restricción de control (ISIS2304A231820.CK_A_FACTURA) violada
+
+10:10:17,525 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de registra venta: null
+10:14:40,091 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, mocampo@gmail.com
+10:14:40,948 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, mocampo@gmail.com
+10:14:40,949 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:14:41,078 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:14:41,078 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 33
+10:14:41,187 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 33
+10:14:51,275 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito GGGG, 4
+10:14:51,396 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito GGGG, 4
+10:14:51,396 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:14:51,519 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:14:51,519 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 33
+10:14:51,632 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 33
+10:14:53,677 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Registrando venta del carrito
+10:14:53,884 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_FACTURA(idfactura, costototal, fecha, correocliente, ciudad, direccionsucursal) values (?, ?, ?, ?, ?, ?)".
+ORA-02290: restricción de control (ISIS2304A231820.CK_A_FACTURA) violada
+
+10:14:53,956 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de registra venta: null
+10:16:52,833 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, mocampo@gmail.com
+10:16:53,723 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, mocampo@gmail.com
+10:16:53,723 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:16:53,851 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:16:53,851 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 34
+10:16:53,960 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 34
+10:17:03,684 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito AAAA, 2
+10:17:03,802 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito AAAA, 2
+10:17:03,802 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:17:03,925 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:17:03,925 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 34
+10:17:04,032 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 34
+10:17:05,884 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Registrando venta del carrito
+10:17:06,088 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_FACTURA(idfactura, costototal, fecha, correocliente, ciudad, direccionsucursal) values (?, ?, ?, ?, ?, ?)".
+ORA-02290: restricción de control (ISIS2304A231820.CK_A_FACTURA) violada
+
+10:17:06,158 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de registra venta: null
+10:23:20,305 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, mocampo@gmail.com
+10:23:21,249 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, mocampo@gmail.com
+10:23:21,249 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:23:21,387 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:23:21,387 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 35
+10:23:21,511 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 35
+10:23:48,942 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito AAAA, 1
+10:23:49,071 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito AAAA, 1
+10:23:49,071 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:23:49,202 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:23:49,202 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 35
+10:23:49,314 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 35
+10:24:14,998 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito 0000, 2
+10:24:15,121 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito 0000, 2
+10:24:15,122 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:24:15,244 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:24:15,245 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 35
+10:24:15,356 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 35
+10:24:26,800 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Registrando venta del carrito
+10:24:27,097 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: El Query tenia que devolver objetos de tipo "uniandes.isis2304.superAndes.negocio.Producto" pero era imposible poner el valor al campo "PRECIOUNIMEDIDA"  tipo "java.math.BigDecimal". El campo debe tener un metodo publico set/put o ser publico.
+
+10:24:27,171 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de registra venta: null
+10:43:05,193 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, lromero@gmail.com
+10:43:06,083 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, lromero@gmail.com
+10:43:06,083 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:43:06,212 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:43:06,213 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 36
+10:43:06,324 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 36
+10:43:18,252 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito BBBB, 2
+10:43:18,370 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito BBBB, 2
+10:43:18,370 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:43:18,502 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:43:18,502 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 36
+10:43:18,610 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 36
+10:43:20,840 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Registrando venta del carrito
+10:43:21,258 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: java.math.BigDecimal cannot be cast to java.lang.Long
+
+10:43:21,334 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de registra venta: null
+10:44:56,741 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Registrando venta del carrito
+10:44:57,126 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: java.math.BigDecimal cannot be cast to java.lang.Long
+
+10:44:57,217 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de registra venta: null
+10:45:45,743 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, mocampo@gmail.com
+10:45:46,806 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, mocampo@gmail.com
+10:45:46,806 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:45:47,024 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:45:47,024 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 37
+10:45:47,198 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 37
+10:45:54,727 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito BBBB, 1
+10:45:54,843 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito BBBB, 1
+10:45:54,844 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:45:54,967 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:45:54,967 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 37
+10:45:55,081 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 37
+10:45:56,689 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Registrando venta del carrito
+10:45:57,232 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "UPDATE A_CANTIDAD_EN_ESTANTES SET cantidadactual = cantidadactual - ? WHERE codbarras = ? AND idestante = ?".
+ORA-00904: "CODBARRAS": identificador no válido
+
+10:45:57,327 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de registra venta: null
+10:47:46,870 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, mocampo@gmail.com
+10:47:47,849 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, mocampo@gmail.com
+10:47:47,849 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:47:47,982 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:47:47,983 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 38
+10:47:48,203 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 38
+10:47:58,800 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito AAAA, 4
+10:47:58,916 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito AAAA, 4
+10:47:58,916 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:47:59,042 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:47:59,043 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 38
+10:47:59,159 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 38
+10:48:00,329 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Registrando venta del carrito
+10:48:01,079 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: El Query de JDOQL ha vuelto más que una instancia pero "unica" esta "verdad" o hay solo aggregados asi que debe devolver una como maxima.
+
+10:48:01,079 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de registra venta: null
+10:55:32,213 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, mocampo@gmail.com
+10:55:33,099 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, mocampo@gmail.com
+10:55:33,099 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:55:33,231 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:55:33,231 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 39
+10:55:33,362 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 39
+10:55:44,444 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito BBBB, 5
+10:55:44,577 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito BBBB, 5
+10:55:44,577 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:55:44,711 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:55:44,711 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 39
+10:55:44,839 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 39
+10:55:47,764 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Registrando venta del carrito
+10:55:48,418 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de registra venta: Factura [idFactura=10, fecha=2018-11-04 10:55:47.0, costoTotal=15000.0, correoCliente=mocampo@gmail.com, direccionSucursal=CR 139 139-99, ciudad=Bucaramanga]
+10:57:10,043 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando carrito: CR 139 139-99, Bucaramanga, socampo@gmail.com
+10:57:10,275 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar carrito: CR 139 139-99, Bucaramanga, socampo@gmail.com
+10:57:10,275 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:57:10,399 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:57:10,399 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 40
+10:57:10,512 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 40
+10:57:21,889 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito GGGG, 2
+10:57:22,279 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito GGGG, 2
+10:57:22,279 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:57:22,402 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:57:22,402 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 40
+10:57:22,511 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 40
+10:57:29,159 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Agregar productos al carrito 0000, 3
+10:57:29,535 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de agregar productos al carrito 0000, 3
+10:57:29,535 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Consultando cantidad en estantes: Bucaramanga, CR 139 139-99
+10:57:29,739 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de consultar cantidad en estantes: Bucaramanga, CR 139 139-99
+10:57:29,740 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 40
+10:57:29,881 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 40
+10:57:31,049 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Registrando venta del carrito
+10:57:32,049 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de registra venta: Factura [idFactura=11, fecha=2018-11-04 10:57:31.0, costoTotal=9900.0, correoCliente=socampo@gmail.com, direccionSucursal=CR 139 139-99, ciudad=Bucaramanga]
+11:07:29,419 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+11:07:32,527 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123546987, Alpina
+11:07:32,528 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123456788, Alquería
+11:07:32,785 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123456788, Alquería
+11:07:32,785 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123456799, Kelogs
+11:07:33,282 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123456799, Kelogs
+11:07:33,282 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor
+11:07:36,540 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 3 proveedores existentes
+11:07:36,541 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Dar información de un proveedor por nit: 123546987
+11:07:36,889 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Proveedor [nitProveedor=123546987, nombreProveedor=Alpina, calificacion=null]
+11:07:36,889 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Dar información de un proveedor por nit: 0
+11:07:37,197 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - 
+11:07:37,198 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminando proveedor 123546987
+11:07:37,358 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar proveedor 123546987
+11:07:37,358 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminando proveedor 123456788
+11:07:37,480 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar proveedor 123456788
+11:07:37,480 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminando proveedor 123456799
+11:07:37,596 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar proveedor 123456799
+11:09:25,534 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+11:09:25,659 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_SUCURSAL(tamanio, direccionsucursal, ciudad, nombresucursal) values (?, ?, ?, ?)".
+ORA-01722: número no válido
+
+11:09:25,733 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+11:09:25,734 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Sucursal
+11:09:25,952 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Generando los VO de Sucursal: 0 sucursales existentes
+11:09:25,952 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Eliminando sucursal Calle 7 #5-74, Bogotá
+11:09:26,077 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar sucursal Calle 7 #5-74, Bogotá
+11:09:32,950 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+11:09:33,028 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_SUCURSAL(tamanio, direccionsucursal, ciudad, nombresucursal) values (?, ?, ?, ?)".
+ORA-01722: número no válido
+
+11:09:33,099 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+11:09:33,100 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el producto papas de pollo
+11:09:33,216 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: null
+
+11:09:33,217 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el producto papas de pollo
+11:09:33,217 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la bodega Calle 7 #5-74, Calle 7 #5-74,Bogotá
+11:09:33,301 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: Error con la ejecucion de Query de SQL "INSERT INTO A_BODEGA (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) values (?,?,?,?,?,?)".
+ORA-02291: restricción de integridad (ISIS2304A231820.FK_DS_BODEGA) violada - clave principal no encontrada
+
+11:09:33,523 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la bodega Calle 7 #5-74, Calle 7 #5-74,Bogotá
+11:09:33,523 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123546987, Alpina
+11:09:33,638 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123546987, Alpina
+11:09:43,674 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+11:09:43,777 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO A_SUCURSAL(tamanio, direccionsucursal, ciudad, nombresucursal) values (?, ?, ?, ?)".
+ORA-01722: número no válido
+
+11:09:43,885 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar sucursal 50 m^2, Calle 7 #5-74, Bogotá, Candelaria
+11:09:43,885 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando el producto papas de pollo
+11:09:44,039 (AWT-EventQueue-0) ERROR [uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes] - Exception: null
+
+11:09:44,040 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar el producto papas de pollo

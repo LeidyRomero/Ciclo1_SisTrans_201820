@@ -1034,7 +1034,7 @@ public class PersistenciaSuperAndes {
 			tx.commit();
 
 			Log.trace("Insercción factura: " + idFactura+": "+tuplasInsertadas);
-			return new Factura(idFactura, fecha, costoTotal, correoCliente);
+			return new Factura(idFactura, fecha, costoTotal, correoCliente, direccion, ciudad);
 		}
 		catch(Exception e)
 		{
@@ -1417,7 +1417,7 @@ public class PersistenciaSuperAndes {
 			long tuplasInsertadas = sqlProducto.agregarProducto(manager, pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento,pPeso, pVolumen, pCategoria);
 			t.commit();
 			Log.trace("Inserccion producto: "+ pNombre+": "+tuplasInsertadas+ " tuplas insertadas");
-			return new Producto(pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento, pPeso, pVolumen);
+			return new Producto(pNombre, pMarca, pPresentacion, pUnidadMedida, pCalidad, pPrecioUnitario, pPrecioUnidadMedida, pCantidadPresentacion, pCodigoBarras, pFechaVencimiento, pPeso, pVolumen, "");
 		}
 		catch(Exception e)
 		{
@@ -2499,7 +2499,7 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
-
+	
 	//------------------------------------------------------------------
 	//  Metodos para manejar PRODUCTOS CARRITO
 	//------------------------------------------------------------------
@@ -2635,6 +2635,74 @@ public class PersistenciaSuperAndes {
 		}
 		
 		return respuesta;
+	}
+	
+	public List<ProductosCarrito> darProductosCarrito(long idCarrito)
+	{
+		return sqlProductosCarrito.buscarProductosCarritoPorId(managerFactory.getPersistenceManager(), idCarrito);
+	}
+	
+	public Factura registrarVenta(String direccionSucursal, String ciudad, long idCarrito, String correoCliente)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction t = pm.currentTransaction();
+		try 
+		{
+			t.begin();
+			long idFactura = nextvalFacturas();
+			System.out.println(idFactura);
+			Timestamp fecha = new Timestamp(System.currentTimeMillis());
+			Log.trace("Adicionar factura: "+idFactura+", "+0+", "+fecha+", "+correoCliente+", "+ciudad+", "+direccionSucursal);
+			long facturasInsertadas = sqlFactura.adicionarFactura(pm, idFactura, 0, fecha, correoCliente, ciudad, direccionSucursal);
+			System.out.println("Inserta factura");
+			
+			List<ProductosCarrito> productos = sqlProductosCarrito.buscarProductosCarritoPorId(pm, idCarrito);
+			long productosCarritoEliminados = 0;
+			System.out.println("Recorrido productos");
+			for(ProductosCarrito actual: productos)
+			{
+				String codBarras = actual.getCodBarras();
+				int cantidad = actual.getCantidad();
+				double pPrecioTotal = actual.getCantidad()*sqlProducto.buscarProductoPorCodigo(pm, codBarras).getPrecioUnitario();
+				System.out.println("Precio a pagar por producto: "+pPrecioTotal);
+				
+				Log.trace("Agregar producto a comprados: "+codBarras+", "+cantidad+", "+idFactura );
+				sqlComprados.agregarComprados(pm, codBarras, cantidad, pPrecioTotal, idFactura);
+				System.out.println("Agrega a comprados");
+				
+				Log.trace("Aumentar costo de la factura: " +pPrecioTotal+", "+idFactura);
+				sqlFactura.aumentarCostoFactura(pm, pPrecioTotal, idFactura);
+				System.out.println("Aumenta el costo de la factura");
+				
+				long idEstante = sqlProducto.darEstanteProducto(pm, codBarras, direccionSucursal, ciudad);
+				Log.trace("Disminuir cantidad en estantes: "+cantidad+", "+codBarras+", "+idCarrito);
+				sqlCantidadEnEstantes.disminuirCantidadEnEstantes(pm, cantidad, codBarras, idEstante);
+				System.out.println("Disminuye la cantidad en estantes");
+				
+				Log.trace("Eliminar producto del carrito: "+codBarras+", "+idCarrito);
+				sqlProductosCarrito.eliminarProductoCarrito(pm, actual.getCodBarras(), idCarrito);
+				System.out.println("Elimina el producto del carrito");
+				
+				productosCarritoEliminados++;
+			}
+			t.commit();
+
+			Log.trace("Registrar venta del carrito : " + idCarrito + ": "+ facturasInsertadas+", "+productosCarritoEliminados);
+			return sqlFactura.darFacturaPorId(pm, idFactura);
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			pm.close();
+		}
 	}
 	//------------------------------------------------------------------
 	//  Metodos de ADMINISTRACION

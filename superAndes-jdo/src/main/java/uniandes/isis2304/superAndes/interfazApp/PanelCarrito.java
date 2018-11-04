@@ -124,7 +124,7 @@ public class PanelCarrito extends JPanel implements ActionListener, Actualizacio
 			{
 				if(!txtCodBarras.getText().equals("") && !txtCantidad.getText().equals(""))
 					superAndesApp.agregarProductoAlCarrito(txtCodBarras.getText(), Integer.parseInt(txtCantidad.getText()));
-				
+
 				else
 					JOptionPane.showMessageDialog(this, "Ingrese valores válidos");
 			}
@@ -147,7 +147,7 @@ public class PanelCarrito extends JPanel implements ActionListener, Actualizacio
 			{
 				if(!txtCodBarras.getText().equals("") && !txtCantidad.getText().equals(""))
 					superAndesApp.devolverProductoDelCarrito(txtCodBarras.getText(), Integer.parseInt(txtCantidad.getText()));
-				
+
 				else
 					JOptionPane.showMessageDialog(this, "Ingrese valores válidos");
 			}
@@ -155,35 +155,50 @@ public class PanelCarrito extends JPanel implements ActionListener, Actualizacio
 
 		else if(com.equals("PAGAR"))
 		{
-
+			superAndesApp.registrarVenta();
 		}
 	}
 
 	@Override
 	public void actualizarLista(List<Object[]>[] lista) {
 		List<String> data = new LinkedList<String>();
-		for(Object[] actual : lista[0])
-		{
-			CantidadEnEstantes ce = (CantidadEnEstantes) actual[0];
-			String cadena = "Nombre: "+actual[1]+" - CodBarras: "+ce.getCodigoBarras() + " - Cantidad: "+ce.getCantidadActual();
-			data.add(cadena);
-		}
-		String[] data2 = new String[data.size()];
-		listaCantidadEstante.setListData(data.toArray(data2));
-		listaCantidadEstante.repaint();
-		listaCantidadEstante.updateUI();
 
-		List<String> data3 = new LinkedList<String>();
-		for(Object[] actual : lista[1])
+		if(lista[0] == null)
 		{
-			ProductosCarrito prod = (ProductosCarrito) actual[0];
-			String cadena = "Cantidad: "+prod.getCantidad()+ "- CodBarras: " + prod.getCodBarras();
-			data3.add(cadena);
+			JOptionPane.showMessageDialog(this, "Se ha abandonado el carrito", "Carrito", JOptionPane.INFORMATION_MESSAGE);
+			superAndesApp.abandonarCarrito();
 		}
-		String[] data4 = new String[data3.size()];
-		listaProductosCarrito.setListData(data3.toArray(data4));
-		listaProductosCarrito.repaint();
-		listaProductosCarrito.updateUI();		
+
+		else if(lista[0].size() == 0)
+		{
+			JOptionPane.showMessageDialog(this, "No hay productos en la sucursal", "Carrito", JOptionPane.INFORMATION_MESSAGE);	
+		}
+
+		else
+		{
+			for(Object[] actual : lista[0])
+			{
+				CantidadEnEstantes ce = (CantidadEnEstantes) actual[0];
+				String cadena = "Nombre: "+actual[1]+" - CodBarras: "+ce.getCodigoBarras() + " - Cantidad: "+ce.getCantidadActual();
+				data.add(cadena);
+			}
+			String[] data2 = new String[data.size()];
+			listaCantidadEstante.setListData(data.toArray(data2));
+			listaCantidadEstante.repaint();
+			listaCantidadEstante.updateUI();
+
+			List<String> data3 = new LinkedList<String>();
+			for(Object[] actual : lista[1])
+			{
+				ProductosCarrito prod = (ProductosCarrito) actual[0];
+				String cadena = "Cantidad: "+prod.getCantidad()+ "- CodBarras: " + prod.getCodBarras();
+				data3.add(cadena);
+			}
+			String[] data4 = new String[data3.size()];
+			listaProductosCarrito.setListData(data3.toArray(data4));
+			listaProductosCarrito.repaint();
+			listaProductosCarrito.updateUI();	
+		}
 	}
 
 }

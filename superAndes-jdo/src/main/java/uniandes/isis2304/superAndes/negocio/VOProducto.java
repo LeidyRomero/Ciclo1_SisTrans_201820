@@ -12,7 +12,7 @@ public interface VOProducto {
 	public String getMarca();
 	public double getPrecioUnitario();
 	public String getPresentacion();
-	public double getPrecioUnidadMedida();
+	public double getPrecioUniMedida();
 	public int getCantPresentacion();
 	public String getUnidadMedida();
 	public String getPesoProducto();

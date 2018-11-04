@@ -1,5 +1,6 @@
 package uniandes.isis2304.superAndes.negocio;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -34,9 +35,14 @@ public class SuperAndes extends SwingWorker<Boolean, List<Object[]>[]>{
 	private Carrito carrito;
 
 	/**
-	 * 
+	 * Fecha de la última transacción del carrito
 	 */
 	private long ultimaTransaccion;
+	
+	/**
+	 * Representa si se terminó de usar el carrito, ya sea si se abandonó o 
+	 */
+	private boolean termino;
 	// -----------------------------------------------------------------
 	// Constructores
 	// -----------------------------------------------------------------
@@ -665,6 +671,12 @@ public class SuperAndes extends SwingWorker<Boolean, List<Object[]>[]>{
 		Log.info("Eliminando un carrito: " + idCarrito);
 		long[] tuplasEliminadas = pp.eliminarCarritoPorId(idCarrito);
 		Log.info("Saliendo de eliminar un carrito: " + idCarrito);
+
+		List<Object[]>[] listas = new LinkedList[2];
+		listas[0] = null;
+		listas[1] = buscarProductosCarritoPorId(carrito.getIdCarrito());
+		publish(listas);
+
 		return tuplasEliminadas;
 	}
 
@@ -711,7 +723,8 @@ public class SuperAndes extends SwingWorker<Boolean, List<Object[]>[]>{
 		listas[0] = darCantidadEnEstantesReales(carrito.getCiudad(), carrito.getDireccionSucursal());
 		listas[1] = buscarProductosCarritoPorId(carrito.getIdCarrito());
 		publish(listas);
-
+	
+		termino = false;
 		ultimaTransaccion = System.currentTimeMillis();
 		return nuevo;
 	}
@@ -753,24 +766,32 @@ public class SuperAndes extends SwingWorker<Boolean, List<Object[]>[]>{
 		return productos;
 	}
 
-	//TODO Método que retorne los productos carrito
-	//	public List<VOProductosCarrito> darVOProductosCarrito(long id)
-	//	{
-	//		Log.info ("Generando los VO de Productos en el carrito");
-	//		List<VOProductosCarrito> voProductos = new LinkedList<VOProductosCarrito> ();
-	//		for (ProductosCarrito producto: pp.buscarProductosCarrito(id))
-	//		{
-	//			voProductos.add (producto);
-	//		}
-	//		Log.info ("Generando los VO de Productos en el carrito: " + voProductos.size () + " productos existentes");
-	//		return voProductos;
-	//	}
+	public List<VOProductosCarrito> darVOProductosCarrito(long id)
+	{
+		Log.info ("Generando los VO de Productos en el carrito");
+		List<VOProductosCarrito> voProductos = new LinkedList<VOProductosCarrito> ();
+		for (ProductosCarrito producto: pp.darProductosCarrito(id))
+		{
+			voProductos.add (producto);
+		}
+		Log.info ("Generando los VO de Productos en el carrito: " + voProductos.size () + " productos existentes");
+		return voProductos;
+	}
 	public long eliminarProductoCarrito(String pCodigo, long idCarrito)
 	{
 		Log.info("Borrar el producto del carrito");
 		long numero = pp.eliminarProductoDelCarrito(pCodigo, idCarrito);
 		Log.info("Saliendo de borrar el producto del carrito");
 		return numero;
+	}
+
+	public Factura registrarVenta()
+	{
+		Log.info("Registrando venta del carrito");
+		Factura nueva = pp.registrarVenta(carrito.getDireccionSucursal(), carrito.getCiudad(), carrito.getIdCarrito(), carrito.getCorreoCliente());
+		Log.info("Saliendo de registra venta: "+nueva);
+		termino = true;
+		return nueva;
 	}
 
 	//--------------------------------------------------------
@@ -781,13 +802,20 @@ public class SuperAndes extends SwingWorker<Boolean, List<Object[]>[]>{
 
 		while(true)
 		{
+			System.out.println("entra");
 			long actual = System.currentTimeMillis();
 			if(actual-ultimaTransaccion > 30000)
 			{
 				eliminarCarritoPorId(carrito.getIdCarrito());
 				break;
 			}
+			else if(termino)
+			{
+				break;
+			}
+
 		}
+
 		return false;
 	}
 

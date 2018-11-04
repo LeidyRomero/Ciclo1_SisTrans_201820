@@ -168,7 +168,7 @@ class SQLCantidadEnEstantes
 	 */
 	public long disminuirCantidadEnEstantes(PersistenceManager pm, int pCantidad, String pCodBarras, long idEstante)
 	{
-		Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlCantidadEnEstantes() +" SET cantidadactual = cantidadactual - ? WHERE codbarras = ? AND idestante = ?");
+		Query q = pm.newQuery(SQL, "UPDATE " + persistencia.getSqlCantidadEnEstantes() +" SET cantidadactual = cantidadactual - ? WHERE codigobarras = ? AND idestante = ?");
 		q.setParameters(pCantidad, pCodBarras, idEstante);
 		return (long) q.executeUnique();
 	}
