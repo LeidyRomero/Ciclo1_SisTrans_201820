@@ -75,6 +75,19 @@ public class SQLProductosCarrito {
 	}
 	
 	/**
+	 * Crea y ejecuta una sentencia sql que elimina un PRODUCTO CARRITO de la base de datos de SuperAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idCarrito - El identificador del carrito
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarProductosCarrito(PersistenceManager pm, long idCarrito)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlProductosCarrito() + " WHERE idcarrito = ? AND cantidad = 0");
+		q.setParameters(idCarrito);
+		return (long) q.executeUnique();
+	}
+	
+	/**
 	 * Crea y ejecuta una sentencia sql que elimina una cantidad de un PRODUCTO del CARRITO de la base de datos de SuperAndes
 	 * @param pm - El manejador de persistencia
 	 * @param codBarras - El código de barras del producto
@@ -95,13 +108,11 @@ public class SQLProductosCarrito {
 	 * @param idCarrito - El identificador del carrito
 	 * @return Una lista de objetos PRODUCTOS CARRITO que tienen el identificador dado
 	 */
-	public List<ProductosCarrito> darProductosCarritoPorId(PersistenceManager pm, long idCarrito)
+	public List<Object> darProductosCarritoPorId(PersistenceManager pm, long idCarrito)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.getSqlProductosCarrito() + " WHERE idcarrito = ?");
-		q.setResultClass(ProductosCarrito.class);
+		Query q = pm.newQuery(SQL, "SELECT cantidad, codbarras FROM " + pp.getSqlProductosCarrito() + " WHERE idcarrito = ?");
 		q.setParameters(idCarrito);
-		return (List<ProductosCarrito>) q.executeList();
+		return (List<Object>) q.executeList();
 	}
-	
 	
 }

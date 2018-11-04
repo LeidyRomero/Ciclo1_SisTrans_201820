@@ -32,7 +32,7 @@ class SQLBodega
 		add.setParameters(pTipo, pVolumen, pPeso, pDireccionBodega, pDireccionSucursal, pCiudad);
 		return (long) add.executeUnique();
 	}
-	//TODO RFC3 - Mostrar el indice de ocupacion de cada estante
+
 	public List<Bodega> buscarBodegasSucursal(PersistenceManager manager, String pDireccion, String pCiudad)
 	{
 		Query q = manager.newQuery(SQL, "SELECT * FROM " + persistencia.getSqlBodega()+"WHERE ciudad = ? AND direccionsucursal = ?");

@@ -4,14 +4,12 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
+import javax.swing.SwingWorker;
 import org.apache.log4j.Logger;
-
 import com.google.gson.JsonObject;
-
 import uniandes.isis2304.superAndes.persistencia.PersistenciaSuperAndes;
 
-public class SuperAndes {
+public class SuperAndes extends SwingWorker<Boolean, List<Object[]>[]>{
 	/**
 	 * Logger para escribir la traza de la ejecución
 	 */
@@ -24,6 +22,21 @@ public class SuperAndes {
 	 * El manejador de persistencia
 	 */
 	private PersistenciaSuperAndes pp;
+
+	/**
+	 * 
+	 */
+	private ActualizacionListasListener oidorCarrito;
+
+	/**
+	 * Carrito actual de la apliación
+	 */
+	private Carrito carrito;
+
+	/**
+	 * 
+	 */
+	private long ultimaTransaccion;
 	// -----------------------------------------------------------------
 	// Constructores
 	// -----------------------------------------------------------------
@@ -36,6 +49,11 @@ public class SuperAndes {
 	{
 		pp = PersistenciaSuperAndes.getInstance (tableConfig);
 		pp.finalizarPromocionesPendientes();
+	}
+
+	public void setOidor(ActualizacionListasListener oidorCarrito)
+	{
+		this.oidorCarrito = oidorCarrito;
 	}
 	//-----------------------------------------------------------------------------
 	//   Metodos para manejar los PRODUCTOS
@@ -259,7 +277,7 @@ public class SuperAndes {
 		Log.info("Saliendo de adicionar el estante "+ pId);
 		return estante;
 	}
-	//TODO Hacer la consulta a punta de SQL
+
 	public String buscarIndiceEstante(String pDireccion, String pCiudad)
 	{
 		String mensaje = "Para la sucursal con dirección: "+pDireccion+" de la ciudad: "+pCiudad;
@@ -569,6 +587,14 @@ public class SuperAndes {
 		return cantidadEstantes;
 	}
 
+	public List<Object[]> darCantidadEnEstantesReales(String ciudad, String direccionSucursal)
+	{
+		Log.info("Consultando cantidad en estantes: "+ ciudad+", "+direccionSucursal);
+		List<Object[]> cantidadEstantes = pp.darCantidadEnEstantesReales(ciudad, direccionSucursal);
+		Log.info("Saliendo de consultar cantidad en estantes: "+ ciudad+", "+direccionSucursal);
+		return cantidadEstantes;
+	}
+
 	//---------------------------------------------------------------------
 	// Métodos para manejar PRODUCTOS OFRECIDOS
 	//---------------------------------------------------------------------
@@ -605,13 +631,6 @@ public class SuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar CARRITO
 	//---------------------------------------------------------------------
-	public ArrayList<Producto> buscarProductosSucursal(String pDireccion, String pCiudad)
-	{
-		Log.info("Buscando productos en sucursal"+ pDireccion+", "+pCiudad);
-		ArrayList<Producto> productos = pp.buscarProductosSucursal(pDireccion, pCiudad);
-		Log.info("Saliendo de buscar productos en sucursal "+ pDireccion+", "+pCiudad);
-		return productos;
-	}
 	public void disminuirProductosEnEstante(int pCantidad, Producto pProducto, long idEstante)
 	{
 		Log.info("Actualizando inventario"+ pCantidad+","+pProducto);
@@ -624,23 +643,31 @@ public class SuperAndes {
 		pp.aumentarCantidadEnEstantes(pCantidad, pProducto, idEstante);
 		Log.info("Saliendo de actualizar inventario"+ pCantidad+", "+pProducto);
 	}
-	
+
 	public Carrito adicionarCarrito(String direccionSucursal, String ciudad, String correoCliente)
 	{
 		Log.info("Adicionando carrito: " + direccionSucursal +", "+ ciudad + ", "+ correoCliente);
-		Carrito carrito  = pp.adicionarCarrito(direccionSucursal, ciudad, correoCliente);
+		carrito  = pp.adicionarCarrito(direccionSucursal, ciudad, correoCliente);
 		Log.info("Saliendo de adicionar carrito: " + direccionSucursal +", "+ ciudad + ", "+ correoCliente);
+
+		List<Object[]>[] listas = new LinkedList[2];
+		listas[0] = darCantidadEnEstantesReales(ciudad, direccionSucursal);
+		listas[1] = buscarProductosCarritoPorId(carrito.getIdCarrito());
+		publish(listas);
+
+		ultimaTransaccion = System.currentTimeMillis();
+
 		return carrito;
 	}
-	
-	public long eliminarCarritoPorId(long idCarrito)
+
+	public long[] eliminarCarritoPorId(long idCarrito)
 	{
 		Log.info("Eliminando un carrito: " + idCarrito);
-		long tuplasEliminadas = pp.eliminarCarritoPorId(idCarrito);
+		long[] tuplasEliminadas = pp.eliminarCarritoPorId(idCarrito);
 		Log.info("Saliendo de eliminar un carrito: " + idCarrito);
 		return tuplasEliminadas;
 	}
-	
+
 	public Carrito darCarritoPorId(long idCarrito)
 	{
 		Log.info("Consultando carrito por identificador: " + idCarrito);
@@ -648,7 +675,7 @@ public class SuperAndes {
 		Log.info("Saliendo de consultar carrito por identificador: " + idCarrito);
 		return carrito;
 	}
-	
+
 	public Carrito darCarritoPorCorreoCliente(String correoCliente)
 	{
 		Log.info("Consultando carrito por correo: " + correoCliente);
@@ -656,7 +683,7 @@ public class SuperAndes {
 		Log.info("Saliendo de consultar carrito por correo: " + correoCliente);
 		return carrito;
 	}
-	
+
 	public List<VOCarrito> darVOCarrito ()
 	{
 		Log.info ("Generando los VO de Carrito");
@@ -674,12 +701,19 @@ public class SuperAndes {
 	//---------------------------------------------------------------------
 	// Métodos para manejar PRODUCTOS EN CARRITO
 	//---------------------------------------------------------------------
-	public long adicionarProductoAlCarrito(String pCodigo, long idCarrito, int pCantidad)
+	public ProductosCarrito adicionarProductoAlCarrito(String pCodigo, int pCantidad)
 	{
-		Log.info("Agregar productos al carrito "+pCodigo+", "+ idCarrito+", "+ pCantidad);
-		long numero = pp.adicionarProductoAlCarrito(pCodigo, idCarrito, pCantidad);
-		Log.info("Saliendo de agregar productos al carrito "+pCodigo+", "+ idCarrito+", "+ pCantidad);
-		return numero;
+		Log.info("Agregar productos al carrito "+pCodigo+", "+ pCantidad);
+		ProductosCarrito nuevo = pp.adicionarProductoAlCarrito(pCodigo, carrito.getIdCarrito(), pCantidad);
+		Log.info("Saliendo de agregar productos al carrito "+pCodigo+", "+ pCantidad);
+
+		List<Object[]>[] listas = new LinkedList[2];
+		listas[0] = darCantidadEnEstantesReales(carrito.getCiudad(), carrito.getDireccionSucursal());
+		listas[1] = buscarProductosCarritoPorId(carrito.getIdCarrito());
+		publish(listas);
+
+		ultimaTransaccion = System.currentTimeMillis();
+		return nuevo;
 	}
 	public long eliminarProductoDelCarrito(String pCodigo, long idCarrito)
 	{
@@ -688,31 +722,49 @@ public class SuperAndes {
 		Log.info("Saliendo de eliminar productos al carrito "+pCodigo+", "+ idCarrito);
 		return numero;
 	}
-	public long eliminarCantidadProductoDelCarrito(String pCodigo, long idCarrito, int pCantidad)
+	public long eliminarProductosDelCarrito()
 	{
-		Log.info("Eliminar cantidad productos al carrito "+pCodigo+", "+ idCarrito);
-		long numero = pp.eliminarCantidadProductoDelCarrito(pCodigo, idCarrito, pCantidad);
-		Log.info("Saliendo de eliminar cantidad productos al carrito "+pCodigo+", "+ idCarrito);
+		Log.info("Eliminar productos al carrito "+carrito.getIdCarrito());
+		long numero = pp.eliminarProductoDelCarrito(carrito.getIdCarrito());
+		Log.info("Saliendo de eliminar productos al carrito "+carrito.getIdCarrito());
 		return numero;
 	}
-	public List<ProductosCarrito> buscarProductosCarritoPorId( long idCarrito)
+	public long eliminarCantidadProductoDelCarrito(String pCodigo, int pCantidad)
+	{
+		Log.info("Eliminar cantidad productos al carrito "+pCodigo+", "+ carrito.getIdCarrito());
+		long numero = pp.eliminarCantidadProductoDelCarrito(pCodigo, carrito.getIdCarrito(), pCantidad);
+		Log.info("Saliendo de eliminar cantidad productos al carrito "+pCodigo+", "+ carrito.getIdCarrito());
+
+		eliminarProductosDelCarrito();
+		List<Object[]>[] listas = new LinkedList[2];
+		listas[0] = darCantidadEnEstantesReales(carrito.getCiudad(), carrito.getDireccionSucursal());
+		listas[1] = buscarProductosCarritoPorId(carrito.getIdCarrito());
+		publish(listas);
+
+		ultimaTransaccion = System.currentTimeMillis();
+
+		return numero;
+	}
+	public List<Object[]> buscarProductosCarritoPorId( long idCarrito)
 	{
 		Log.info("Buscar productos de un carrito "+ idCarrito);
-		List<ProductosCarrito> productos = pp.buscarProductosCarrito(idCarrito);
+		List<Object[]> productos = pp.buscarProductosCarrito(idCarrito);
 		Log.info("Saliendo de buscar productos de un carrito "+ idCarrito);
 		return productos;
 	}
-	public List<VOProductosCarrito> darVOProductosCarrito(long id)
-	{
-		Log.info ("Generando los VO de Productos en el carrito");
-		List<VOProductosCarrito> voProductos = new LinkedList<VOProductosCarrito> ();
-		for (ProductosCarrito producto: pp.buscarProductosCarrito(id))
-		{
-			voProductos.add (producto);
-		}
-		Log.info ("Generando los VO de Productos en el carrito: " + voProductos.size () + " productos existentes");
-		return voProductos;
-	}
+
+	//TODO Método que retorne los productos carrito
+	//	public List<VOProductosCarrito> darVOProductosCarrito(long id)
+	//	{
+	//		Log.info ("Generando los VO de Productos en el carrito");
+	//		List<VOProductosCarrito> voProductos = new LinkedList<VOProductosCarrito> ();
+	//		for (ProductosCarrito producto: pp.buscarProductosCarrito(id))
+	//		{
+	//			voProductos.add (producto);
+	//		}
+	//		Log.info ("Generando los VO de Productos en el carrito: " + voProductos.size () + " productos existentes");
+	//		return voProductos;
+	//	}
 	public long eliminarProductoCarrito(String pCodigo, long idCarrito)
 	{
 		Log.info("Borrar el producto del carrito");
@@ -720,4 +772,30 @@ public class SuperAndes {
 		Log.info("Saliendo de borrar el producto del carrito");
 		return numero;
 	}
+
+	//--------------------------------------------------------
+	// Actualización constante
+	//--------------------------------------------------------
+	@Override
+	protected Boolean doInBackground() throws Exception {
+
+		while(true)
+		{
+			long actual = System.currentTimeMillis();
+			if(actual-ultimaTransaccion > 30000)
+			{
+				eliminarCarritoPorId(carrito.getIdCarrito());
+				break;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	protected void process(List<List<Object[]>[]> chunks) 
+	{
+		oidorCarrito.actualizarLista(chunks.get(chunks.size()-1));
+	}
+
+
 }

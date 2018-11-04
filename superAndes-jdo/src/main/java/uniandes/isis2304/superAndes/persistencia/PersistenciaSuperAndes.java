@@ -1,7 +1,7 @@
 package uniandes.isis2304.superAndes.persistencia;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -321,42 +321,42 @@ public class PersistenciaSuperAndes {
 
 	public String getSqlPromoUnidades()
 	{
-		return tablas.get(21);
+		return tablas.get(22);
 	}
 
 	public String getSqlPromoDescuento()
 	{
-		return tablas.get(22);
+		return tablas.get(23);
 	}
 
 	public String getSqlPromoUnidadDescuento()
 	{
-		return tablas.get(23);
+		return tablas.get(24);
 	}
 
 	public String getSecuenciaPromociones()
 	{
-		return tablas.get(24);
+		return tablas.get(25);
 	}
 
 	public String getSecuenciaFacturas()
 	{
-		return tablas.get(25);
+		return tablas.get(26);
 	}
 
 	public String getSqlCarrito()
 	{
-		return tablas.get(26);
+		return tablas.get(27);
 	}
 
 	public String getSqlProductosCarrito()
 	{
-		return tablas.get(27);
+		return tablas.get(28);
 	}
 
 	public String getSecuenciaCarrito()
 	{
-		return tablas.get(28);
+		return tablas.get(29);
 	}
 
 	/**
@@ -1173,7 +1173,7 @@ public class PersistenciaSuperAndes {
 	 * @param idEstante - El identificador del estante
 	 * @param cantidadActual - La cantidad actual del producto
 	 * @param cantidadMinima - La cantidad mínima del producto
-	 * @return El númer de tuplas insertadas. -1 en caso de que ocurra una Excepción
+	 * @return El obejto CantidadEnEstantes. null en caso de que ocurra una Excepción
 	 */
 	public CantidadEnEstantes adicionarCantidadEnEstante(String codigoBarras, long idEstante, int cantidadActual, int cantidadMinima)
 	{
@@ -1273,6 +1273,36 @@ public class PersistenciaSuperAndes {
 			}
 			pm.close();
 		}
+	}
+	
+	/**
+	 * Método que consulta la cantidad en estantes real
+	 * @param ciudad - La ciudad de la sucursal
+	 * @param direccionSucursal - La dirección de la sucursal
+	 * @return La lista de parejas de objetos, construidos en base a las tuplas de la tabla CANTIDAD EN ESTANTES y PRODUCTO
+	 * El primer elemento de la pareja es una cantidad en estantes;
+	 * el segundo elemento es el nombre del producto.
+	 */
+	public List<Object[]> darCantidadEnEstantesReales(String ciudad, String direccionSucursal)
+	{
+		List<Object[]> respuesta = new LinkedList<Object[]>();
+		List<Object> tuplas = sqlCantidadEnEstantes.darCantidadEnEstantesReales(managerFactory.getPersistenceManager(), ciudad, direccionSucursal);
+		for(Object tupla: tuplas)
+		{
+			Object[] datos = (Object[]) tupla;
+			String nombreProducto = (String) datos[0];
+			String codigoBarras = (String) datos[1];
+			int cantidadMinima = ((BigDecimal) datos [2]).intValue ();
+			long idEstante = ((BigDecimal) datos [3]).longValue ();
+			int cantidadActual = ((BigDecimal) datos [4]).intValue ();
+			
+			Object[] resp = new Object[2];
+			resp[0] = new CantidadEnEstantes(cantidadActual, cantidadMinima, codigoBarras, idEstante);
+			resp[1] = nombreProducto;
+			
+			respuesta.add(resp);
+		}
+		return respuesta;
 	}
 
 	//---------------------------------------------------------------------
@@ -1478,44 +1508,7 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	public ArrayList<Producto> buscarProductosSucursal(String pDireccion, String pCiudad)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			ArrayList<Producto> productos = new ArrayList<Producto>();
-			List<Estante> estantes = sqlEstante.buscarEstantesSucursal(manager, pDireccion, pCiudad);
-			for(Estante actual : estantes)
-			{
-				List<String> codigos = sqlCantidadEnEstantes.buscarCodigosDeBarrasProductos(manager, actual.getIdEstante());
-				for(String codigoActual: codigos)
-				{
-					productos.add(sqlProducto.buscarProductoPorCodigo(manager, codigoActual));
-				}
-			}
-
-
-			t.commit();
-			Log.trace("Buscar productos de la sucursal");
-			return productos;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
-
+	
 	//------------------------------------------------------------------
 	//  Metodos para manejar CATEGORIA
 	//------------------------------------------------------------------
@@ -2184,31 +2177,6 @@ public class PersistenciaSuperAndes {
 			manager.close();
 		}
 	}
-	public List<Estante> buscarEstantesSucursal(String pDireccion, String pCiudad)
-	{
-		PersistenceManager manager = managerFactory.getPersistenceManager();
-		Transaction t = manager.currentTransaction();
-		try 
-		{
-			t.begin();
-			List<Estante> q = sqlEstante.buscarEstantesSucursal(manager, pDireccion, pCiudad);
-			t.commit();
-			return q;
-		}
-		catch(Exception e)
-		{
-			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (t.isActive())
-			{
-				t.rollback();
-			}
-			manager.close();
-		}
-	}
 	public long eliminarEstante(long id)
 	{
 		PersistenceManager manager = managerFactory.getPersistenceManager();
@@ -2503,14 +2471,14 @@ public class PersistenciaSuperAndes {
 	 * @param idCarrito
 	 * @return
 	 */
-	public long eliminarCarritoPorId(long idCarrito)
+	public long[] eliminarCarritoPorId(long idCarrito)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction t = pm.currentTransaction();
 		try 
 		{
 			t.begin();
-			long tuplasEliminadas = sqlCarrito.eliminarCarritoPorId(pm, idCarrito);
+			long[] tuplasEliminadas = sqlCarrito.eliminarCarritoPorId(pm, idCarrito);
 			t.commit();
 			
 			Log.trace("Eliminación carrito : " + idCarrito + ": "+ tuplasEliminadas);
@@ -2519,7 +2487,7 @@ public class PersistenciaSuperAndes {
 		catch(Exception e)
 		{
 			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return -1;
+			return new long[] {-1, -1};
 		}
 		finally
 		{
@@ -2537,7 +2505,7 @@ public class PersistenciaSuperAndes {
 	//------------------------------------------------------------------
 
 
-	public long adicionarProductoAlCarrito(String pCodigo, long idCarrito, int pCantidad)
+	public ProductosCarrito adicionarProductoAlCarrito(String pCodigo, long idCarrito, int pCantidad)
 	{
 		PersistenceManager pm = managerFactory.getPersistenceManager();
 		Transaction t = pm.currentTransaction();
@@ -2545,15 +2513,16 @@ public class PersistenciaSuperAndes {
 		{
 			t.begin();
 			long tuplasInsertadas = sqlProductosCarrito.adicionarProductoCarrito(pm, pCodigo, idCarrito, pCantidad);
+			ProductosCarrito nuevo = new ProductosCarrito(idCarrito, pCodigo, pCantidad);
 			t.commit();
 
 			Log.trace("Inserción producto al carrito : " + idCarrito + ": "+ tuplasInsertadas);
-			return tuplasInsertadas;
+			return nuevo;
 		}
 		catch(Exception e)
 		{
 			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
-			return 0;
+			return null;
 		}
 		finally
 		{
@@ -2573,6 +2542,34 @@ public class PersistenciaSuperAndes {
 		{
 			t.begin();
 			long tuplasInsertadas = sqlProductosCarrito.eliminarProductoCarrito(pm, pCodigo, idCarrito);
+			t.commit();
+
+			Log.trace("Eliminar producto del carrito : " + idCarrito + ": "+ tuplasInsertadas);
+			return tuplasInsertadas;
+		}
+		catch(Exception e)
+		{
+			Log.error("Exception: "+e.getMessage()+ "\n"+ darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (t.isActive())
+			{
+				t.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public long eliminarProductoDelCarrito(long idCarrito)
+	{
+		PersistenceManager pm = managerFactory.getPersistenceManager();
+		Transaction t = pm.currentTransaction();
+		try 
+		{
+			t.begin();
+			long tuplasInsertadas = sqlProductosCarrito.eliminarProductosCarrito(pm, idCarrito);
 			t.commit();
 
 			Log.trace("Eliminar producto del carrito : " + idCarrito + ": "+ tuplasInsertadas);
@@ -2621,15 +2618,23 @@ public class PersistenciaSuperAndes {
 		}
 	}
 	
-	public List<ProductosCarrito> buscarProductosCarrito(long idCarrito)
+	public List<Object[]> buscarProductosCarrito(long idCarrito)
 	{
-		PersistenceManager pm = managerFactory.getPersistenceManager();
-
-		List<ProductosCarrito> productos = sqlProductosCarrito.darProductosCarritoPorId(pm,  idCarrito);
-
-		Log.trace("Buscar productos del carrito : " + idCarrito);
-		return productos;
-
+		List<Object[]> respuesta = new LinkedList<Object[]>();
+		List<Object> tuplas = sqlProductosCarrito.darProductosCarritoPorId(managerFactory.getPersistenceManager(), idCarrito);
+		for(Object tupla: tuplas)
+		{
+			Object[] datos = (Object[]) tupla;
+			int cantidad = ((BigDecimal) datos [0]).intValue ();
+			String codBarras = (String) datos [1];
+			
+			Object[] resp = new Object[1];
+			resp[0] = new ProductosCarrito(idCarrito, codBarras, cantidad);
+			
+			respuesta.add(resp);
+		}
+		
+		return respuesta;
 	}
 	//------------------------------------------------------------------
 	//  Metodos de ADMINISTRACION

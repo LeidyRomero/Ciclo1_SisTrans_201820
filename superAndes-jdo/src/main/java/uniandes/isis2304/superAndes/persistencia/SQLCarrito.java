@@ -70,11 +70,16 @@ public class SQLCarrito {
 	 * @param idCarrito - El identificador del carrito
 	 * @return El número de tuplas eliminadas
 	 */
-	public long eliminarCarritoPorId(PersistenceManager pm, long idCarrito)
+	public long[] eliminarCarritoPorId(PersistenceManager pm, long idCarrito)
 	{
+		Query q1 = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlProductosCarrito() + " WHERE idcarrito = ?");
+		q1.setParameters(idCarrito);
 		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.getSqlCarrito() + " WHERE idcarrito = ?");
 		q.setParameters(idCarrito);
-		return (long) q.executeUnique();
+		
+		long productosCarrito = (long) q1.executeUnique();
+		long carrito = (long) q.executeUnique();
+		return new long[] {productosCarrito, carrito};
 	}
 
 	/**

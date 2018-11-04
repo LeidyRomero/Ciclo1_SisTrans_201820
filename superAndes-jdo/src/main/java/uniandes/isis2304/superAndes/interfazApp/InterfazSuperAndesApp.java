@@ -44,9 +44,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.superAndes.negocio.Bodega;
+import uniandes.isis2304.superAndes.negocio.Carrito;
 import uniandes.isis2304.superAndes.negocio.Categoria;
 import uniandes.isis2304.superAndes.negocio.Estante;
 import uniandes.isis2304.superAndes.negocio.Producto;
+import uniandes.isis2304.superAndes.negocio.ProductosCarrito;
 import uniandes.isis2304.superAndes.negocio.Promocion;
 import uniandes.isis2304.superAndes.negocio.SuperAndes;
 import uniandes.isis2304.superAndes.negocio.TipoProducto;
@@ -91,8 +93,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	/**
 	 * Segundos 
 	 */
-	private static double tiempoUltimaOperacion;
-	
+	private double tiempoUltimaOperacion;
+
 	// -----------------------------------------------------------------
 	// Atributos de la interfaz
 	// -----------------------------------------------------------------
@@ -103,11 +105,13 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	/**
 	 * Panel de despliegue de interacción para los requerimientos
 	 */
-	private static PanelDatos panelDatos;
+	private PanelDatos panelDatos;
 	/**
 	 * Menú de la aplicación
 	 */
 	private JMenuBar menuSA;
+
+	private PanelCarrito panelCarrito;
 
 	private JComboBox<String> cbBuscarProductos;
 	// -----------------------------------------------------------------
@@ -133,10 +137,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		String path = guiConfig.get("bannerPath").getAsString();
 
 		tableConfig = openConfig ("Tablas BD", CONFIGURACION_TABLAS);
-		superAndes = new SuperAndes(tableConfig);
-
 
 		panelDatos = new PanelDatos ( );
+
+		superAndes = new SuperAndes(tableConfig);
 
 		setLayout (new BorderLayout());
 		add (new JLabel (new ImageIcon (path)), BorderLayout.NORTH );          
@@ -1051,7 +1055,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			{
 				if(!minField.getText().equals("") && !maxField.getText().equals("") && !corField.getText().equals(""))
 				{
-					VOComprados venta = superAndes.registrarCompra(minField.getText(), Integer.parseInt(maxField.getText()), corField.getText());
+					VOComprados venta = null;//superAndes.registrarCompra(minField.getText(), Integer.parseInt(maxField.getText()), corField.getText());
 					if(venta == null)
 					{
 						throw new Exception("No se pudo registrar la compra del pedido: " + minField.getText());
@@ -1061,7 +1065,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 					resultado += "Venta registrada exitosamente: " + venta;
 					resultado += "\n Operación terminada";
 					panelDatos.actualizarInterfaz(resultado);
-					panelDatos.devolverAbandonarCarrito();
 				}
 				else
 					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
@@ -1143,31 +1146,100 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 		int result = JOptionPane.showConfirmDialog(null, aux,"Registrar carrito", JOptionPane.OK_CANCEL_OPTION);
 		if (result == JOptionPane.OK_OPTION) 
 		{
+			try{
+				if(!direccionField.getText().equals("") && !ciudadField.getText().equals(""))
+				{
+					actualizar();
 
-			ArrayList<Producto> productos = superAndes.buscarProductosSucursal(direccionField.getText(), ciudadField.getText());
-			if(productos!=null)
-			{
-				JOptionPane.showMessageDialog (this, "Carrito registrado", "Agregar carrito: exitoso", JOptionPane.INFORMATION_MESSAGE);
-				panelDatos.actualizar(productos);
-				tiempoUltimaOperacion = System.currentTimeMillis();
+					Carrito nuevo = superAndes.adicionarCarrito(direccionField.getText(), ciudadField.getText(), correoField.getText());
+					if(nuevo == null)
+					{
+						throw new Exception("No se pudo adicionar un carrito: " + direccionField.getText() + ", "+correoField.getText());
+					}
+
+					String resultado = "En consultaDinero \n\n";
+					resultado += nuevo;
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
-			else
-				JOptionPane.showMessageDialog (this, "Carrito no registrado", "Agregar carrito: no exitoso", JOptionPane.ERROR_MESSAGE);
-
+			catch(Exception e)
+			{
+				String resultado = "En adiciónCarrito \n\n";
+				resultado += e.getMessage();
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
 		}
 	}
-	public void abandonarCarrito()
-	{
 
-	}
-	public static void verificarTiempoInactividad()
+	public void agregarProductoAlCarrito(String codBarras, int cantidad)
 	{
-		double actual = System.currentTimeMillis();
-		if((actual-tiempoUltimaOperacion)>=30)
+		try{				
+			ProductosCarrito nuevo = superAndes.adicionarProductoAlCarrito(codBarras, cantidad);
+			if(nuevo == null)
+			{
+				throw new Exception("No se pudo adicionar un producto al carrito: " + codBarras + ", " + cantidad);
+			}
+
+			String resultado = "En agregandoProductoAlCarrito \n\n";
+			resultado += nuevo;
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+
+		}
+		catch(Exception e)
 		{
-			panelDatos.devolverAbandonarCarrito();
+			String resultado = "En adiciónProductoAlCarrito \n\n";
+			resultado += e.getMessage();
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+	
+	public void devolverProductoDelCarrito(String codBarras, int cantidad)
+	{
+		try{				
+			long nuevo = superAndes.eliminarCantidadProductoDelCarrito(codBarras, cantidad);
+			if(nuevo == -1)
+			{
+				throw new Exception("No se pudo decolver un producto del carrito: " + codBarras + ", " + cantidad);
+			}
+
+			String resultado = "En devolviendoProductoDelCarrito \n\n";
+			resultado += nuevo;
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+
+		}
+		catch(Exception e)
+		{
+			String resultado = "En devoluciónProductoDelCarrito \n\n";
+			resultado += e.getMessage();
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	public void actualizar()
+	{
+		panelCarrito = new PanelCarrito(this);		
+		superAndes.setOidor(panelCarrito);
+		superAndes.execute();
+		add(panelCarrito, BorderLayout.WEST);
+
+		repaint();
+	}
+	//	public static void verificarTiempoInactividad()
+	//	{
+	//		double actual = System.currentTimeMillis();
+	//		if((actual-tiempoUltimaOperacion)>=30)
+	//		{
+	//			
+	//		}
+	//	}
 	// -----------------------------------------------------------------
 	// Programa principal
 	// -----------------------------------------------------------------
@@ -1182,13 +1254,13 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 			// Unifica la interfaz para Mac y para Windows.
 			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
 			InterfazSuperAndesApp interfaz = new InterfazSuperAndesApp( );
-			
-			Timer timer = new Timer(60000,new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					verificarTiempoInactividad();
-				}
-			});
-			
+
+			//			Timer timer = new Timer(60000,new ActionListener() {
+			//				public void actionPerformed(ActionEvent e) {
+			//					verificarTiempoInactividad();
+			//				}
+			//			});
+
 			interfaz.setVisible( true );
 		}
 		catch( Exception e )

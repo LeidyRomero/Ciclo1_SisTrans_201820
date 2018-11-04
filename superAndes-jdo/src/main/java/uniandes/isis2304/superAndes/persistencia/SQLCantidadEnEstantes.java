@@ -176,23 +176,19 @@ class SQLCantidadEnEstantes
 	//------------------------------------------------------
 	// CONSULTAS
 	//------------------------------------------------------
-	public List<Object[]> darCantidadEnEstantesReales(PersistenceManager pm, String ciudad, String direccionSucursal)
+	/**
+	 * Crea y ejecuta una sentencia para consultar la cantidad en estantes real de un sucursal dada
+	 * @param pm - El manejador de persistencia
+	 * @param ciudad - La ciudad de la sucursal
+	 * @param direccionSucursal - La dirección de la sucursal
+	 * @return 
+	 */
+	public List<Object> darCantidadEnEstantesReales(PersistenceManager pm, String ciudad, String direccionSucursal)
 	{
-		String sql = "SELECT a.nombreproducto, a.codigobarras, a.cantidadminima, a.idestante, (a.cantidadactual - b.total) AS cantidadactual"
-				+ " FROM ("
-				+ "(SELECT e.ciudad, e.direccionsucursal, ce.codigobarras, ce.cantidadactual, ce.cantidadminima, ce.idestante, p.nombreproducto "
-				+ " FROM " + persistencia.getSqlCantidadEnEstantes() + " ce, " + persistencia.getSqlEstante() + " e, " + persistencia.getSqlProducto() + " p"
-				+ " WHERE ce.idestante = e.idestante AND"
-				+ " ce.codigobarras = p.codbarras) a"
-				+ " LEFT OUTER JOIN"
-				+ " (SELECT  c.ciudad, c.direccionsucursal, pc.codbarras, SUM(pc.cantidad) AS total"
-				+ " FROM " + persistencia.getSqlProductosCarrito() + " pc, " + persistencia.getSqlCarrito() + " c"
-				+ " WHERE pc.idcarrito = c.idcarrito"
-				+ " GROUP BY c.ciudad, c.direccionsucursal, pc.codbarras) b"
-				+ " ON (b.ciudad = a.ciudad AND b.direccionsucursal = a.direccionsucursal AND a.codigobarras = b.codbarras))";
+		String sql = "SELECT a.nombreproducto, a.codigobarras, a.cantidadminima, a.idestante, NVL((a.cantidadactual - b.total),a.cantidadactual)AS cantidadactual FROM ((SELECT e.ciudad, e.direccionsucursal, ce.codigobarras, ce.cantidadactual, ce.cantidadminima, ce.idestante, p.nombreproducto FROM A_CANTIDAD_EN_ESTANTES ce, A_ESTANTE e, A_PRODUCTO p WHERE ce.idestante = e.idestante AND ce.codigobarras = p.codbarras AND e.ciudad = ? AND e.direccionsucursal = ?) a LEFT OUTER JOIN (SELECT  c.ciudad, c.direccionsucursal, pc.codbarras, SUM(pc.cantidad) AS total FROM A_PRODUCTOS_CARRITO pc, A_CARRITO c WHERE pc.idcarrito = c.idcarrito GROUP BY c.ciudad, c.direccionsucursal, pc.codbarras) b ON (b.ciudad = a.ciudad AND b.direccionsucursal = a.direccionsucursal AND a.codigobarras = b.codbarras))";
 		Query q = pm.newQuery(SQL, sql);
 		q.setParameters(ciudad, direccionSucursal);
-		return (List<Object[]>) q.executeList();
+		return (List<Object>) q.executeList();
 	}
 	
 	

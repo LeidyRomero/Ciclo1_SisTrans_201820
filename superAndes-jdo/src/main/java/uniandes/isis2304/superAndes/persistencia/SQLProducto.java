@@ -8,9 +8,6 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import oracle.net.aso.p;
-import uniandes.isis2304.superAndes.negocio.Bodega;
-import uniandes.isis2304.superAndes.negocio.Estante;
 import uniandes.isis2304.superAndes.negocio.Producto;
 
 /**

@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.sql.Timestamp;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.jdo.JDODataStoreException;
@@ -944,9 +945,11 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			VOCarrito carrito = superAndes.adicionarCarrito("CRR 1 1-1", "Bogotá", "mj.ocampov@uniandes.edu.co");
 			superAndes.adicionarProducto(500,"papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32","Perecederos");
 			
-			superAndes.adicionarProductoAlCarrito("FFFF", carrito.getIdCarrito(), 10);
-
-			List <VOProductosCarrito> lista = superAndes.darVOProductosCarrito(carrito.getIdCarrito());
+			//TODO Adicionar productos carrito
+			//superAndes.adicionarProductoAlCarrito("FFFF", carrito.getIdCarrito(), 10);
+			
+			//TODO Método productos carrito
+			List <VOProductosCarrito> lista = new LinkedList<>();//superAndes.darVOProductosCarrito(carrito.getIdCarrito());
 
 			long productosEliminados = superAndes.eliminarProductoCarrito("FFFF",carrito.getIdCarrito());
 			
