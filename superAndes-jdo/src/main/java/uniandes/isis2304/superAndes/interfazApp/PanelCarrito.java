@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -43,6 +44,10 @@ public class PanelCarrito extends JPanel implements ActionListener, Actualizacio
 	private JButton btnPagarCarrito;
 
 	private InterfazSuperAndesApp superAndesApp;
+
+	private String[] dataCantidad;
+
+	private String[] dataCarrito;
 
 	public PanelCarrito(InterfazSuperAndesApp interfaz) 
 	{
@@ -109,21 +114,32 @@ public class PanelCarrito extends JPanel implements ActionListener, Actualizacio
 
 		if(com.equals("AGREGAR"))
 		{
-			JTextField txtCodBarras = new JTextField(15);
 			JTextField txtCantidad = new JTextField(15);
-
+			JComboBox opcionesUnidad = new JComboBox<>(dataCantidad);
 			JPanel aux = new JPanel();
-			aux.add(new JLabel("Código de barras:"));
-			aux.add(txtCodBarras);
+			aux.add(new JLabel("Producto:"));
+			aux.add(opcionesUnidad);
 			aux.add(Box.createHorizontalStrut(15)); // a spacer
 			aux.add(new JLabel("Cantidad:"));
 			aux.add(txtCantidad);
-
 			int result = JOptionPane.showConfirmDialog(null, aux,"Agregar producto al carrito", JOptionPane.OK_CANCEL_OPTION);
 			if (result == JOptionPane.OK_OPTION) 
 			{
-				if(!txtCodBarras.getText().equals("") && !txtCantidad.getText().equals(""))
-					superAndesApp.agregarProductoAlCarrito(txtCodBarras.getText(), Integer.parseInt(txtCantidad.getText()));
+				if(!opcionesUnidad.getSelectedItem().toString().equals("") && !txtCantidad.getText().equals(""))
+				{
+					String[] data = opcionesUnidad.getSelectedItem().toString().split(" - ");
+					int cantidadE = Integer.parseInt(data[2].trim().substring(10, data[2].length()));
+					int cantidadC = Integer.parseInt(txtCantidad.getText());
+					if(cantidadC <= cantidadE)
+					{
+						String codBarras = data[1].trim().substring(11, data[1].length());
+						superAndesApp.agregarProductoAlCarrito(codBarras,cantidadC);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(this, "La cantidad no puede ser mayor a la que está en estante");
+					}
+				}
 
 				else
 					JOptionPane.showMessageDialog(this, "Ingrese valores válidos");
@@ -182,8 +198,8 @@ public class PanelCarrito extends JPanel implements ActionListener, Actualizacio
 				String cadena = "Nombre: "+actual[1]+" - CodBarras: "+ce.getCodigoBarras() + " - Cantidad: "+ce.getCantidadActual();
 				data.add(cadena);
 			}
-			String[] data2 = new String[data.size()];
-			listaCantidadEstante.setListData(data.toArray(data2));
+			dataCantidad = new String[data.size()];
+			listaCantidadEstante.setListData(data.toArray(dataCantidad));
 			listaCantidadEstante.repaint();
 			listaCantidadEstante.updateUI();
 
@@ -194,8 +210,8 @@ public class PanelCarrito extends JPanel implements ActionListener, Actualizacio
 				String cadena = "Cantidad: "+prod.getCantidad()+ "- CodBarras: " + prod.getCodBarras();
 				data3.add(cadena);
 			}
-			String[] data4 = new String[data3.size()];
-			listaProductosCarrito.setListData(data3.toArray(data4));
+			dataCarrito = new String[data3.size()];
+			listaProductosCarrito.setListData(data3.toArray(dataCarrito));
 			listaProductosCarrito.repaint();
 			listaProductosCarrito.updateUI();	
 		}

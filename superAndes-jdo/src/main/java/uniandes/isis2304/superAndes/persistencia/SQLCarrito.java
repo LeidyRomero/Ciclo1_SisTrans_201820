@@ -102,7 +102,7 @@ public class SQLCarrito {
 	 */
 	public Carrito darCarritoPorId(PersistenceManager pm, long idCarrito)
 	{
-		Query q = pm.newQuery(SQL, "SELECR * FROM " + pp.getSqlCarrito() + " WHERE idcarrito = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.getSqlCarrito() + " WHERE idcarrito = ?");
 		q.setResultClass(Carrito.class);
 		q.setParameters(idCarrito);
 		return (Carrito) q.executeUnique();
@@ -116,7 +116,7 @@ public class SQLCarrito {
 	 */
 	public Carrito darCarritoPorCorreoCliente(PersistenceManager pm, String correoCliente)
 	{
-		Query q = pm.newQuery(SQL, "SELECR * FROM " + pp.getSqlCarrito() + " WHERE correoCliente = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.getSqlCarrito() + " WHERE correoCliente = ?");
 		q.setResultClass(Carrito.class);
 		q.setParameters(correoCliente);
 		return (Carrito) q.executeUnique();

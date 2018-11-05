@@ -257,7 +257,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent pEvento)
 	{
 		String evento = pEvento.getActionCommand( );
-		System.out.println(evento);
 		if(!evento.equals("comboBoxChanged"))
 		{
 			try 
@@ -623,7 +622,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 	}
 	public void buscarIndiceBodega()
 	{
-		System.out.println("entra");
 		JTextField ciudadField = new JTextField(15);
 		JTextField direccionField = new JTextField(15);
 

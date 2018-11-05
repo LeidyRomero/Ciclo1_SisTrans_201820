@@ -668,6 +668,14 @@ public class SuperAndes extends SwingWorker<Boolean, List<Object[]>[]>{
 
 		return carrito;
 	}
+	
+	public Carrito agregarCarrito(String direccionSucursal, String ciudad, String correoCliente)
+	{
+		Log.info("Adicionando carrito: " + direccionSucursal +", "+ ciudad + ", "+ correoCliente);
+		carrito  = pp.adicionarCarrito(direccionSucursal, ciudad, correoCliente);
+		Log.info("Saliendo de adicionar carrito: " + direccionSucursal +", "+ ciudad + ", "+ correoCliente);
+		return carrito;
+	}
 
 	public long[] eliminarCarritoPorId(long idCarrito)
 	{
@@ -681,6 +689,14 @@ public class SuperAndes extends SwingWorker<Boolean, List<Object[]>[]>{
 		publish(listas);
 
 		return tuplasEliminadas;
+	}
+	
+	public long eliminarCarrito(long idCarrito)
+	{
+		Log.info("Eliminando un carrito: " + idCarrito);
+		long[] tuplasEliminadas = pp.eliminarCarritoPorId(idCarrito);
+		Log.info("Saliendo de eliminar un carrito: " + idCarrito);
+		return tuplasEliminadas[1];
 	}
 
 	public Carrito darCarritoPorId(long idCarrito)
@@ -731,6 +747,14 @@ public class SuperAndes extends SwingWorker<Boolean, List<Object[]>[]>{
 		ultimaTransaccion = System.currentTimeMillis();
 		return nuevo;
 	}
+	public ProductosCarrito adicionarProductoCarrito(String pCodigo, long idCarrito, int pCantidad)
+	{
+		Log.info("Agregar productos al carrito "+pCodigo+", "+ pCantidad+", "+idCarrito);
+		ProductosCarrito nuevo = pp.adicionarProductoAlCarrito(pCodigo, idCarrito, pCantidad);
+		Log.info("Saliendo de agregar productos al carrito "+pCodigo+", "+ pCantidad+", "+idCarrito);
+		return nuevo;
+	}
+	
 	public long eliminarProductoDelCarrito(String pCodigo, long idCarrito)
 	{
 		Log.info("Eliminar productos al carrito "+pCodigo+", "+ idCarrito);
@@ -840,7 +864,6 @@ public class SuperAndes extends SwingWorker<Boolean, List<Object[]>[]>{
 
 		while(true)
 		{
-			System.out.println("entra");
 			long actual = System.currentTimeMillis();
 			if(actual-ultimaTransaccion > 30000)
 			{

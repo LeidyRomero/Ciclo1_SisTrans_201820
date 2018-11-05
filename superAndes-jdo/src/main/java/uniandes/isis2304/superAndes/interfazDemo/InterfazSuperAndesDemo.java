@@ -933,6 +933,65 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 		}
 		return resp;
 	}
+
+	//----------------------------------------------------------------------------------------------
+	// demo CARRITO
+	//----------------------------------------------------------------------------------------------
+	public void demoCarrito()
+	{
+		try
+		{
+			//Ejecución de la demo y recolección de los resultados
+			VOCarrito pro1 = superAndes.agregarCarrito("CR 139 139-99", "Bucaramanga", "mocampo@gmail.com");
+			VOCarrito pro2 = superAndes.agregarCarrito("CLL 34 43-65", "Medellín", "socampo@gmail.com");
+			VOCarrito pro3 = superAndes.agregarCarrito("CR 13 13-9", "Arauca", "empresa1@hotmail.com");
+
+			List<VOCarrito> lista = superAndes.darVOCarrito();
+			VOCarrito pro5 = superAndes.darCarritoPorId(pro1.getIdCarrito());
+			VOCarrito pro6 = superAndes.darCarritoPorId(0);
+
+			long prov1 = superAndes.eliminarCarrito(pro1.getIdCarrito());
+			long prov2 = superAndes.eliminarCarrito(pro2.getIdCarrito());
+			long prov3 = superAndes.eliminarCarrito(pro3.getIdCarrito());
+
+			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
+			String resultado = "Demo de creación y listado de Carritos\n\n";
+			resultado += "\n\n************ Generando datos de prueba ************ \n";
+			resultado += "\n" + listarCarritos(lista) + "\n";
+			resultado += "Adicionado el carrito: " + pro1 + "\n";
+			resultado += "Adicionado el carrito: " + pro2 + "\n";
+			resultado += "Adicionado el carrito: " + pro3 + "\n";
+
+			resultado += "\n\n************ Ejecutando la demo ************ \n";
+			resultado += "\nBuscando el carrito con id " + pro1.getIdCarrito() + ":\n";
+			resultado += pro5 != null ? "El carrito es: " + pro5 + "\n" : "Ese carrito no existe\n";
+			resultado += "\nBuscando el carrito con id " + 0 + ":\n";
+			resultado += pro6 != null ? "El carrito es: " + pro6 + "\n" : "Ese carrito no existe\n";			
+
+			resultado += "\n\n************ Limpiando la base de datos ************ \n";
+			resultado += (prov1+prov2+prov3) + " Carritos eliminados\n";
+			resultado += "\n Demo terminada";
+
+			panelDatos.actualizarInterfaz(resultado);	
+		}
+		catch(Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	private String listarCarritos (List<VOCarrito> lista) 
+	{
+		String resp = "Los carritos existentes son:\n";
+		int i = 1;
+		for (VOCarrito carrito : lista)
+		{
+			resp += i++ + ". " + carrito.toString() + "\n";
+		}
+		return resp;
+	}
+
 	//----------------------------------------------------------------------------------------------
 	// PRODUCTOS CARRITO
 	//----------------------------------------------------------------------------------------------
@@ -944,15 +1003,13 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener{
 			superAndes.adicionarCliente("mj.ocampov@uniandes.edu.co", "Maria Ocampo");
 			VOCarrito carrito = superAndes.adicionarCarrito("CRR 1 1-1", "Bogotá", "mj.ocampov@uniandes.edu.co");
 			superAndes.adicionarProducto(500,"papas de pollo", "super ricas", "paqueton de 5 paquetes", "6000","buena", 1300.01,6000.00 ,10, "FFFF", null, "10", "32","Perecederos");
-			
-			//TODO Adicionar productos carrito
-			//superAndes.adicionarProductoAlCarrito("FFFF", carrito.getIdCarrito(), 10);
-			
-			//TODO Método productos carrito
-			List <VOProductosCarrito> lista = new LinkedList<>();//superAndes.darVOProductosCarrito(carrito.getIdCarrito());
+
+			superAndes.adicionarProductoCarrito("FFFF", carrito.getIdCarrito(), 10);
+
+			List <VOProductosCarrito> lista = superAndes.darVOProductosCarrito(carrito.getIdCarrito());
 
 			long productosEliminados = superAndes.eliminarProductoCarrito("FFFF",carrito.getIdCarrito());
-			
+
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de productos al carrito\n\n";
 			resultado += "\n\n************ Generando datos de prueba ************ \n";

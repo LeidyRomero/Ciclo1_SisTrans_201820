@@ -305,10 +305,6 @@ class SQLFactura
 		Query q4 = pm.newQuery(SQL, sqlMinUnidades);
 		q4.setParameters(tipo, tipo);
 		
-		System.out.println(sqlMaxCosto);
-		System.out.println(sqlMaxUnidades);
-		System.out.println(sqlMinCosto);
-		System.out.println(sqlMinUnidades);
 		List<Object> maxCosto = q1.executeList();
 		List<Object> maxCantidad = q2.executeList();
 		List<Object> minCosto = q3.executeList();
@@ -351,10 +347,6 @@ class SQLFactura
 		Query q4 = pm.newQuery(SQL, sqlMinUnidades);
 		q4.setParameters(tipo, tipo);
 		
-		System.out.println(sqlMaxCosto);
-		System.out.println(sqlMaxUnidades);
-		System.out.println(sqlMinCosto);
-		System.out.println(sqlMinUnidades);
 		List<Object> maxCosto = q1.executeList();
 		List<Object> maxCantidad = q2.executeList();
 		List<Object> minCosto = q3.executeList();

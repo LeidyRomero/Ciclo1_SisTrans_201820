@@ -157,6 +157,19 @@
 					"event": "demoPromociones"
 				}	
 			]
+		},		
+		{ "menuTitle": "Carrito",
+		  "options":
+			[
+				{
+					"label": "CRD Carrito",
+					"event": "demoCarrito"
+				},
+				{
+					"label": "CRD Productos Carrito",
+					"event": "demoProductosCarrito"
+				}
+			]
 		},	
 		{ "menuTitle": "Documentacion",
 		  "options":

@@ -2683,11 +2683,11 @@ public class PersistenciaSuperAndes {
 		{
 			t.begin();
 			long idFactura = nextvalFacturas();
-			System.out.println(idFactura);
+			
 			Timestamp fecha = new Timestamp(System.currentTimeMillis());
 			Log.trace("Adicionar factura: "+idFactura+", "+0+", "+fecha+", "+correoCliente+", "+ciudad+", "+direccionSucursal);
 			long facturasInsertadas = sqlFactura.adicionarFactura(pm, idFactura, 0, fecha, correoCliente, ciudad, direccionSucursal);
-			System.out.println("Inserta factura");
+			
 
 			List<ProductosCarrito> productos = sqlProductosCarrito.buscarProductosCarritoPorId(pm, idCarrito);
 			long productosCarritoEliminados = 0;
