@@ -1,5 +1,6 @@
+--MINIMO POR TABLA: 38.500 REGISTROS
 ------------------------------------------------------------------------------------
---SUCURSAL
+--SUCURSAL:MARI
 INSERT INTO a_sucursal (tamanio, direccionsucursal, ciudad, nombresucursal) VALUES (10, 'CR 139 139-99', 'Bucaramanga', 'A13');
 INSERT INTO a_sucursal (tamanio, direccionsucursal, ciudad, nombresucursal) VALUES (1, 'CR 13 13-9', 'Arauca', 'F3');
 INSERT INTO a_sucursal (tamanio, direccionsucursal, ciudad, nombresucursal) VALUES (60, 'CL 50 26A-8 SUR', 'Cartagena', 'N5');
@@ -11,7 +12,7 @@ INSERT INTO a_sucursal (tamanio, direccionsucursal, ciudad, nombresucursal) VALU
 INSERT INTO a_sucursal (tamanio, direccionsucursal, ciudad, nombresucursal) VALUES (43, 'CR 41 36-81', 'Barranquilla', 'Q1');
 INSERT INTO a_sucursal (tamanio, direccionsucursal, ciudad, nombresucursal) VALUES (100, 'CR 10 14-71', 'Pereira', 'P1');
 ------------------------------------------------------------------------------------
---CLIENTE
+--CLIENTE:MARI
 INSERT INTO A_CLIENTE (correo, nombreconsumidor,puntos) VALUES('empresa1@hotmail.com','empresa1',10);
 INSERT INTO A_CLIENTE (correo, nombreconsumidor,puntos) VALUES('empresa2@hotmail.com','empresa2',20);
 INSERT INTO A_CLIENTE (correo, nombreconsumidor,puntos) VALUES('empresa3@hotmail.com','empresa3',30);
@@ -33,7 +34,7 @@ INSERT INTO A_CLIENTE (correo, nombreconsumidor,puntos) VALUES('ahernandez@gmail
 INSERT INTO A_CLIENTE (correo, nombreconsumidor,puntos) VALUES('fmaya@gmail.com','Felipe Maya',30);
 INSERT INTO A_CLIENTE (correo, nombreconsumidor,puntos) VALUES('socampo@gmail.com','Sebastian Ocampo',5);
 ------------------------------------------------------------------------------------
---PROVEEDOR
+--PROVEEDOR:MARI
 INSERT INTO A_PROVEEDOR (nitproveedor, nombreproveedor, calificacionproveedor) VALUES(8600203089,'Super Ricas','');
 INSERT INTO A_PROVEEDOR (nitproveedor, nombreproveedor, calificacionproveedor) VALUES(8903041304,'Zenu','');
 INSERT INTO A_PROVEEDOR (nitproveedor, nombreproveedor, calificacionproveedor) VALUES(8000009464,'Procter y Gamble','');
@@ -45,7 +46,7 @@ INSERT INTO A_PROVEEDOR (nitproveedor, nombreproveedor, calificacionproveedor) V
 INSERT INTO A_PROVEEDOR (nitproveedor, nombreproveedor, calificacionproveedor) VALUES(9001785632,'Frubana','');
 INSERT INTO A_PROVEEDOR (nitproveedor, nombreproveedor, calificacionproveedor) VALUES(8870253974,'El Bosque','');
 ------------------------------------------------------------------------------------
---BODEGA
+--BODEGA:LEIDY
 -- Estas son las sucursales que ofrecen productos, todas ofrecen todos los productos
 --'CR 139 139-99', 'Bucaramanga'
 --'CR 13 13-9', 'Arauca'
@@ -64,7 +65,7 @@ INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, di
 INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Cuidado personal', 3567000, 8999900, 'CL 35 #94-73', 'CR 13 13-9', 'Arauca');
 INSERT INTO a_bodega (tipobodega, volumenbodega, pesobodega, direccionbodega, direccionsucursal, ciudad) VALUES ('Carnes', 258, 300, 'DIAG 91 4-54', 'CL 7 5-74', 'Bogotá');
 ------------------------------------------------------------------------------------
---CATEGORIA
+--CATEGORIA:LEIDY
 INSERT INTO A_CATEGORIA(nombrecategoria) VALUES ('Congelados');
 INSERT INTO A_CATEGORIA(nombrecategoria) VALUES ('Perecederos');
 INSERT INTO A_CATEGORIA(nombrecategoria) VALUES ('No perecederos');
@@ -77,7 +78,7 @@ INSERT INTO A_CATEGORIA(nombrecategoria) VALUES ('Verduras');
 INSERT INTO A_CATEGORIA(nombrecategoria) VALUES ('Dulces');
 INSERT INTO A_CATEGORIA(nombrecategoria) VALUES ('Especiales');
 ------------------------------------------------------------------------------------
---PRODUCTO
+--PRODUCTO:LEIDY
 INSERT INTO a_producto (nombreproducto, marca, preciounitario, presentacion, preciounimedida, cantpresentacion, unidadmedida, codbarras, pesoproducto, volumenproducto, nombrecategoria) VALUES ('Papas de pollo', 'Super ricas', 1500, 'Paquete 30 gr', 10, 25, 'gr', 'FFFF', '32 gr', '1000 mm^3', 'Perecederos');
 INSERT INTO a_producto (nombreproducto, marca, preciounitario, presentacion, preciounimedida, cantpresentacion, unidadmedida, codbarras, pesoproducto, volumenproducto, nombrecategoria) VALUES ('Manzana', 'Productos del bosque', 800, 'Individual', 50, 1, 'gr', 'AAAA', '20 gr', '10 cm^3', 'Frutas');
 INSERT INTO a_producto (nombreproducto, marca, preciounitario, presentacion, preciounimedida, cantpresentacion, unidadmedida, codbarras, calidad, fechavencimiento, pesoproducto, volumenproducto, nombrecategoria) VALUES ('Salchichas', 'Zenu', 2700, 'Paquete doble', 100, 2, 'gr', '0000', 'bueno', TO_DATE('2017-10-22','yyyy-MM-dd'), '300 gr', '50 mm^3', 'Carnes');
@@ -89,7 +90,7 @@ INSERT INTO a_producto (nombreproducto, marca, preciounitario, presentacion, pre
 INSERT INTO a_producto (nombreproducto, marca, preciounitario, presentacion, preciounimedida, cantpresentacion, unidadmedida, codbarras, calidad, fechavencimiento, pesoproducto, volumenproducto, nombrecategoria) VALUES ('Gomitas', 'Colombina', 2000, 'Paquete 200 gr', 38, 65, 'gr', 'EEEE', 'bueno', TO_DATE('2017-10-22','yyyy-MM-dd'), '1200 gr', '1000 mm^3', 'Dulces');
 INSERT INTO a_producto (nombreproducto, marca, preciounitario, presentacion, preciounimedida, cantpresentacion, unidadmedida, codbarras, calidad, fechavencimiento, pesoproducto, volumenproducto, nombrecategoria) VALUES ('Galletas', 'Ramo', 900, 'Paquete 30 gr', 10, 50, 'gr', 'GGGG', 'bueno', TO_DATE('2017-10-22','yyyy-MM-dd'), '780 gr', '120 mm^3', 'Dulces');
 ------------------------------------------------------------------------------------
---PROVEEN
+--PROVEEN:MARI
 INSERT INTO A_PROVEEN (nitproveedor, codbarras) VALUES (9001785632,'AAAA');
 INSERT INTO A_PROVEEN (nitproveedor, codbarras) VALUES (8600049224,'BBBB');
 INSERT INTO A_PROVEEN (nitproveedor, codbarras) VALUES (9010859970,'CCCC');
@@ -101,7 +102,7 @@ INSERT INTO A_PROVEEN (nitproveedor, codbarras) VALUES (8903041304,'0000');
 INSERT INTO A_PROVEEN (nitproveedor, codbarras) VALUES (8000009464,'0ABC');
 INSERT INTO A_PROVEEN (nitproveedor, codbarras) VALUES (8000009464,'EEEC');
 ------------------------------------------------------------------------------------
---PRODUCTOS OFRECIDOS
+--PRODUCTOS OFRECIDOS:MARI
 INSERT INTO A_PRODUCTOS_OFRECIDOS (direccionsucursal, ciudad, codigobarras, nivelreorden) VALUES('CR 139 139-99', 'Bucaramanga', 'AAAA', 20);
 INSERT INTO A_PRODUCTOS_OFRECIDOS (direccionsucursal, ciudad, codigobarras, nivelreorden) VALUES('CR 139 139-99', 'Bucaramanga', 'BBBB', 30);
 INSERT INTO A_PRODUCTOS_OFRECIDOS (direccionsucursal, ciudad, codigobarras, nivelreorden) VALUES('CR 139 139-99', 'Bucaramanga', 'CCCC', 40);
@@ -163,7 +164,7 @@ INSERT INTO A_PRODUCTOS_OFRECIDOS (direccionsucursal, ciudad, codigobarras, nive
 INSERT INTO A_PRODUCTOS_OFRECIDOS (direccionsucursal, ciudad, codigobarras, nivelreorden) VALUES('CL 50 26A-8 SUR', 'Cartagena', '0ABC', 30);
 INSERT INTO A_PRODUCTOS_OFRECIDOS (direccionsucursal, ciudad, codigobarras, nivelreorden) VALUES('CL 50 26A-8 SUR', 'Cartagena', 'EEEC', 40);
 ------------------------------------------------------------------------------------
---CANTIDAD EN BODEGA
+--CANTIDAD EN BODEGA_LEIDY
 -- Estas son las sucursales que ofrecen productos, todas ofrecen todos los productos
 --'CR 139 139-99', 'Bucaramanga'
 --'CR 13 13-9', 'Arauca'
@@ -182,7 +183,7 @@ INSERT INTO a_cantidad_en_bodega (codigobarras,direccionbodega,direccionsucursal
 INSERT INTO a_cantidad_en_bodega (codigobarras,direccionbodega,direccionsucursal,ciudad,cantidadactual,cantidadminima) VALUES ('DDDD','DIAG 7 8-2','CR 139 139-99','Bucaramanga',10000,5471);
 INSERT INTO a_cantidad_en_bodega (codigobarras,direccionbodega,direccionsucursal,ciudad,cantidadactual,cantidadminima) VALUES ('EEEE','CR 87 41-66','CR 139 139-99','Bucaramanga',3950,395);
 ------------------------------------------------------------------------------------
---ESTANTE
+--ESTANTE:LEIDY
 -- Estas son las sucursales que ofrecen productos, todas ofrecen todos los productos
 --'CR 139 139-99', 'Bucaramanga'
 --'CR 13 13-9', 'Arauca'
@@ -201,7 +202,7 @@ INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabas
 INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('Cuidado personal',900,9,200,80,'AV 6A NORTE 35-47','Cali');
 INSERT INTO a_estante(tipoestante,volumenestante,idestante,pesoestante,nivelabastecimiento,direccionsucursal,ciudad) VALUES ('Carnes',1000,10,100,90,'AV 6A NORTE 35-47','Cali');
 ------------------------------------------------------------------------------------
---PERSONA_NATURAL
+--PERSONA_NATURAL:LEIDY
 INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('ahernandez@gmail.com',100524874);
 INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('amalvarez@gmail.com',97464321654);
 INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('drivera@gmail.com',544554);
@@ -213,7 +214,7 @@ INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('mocampo@gmail.com',456
 INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('nvargas@gmail.com',88456556);
 INSERT INTO A_PERSONA_NATURAL (correo, documento) VALUES('socampo@gmail.com',7774123122);
 ------------------------------------------------------------------------------------
---EMPRESA
+--EMPRESA:LEIDY
 INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa10@hotmail.com',111111111,'CLL 1 1-1');
 INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa1@hotmail.com',222222222,'CLL 1 1-2');
 INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa2@hotmail.com',333333333,'CLL 1 1-3');
@@ -225,7 +226,7 @@ INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa7@hotmail.co
 INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa8@hotmail.com',9999999999,'CLL 1 1-9');
 INSERT INTO A_EMPRESA (correo, nitempresa,direccion) VALUES('empresa9@hotmail.com',654654645454,'CLL 1 1-10');
 ------------------------------------------------------------------------------------
---TIPO_PRODUCTO
+--TIPO_PRODUCTO:LEIDY
 INSERT INTO A_TIPO_PRODUCTO(nombretipo,nombrecategoria) VALUES('A','Aseo');
 INSERT INTO A_TIPO_PRODUCTO(nombretipo,nombrecategoria) VALUES('B','Carnes');
 INSERT INTO A_TIPO_PRODUCTO(nombretipo,nombrecategoria) VALUES('C','Congelados');
@@ -237,7 +238,7 @@ INSERT INTO A_TIPO_PRODUCTO(nombretipo,nombrecategoria) VALUES('H','Lacteos');
 INSERT INTO A_TIPO_PRODUCTO(nombretipo,nombrecategoria) VALUES('I','No perecederos');
 INSERT INTO A_TIPO_PRODUCTO(nombretipo,nombrecategoria) VALUES('J','Lacteos');
 ------------------------------------------------------------------------------------
---PEDIDO_PRODUCTO
+--PEDIDO_PRODUCTO:LEIDY
 --INSERT INTO A_PEDIDO_PRODUCTO(codigobarras,idpedido,cantidadproducto,precioproducto) VALUES('',,,);
 --INSERT INTO A_PEDIDO_PRODUCTO(codigobarras,idpedido,cantidadproducto,precioproducto) VALUES('',,,);
 --INSERT INTO A_PEDIDO_PRODUCTO(codigobarras,idpedido,cantidadproducto,precioproducto) VALUES('',,,);
@@ -249,7 +250,7 @@ INSERT INTO A_TIPO_PRODUCTO(nombretipo,nombrecategoria) VALUES('J','Lacteos');
 --INSERT INTO A_PEDIDO_PRODUCTO(codigobarras,idpedido,cantidadproducto,precioproducto) VALUES('',,,);
 --INSERT INTO A_PEDIDO_PRODUCTO(codigobarras,idpedido,cantidadproducto,precioproducto) VALUES('',,,);
 ------------------------------------------------------------------------------------
---CANTIDAD EN ESTANTES
+--CANTIDAD EN ESTANTES:MARI
 INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantidadactual, cantidadminima) VALUES ('AAAA',2,10,1);
 INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantidadactual, cantidadminima) VALUES ('BBBB',3,10,1);
 INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantidadactual, cantidadminima) VALUES ('0000',2,10,1);
@@ -312,7 +313,7 @@ INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantidadactual, can
 --INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantiadactual, cantidadminima) VALUES ('',0,0,0);
 --INSERT INTO A_CANTIDAD_EN_ESTANTES (codigobarras, idestante, cantiadactual, cantidadminima) VALUES ('',0,0,0);
 ------------------------------------------------------------------------------------
---FACTURA
+--FACTURA:MARI
 INSERT INTO A_FACTURA (idfactura, fecha, costototal, correocliente, ciudad, direccionsucursal) VALUES (1,TO_DATE('2018-05-10','yyyy-MM-dd'),15000,'empresa1@hotmail.com','Bucaramanga','CR 139 139-99');
 INSERT INTO A_FACTURA (idfactura, fecha, costototal, correocliente, ciudad, direccionsucursal) VALUES (2,TO_DATE('2018-06-10','yyyy-MM-dd'),15000,'empresa2@hotmail.com','Arauca','CR 13 13-9');
 INSERT INTO A_FACTURA (idfactura, fecha, costototal, correocliente, ciudad, direccionsucursal) VALUES (3,TO_DATE('2018-07-10','yyyy-MM-dd'),20000,'empresa3@hotmail.com','Bogotá','CL 7 5-74');
@@ -354,7 +355,7 @@ INSERT INTO A_FACTURA (idfactura, fecha, costototal, correocliente, ciudad, dire
 INSERT INTO A_FACTURA (idfactura, fecha, costototal, correocliente, ciudad, direccionsucursal) VALUES (39,TO_DATE('2018-08-16','yyyy-MM-dd'),105000,'fmaya@gmail.com','Bogotá','CL 7 5-74');
 INSERT INTO A_FACTURA (idfactura, fecha, costototal, correocliente, ciudad, direccionsucursal) VALUES (40,TO_DATE('2018-09-16','yyyy-MM-dd'),105000,'socampo@gmail.com','Medellín','CLL 34 43-65');
 ------------------------------------------------------------------------------------
---COMPRADOS
+--COMPRADOS:LEIDY
 INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('AAAA',1,10,10*800);
 INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('BBBB',2,5,5*3000);
 INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('CCCC',3,4,4*1800);
@@ -396,7 +397,7 @@ INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('GGG
 INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0ABC',39,14,14*3000);
 INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('0000',40,15,15*2700);
 ------------------------------------------------------------------------------------
---ORDEN PEDIDO
+--ORDEN PEDIDO:MARI
 --INSERT INTO A_ORDEN_PEDIDO (fechaespereadaentrega, estado, fechaentrega, calificacionpedido, nitproveedor, idpedido, ciudad, direccionsucursal, direccionbodega) VALUES (TO_DATE('','yyyy-MM-dd'), '', TO_DATE('','yyyy-MM-dd'), '', 0, 0, '', '', '');
 --INSERT INTO A_ORDEN_PEDIDO (fechaespereadaentrega, estado, fechaentrega, calificacionpedido, nitproveedor, idpedido, ciudad, direccionsucursal, direccionbodega) VALUES (TO_DATE('','yyyy-MM-dd'), '', TO_DATE('','yyyy-MM-dd'), '', 0, 0, '', '', '');
 --INSERT INTO A_ORDEN_PEDIDO (fechaespereadaentrega, estado, fechaentrega, calificacionpedido, nitproveedor, idpedido, ciudad, direccionsucursal, direccionbodega) VALUES (TO_DATE('','yyyy-MM-dd'), '', TO_DATE('','yyyy-MM-dd'), '', 0, 0, '', '', '');
@@ -409,7 +410,7 @@ INSERT INTO A_COMPRADOS(codigobarras,idfactura,cantidad,preciototal) VALUES('000
 --INSERT INTO A_ORDEN_PEDIDO (fechaespereadaentrega, estado, fechaentrega, calificacionpedido, nitproveedor, idpedido, ciudad, direccionsucursal, direccionbodega) VALUES (TO_DATE('','yyyy-MM-dd'), '', TO_DATE('','yyyy-MM-dd'), '', 0, 0, '', '', '');
 --INSERT INTO A_ORDEN_PEDIDO (fechaespereadaentrega, estado, fechaentrega, calificacionpedido, nitproveedor, idpedido, ciudad, direccionsucursal, direccionbodega) VALUES (TO_DATE('','yyyy-MM-dd'), '', TO_DATE('','yyyy-MM-dd'), '', 0, 0, '', '', '');
 ------------------------------------------------------------------------------------
---PROMOCION
+--PROMOCION:MARI
 INSERT INTO A_PROMOCION (fechainicial, fechafinal, descripcion, idpromocion, unidadesdisponibles, unidadesvendidas, codigobarras, estado) VALUES (TO_DATE('2018-09-27','yyyy-MM-dd'), TO_DATE('2018-10-07','yyyy-MM-dd'), 'Descuento del 10%', 1, 30, 15, 'AAAA', 'FINALIZADA');
 INSERT INTO A_PROMOCION (fechainicial, fechafinal, descripcion, idpromocion, unidadesdisponibles, unidadesvendidas, codigobarras, estado) VALUES (TO_DATE('2018-10-17','yyyy-MM-dd'), TO_DATE('2018-10-27','yyyy-MM-dd'), 'Descuento del 15%', 2, 30, 29, 'BBBB', 'FINALIZADA');
 INSERT INTO A_PROMOCION (fechainicial, fechafinal, descripcion, idpromocion, unidadesdisponibles, unidadesvendidas, codigobarras, estado) VALUES (TO_DATE('2018-10-13','yyyy-MM-dd'), TO_DATE('2018-10-27','yyyy-MM-dd'), 'Descuento del 20%', 3, 30, 18, 'CCCC', 'FINALIZADA');
@@ -435,7 +436,7 @@ INSERT INTO A_PROMOCION (fechainicial, fechafinal, descripcion, idpromocion, uni
 INSERT INTO A_PROMOCION (fechainicial, fechafinal, descripcion, idpromocion, unidadesdisponibles, unidadesvendidas, codigobarras, estado) VALUES (TO_DATE('2018-10-17','yyyy-MM-dd'), TO_DATE('2018-10-27','yyyy-MM-dd'), 'Pague 90 cantidad, lleve 130', 23, 30, 16, 'CCCC', 'FINALIZADA');
 INSERT INTO A_PROMOCION (fechainicial, fechafinal, descripcion, idpromocion, unidadesdisponibles, unidadesvendidas, codigobarras, estado) VALUES (TO_DATE('2018-09-27','yyyy-MM-dd'), TO_DATE('2018-10-07','yyyy-MM-dd'), 'Pague 140 cantidad, lleve 180', 24, 30, 30, 'DDDD', 'FINALIZADA');
 ------------------------------------------------------------------------------------
---PROMO CANTIDADES
+--PROMO CANTIDADES:MARI
 INSERT INTO A_PROMO_CANTIDADES (cantidadpagar, cantidadllevar, idpromocion) VALUES (170, 200, 19);
 INSERT INTO A_PROMO_CANTIDADES (cantidadpagar, cantidadllevar, idpromocion) VALUES (200, 250, 20);
 INSERT INTO A_PROMO_CANTIDADES (cantidadpagar, cantidadllevar, idpromocion) VALUES (120, 160, 21);
@@ -443,7 +444,7 @@ INSERT INTO A_PROMO_CANTIDADES (cantidadpagar, cantidadllevar, idpromocion) VALU
 INSERT INTO A_PROMO_CANTIDADES (cantidadpagar, cantidadllevar, idpromocion) VALUES (90, 130, 23);
 INSERT INTO A_PROMO_CANTIDADES (cantidadpagar, cantidadllevar, idpromocion) VALUES (140, 180, 24);
 ------------------------------------------------------------------------------------
---PROMO UNIDADES
+--PROMO UNIDADES:MARI
 INSERT INTO A_PROMO_UNIDADES (unidadespagar, unidadesllevar, idpromocion) VALUES (1, 2, 7);
 INSERT INTO A_PROMO_UNIDADES (unidadespagar, unidadesllevar, idpromocion) VALUES (2, 3, 8);
 INSERT INTO A_PROMO_UNIDADES (unidadespagar, unidadesllevar, idpromocion) VALUES (1, 2, 9);
@@ -451,7 +452,7 @@ INSERT INTO A_PROMO_UNIDADES (unidadespagar, unidadesllevar, idpromocion) VALUES
 INSERT INTO A_PROMO_UNIDADES (unidadespagar, unidadesllevar, idpromocion) VALUES (1, 2, 11);
 INSERT INTO A_PROMO_UNIDADES (unidadespagar, unidadesllevar, idpromocion) VALUES (2, 3, 12);
 ------------------------------------------------------------------------------------
---PROMO DESCUENTO
+--PROMO DESCUENTO:MARI
 INSERT INTO A_PROMO_DESCUENTO (descuento, idpromocion) VALUES (10, 1);
 INSERT INTO A_PROMO_DESCUENTO (descuento, idpromocion) VALUES (15, 2);
 INSERT INTO A_PROMO_DESCUENTO (descuento, idpromocion) VALUES (20, 3);
@@ -459,7 +460,7 @@ INSERT INTO A_PROMO_DESCUENTO (descuento, idpromocion) VALUES (25, 4);
 INSERT INTO A_PROMO_DESCUENTO (descuento, idpromocion) VALUES (30, 5);
 INSERT INTO A_PROMO_DESCUENTO (descuento, idpromocion) VALUES (35, 6);
 ------------------------------------------------------------------------------------
---PROMO UNIDAD DESCUENTO
+--PROMO UNIDAD DESCUENTO:MARI
 INSERT INTO A_PROMO_UNIDADES_DESCUENTO (unidades, descuento, idpromocion) VALUES (1, 20, 13);
 INSERT INTO A_PROMO_UNIDADES_DESCUENTO (unidades, descuento, idpromocion) VALUES (2, 30, 14);
 INSERT INTO A_PROMO_UNIDADES_DESCUENTO (unidades, descuento, idpromocion) VALUES (1, 40, 15);
@@ -467,7 +468,7 @@ INSERT INTO A_PROMO_UNIDADES_DESCUENTO (unidades, descuento, idpromocion) VALUES
 INSERT INTO A_PROMO_UNIDADES_DESCUENTO (unidades, descuento, idpromocion) VALUES (1, 60, 17);
 INSERT INTO A_PROMO_UNIDADES_DESCUENTO (unidades, descuento, idpromocion) VALUES (1, 70, 18);
 ------------------------------------------------------------------------------------
---PROMOCIONES
+--PROMOCIONES:MARI
 INSERT INTO A_PROMOCIONES (idpromocion, direccionsucursal, ciudad) VALUES (1, 'CR 139 139-99', 'Bucaramanga');
 INSERT INTO A_PROMOCIONES (idpromocion, direccionsucursal, ciudad) VALUES (2, 'CR 13 13-9', 'Arauca');
 INSERT INTO A_PROMOCIONES (idpromocion, direccionsucursal, ciudad) VALUES (3, 'CL 7 5-74', 'Bogotá');
@@ -494,7 +495,7 @@ INSERT INTO A_PROMOCIONES (idpromocion, direccionsucursal, ciudad) VALUES (23, '
 INSERT INTO A_PROMOCIONES (idpromocion, direccionsucursal, ciudad) VALUES (24, 'CL 50 26A-8 SUR', 'Cartagena');
 
 ------------------------------------------------------------------------------------
---CARRITO
+--CARRITO:MARI
 INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (1, 'CR 139 139-99', 'Bucaramanga','empresa1@hotmail.com');
 INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (7, 'CR 139 139-99', 'Bucaramanga','empresa4@hotmail.com');
 INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (4, 'CLL 34 43-65', 'Medellín','lromero@gmail.com');
@@ -507,7 +508,7 @@ INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUE
 INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (3, 'CL 50 26A-8 SUR', 'Cartagena','empresa2@hotmail.com');
 
 ------------------------------------------------------------------------------------
---PRODUCTOS CARRITO
+--PRODUCTOS CARRITO:MARI
 INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (1,'AAAA',2);
 INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (1,'BBBB',3);
 INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (2,'CCCC',2);
