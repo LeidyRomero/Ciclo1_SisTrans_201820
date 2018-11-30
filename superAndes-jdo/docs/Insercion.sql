@@ -12,7 +12,7 @@ INSERT INTO a_sucursal (tamanio, direccionsucursal, ciudad, nombresucursal) VALU
 INSERT INTO a_sucursal (tamanio, direccionsucursal, ciudad, nombresucursal) VALUES (43, 'CR 41 36-81', 'Barranquilla', 'Q1');
 INSERT INTO a_sucursal (tamanio, direccionsucursal, ciudad, nombresucursal) VALUES (100, 'CR 10 14-71', 'Pereira', 'P1');
 ------------------------------------------------------------------------------------
---CLIENTE:MARI
+--CLIENTE:LEIDY
 INSERT INTO A_CLIENTE (correo, nombreconsumidor,puntos) VALUES('empresa1@hotmail.com','empresa1',10);
 INSERT INTO A_CLIENTE (correo, nombreconsumidor,puntos) VALUES('empresa2@hotmail.com','empresa2',20);
 INSERT INTO A_CLIENTE (correo, nombreconsumidor,puntos) VALUES('empresa3@hotmail.com','empresa3',30);
@@ -102,7 +102,7 @@ INSERT INTO A_PROVEEN (nitproveedor, codbarras) VALUES (8903041304,'0000');
 INSERT INTO A_PROVEEN (nitproveedor, codbarras) VALUES (8000009464,'0ABC');
 INSERT INTO A_PROVEEN (nitproveedor, codbarras) VALUES (8000009464,'EEEC');
 ------------------------------------------------------------------------------------
---PRODUCTOS OFRECIDOS:MARI
+--PRODUCTOS OFRECIDOS:LEIDY
 INSERT INTO A_PRODUCTOS_OFRECIDOS (direccionsucursal, ciudad, codigobarras, nivelreorden) VALUES('CR 139 139-99', 'Bucaramanga', 'AAAA', 20);
 INSERT INTO A_PRODUCTOS_OFRECIDOS (direccionsucursal, ciudad, codigobarras, nivelreorden) VALUES('CR 139 139-99', 'Bucaramanga', 'BBBB', 30);
 INSERT INTO A_PRODUCTOS_OFRECIDOS (direccionsucursal, ciudad, codigobarras, nivelreorden) VALUES('CR 139 139-99', 'Bucaramanga', 'CCCC', 40);
@@ -164,7 +164,7 @@ INSERT INTO A_PRODUCTOS_OFRECIDOS (direccionsucursal, ciudad, codigobarras, nive
 INSERT INTO A_PRODUCTOS_OFRECIDOS (direccionsucursal, ciudad, codigobarras, nivelreorden) VALUES('CL 50 26A-8 SUR', 'Cartagena', '0ABC', 30);
 INSERT INTO A_PRODUCTOS_OFRECIDOS (direccionsucursal, ciudad, codigobarras, nivelreorden) VALUES('CL 50 26A-8 SUR', 'Cartagena', 'EEEC', 40);
 ------------------------------------------------------------------------------------
---CANTIDAD EN BODEGA_LEIDY
+--CANTIDAD EN BODEGA: LEIDY
 -- Estas son las sucursales que ofrecen productos, todas ofrecen todos los productos
 --'CR 139 139-99', 'Bucaramanga'
 --'CR 13 13-9', 'Arauca'
@@ -508,7 +508,7 @@ INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUE
 INSERT INTO A_CARRITO(idcarrito, direccionsucursal, ciudad, correocliente) VALUES (3, 'CL 50 26A-8 SUR', 'Cartagena','empresa2@hotmail.com');
 
 ------------------------------------------------------------------------------------
---PRODUCTOS CARRITO:MARI
+--PRODUCTOS CARRITO:LEIDY
 INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (1,'AAAA',2);
 INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (1,'BBBB',3);
 INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (2,'CCCC',2);
@@ -529,5 +529,4 @@ INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (9,'DDDD'
 INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (9,'CCCC',3);
 INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (10,'BBBB',2);
 INSERT INTO A_PRODUCTOS_CARRITO(idcarrito, codbarras, cantidad) VALUES (10,'AAAA',3);
-
 COMMIT;
