@@ -832,3 +832,9 @@ ORA-02290: restricción de control (ISIS2304A231820.CK_P_CA_CANTIDAD) violada
 20:44:13,087 (SwingWorker-pool-1-thread-1) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de eliminar un carrito: 51
 20:44:13,087 (SwingWorker-pool-1-thread-1) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Buscar productos de un carrito 51
 20:44:13,197 (SwingWorker-pool-1-thread-1) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de buscar productos de un carrito 51
+20:20:27,028 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando proveedor 123456, Hola
+20:20:27,377 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar proveedor 123456, Hola
+20:21:46,182 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando sucursal 52, fghjk, ftgyhujik, Hola
+20:21:46,255 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar sucursal 52, fghjk, ftgyhujik, Hola
+20:22:25,956 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Adicionando la bodega esdrftgy, fghjk,ftgyhujik
+20:22:26,001 (AWT-EventQueue-0) INFO  [uniandes.isis2304.superAndes.negocio.SuperAndes] - Saliendo de adicionar la bodega esdrftgy, fghjk,ftgyhujik
