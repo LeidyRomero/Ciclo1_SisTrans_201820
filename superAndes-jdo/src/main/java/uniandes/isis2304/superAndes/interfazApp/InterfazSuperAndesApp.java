@@ -515,7 +515,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener{
 				else
 					JOptionPane.showMessageDialog (this, "Producto no registrado", "Agregar producto: no exitoso", JOptionPane.ERROR_MESSAGE);
 			}
-			else if(!isHexNumber(pCodigoBarras))
+			else if(!isHexNumber(pCodigoBarras.toUpperCase()))
 			{
 				JOptionPane.showMessageDialog (this, "Codigo de barras invalido", "Agregar producto: no exitoso", JOptionPane.ERROR_MESSAGE);	
 			}
