@@ -4,34 +4,57 @@
 --SEMANALMENTE: PRODUCTO MAS-MENOS VENDIDO
 --              PROVEEDOR MAS-MENOS SOLICITADOS
 
+--RFC12 - CONSULTAR FUNCIONAMIENTO
 --PRODUCTO MAS-MENOS VENDIDO:
 SELECT
-    MAX(s),
-    MIN(s),
-    SEMANA
+    cb,
+    semana,
+    suma
 FROM
     (
         SELECT
-            codigobarras,
-            SUM(cantidad) s,
-            TO_CHAR(fecha, 'WW') SEMANA
+            codigobarras cb,
+            TO_CHAR(fecha,'WW') semana,
+            SUM(cantidad) suma,
+            ROW_NUMBER() OVER(PARTITION BY
+                TO_CHAR(fecha,'WW')
+                ORDER BY
+                    (SUM(cantidad) )
+                DESC
+            ) AS maximo,
+            ROW_NUMBER() OVER(PARTITION BY
+                TO_CHAR(fecha,'WW')
+                ORDER BY
+                    (SUM(cantidad) )
+                ASC
+            ) AS minimo
         FROM
             a_comprados,
             a_factura
         WHERE
-            a_comprados.idfactura = a_factura.idfactura
-            AND EXTRACT(YEAR FROM fecha) = 2018
+                a_comprados.idfactura = a_factura.idfactura
+            AND
+                EXTRACT(YEAR FROM fecha) = 2018
         GROUP BY
-            TO_CHAR(fecha, 'WW'),
+            TO_CHAR(fecha,'WW'),
             codigobarras
     )
-GROUP BY
-    SEMANA
-ORDER BY
-    SEMANA ASC;
-
+WHERE
+        maximo = 1
+    OR
+        minimo = 1;
 --PROVEEDOR MAS-MENOS VENDIDO:
-
+SELECT
+    nitproveedor nit,
+    COUNT(*) numeroPedidos,
+    TO_CHAR(fechaentrega,'WW') semana,
+    ROW_NUMBER() OVER (PARTITION BY TO_CHAR(fechaEntrega,'WW') ORDER BY (COUNT(*)) desc) as maximo,
+    ROW_NUMBER() OVER (PARTITION BY TO_CHAR(fechaEntrega,'WW') ORDER BY (COUNT(*)) asc) as minimo
+FROM
+    a_orden_pedido
+GROUP BY
+    nitproveedor,
+    TO_CHAR(fechaentrega,'WW');
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------RFC13:Consultar los buenos clientes---------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
